@@ -20,7 +20,15 @@ type Pokemon implements Node {
   """
   dexNumber: Int!
 
-  evolvesTo: [EvolutionData!]!
+  """
+  Pokemon for which this Pokemon is a prevolution. 
+  """
+  evolvesTo(input: ConnectionInput): PokemonEvolutionConnection
+
+  """
+  Pokemon for which this Pokemon is an evolution.
+  """
+  evolvesFrom(input: ConnectionInput): PokemonPrevolutionConnection
 
   """
   The name of the Pokemon in Title Case, and with appropriate punctuation. The species name is capitalized, and form data is in parentheses.
@@ -35,15 +43,18 @@ type Pokemon implements Node {
   formattedName: String!
 
   """
-  The different forms that the Pokemon can take, assuming the Pokemon.
+  If the Pokemon is a base form, this is the alternate forms the Pokemon can take.
+
+  If instead the Pokemon is an alternate form, this is the base form of that Pokemon.
 
   For example:
-    'charizard' has forms 'charizard_mega_x', 'charizard_mega_y', and 'charizard_gmax'
-    'charizard_gmax' has forms 'charizard', 'charizard_mega_x', and 'charizard_mega_y'
-    'raticate' has the form 'raticate_alola'
+    'charizard' has forms 'charizard_mega_x', 'charizard_mega_y', and 'charizard_gmax'.
+    'charizard_gmax' has the form 'charizard'.
+    'raticate' has the form 'raticate_alola'.
+    'raticate_alola' has the form 'raticate'.
 
   """
-  forms: [FormData!]!
+  formData(input: ConnectionInput): PokemonFormConnection
 
   """
   The height of the Pokemon in meters. 0.0 if unknown.
@@ -106,52 +117,6 @@ type BaseStats {
   speed: Int!
 }
 
-"""
-An object representing an evolution relationship between two Pokemon.
-"""
-type EvolutionData {
-  """
-  The starting evolution.
-  """
-  prevolution: Pokemon!
-
-  """
-  The ending evolution.
-  """
-  evolution: Pokemon!
-
-  """
-  The method of evolution.
-  """
-  method: String!
-}
-
-"""
-An object representing a form relationship between two Pokemon.
-"""
-type FormData {
-  """
-  The Pokemon who serves as the base form in the form relationship.
-
-  For example:
-    'raticate' is the baseForm for 'raticate_alola'
-    'deerling_spring' is (arbitrarily chosen to be) the baseForm for 'deerling_winter'
-  """
-  baseForm: Pokemon!
-
-  """
-  The Pokemon who serves as the non-base form in the form relationship.
-  """
-  form: Pokemon!
-
-  """
-  For example:
-    MEGA
-    ALOLA
-  """
-  formClass: FormClass!
-}
-
 #
 # CONNECTIONS AND EDGES
 #
@@ -165,7 +130,7 @@ type PokemonAbilityConnection implements Connection {
 
 type PokemonAbilityEdge implements Edge {
   cursor: String!
-  node: Pokemon!
+  node: Ability!
 
   """
   The slot which the Ability occupies on the Pokemon. 
@@ -182,7 +147,7 @@ type PokemonMoveConnection implements Connection {
 
 type PokemonMoveEdge implements Edge {
   cursor: String!
-  node: Pokemon!
+  node: Move!
 
   """
   A string representing how the Pokemon can learn the Move, taken mostly from the system used by Pokemon Showdown.
@@ -200,6 +165,69 @@ type PokemonMoveEdge implements Edge {
   learnMethod: String!
 }
 
+# POKEMON
+
+type PokemonEvolutionConnection implements Connection {
+  edges: [PokemonEvolutionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PokemonEvolutionEdge implements Edge {
+  cursor: String!
+
+  """
+  The evolved form in the evolution relationship.
+  """ 
+  node: Pokemon!
+
+  """
+  The method of evolution.
+  """
+  method: String!
+}
+
+type PokemonPrevolutionConnection implements Connection {
+  edges: [PokemonPrevolutionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PokemonPrevolutionEdge implements Edge {
+  cursor: String!
+
+  """
+  The pre-evolved form in the evolution relationship.
+  """ 
+  node: Pokemon!
+
+  """
+  The method of evolution.
+  """
+  method: String!
+}
+
+type PokemonFormConnection implements Connection {
+  edges: [PokemonFormEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PokemonFormEdge implements Edge {
+  cursor: String!
+
+  """
+  If the starting node is a base form, then this is the alternate form (e.g. the Mega form, Alola form, etc.). 
+  
+  If instead the starting node is the alternate form, this is the base form. 
+  """
+  node: Pokemon!
+
+  """
+  E.g. MEGA, ALOLA, etc. 
+
+  BASE if the starting node is an alternate form, in which case the ending node is the base form.
+  """
+  formClass: FormClass!
+}
+
 # TYPE
 
 type PokemonTypeConnection implements Connection {
@@ -209,7 +237,7 @@ type PokemonTypeConnection implements Connection {
 
 type PokemonTypeEdge implements Edge {
   cursor: String!
-  node: Pokemon!
+  node: Type!
 }
 
 #

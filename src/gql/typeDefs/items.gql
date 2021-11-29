@@ -64,7 +64,7 @@ type ItemEffectConnection implements Connection {
 
 type ItemEffectEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Effect!
 }
 
 # POKEMON
@@ -75,7 +75,7 @@ type ItemRequiresPokemonConnection implements Connection {
 
 type ItemRequiresPokemonEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Pokemon!
 }
 
 # STAT
@@ -87,7 +87,7 @@ type ItemModifiesStatConnection implements Connection {
 
 type ItemModifiesStatEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Stat!
 
   """
   An integer between -6 and 6. Null if the Item modifies Stat via a multiplier.
@@ -121,7 +121,7 @@ type ItemCausesStatusConnection implements Connection {
 
 type ItemCausesStatusEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Status!
 
   """
   The probability of the Item causing the Status once the necessary conditions have been met.
@@ -136,7 +136,7 @@ type ItemResistsStatusConnection implements Connection {
 
 type ItemResistsStatusEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Status!
 }
 
 # TYPE
@@ -148,7 +148,7 @@ type ItemBoostsTypeConnection implements Connection {
 
 type ItemBoostsTypeEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Type!
 
   """
   The multiplier by which the Item boosts the power of Moves which have the Type. 
@@ -163,7 +163,7 @@ type ItemResistsTypeConnection implements Connection {
 
 type ItemResistsTypeEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Type!
 
   """
   The multiplier by which the Item resists the power of Moves which have the Type. 
@@ -178,7 +178,7 @@ type NaturalGiftConnection implements Connection {
 
 type NaturalGiftEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: Gift!
 
   """
   The power of Natural Gift when used by a Pokemon holding Item.
@@ -193,9 +193,9 @@ type ItemBoostsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type ItemBoostsUsageMethodEdge implements Edge {
+type ItemUsageMethodEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: UsageMethod!
 
   """
   The multiplier by which the Item boosts the power of Moves which have the UsageMethod. 
@@ -208,9 +208,9 @@ type ItemResistsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type ItemResistsUsageMethodEdge implements Edge {
+type ItemUsageMethodEdge implements Edge {
   cursor: String!
-  node: Item!
+  node: UsageMethod!
 
   """
   The multiplier by which the Item resists the power of Moves which have the UsageMethod. 

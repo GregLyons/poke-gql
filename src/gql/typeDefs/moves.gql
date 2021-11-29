@@ -5,6 +5,31 @@
 type Move implements Node {
   id: ID!
 
+
+  """
+  Moves which bypass accuracy checks (e.g. aerial_ace) have null in this field. Otherwise, accuracy is an integer ranging from 0-100.
+  """
+  accuracy: Int
+
+  causesStatus(input: ConnectionInput): MoveCausesStatusConnection
+
+  """
+  Whether or not the Move makes contact (e.g. for interacting with the Move 'static').
+  """
+  contact: Boolean!
+
+  """
+  The name of the Move in Title Case.
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the Move was introduced.
+  """ 
+  introduced: Generation!
+
+  modifiesStat(input: ConnectionInput): MoveModifiesStatConnection
+
   """
   The name of the Move in snake_case. 
 
@@ -17,11 +42,6 @@ type Move implements Node {
   name: String!
 
   """
-  The name of the Move in Title Case.
-  """
-  formattedName: String!
-
-  """
   Non-damaging moves (e.g. status moves), fixed damage moves (e.g. sonic_boom), and variable damage (e.g. magnitude) moves have null in this field. 
   """
   power: Int 
@@ -29,14 +49,29 @@ type Move implements Node {
   pp: Int!
 
   """
-  Moves which bypass accuracy checks (e.g. aerial_ace) have null in this field. Otherwise, accuracy is an integer ranging from 0-100.
+  E.g. 'breakneck_blitz' requires 'normalium_z'.
   """
-  accuracy: Int
+  requiresItem(input: ConnectionInput): MoveRequiresItemConnection
 
   """
-  Whether or not the Move makes contact (e.g. for interacting with the Ability 'static').
+  E.g. 'catastropika' requires the Move 'volt_tackle'.
   """
-  contact: Boolean!
+  requiresMove(input: ConnectionInput): MoveRequiresMoveConnection
+
+  """
+  E.g. 'g_max_wildfire' requires the user to be 'charizard_gmax'.
+  """
+  requiresPokemon(input: ConnectionInput): MoveRequiresPokemonConnection
+
+  """
+  E.g. 'inferno_overdrive', the Fire Z-Move, requires a 'fire'-Type base move.
+  """
+  requiresType(input: ConnectionInput): MoveRequiresTypeConnection
+
+  """
+  Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
+  """
+  resistsStatus(input: ConnectionInput): MoveResistsStatusConnection
 
   """
   Who the Move can target.
@@ -46,18 +81,146 @@ type Move implements Node {
   """
   The Type possessed by the Move, e.g. 'flamethrower' is 'fire'-type. 
   """
-  type: 
+  type(input: ConnectionInput): MoveTypeConnection
 
   """
-  The Generation in which the Move was introduced.
-  """ 
-  introduced: Generation!
+  E.g. The Move 'aura_sphere' has both 'ball' and 'pulse' as UsageMethods.
+  """
+  usageMethod(input: ConnectionInput): MoveUsageMethodConnection
 }
 
 #
 # CONNECTIONS AND EDGES
 #
 
+# ITEM
+
+type MoveRequiresItemConnection implements Connection {
+  edges: [MoveRequiresItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveRequiresItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# MOVE
+
+type MoveRequiresMoveConnection implements Connection {
+  edges: [MoveRequiresMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveRequiresMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+}
+
+# POKEMON
+
+type MoveRequiresPokemonConnection implements Connection {
+  edges: [MoveRequiresPokemonEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveRequiresPokemonEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+}
+
+# STAT
+
+type MoveModifiesStatConnection implements Connection {
+  edges: [AbilitiyModifiesStatEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveModifiesStatEdge implements Edge {
+  cursor: String!
+  node: Stat!
+
+  """
+  An integer between -6 and 6 (except for moves which max out a stat, e.g. 'belly_drum', in which case is 12). Null if the Move modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Move modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met (i.e. the move being successful/hitting).
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# STATUS
+
+type MoveCausesStatusConnection implements Connection {
+  edges: [MoveCausesStatusEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveCausesStatusEdge implements Edge {
+  cursor: String!
+  node: Status!
+
+  """
+  The probability of the Move causing the Status once the necessary conditions have been met (i.e. the move being successful/hitting).
+  """
+  chance: Float!
+}
+
+type MoveResistsStatusConnection implements Connection {
+  edges: [MoveResistsStatusEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveResistsStatusEdge implements Edge {
+  cursor: String!
+  node: Status!
+}
+
+# TYPE
+
+type MoveTypeConnection implements Connection {
+  edges: [MoveTypeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveTypeEdge implements Edge {
+  cursor: String!
+  node: Type!
+}
+
+type MoveRequiresTypeConnection implements Connection {
+  edges: [MoveRequiresTypeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveRequiresTypeEdge implements Edge {
+  cursor: String!
+  node: Type!
+}
+
+# USAGE METHOD
+
+type MoveUsageMethodConnection implements Connection {
+  edges: [MoveUsageMethodEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveUsageMethodEdge implements Edge {
+  cursor: String!
+  node: UsageMethod!
+}
 
 #
 # ENUMS

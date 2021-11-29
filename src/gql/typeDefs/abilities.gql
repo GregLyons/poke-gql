@@ -54,7 +54,7 @@ type AbilityEffectConnection implements Connection {
 
 type AbilityEffectEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: Effect!
 }
 
 # STAT
@@ -66,7 +66,7 @@ type AbilityModifiesStatConnection implements Connection {
 
 type AbilityModifiesStatEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: Stat!
 
   """
   An integer between -6 and 6 (except for moves which max out a stat, e.g. 'anger_point', in which case is 12). Null if the Ability modifies Stat via a multiplier.
@@ -100,7 +100,7 @@ type AbilityCausesStatusConnection implements Connection {
 
 type AbilityCausesStatusEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: Status!
 
   """
   The probability of the Ability causing the Status once the necessary conditions have been met. 
@@ -117,7 +117,7 @@ type AbilityResistsStatusConnection implements Connection {
 
 type AbilityResistsStatusEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: Status!
 }
 
 # TYPE
@@ -129,7 +129,7 @@ type AbilityBoostsTypeConnection implements Connection {
 
 type AbilityBoostsTypeEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: Type!
 
   """
   The multiplier by which the Ability boosts the power of Moves which have the Type. 
@@ -144,7 +144,7 @@ type AbilityResistsTypeConnection implements Connection {
 
 type AbilityResistsTypeEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: Type!
 
   """
   The multiplier by which the Ability resists the power of Moves which have the Type. 
@@ -159,9 +159,9 @@ type AbilityBoostsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type AbilityBoostsUsageMethodEdge implements Edge {
+type AbilityUsageMethodEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: UsageMethod!
 
   """
   The multiplier by which the Ability boosts the power of Moves which have the UsageMethod. 
@@ -174,9 +174,9 @@ type AbilityResistsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type AbilityResistsUsageMethodEdge implements Edge {
+type AbilityUsageMethodEdge implements Edge {
   cursor: String!
-  node: Ability!
+  node: UsageMethod!
 
   """
   The multiplier by which the Ability resists the power of Moves which have the UsageMethod. 
