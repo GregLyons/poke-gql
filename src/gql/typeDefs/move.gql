@@ -1,0 +1,74 @@
+type Move {
+  id: ID!
+
+  """
+  The name of the Move in snake_case. 
+
+  Examples:
+    flamethrower
+    u_turn
+    10000000_volt_thunderbolt
+    will_o_wisp
+  """
+  name: String!
+
+  """
+  The name of the Move in Title Case.
+  """
+  formattedName: String!
+
+  """
+  Non-damaging moves (e.g. status moves), fixed damage moves (e.g. sonic_boom), and variable damage (e.g. magnitude) moves have null in this field. 
+  """
+  power: Int 
+
+  pp: Int!
+
+  """
+  Moves which bypass accuracy checks (e.g. aerial_ace) have null in this field. Otherwise, accuracy is an integer ranging from 0-100.
+  """
+  accuracy: Int
+
+  """
+  Whether or not the Move makes contact (e.g. for interacting with the Ability 'static').
+  """
+  contact: Boolean!
+
+  """
+  Who the Move can target.
+  """
+  target: TargetClass!
+
+  """
+  The Generation in which the Move was introduced.
+  """ 
+  introduced: Generation!
+}
+
+"""
+The damage category of a Move. 'VARIES' means that the Move can be one of the other three categories, e.g. hidden_power before Generation 4.
+"""
+enum MoveCategory {
+  PHYSICAL
+  SPECIAL
+  STATUS
+  VARIES
+}
+
+"""
+Describes who the Move can target. 'ADJACENT' refers to triple battles, in reference to the user of the Move; in double battles, all Pokemon are considered adjacent.
+"""
+enum TargetClass {
+  ADJACENT_ALLY
+  ADJACENT_FOE
+  ALL
+  ALL_ADJACENT
+  ALL_ADJACENT_FOES
+  ALL_ALLIES
+  ALL_FOES
+  ANY
+  ANY_ADJACENT
+  USER
+  USER_AND_ALL_ALLIES
+  USER_OR_ADJACENT_ALLY
+}

@@ -1,0 +1,30 @@
+type VersionGroup {
+  id: ID!
+
+  """
+  The initials of the games in the VersionGroup, or an abbreviation. Corresponds with the conventions used on Bulbapedia.
+
+  For example:
+    'GS' for 'Gold/Silver'
+    'C' for 'Crystal'
+    'Pt' for 'Platinum'
+    'Colo' for 'Colosseum'
+    'PE' for 'Let's Go Pikachu and Eevee'
+    'SwSh' for 'Sword/Shield'
+  """
+  code: String!
+
+  """
+  The formatted name of the VersionGroup. If there are multiple games in the group, they are separated by a '/'.
+
+  For example:
+    'Gold/Silver' for 'GS'
+    'SwSh' for 'Sword/Shield'
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the VersionGroup was introduced. 
+  """
+  introduced: Generation!
+}

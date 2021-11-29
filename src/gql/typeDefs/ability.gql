@@ -1,0 +1,22 @@
+type Ability {
+  id: ID!
+
+  """
+  The name of the Ability in snake_case.
+  """
+  name: String!
+
+  """
+  The name of the Ability in Title Case, with appropriate punctuation and capitalization. 
+
+  For example:
+    'RKS System' instead of 'Rks System'
+    'Power of Alchemy' instead of 'Power Of Alchemy'
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the Ability was introduced.
+  """ 
+  introduced: Generation!
+}

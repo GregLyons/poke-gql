@@ -1,0 +1,27 @@
+type Description {
+  id: ID!
+
+  """
+  The text of the Description as it appears on in-game/on Bulbapedia.
+  """
+  text: String!
+
+  """
+  The type of entity that the Description is describing.
+  """ 
+  class: DescriptionClass!
+
+  """
+  The entity to which the Description applies.
+  """
+  entity: Ability | Item | Move
+}
+
+"""
+The type of entity that the Description is describing.
+"""
+enum DescriptionClass {
+  ABILITY
+  ITEM
+  MOVE
+}

@@ -1,0 +1,18 @@
+type Type {
+  id: ID!
+
+  """
+  The name of the Type in snake_case. 
+  """ 
+  name: String!
+
+  """
+  The name of the Type in Title Case.
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the Type was introduced.
+  """
+  introduced: Generation!
+}

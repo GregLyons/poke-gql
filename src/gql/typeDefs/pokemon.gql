@@ -1,0 +1,74 @@
+type Pokemon {
+  id: ID!
+
+  """
+  The name of the Pokemon in snake_case. Periods are removed, whereas hyphens become underscores. The species name comes first, followed by the form name. 
+
+  Examples:
+    venusaur_mega
+    charizard_mega_x
+    charizard_gmax
+    raticate_alola
+    mr_mime_galar
+  """
+  name: String!
+
+  """
+  The name of the Pokemon in Title Case, and with appropriate punctuation. The species name is capitalized, and form data is in parentheses.
+
+  Examples:
+    Venusaur (Mega)
+    Charizard (Mega X)
+    Charizard (G-Max)
+    Raticate (Alola)
+    Mr. Mime (Galar)
+  """
+  formattedName: String!
+
+  """
+  The name of the Pokemon species in snake_case. Two Pokemon belong to the same species if and only if they have the same National Dex number.
+
+  Examples:
+    Venusaur (Mega), venusaur_mega -> venusaur 
+    Raticate (Alola), raticate_alola -> raticate
+    Mr. Mime (Galar), mr_mime_galar -> mr_mime
+  """
+  speciesName: String!
+
+  """
+  The National Dex number of the Pokemon. 
+  """
+  dexNumber: Int!
+
+  """
+  The height of the Pokemon in meters. 0.0 if unknown.
+  """
+  height: Float!
+
+  """
+  The weight of the Pokemon in kilograms. 0.0 if unknown.
+  """
+  weight: Float!
+
+  """
+  The Generation in which the Pokemon was introduced.
+  """
+  introduced: Generation!
+
+  """
+  The base stats of the Pokemon.
+  """
+  baseStats: BaseStats!
+}
+
+"""
+An object containing the six base stats of a Pokemon. For Generation 1, we split the Special stat into Special Attack and Special Defense.
+"""
+type BaseStats {
+  hp: Int!
+  attack: Int!
+  defense: Int!
+  specialAttack: Int!
+  specialDefense: Int!
+  speed: Int!
+}

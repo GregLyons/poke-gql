@@ -1,0 +1,13 @@
+type Status {
+  id: ID!
+
+  """
+  The name of the Status in snake_case.
+  """
+  string: String!
+
+  """
+  The name of the Status in Title Case, with appropriate punctuation.
+  """
+  formattedName: String!
+}

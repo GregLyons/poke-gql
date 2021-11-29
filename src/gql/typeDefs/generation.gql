@@ -1,0 +1,29 @@
+type Generation {
+  id: ID!
+
+  """
+  The literal number of the Generation (e.g. '1' for Generation 1, '2' for Generation 2, etc.).
+  """
+  genNumber: Int!
+
+  """
+  The roman numeral for the Generation.
+  """
+  genCode: GenerationCode!
+}
+
+"""
+A roman numeral for the Generation.
+""" 
+enum GenerationCode {
+  I
+  II
+  III
+  IV
+  V
+  VI
+  VII
+  VIII
+  IX
+  X
+}

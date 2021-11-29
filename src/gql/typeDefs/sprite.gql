@@ -1,0 +1,15 @@
+type Sprite {
+  id: ID!
+
+  """
+  A string representing the filepath to the Sprite in the 'sprites' folder from https://github.com/PokeAPI/sprites. 
+  
+  For example, '/sprites/pokemon/versions/generation-i/1.png' would refer to a front-facing, Generation 1 sprite of Bulbasaur, as a .png. 
+  """
+  filepath: String!
+
+  """
+  The entity represented by the Sprite (e.g. Item or Pokemon).
+  """
+  entity: Item | Pokemon
+}

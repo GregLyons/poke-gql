@@ -1,0 +1,20 @@
+type UsageMethod {
+  id: ID!
+
+  """
+  The name of the UsageMethod in snake_case. 
+  """
+  name: String!
+
+  """
+  The name of the UsageMethod in Title Case.
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the UsageMethod became relevant. That is, in which the UsageMethod of the Move would interact with certain Abilities, Moves, etc. 
+  
+  For example, whether a Move had the UsageMethod 'bite' only became relevant when the ability 'strong_jaw' was introduced in Generation 6, even though Moves like 'crunch' have been around since Generation 2.
+  """
+  introduced: Generation!
+}
