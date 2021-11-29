@@ -1,4 +1,8 @@
-type Move {
+#
+# NODES AND HELPER TYPES
+#
+
+type Move implements Node {
   id: ID!
 
   """
@@ -40,10 +44,24 @@ type Move {
   target: TargetClass!
 
   """
+  The Type possessed by the Move, e.g. 'flamethrower' is 'fire'-type. 
+  """
+  type: 
+
+  """
   The Generation in which the Move was introduced.
   """ 
   introduced: Generation!
 }
+
+#
+# CONNECTIONS AND EDGES
+#
+
+
+#
+# ENUMS
+#
 
 """
 The damage category of a Move. 'VARIES' means that the Move can be one of the other three categories, e.g. hidden_power before Generation 4.

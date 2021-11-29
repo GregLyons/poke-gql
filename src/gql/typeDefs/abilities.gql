@@ -1,0 +1,194 @@
+#
+# NODES AND HELPER TYPES
+#
+
+type Ability implements Node {
+  id: ID!
+
+  boostsType(input: ConnectionInput): AbilityBoostsTypeConnection
+
+  boostsUsageMethod(input: ConnectionInput): AbilityBoostsUsageMethodConnection
+
+  causesStatus(input: ConnectionInput): AbilityCausesStatusConnection
+
+  effect(input: ConnectionInput): AbilityEffectConnection
+
+  modifiesStat(input: ConnectionInput): AbilityModifiesStatConnection
+
+  """
+  The name of the Ability in snake_case.
+  """
+  name: String!
+
+  """
+  The name of the Ability in Title Case, with appropriate punctuation and capitalization. 
+
+  For example:
+    'RKS System' instead of 'Rks System'
+    'Power of Alchemy' instead of 'Power Of Alchemy'
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the Ability was introduced.
+  """ 
+  introduced: Generation!
+
+  resistsType(input: ConnectionInput): AbilityResistsTypeConnection
+
+  resistsUsageMethod(input: ConnectionInput): AbilityResistsUsageMethodConnection
+
+  resistsStatus(input: ConnectionInput): AbilityResistsStatusConnection
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# EFFECT
+
+type AbilityEffectConnection implements Connection {
+  edges: [AbilityEffectEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type AbilityEffectEdge implements Edge {
+  cursor: String!
+  node: Ability!
+}
+
+# STAT
+
+type AbilityModifiesStatConnection implements Connection {
+  edges: [AbilitiyModifiesStatEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityModifiesStatEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  An integer between -6 and 6 (except for moves which max out a stat, e.g. 'anger_point', in which case is 12). Null if the Ability modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Ability modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met.
+  
+  For example, once rain is present for 'swift_swim', the speed boost is guaranteed to occur, so the 'chance' is 100.0.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# STATUS
+
+type AbilityCausesStatusConnection implements Connection {
+  edges: [AbilityCausesStatusEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityCausesStatusEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  The probability of the Ability causing the Status once the necessary conditions have been met. 
+
+  For example, 'static' causing 'paralysis' has a 'chance' of 30.0 since that is the probability of the user of a Move being paralyzed, assuming the Move makes contact (a necessary condition for 'static').
+  """
+  chance: Float!
+}
+
+type AbilityResistsStatusConnection implements Connection {
+  edges: [AbilityResistsStatusEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityResistsStatusEdge implements Edge {
+  cursor: String!
+  node: Ability!
+}
+
+# TYPE
+
+type AbilityBoostsTypeConnection implements Connection {
+  edges: [AbilityBoostsTypeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityBoostsTypeEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  The multiplier by which the Ability boosts the power of Moves which have the Type. 
+  """
+  multiplier: Float!
+}
+
+type AbilityResistsTypeConnection implements Connection {
+  edges: [AbilityResistsTypeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityResistsTypeEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  The multiplier by which the Ability resists the power of Moves which have the Type. 
+  """
+  multiplier: Float!
+}
+
+# USAGE METHOD
+
+type AbilityBoostsUsageMethodConnection implements Connection {
+  edges: [AbilityBoostsUsageMethodEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityBoostsUsageMethodEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  The multiplier by which the Ability boosts the power of Moves which have the UsageMethod. 
+  """
+  multiplier: Float!
+}
+
+type AbilityResistsUsageMethodConnection implements Connection {
+  edges: [AbilityResistsUsageMethodEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityResistsUsageMethodEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  The multiplier by which the Ability resists the power of Moves which have the UsageMethod. 
+  """
+  multiplier: Float!
+}
+
+#
+# ENUMS
+#
+enum Recipient {
+  ALL_FOES
+  TARGET
+  USER
+}

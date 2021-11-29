@@ -1,0 +1,219 @@
+#
+# NODES AND HELPER TYPES
+#
+
+type Item implements Node {
+  id: ID!
+
+  boostsType(input: ConnectionInput): ItemBoostsTypeConnection
+
+  boostsUsageMethod(input: ConnectionInput): ItemBoostsUsageMethodConnection
+
+  causesStatus(input: ConnectionInput): ItemCausesStatusConnection
+
+  effect(input: ConnectionInput): ItemEffectConnection
+
+  """
+  The formatted name of the Item, with correct punctuation.
+  """
+  formattedName: String!
+
+  """
+  The Generation in which the Item was introduced.
+  """
+  introduced: Generation!
+
+  modifiesStat(input: ConnectionInput): ItemModifiesStatConnection
+
+  """
+  The name of the Item in snake_case. Hyphens are converted to underscores.
+  """
+  name: String!
+
+  """
+  Describes the Type and power of the Move Natural Gift when the user holds the Item.
+  """
+  naturalGift(input: ConnectionInput): NaturalGiftConnection
+
+  """
+  The Pokemon necessary for this item to take effect.
+
+  For example:
+    Only Venusaur can use Venasaurite to Mega-evolve.
+    Only Latias and Latios can obtain the effects of Soul Dew.
+  """
+  requiresPokemon(input: ConnectionInput): ItemRequiresPokemonConnection
+
+  resistsType(input: ConnectionInput): ItemResistsTypeConnection
+
+  resistsUsageMethod(input: ConnectionInput): ItemResistsUsageMethodConnection
+
+  resistsStatus(input: ConnectionInput): ItemResistsStatusConnection
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# EFFECT
+
+type ItemEffectConnection implements Connection {
+  edges: [ItemEffectEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type ItemEffectEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# POKEMON
+type ItemRequiresPokemonConnection implements Connection {
+  edges: [ItemRequiresPokemonEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemRequiresPokemonEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# STAT
+
+type ItemModifiesStatConnection implements Connection {
+  edges: [AbilitiyModifiesStatEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemModifiesStatEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  An integer between -6 and 6. Null if the Item modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Item modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met.
+  
+  For example, once a Pokemon has fallen bellow quarter health, stat-boosting berries are guaranteed to give a stat boost, so the 'chance' is 100.0.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# STATUS
+
+type ItemCausesStatusConnection implements Connection {
+  edges: [ItemCausesStatusEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemCausesStatusEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The probability of the Item causing the Status once the necessary conditions have been met.
+  """
+  chance: Float!
+}
+
+type ItemResistsStatusConnection implements Connection {
+  edges: [ItemResistsStatusEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemResistsStatusEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# TYPE
+
+type ItemBoostsTypeConnection implements Connection {
+  edges: [ItemBoostsTypeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemBoostsTypeEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The multiplier by which the Item boosts the power of Moves which have the Type. 
+  """
+  multiplier: Float!
+}
+
+type ItemResistsTypeConnection implements Connection {
+  edges: [ItemResistsTypeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemResistsTypeEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The multiplier by which the Item resists the power of Moves which have the Type. 
+  """
+  multiplier: Float!
+}
+
+type NaturalGiftConnection implements Connection {
+  edges: [NaturalGiftEdge!]!
+  pageInfo: PageInfo!
+}
+
+type NaturalGiftEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The power of Natural Gift when used by a Pokemon holding Item.
+  """
+  power: Int!
+}
+
+# USAGE METHOD
+
+type ItemBoostsUsageMethodConnection implements Connection {
+  edges: [ItemBoostsUsageMethodEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemBoostsUsageMethodEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The multiplier by which the Item boosts the power of Moves which have the UsageMethod. 
+  """
+  multiplier: Float!
+}
+
+type ItemResistsUsageMethodConnection implements Connection {
+  edges: [ItemResistsUsageMethodEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemResistsUsageMethodEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The multiplier by which the Item resists the power of Moves which have the UsageMethod. 
+  """
+  multiplier: Float!
+}
