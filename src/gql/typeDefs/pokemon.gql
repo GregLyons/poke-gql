@@ -1,15 +1,14 @@
+#
+# NODES AND HELPER TYPES
+#
+
 type Pokemon implements Node {
   id: ID!
 
   """
   The Abilities that the Pokemon can possess.
   """
-  abilities(
-    first: Int,
-    last: Int,
-    before: String,
-    after: String
-  ): PokemonAbilityConnection
+  abilities(input: ConnectionInput): PokemonAbilityConnection
 
   """
   The base stats of the Pokemon.
@@ -59,12 +58,7 @@ type Pokemon implements Node {
   """
   The Moves that the Pokemon can learn.
   """
-  moves(
-    first: Int,
-    last: Int,
-    before: String,
-    after: String
-  ): PokemonMoveConnection!
+  moves(input: ConnectionInput): PokemonMoveConnection!
 
   """
   The name of the Pokemon in snake_case. Periods are removed, whereas hyphens become underscores. The species name comes first, followed by the form name. 
@@ -91,12 +85,7 @@ type Pokemon implements Node {
   """
   The elemental typing of the Pokemon, as an array of Types of length 1 or 2. For example, 'charizard' would have Types ['fire', 'flying'], and 'blastoise' would have Types ['water'].
   """
-  typing(
-    first: Int,
-    last: Int,
-    before: String,
-    after: String
-  ): PokemonTypeConnection!
+  typing(input: ConnectionInput): PokemonTypeConnection!
 
   """
   The weight of the Pokemon in kilograms. 0.0 if unknown.
@@ -163,14 +152,11 @@ type FormData {
   formClass: FormClass!
 }
 
-enum FormClass {
-  ALOLA
-  BASE
-  GALAR
-  GMAX
-  MEGA
-  OTHER
-}
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
 
 type PokemonAbilityConnection implements Connection {
   pageInfo: PageInfo!
@@ -187,11 +173,7 @@ type PokemonAbilityEdge implements Edge {
   slot: AbilitySlot
 }
 
-enum AbilitySlot {
-  ONE
-  TWO
-  HIDDEN
-}
+# MOVE
 
 type PokemonMoveConnection implements Connection {
   pageInfo: PageInfo!
@@ -218,6 +200,8 @@ type PokemonMoveEdge implements Edge {
   learnMethod: String!
 }
 
+# TYPE
+
 type PokemonTypeConnection implements Connection {
   pageInfo: PageInfo!
   edges: [PokemonTypeEdge!]!
@@ -226,4 +210,23 @@ type PokemonTypeConnection implements Connection {
 type PokemonTypeEdge implements Edge {
   cursor: String!
   node: Pokemon!
+}
+
+#
+# ENUMS
+# 
+
+enum AbilitySlot {
+  ONE
+  TWO
+  HIDDEN
+}
+
+enum FormClass {
+  ALOLA
+  BASE
+  GALAR
+  GMAX
+  MEGA
+  OTHER
 }

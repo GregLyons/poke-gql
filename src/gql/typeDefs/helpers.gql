@@ -12,6 +12,13 @@ interface Connection {
   pageInfo: PageInfo!
 }
 
+input ConnectionInput {
+  first: Int
+  last: Int
+  before: String
+  after: String
+}
+
 type PageInfo {
   startCursor: String!
   endCursor: String!
