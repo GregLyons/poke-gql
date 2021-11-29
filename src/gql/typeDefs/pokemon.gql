@@ -1,17 +1,27 @@
-type Pokemon {
+type Pokemon implements Node {
   id: ID!
 
   """
-  The name of the Pokemon in snake_case. Periods are removed, whereas hyphens become underscores. The species name comes first, followed by the form name. 
-
-  Examples:
-    venusaur_mega
-    charizard_mega_x
-    charizard_gmax
-    raticate_alola
-    mr_mime_galar
+  The Abilities that the Pokemon can possess.
   """
-  name: String!
+  abilities(
+    first: Int,
+    last: Int,
+    before: String,
+    after: String
+  ): PokemonAbilityConnection
+
+  """
+  The base stats of the Pokemon.
+  """
+  baseStats: BaseStats!
+
+  """
+  The National Dex number of the Pokemon. 
+  """
+  dexNumber: Int!
+
+  evolvesTo: [EvolutionData!]!
 
   """
   The name of the Pokemon in Title Case, and with appropriate punctuation. The species name is capitalized, and form data is in parentheses.
@@ -26,6 +36,49 @@ type Pokemon {
   formattedName: String!
 
   """
+  The different forms that the Pokemon can take, assuming the Pokemon.
+
+  For example:
+    'charizard' has forms 'charizard_mega_x', 'charizard_mega_y', and 'charizard_gmax'
+    'charizard_gmax' has forms 'charizard', 'charizard_mega_x', and 'charizard_mega_y'
+    'raticate' has the form 'raticate_alola'
+
+  """
+  forms: [FormData!]!
+
+  """
+  The height of the Pokemon in meters. 0.0 if unknown.
+  """
+  height: Float!
+
+  """
+  The Generation in which the Pokemon was introduced.
+  """
+  introduced: Generation!
+
+  """
+  The Moves that the Pokemon can learn.
+  """
+  moves(
+    first: Int,
+    last: Int,
+    before: String,
+    after: String
+  ): PokemonMoveConnection!
+
+  """
+  The name of the Pokemon in snake_case. Periods are removed, whereas hyphens become underscores. The species name comes first, followed by the form name. 
+
+  Examples:
+    venusaur_mega
+    charizard_mega_x
+    charizard_gmax
+    raticate_alola
+    mr_mime_galar
+  """
+  name: String!
+
+  """
   The name of the Pokemon species in snake_case. Two Pokemon belong to the same species if and only if they have the same National Dex number.
 
   Examples:
@@ -36,29 +89,20 @@ type Pokemon {
   speciesName: String!
 
   """
-  The National Dex number of the Pokemon. 
+  The elemental typing of the Pokemon, as an array of Types of length 1 or 2. For example, 'charizard' would have Types ['fire', 'flying'], and 'blastoise' would have Types ['water'].
   """
-  dexNumber: Int!
-
-  """
-  The height of the Pokemon in meters. 0.0 if unknown.
-  """
-  height: Float!
+  typing(
+    first: Int,
+    last: Int,
+    before: String,
+    after: String
+  ): PokemonTypeConnection!
 
   """
   The weight of the Pokemon in kilograms. 0.0 if unknown.
   """
   weight: Float!
 
-  """
-  The Generation in which the Pokemon was introduced.
-  """
-  introduced: Generation!
-
-  """
-  The base stats of the Pokemon.
-  """
-  baseStats: BaseStats!
 }
 
 """
@@ -71,4 +115,115 @@ type BaseStats {
   specialAttack: Int!
   specialDefense: Int!
   speed: Int!
+}
+
+"""
+An object representing an evolution relationship between two Pokemon.
+"""
+type EvolutionData {
+  """
+  The starting evolution.
+  """
+  prevolution: Pokemon!
+
+  """
+  The ending evolution.
+  """
+  evolution: Pokemon!
+
+  """
+  The method of evolution.
+  """
+  method: String!
+}
+
+"""
+An object representing a form relationship between two Pokemon.
+"""
+type FormData {
+  """
+  The Pokemon who serves as the base form in the form relationship.
+
+  For example:
+    'raticate' is the baseForm for 'raticate_alola'
+    'deerling_spring' is (arbitrarily chosen to be) the baseForm for 'deerling_winter'
+  """
+  baseForm: Pokemon!
+
+  """
+  The Pokemon who serves as the non-base form in the form relationship.
+  """
+  form: Pokemon!
+
+  """
+  For example:
+    MEGA
+    ALOLA
+  """
+  formClass: FormClass!
+}
+
+enum FormClass {
+  ALOLA
+  BASE
+  GALAR
+  GMAX
+  MEGA
+  OTHER
+}
+
+type PokemonAbilityConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [PokemonAbilityEdge!]!
+}
+
+type PokemonAbilityEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+
+  """
+  The slot which the Ability occupies on the Pokemon. 
+  """
+  slot: AbilitySlot
+}
+
+enum AbilitySlot {
+  ONE
+  TWO
+  HIDDEN
+}
+
+type PokemonMoveConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [PokemonMoveEdge!]!
+}
+
+type PokemonMoveEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+
+  """
+  A string representing how the Pokemon can learn the Move, taken mostly from the system used by Pokemon Showdown.
+
+  M: TM/HM
+  T: Tutor
+  L: Start or level-up, second character onwards is the level
+  R: Restricted (special moves like Rotom moves)
+  E: Egg
+  D: Dream World
+  S: Event, second character onwards is the index in eventData.
+  V: Virtual Console or Let's Go transfer
+  C: NOT A REAL SOURCE
+  """
+  learnMethod: String!
+}
+
+type PokemonTypeConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [PokemonTypeEdge!]!
+}
+
+type PokemonTypeEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
 }
