@@ -1,13 +1,119 @@
-type Status {
+#
+# NODES AND HELPER TYPES
+#
+
+type Status implements Node {
   id: ID!
+
+  abilityCauses(input: ConnectionInput): StatusCausedByAbilityConnection
+
+  abilityResists(input: ConnectionInput): StatusResistedByAbilityConnection
+
+  itemCauses(input: ConnectionInput): StatusCausedByItemConnection
+
+  itemResists(input: ConnectionInput): StatusResistedByItemConnection
+
+  moveCauses(input: ConnectionInput): StatusCausedByMoveConnection
+
+  """
+  Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
+  """
+  moveResists(input: ConnectionInput): StatusResistedByMoveConnection
 
   """
   The name of the Status in snake_case.
   """
-  string: String!
+  name: String!
 
   """
   The name of the Status in Title Case, with appropriate punctuation.
   """
   formattedName: String!
+}
+
+#
+# EDGES AND CONNECTIONS
+#
+
+# ABILITY
+
+type StatusCausedByAbilityConnection implements Connection {
+  edges: [StatusCausedByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatusCausedByAbilityEdge implements Edge {
+  cursor: String!
+  node: Ability!
+  
+  """
+  The probability of the Ability causing the Status once the necessary conditions have been met. 
+
+  For example, 'static' causing 'paralysis' has a 'chance' of 30.0 since that is the probability of the user of a Move being paralyzed, assuming the Move makes contact (a necessary condition for 'static').
+  """
+  chance: Float!
+}
+
+type StatusResistdByAbilityConnection implements Connection {
+  edges: [StatusResistdByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatusResistdByAbilityEdge implements Edge {
+  cursor: String!
+  node: Ability!
+}
+
+# ITEM
+
+type StatusCausedByItemConnection implements Connection {
+  edges: [StatusCausedByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatusCausedByItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+  
+  """
+  The probability of the Item causing the Status once the necessary conditions have been met.
+  """
+  chance: Float!
+}
+
+type StatusResistdByItemConnection implements Connection {
+  edges: [StatusResistdByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatusResistdByItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# MOVE
+
+type StatusCausedByMoveConnection implements Connection {
+  edges: [StatusCausedByMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatusCausedByMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+  
+  """
+  The probability of the Move causing the Status once the necessary conditions have been met (i.e. the move being successful/hitting).
+  """
+  chance: Float!
+}
+
+type StatusResistdByMoveConnection implements Connection {
+  edges: [StatusResistdByMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatusResistdByMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
 }

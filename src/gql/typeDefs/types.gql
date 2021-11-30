@@ -1,10 +1,13 @@
-type Type {
+#
+# NODES AND HELPER TYPES
+#
+
+type Type implements Node {
   id: ID!
 
-  """
-  The name of the Type in snake_case. 
-  """ 
-  name: String!
+  abilityBoosts(input: ConnectionInput): TypeBoostedByAbilityConnection
+
+  abilityResists(input: ConnectionInput): TypeResistedByAbilityConnection
 
   """
   The name of the Type in Title Case.
@@ -15,4 +18,147 @@ type Type {
   The Generation in which the Type was introduced.
   """
   introduced: Generation!
+
+  itemBoosts(input: ConnectionInput): TypeBoostedByItemConnection
+
+  itemResists(input: ConnectionInput): TypeResistedByItemConnection
+
+  """
+  The matchups of this Type as the attacking-type against other defending Types.
+  """
+  matchups(input: ConnectionInput): TypeMatchupConnection
+
+  moves(input: ConnectionInput): TypeMoveConnection
+
+  """
+  The name of the Type in snake_case. 
+  """ 
+  name: String!
+
+  pokemon(input: ConnectionInput): TypePokemonConnection
+
+  #
+  # CONVENIENCE FIELDS
+  #
+  
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  doubleDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  neutralDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  halfDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  noDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  doubleDamageTo: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  neutralDamageTo: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  halfDamageTo: [Type!]!
+
+  """
+  Convenience field for damage calculations. For pagination, use the 'matchups' field.
+  """
+  noDamageTo: [Type!]!
+}
+
+#
+# EDGES AND CONNECTIONS
+#
+
+# ABILITY
+
+type TypeBoostedByAbilityConnection implements Connection {
+  edges: [TypeBoostedByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeBoostedByAbilityEdge implements Edge {
+  cursor: String!
+  node: Type!
+  multiplier: Float!
+}
+
+type TypeResistedByAbilityConnection implements Connection {
+  edges: [TypeResistedByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeResistedByAbilityEdge implements Edge {
+  cursor: String!
+  node: Type!
+  multiplier: Float!
+}
+
+# ITEM
+
+type TypeBoostedByItemConnection implements Connection {
+  edges: [TypeBoostedByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeBoostedByItemEdge implements Edge {
+  cursor: String!
+  node: Type!
+  multiplier: Float!
+}
+
+type TypeResistedByItemConnection implements Connection {
+  edges: [TypeResistedByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeResistedByItemEdge implements Edge {
+  cursor: String!
+  node: Type!
+  multiplier: Float!
+}
+
+# POKEMON
+
+type TypePokemonConnection implements Connection {
+  edges: [TypePokemonEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypePokemonEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+}
+
+# TYPE
+
+type TypeMatchupConnection implements Connection {
+  edges: [TypeMatchupEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeMatchupEdge implements Edge {
+  cursor: String!
+  node: Type!
+
+  """
+  The multiplier of the Type-matchup, with the starting node as the attacking Type and the ending node as the defending Type.
+  """
+  multiplier: Float!
 }

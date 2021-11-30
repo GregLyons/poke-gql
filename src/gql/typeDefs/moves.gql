@@ -18,6 +18,8 @@ type Move implements Node {
   """
   contact: Boolean!
 
+  effect(input: ConnectionInput): MoveEffectConnection
+
   """
   The name of the Move in Title Case.
   """
@@ -92,6 +94,18 @@ type Move implements Node {
 #
 # CONNECTIONS AND EDGES
 #
+
+# EFFECT
+
+type MoveEffectConnection implements Connection {
+  edges: [MoveEffectEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type MoveEffectEdge implements Edge {
+  cursor: String!
+  node: Effect!
+}
 
 # ITEM
 

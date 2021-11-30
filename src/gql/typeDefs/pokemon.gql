@@ -103,6 +103,40 @@ type Pokemon implements Node {
   """
   weight: Float!
 
+  #
+  # CONVENIENCE FIELDS
+  #
+  
+  """
+  Convenience field for damage calculations.
+  """
+  quadDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations.
+  """
+  doubleDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations.
+  """
+  neutralDamageFrom: [Type!]!
+  
+  """
+  Convenience field for damage calculations.
+  """
+  halfDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations.
+  """
+  quarterDamageFrom: [Type!]!
+
+  """
+  Convenience field for damage calculations.
+  """
+  noDamageFrom: [Type!]!
+
 }
 
 """
