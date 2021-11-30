@@ -11,7 +11,27 @@ type Item implements Node {
 
   causesStatus(input: ConnectionInput): ItemCausesStatusConnection
 
+  """
+  The Descriptions for the Move across the different VersionGroups.
+  """
+  descriptions(input: ConnectionInput): ItemDescriptionConnection
+
   effect(input: ConnectionInput): ItemEffectConnection
+
+  """
+  Entities which the Item enables.
+  """
+  enables(input: ConnectionInput): ItemEnablesMoveConnection | ItemEnablesPokemonConnection
+
+  """
+  E.g. Z-Crystals enable their corresponding Z-Moves.
+  """
+  enablesMove(input: ConnectionInput): ItemEnablesMoveConnection
+
+  """
+  E.g. Mega Stones enable their corresponding mega-evolved Pokemon.
+  """
+  enablesPokemon(input: ConnectionInput): ItemEnablesPokemonConnection
 
   """
   The formatted name of the Item, with correct punctuation.
@@ -21,7 +41,7 @@ type Item implements Node {
   """
   The Generation in which the Item was introduced.
   """
-  introduced: Generation!
+  introduced(input: ConnectionInput): ItemGenerationConnection
 
   modifiesStat(input: ConnectionInput): ItemModifiesStatConnection
 
@@ -55,6 +75,18 @@ type Item implements Node {
 # CONNECTIONS AND EDGES
 #
 
+# DESCRIPTION 
+
+type ItemDescriptionConnection implements Connection {
+  edges: [ItemDescriptionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemDescriptionEdge implements Edge {
+  cursor: String!
+  node: Description!
+}
+
 # EFFECT
 
 type ItemEffectConnection implements Connection {
@@ -67,7 +99,42 @@ type ItemEffectEdge implements Edge {
   node: Effect!
 }
 
+# GENERATION
+
+type ItemGenerationConnection implements Connection {
+  edges: [ItemGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type ItemGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# MOVE
+
+type ItemEnablesMoveConnection implements Connection {
+  edges: [ItemEnablesMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemEnablesMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+}
+
 # POKEMON
+
+type ItemEnablesPokemonConnection implements Connection {
+  edges: [ItemEnablesPokemonEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ItemEnablesPokemonEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+}
+
 type ItemRequiresPokemonConnection implements Connection {
   edges: [ItemRequiresPokemonEdge!]!
   pageInfo: PageInfo!

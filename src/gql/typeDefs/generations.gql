@@ -1,16 +1,140 @@
-type Generation {
+#
+# NODES AND HELPER TYPES
+#
+
+type Generation implements Node {
   id: ID!
+
+  abilities(input: ConnectionInput): GenerationAbilityConnection
+
+  effects(input: ConnectionInput): GenerationEffectConnection
+
+  """
+  The roman numeral for the Generation.
+  """
+  genCode: GenerationCode!
 
   """
   The literal number of the Generation (e.g. '1' for Generation 1, '2' for Generation 2, etc.).
   """
   genNumber: Int!
 
-  """
-  The roman numeral for the Generation.
-  """
-  genCode: GenerationCode!
+  items(input: ConnectionInput): GenerationItemConnection
+
+  moves(input: ConnectionInput): GenerationMoveConnection
+
+  pokemon(input: ConnectionInput): GenerationPokemonConnection
+
+  types(input: ConnectionInput): GenerationTypeConnection
+
+  usageMethods(input: ConnectionInput): GenerationUsageMethodConnection
+
+  versionGroups(input: ConnectionInput): GenerationVersionGroupConnection
 }
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
+
+type GenerationAbilityConnection implements Connection {
+  edges: [GenerationAbilityEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationAbilityEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# EFFECT
+
+type GenerationEffectConnection implements Connection {
+  edges: [GenerationEffectEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationEffectEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# ITEM
+
+type GenerationItemConnection implements Connection {
+  edges: [GenerationItemEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationItemEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# MOVE
+
+type GenerationMoveConnection implements Connection {
+  edges: [GenerationMoveEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationMoveEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# POKEMON
+
+type GenerationPokemonConnection implements Connection {
+  edges: [GenerationPokemonEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationPokemonEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# TYPE
+
+type GenerationTypeConnection implements Connection {
+  edges: [GenerationTypeEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationTypeEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# USAGE METHOD
+
+type GenerationUsageMethodConnection implements Connection {
+  edges: [GenerationMethodEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationUsageMethodEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# VERSION GROUP
+
+type GenerationVersionGroupConnection implements Connection {
+  edges: [GenerationGroupEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationVersionGroupEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+#
+# ENUMS
+#
 
 """
 A roman numeral for the Generation.

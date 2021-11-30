@@ -32,7 +32,7 @@ type Status implements Node {
 }
 
 #
-# EDGES AND CONNECTIONS
+# CONNECTIONS AND EDGES
 #
 
 # ABILITY

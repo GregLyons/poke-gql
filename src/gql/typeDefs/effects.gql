@@ -1,14 +1,11 @@
-type Effect {
+#
+# NODES AND HELPER FIELDS
+#
+
+type Effect implements Node {
   id: ID!
 
-  """
-  The name of the Effect in snake_case. If the Effect has a verb in its name, the verb is conjugated in third person.
-
-  Examples:
-    'switches_out_target' instead of 'switch_out_target' ('roar')
-    'ignores_ability' instead of 'ignore_ability' ('gastro_acid')
-  """
-  name: String!
+  abilities(input: ConnectionInput): EffectAbilityConnection
 
   """
   The name of the Effect in Title Case, with appropriate punctuation.
@@ -20,5 +17,70 @@ type Effect {
 
   For example, 'low_kick' was introduced in Generation 1, but it didn't have the Effect 'depends_on_weight' until Generation 3.
   """
-  introduced: Generation!
+  introduced(input: ConnectionInput): EffectGenerationConnection
+
+  items(input: ConnectionInput): EffectItemConnection
+
+  moves(input: ConnectionInput): EffectMoveConnection
+
+  """
+  The name of the Effect in snake_case. If the Effect has a verb in its name, the verb is conjugated in third person.
+
+  Examples:
+    'switches_out_target' instead of 'switch_out_target' ('roar')
+    'ignores_ability' instead of 'ignore_ability' ('gastro_acid')
+  """
+  name: String!
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
+
+type EffectAbilityConnection implements Connection {
+  edges: [EffectAbilityEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type EffectAbilityEdge implements Edge {
+  cursor: String!
+  node: Effect!
+}
+
+# GENERATION
+
+type GenerationGenerationConnection implements Connection {
+  edges: [GenerationGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# ITEM
+
+type EffectItemConnection implements Connection {
+  edges: [EffectItemEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type EffectItemEdge implements Edge {
+  cursor: String!
+  node: Effect!
+}
+
+# MOVE
+
+type EffectMoveConnection implements Connection {
+  edges: [EffectMoveEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type EffectMoveEdge implements Edge {
+  cursor: String!
+  node: Effect!
 }

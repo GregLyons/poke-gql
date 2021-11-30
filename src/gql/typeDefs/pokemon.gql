@@ -21,6 +21,23 @@ type Pokemon implements Node {
   dexNumber: Int!
 
   """
+  Entities which the Pokemon enables.
+  """
+  enables(input: ConnectionInput): PokemonEnablesItemConnection | PokemonEnablesMoveConnection
+
+  """
+  E.g. 'venusaur' enables the use of 'venusaurite', and 'latias' enables the use of 'soul_dew'.
+  """
+  enablesItem(input: ConnectionInput): PokemonEnablesItemConnection
+
+  """
+  E.g. 'charizard_gmax' enables 'g_max_wildfire'. 
+  
+  We wouldn't say, however, that 'smeargle' enables 'sketch', even though it is the only Pokemon that can learn that Move.
+  """
+  enablesMove(input: ConnectionInput): PokemonEnablesMoveConnection
+
+  """
   Pokemon for which this Pokemon is a prevolution. 
   """
   evolvesTo(input: ConnectionInput): PokemonEvolutionConnection
@@ -64,7 +81,7 @@ type Pokemon implements Node {
   """
   The Generation in which the Pokemon was introduced.
   """
-  introduced: Generation!
+  introduced(input: ConnectionInput): PokemonGenerationConnection
 
   """
   The Moves that the Pokemon can learn.
@@ -172,7 +189,41 @@ type PokemonAbilityEdge implements Edge {
   slot: AbilitySlot
 }
 
+# GENERATION
+
+type PokemonGenerationConnection implements Connection {
+  edges: [PokemonGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type PokemonGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# ITEM
+
+type PokemonEnablesItemConnection implements Connection {
+  edges: [PokemonEnablesItemEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type PokemonEnablesItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
 # MOVE
+
+type PokemonEnablesMoveConnection implements Connection {
+  edges: [PokemonEnablesMoveEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type PokemonEnablesMoveEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+}
 
 type PokemonMoveConnection implements Connection {
   pageInfo: PageInfo!

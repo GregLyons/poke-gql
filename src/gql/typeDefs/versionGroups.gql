@@ -1,4 +1,8 @@
-type VersionGroup {
+#
+# NODES AND HELPER TYPES
+#
+
+type VersionGroup implements Node {
   id: ID!
 
   """
@@ -26,5 +30,19 @@ type VersionGroup {
   """
   The Generation in which the VersionGroup was introduced. 
   """
-  introduced: Generation!
+  introduced(input: ConnectionInput): VersionGroupGenerationConnection
+}
+
+#
+# CONNECTIONS AND EDGES
+# 
+
+type VersionGroupGenerationConnection implements Connection {
+  edges: [VersionGroupGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type VersionGroupGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
 }

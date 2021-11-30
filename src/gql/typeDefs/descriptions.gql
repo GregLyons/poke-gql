@@ -1,10 +1,9 @@
-type Description {
-  id: ID!
+#
+# NODES AND HELPER TYPES
+#
 
-  """
-  The text of the Description as it appears on in-game/on Bulbapedia.
-  """
-  text: String!
+type Description implements Node {
+  id: ID!
 
   """
   The type of entity that the Description is describing.
@@ -14,8 +13,74 @@ type Description {
   """
   The entity to which the Description applies.
   """
-  entity: Ability | Item | Move
+  entity(input: ConnectionInput): DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection
+
+  """
+  The text of the Description as it appears on in-game/on Bulbapedia.
+  """
+  text: String!
+
+  """
+  The VersionGroup(s) in which the Description is present.
+  """
+  versionGroups(input: ConnectionInput): DescriptionVersionGroupConnection
 }
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
+
+type DescriptionAbilityConnection implements Connection {
+  edges: [DescriptionAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type DescriptionAbilityEdge implements Edge {
+  cursor: String!
+  node: Ability!
+}
+
+# ITEM
+
+type DescriptionItemConnection implements Connection {
+  edges: [DescriptionItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type DescriptionItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# MOVE 
+
+type DescriptionMoveConnection implements Connection {
+  edges: [DescriptionMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type DescriptionMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+}
+
+# VERSION GROUP 
+
+type DescriptionVersionGroupConnection implements Connection {
+  edges: [DescriptionVersionGroupEdge!]!
+  pageInfo: PageInfo!
+}
+
+type DescriptionVersionGroupEdge implements Edge {
+  cursor: String!
+  node: VersionGroup!
+}
+
+#
+# ENUMS
+#
 
 """
 The type of entity that the Description is describing.

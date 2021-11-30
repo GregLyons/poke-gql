@@ -1,5 +1,19 @@
-type UsageMethod {
+#
+# NODES AND HELPER FIELDS
+#
+
+type UsageMethod implements Node {
   id: ID!
+
+  abilityBoosts(input: ConnectionInput): UsageMethodBoostedByAbilityConnection
+
+  abilityResists(input: ConnectionInput): UsageMethodResistedByAbilityConnection
+
+  itemBoosts(input: ConnectionInput): UsageMethodBoostedByItemConnection
+
+  itemResists(input: ConnectionInput): UsageMethodResistedByItemConnection
+
+  moves(input: ConnectionInput): UsageMethodMoveConnection
 
   """
   The name of the UsageMethod in snake_case. 
@@ -16,5 +30,81 @@ type UsageMethod {
   
   For example, whether a Move had the UsageMethod 'bite' only became relevant when the ability 'strong_jaw' was introduced in Generation 6, even though Moves like 'crunch' have been around since Generation 2.
   """
-  introduced: Generation!
+  introduced(input: ConnectionInput): UsageMethodGenerationConnection
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
+
+type UsageMethodBoostedByAbilityConnection implements Connection {
+  edges: [UsageMethodBoostedByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsageMethodBoostedByAbilityEdge implements Edge {
+  cursor: String!
+  node: UsageMethod!
+  multiplier: Float!
+}
+
+type UsageMethodResistedByAbilityConnection implements Connection {
+  edges: [UsageMethodResistedByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsageMethodResistedByAbilityEdge implements Edge {
+  cursor: String!
+  node: UsageMethod!
+  multiplier: Float!
+}
+
+# GENERATION
+
+type UsageMethodGenerationConnection implements Connection {
+  edges: [UsageMethodGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type UsageMethodGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
+}
+
+# ITEM
+
+type UsageMethodBoostedByItemConnection implements Connection {
+  edges: [UsageMethodBoostedByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsageMethodBoostedByItemEdge implements Edge {
+  cursor: String!
+  node: UsageMethod!
+  multiplier: Float!
+}
+
+type UsageMethodResistedByItemConnection implements Connection {
+  edges: [UsageMethodResistedByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsageMethodResistedByItemEdge implements Edge {
+  cursor: String!
+  node: UsageMethod!
+  multiplier: Float!
+}
+
+# MOVE
+
+type UsageMethodMoveConnection implements Connection {
+  edges: [UsageMethodMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsageMethodMoveEdge implements Edge {
+  cursor: String!
+  node: UsageMethod!
 }

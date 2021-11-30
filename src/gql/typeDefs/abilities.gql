@@ -9,16 +9,14 @@ type Ability implements Node {
 
   boostsUsageMethod(input: ConnectionInput): AbilityBoostsUsageMethodConnection
 
+  """
+  The Descriptions for the Ability across the different VersionGroups.
+  """
+  descriptions(input: ConnectionInput): AbilityDescriptionConnection
+
   causesStatus(input: ConnectionInput): AbilityCausesStatusConnection
 
   effect(input: ConnectionInput): AbilityEffectConnection
-
-  modifiesStat(input: ConnectionInput): AbilityModifiesStatConnection
-
-  """
-  The name of the Ability in snake_case.
-  """
-  name: String!
 
   """
   The name of the Ability in Title Case, with appropriate punctuation and capitalization. 
@@ -32,7 +30,14 @@ type Ability implements Node {
   """
   The Generation in which the Ability was introduced.
   """ 
-  introduced: Generation!
+  introduced(input: ConnectionInput): AbilityGenerationConnection
+
+  modifiesStat(input: ConnectionInput): AbilityModifiesStatConnection
+
+  """
+  The name of the Ability in snake_case.
+  """
+  name: String!
 
   resistsType(input: ConnectionInput): AbilityResistsTypeConnection
 
@@ -45,6 +50,18 @@ type Ability implements Node {
 # CONNECTIONS AND EDGES
 #
 
+# DESCRIPTION 
+
+type AbilityDescriptionConnection implements Connection {
+  edges: [AbilityDescriptionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AbilityDescriptionEdge implements Edge {
+  cursor: String!
+  node: Description!
+}
+
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
@@ -55,6 +72,18 @@ type AbilityEffectConnection implements Connection {
 type AbilityEffectEdge implements Edge {
   cursor: String!
   node: Effect!
+}
+
+# GENERATION
+
+type AbilityGenerationConnection implements Connection {
+  edges: [AbilityGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type AbilityGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
 }
 
 # STAT

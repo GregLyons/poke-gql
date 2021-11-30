@@ -5,7 +5,6 @@
 type Move implements Node {
   id: ID!
 
-
   """
   Moves which bypass accuracy checks (e.g. aerial_ace) have null in this field. Otherwise, accuracy is an integer ranging from 0-100.
   """
@@ -18,7 +17,22 @@ type Move implements Node {
   """
   contact: Boolean!
 
+  """
+  The Descriptions for the Move across the different VersionGroups.
+  """
+  descriptions(input: ConnectionInput): MoveDescriptionConnection
+
   effect(input: ConnectionInput): MoveEffectConnection
+
+  """
+  Entities which the Move enables.
+  """
+  enables(input: ConnectionInput): MoveEnablesMoveConnection
+
+  """
+  E.g. 'volt_tackle' (partly) enables 'catastropika'.
+  """
+  enablesMove(input: ConnectionInput): MoveEnablesMoveConnection
 
   """
   The name of the Move in Title Case.
@@ -28,7 +42,7 @@ type Move implements Node {
   """
   The Generation in which the Move was introduced.
   """ 
-  introduced: Generation!
+  introduced(input: ConnectionInput): MoveGenerationConnection
 
   modifiesStat(input: ConnectionInput): MoveModifiesStatConnection
 
@@ -49,6 +63,8 @@ type Move implements Node {
   power: Int 
 
   pp: Int!
+
+  priority: Int!
 
   """
   E.g. 'breakneck_blitz' requires 'normalium_z'.
@@ -95,6 +111,18 @@ type Move implements Node {
 # CONNECTIONS AND EDGES
 #
 
+# DESCRIPTION 
+
+type MoveDescriptionConnection implements Connection {
+  edges: [MoveDescriptionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveDescriptionEdge implements Edge {
+  cursor: String!
+  node: Description!
+}
+
 # EFFECT
 
 type MoveEffectConnection implements Connection {
@@ -105,6 +133,18 @@ type MoveEffectConnection implements Connection {
 type MoveEffectEdge implements Edge {
   cursor: String!
   node: Effect!
+}
+
+# GENERATION
+
+type MoveGenerationConnection implements Connection {
+  edges: [MoveGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type MoveGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
 }
 
 # ITEM
@@ -120,6 +160,16 @@ type MoveRequiresItemEdge implements Edge {
 }
 
 # MOVE
+
+type MoveEnablesMoveConnection implements Connection {
+  edges: [MoveEnablesMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MoveEnablesMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+}
 
 type MoveRequiresMoveConnection implements Connection {
   edges: [MoveRequiresMoveEdge!]!

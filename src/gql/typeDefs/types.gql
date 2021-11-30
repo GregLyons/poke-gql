@@ -17,7 +17,7 @@ type Type implements Node {
   """
   The Generation in which the Type was introduced.
   """
-  introduced: Generation!
+  introduced(input: ConnectionInput): TypeGenerationConnection
 
   itemBoosts(input: ConnectionInput): TypeBoostedByItemConnection
 
@@ -83,7 +83,7 @@ type Type implements Node {
 }
 
 #
-# EDGES AND CONNECTIONS
+# CONNECTIONS AND EDGES
 #
 
 # ABILITY
@@ -108,6 +108,18 @@ type TypeResistedByAbilityEdge implements Edge {
   cursor: String!
   node: Type!
   multiplier: Float!
+}
+
+# GENERATION
+
+type TypeGenerationConnection implements Connection {
+  edges: [TypeGenerationEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type TypeGenerationEdge implements Edge {
+  cursor: String!
+  node: Generation!
 }
 
 # ITEM
