@@ -67,6 +67,11 @@ type Move implements Node {
   priority: Int!
 
   """
+  Entities which the Move requires.
+  """
+  requires(input: ConnectionInput): MoveRequiresItemConnection | MoveRequiresMoveConnection | MoveRequiresPokemonConnection | MoveRequiresTypeConnection
+
+  """
   E.g. 'breakneck_blitz' requires 'normalium_z'.
   """
   requiresItem(input: ConnectionInput): MoveRequiresItemConnection

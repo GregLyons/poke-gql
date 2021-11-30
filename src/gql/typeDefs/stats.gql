@@ -1,0 +1,127 @@
+#
+# NODES AND HELPER TYPES
+#
+
+type Stat implements Node {
+  id: ID!
+
+  abilityModifies(input: ConnectionInput): StatModifiedByAbilityConnection
+
+  """
+  The name of the Stat in Title Case, with appropriate punctuation.
+  """
+  formattedName: String!
+
+  itemModifies(input: ConnectionInput): StatModifiedByItemConnection
+
+  moveModifies(input: ConnectionInput): StatModifiedByMoveConnection
+
+  """
+  The name of the Stat in snake_case.
+  """
+  name: String!
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
+
+type StatModifiedByAbilityConnection implements Connection {
+  edges: [StatModifiedByAbilityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatModifiedByAbilityEdge implements Edge {
+  cursor: String!
+  node: Ability!
+
+  """
+  An integer between -6 and 6 (except for moves which max out a stat, e.g. 'anger_point', in which case is 12). Null if the Ability modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Ability modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met.
+  
+  For example, once rain is present for 'swift_swim', the speed boost is guaranteed to occur, so the 'chance' is 100.0.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# ITEM
+
+type StatModifiedByItemConnection implements Connection {
+  edges: [StatModifiedByItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatModifiedByItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  An integer between -6 and 6. Null if the Item modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Item modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met.
+  
+  For example, once a Pokemon has fallen bellow quarter health, stat-boosting berries are guaranteed to give a stat boost, so the 'chance' is 100.0.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# MOVE
+
+type StatModifiedByMoveConnection implements Connection {
+  edges: [StatModifiedByMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StatModifiedByMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+
+  """
+  An integer between -6 and 6 (except for moves which max out a stat, e.g. 'belly_drum', in which case is 12). Null if the Move modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Move modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met (i.e. the move being successful/hitting).
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}

@@ -101,6 +101,16 @@ type Pokemon implements Node {
   name: String!
 
   """
+  Entities which the Pokemon requires.
+  """
+  requires(input: ConnectionInput): PokemonRequiresItemConnection 
+
+  """
+  E.g. Mega-evolutions require their corresponding Mega Stone.
+  """
+  requiresItem(input: ConnectionInput): PokemonRequiresItemConnection
+
+  """
   The name of the Pokemon species in snake_case. Two Pokemon belong to the same species if and only if they have the same National Dex number.
 
   Examples:
@@ -209,6 +219,16 @@ type PokemonEnablesItemConnection implements Connection {
 }
 
 type PokemonEnablesItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+type PokemonRequiresItemConnection implements Connection {
+  edges: [PokemonRequiresItemEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type PokemonRequiresItemEdge implements Edge {
   cursor: String!
   node: Item!
 }

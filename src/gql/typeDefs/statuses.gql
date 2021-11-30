@@ -9,6 +9,11 @@ type Status implements Node {
 
   abilityResists(input: ConnectionInput): StatusResistedByAbilityConnection
 
+  """
+  The name of the Status in Title Case, with appropriate punctuation.
+  """
+  formattedName: String!
+
   itemCauses(input: ConnectionInput): StatusCausedByItemConnection
 
   itemResists(input: ConnectionInput): StatusResistedByItemConnection
@@ -24,11 +29,6 @@ type Status implements Node {
   The name of the Status in snake_case.
   """
   name: String!
-
-  """
-  The name of the Status in Title Case, with appropriate punctuation.
-  """
-  formattedName: String!
 }
 
 #

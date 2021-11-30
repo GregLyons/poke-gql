@@ -53,7 +53,12 @@ type Item implements Node {
   """
   Describes the Type and power of the Move Natural Gift when the user holds the Item.
   """
-  naturalGift(input: ConnectionInput): NaturalGiftConnection
+  naturalGift(input: ConnectionInput): ItemNaturalGiftConnection
+
+  """
+  Entities which the Item requires.
+  """
+  requires(input: ConnectionInput): ItemRequiresPokemonConnection
 
   """
   The Pokemon necessary for this item to take effect.
@@ -238,14 +243,14 @@ type ItemResistsTypeEdge implements Edge {
   multiplier: Float!
 }
 
-type NaturalGiftConnection implements Connection {
-  edges: [NaturalGiftEdge!]!
+type ItemNaturalGiftConnection implements Connection {
+  edges: [ItemNaturalGiftEdge!]!
   pageInfo: PageInfo!
 }
 
-type NaturalGiftEdge implements Edge {
+type ItemNaturalGiftEdge implements Edge {
   cursor: String!
-  node: Gift!
+  node: Type!
 
   """
   The power of Natural Gift when used by a Pokemon holding Item.

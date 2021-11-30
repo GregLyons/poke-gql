@@ -10,6 +10,17 @@ type Type implements Node {
   abilityResists(input: ConnectionInput): TypeResistedByAbilityConnection
 
   """
+  Entities which the Type enables.
+  """
+  enables(input: ConnectionInput): TypeEnablesMoveConnection
+
+  """
+  E.g. 'normal'-Type Moves enable 'breakneck_blitz'.
+  """
+  enablesMove(input: ConnectionInput): TypeEnablesMoveConnection
+
+
+  """
   The name of the Type in Title Case.
   """
   formattedName: String!
@@ -34,6 +45,11 @@ type Type implements Node {
   The name of the Type in snake_case. 
   """ 
   name: String!
+
+  """
+  The Items which grant their holder a 'natural_gift' of this Type.
+  """
+  naturalGift(input: ConnectionInput): ItemNaturalGiftConnection
 
   pokemon(input: ConnectionInput): TypePokemonConnection
 
@@ -124,6 +140,21 @@ type TypeGenerationEdge implements Edge {
 
 # ITEM
 
+type TypeNaturalGiftConnection implements Connection {
+  edges: [TypeNaturalGiftEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeNaturalGiftEdge implements Edge {
+  cursor: String!
+  node: Item!
+
+  """
+  The power of Natural Gift when used by a Pokemon holding Item.
+  """
+  power: Int!
+}
+
 type TypeBoostedByItemConnection implements Connection {
   edges: [TypeBoostedByItemEdge!]!
   pageInfo: PageInfo!
@@ -144,6 +175,28 @@ type TypeResistedByItemEdge implements Edge {
   cursor: String!
   node: Type!
   multiplier: Float!
+}
+
+# MOVE
+
+type TypeMoveConnection implements Connection {
+  edges: [TypeMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
+}
+
+type TypeEnablesMoveConnection implements Connection {
+  edges: [TypeEnablesMoveEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TypeEnablesMoveEdge implements Edge {
+  cursor: String!
+  node: Move!
 }
 
 # POKEMON
