@@ -1,4 +1,50 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  moveByID(id: ID!): Move!
+
+  """
+  Select an Move by its snake_case name, e.g. 'rks_system'.
+  """
+  moveByName(name: String!): Move!
+  
+  """
+  Select Moves, with optional cursor-based pagination.
+
+  'category' refers to 'physical', 'status', etc. See the MoveCategory enum for all possibilities.
+
+  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
+
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
+
+  'max' and 'min' are inclusive.
+
+  'type' takes the name of a type in snake_case, e.g. 'fire' for Fire-Type Moves.
+
+  'types' is an array of type names in snake_case, and will return Moves whose Type belongs to 'types'.
+  """
+  moves(
+    cursor: String,
+    limit: Int,
+    category: String,
+    contains: String,
+    endsWith: String,
+    introducedAfter: Int,
+    introducedBefore: Int,
+    maxPower: Int,
+    minPower: Int,
+    maxAccuracy: Int,
+    minAccuracy: Int,
+    priority: Int,
+    startsWith: String,
+    type: String,
+    types: [String],
+  ): [Move!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 
@@ -228,7 +274,7 @@ type MoveRequiresPokemonEdge implements Edge {
 # STAT
 
 type MoveModifiesStatConnection implements Connection {
-  edges: [AbilityModifiesStatEdge!]!
+  edges: [MoveModifiesStatEdge!]!
   pageInfo: PageInfo!
 }
 

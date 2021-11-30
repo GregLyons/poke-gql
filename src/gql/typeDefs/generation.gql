@@ -1,7 +1,33 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  generationByID(id: ID!): Generation!
+
+  """
+  Select a Generation by its arabic numeral, e.g. '1'.
+  """
+  generationByNumber(number: Int!): Generation!
+
+  """
+  Select a Generation by its roman numerical code, e.g. 'ii' or 'III' (case doesn't matter).
+  """
+  generationByCode(code: String!): Generation!
+
+  """
+  Select Generations, with optional cursor-based pagination.
+  """
+  generations(cursor: String, limit: Int): [Generation!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 
+"""
+A grouping of the 'Pokemon' games (further divided into VersionGroups), separated based on the Pokemon that the Generation includes. 
+"""
 type Generation implements Node {
   id: ID!
 

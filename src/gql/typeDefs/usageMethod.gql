@@ -1,4 +1,34 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  usageMethodByID(id: ID!): UsageMethod!
+
+  """
+  Select an UsageMethod by its snake_case name, e.g. 'rks_system'.
+  """
+  usageMethodByName(name: String!): UsageMethod!
+  
+  """
+  Select UsageMethods, with optional cursor-based pagination.
+
+  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
+
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
+  """
+  usageMethods(
+    cursor: String,
+    limit: Int,
+    contains: String,
+    endsWith: String,
+    introducedAfter: Int,
+    introducedBefore: Int,
+    startsWith: String,
+  ): [UsageMethod!]!
+}
+
+#
 # NODES AND HELPER FIELDS
 #
 

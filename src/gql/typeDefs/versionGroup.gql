@@ -1,4 +1,29 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  versionGroupByID(id: ID!): VersionGroup!
+
+  """
+  Select an VersionGroup by its snake_case name, e.g. 'rks_system'.
+  """
+  versionGroupByName(name: String!): VersionGroup!
+  
+  """
+  Select VersionGroups, with optional cursor-based pagination.
+
+  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
+  """
+  versionGroups(
+    cursor: String,
+    limit: Int,
+    introducedAfter: Int,
+    introducedBefore: Int,
+  ): [VersionGroup!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 

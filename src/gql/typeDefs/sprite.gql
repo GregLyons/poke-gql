@@ -1,4 +1,20 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  spriteByID(id: ID!): Sprite!
+
+  """
+  Select Sprites, with optional cursor-based pagination.
+  """
+  sprites(
+    cursor: String,
+    limit: Int
+  ): [Sprite!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 

@@ -1,4 +1,20 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  descriptionByID(id: ID!): Description!
+
+  """
+  Select Descriptions, with optional cursor-based pagination.
+  """
+  descriptions(
+    cursor: String,
+    limit: Int
+  ): [Description!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 

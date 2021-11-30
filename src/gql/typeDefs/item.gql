@@ -1,4 +1,38 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  itemByID(id: ID!): Item!
+
+  """
+  Select a Item by its snake_case name, e.g. 'venusaurite'.
+  """
+  itemByName(number: Int!): Item!
+  
+  """
+  Select Items, with optional cursor-based pagination.
+
+  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
+
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
+
+  'itemClass' is a case-insensitive string, with words separated by underscores, e.g. 'mega_stone', 'z_crystal'. See the ItemClass enum for all possibilities.
+
+  """
+  items(
+    cursor: String,
+    limit: Int,
+    contains: String,
+    endsWith: String,
+    introducedAfter: Int,
+    introducedBefore: Int,
+    itemClass: String,
+    startsWith: String,
+  ): [Item!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 
@@ -10,6 +44,8 @@ type Item implements Node {
   boostsUsageMethod(input: ConnectionInput): ItemBoostsUsageMethodConnection
 
   causesStatus(input: ConnectionInput): ItemCausesStatusConnection
+
+  class: ItemClass
 
   """
   The Descriptions for the Move across the different VersionGroups.
@@ -153,7 +189,7 @@ type ItemRequiresPokemonEdge implements Edge {
 # STAT
 
 type ItemModifiesStatConnection implements Connection {
-  edges: [AbilityModifiesStatEdge!]!
+  edges: [ItemModifiesStatEdge!]!
   pageInfo: PageInfo!
 }
 
@@ -288,6 +324,18 @@ type ItemResistsUsageMethodEdge implements Edge {
   The multiplier by which the Item resists the power of Moves which have the UsageMethod. 
   """
   multiplier: Float!
+}
+
+#
+# ENUMS
+#
+
+enum ItemClass {
+  MEGA_STONE
+  Z_CRYSTAL
+  TYPE_ENHANCER
+  STAT_ENHANCER
+  OTHER
 }
 
 #

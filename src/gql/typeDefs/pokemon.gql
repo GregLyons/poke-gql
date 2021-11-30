@@ -1,4 +1,57 @@
 #
+# QUERIES
+#
+
+extend type Query {
+  pokemonByID(id: ID!): Pokemon!
+
+  """
+  Select an Pokemon by its snake_case name, e.g. 'costs_hp'.
+  """
+  pokemonByName(id: ID!): Pokemon!
+  
+  """
+  Select Pokemons, with optional cursor-based pagination.
+
+  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
+
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
+
+  'max' and 'min' are inclusive.
+
+  'type' takes the name of a type in snake_case, e.g. 'fire' for Fire-Type Pokemon. It will match any Pokemon with the Fire type. E.g. 'heatran' and 'charmander', among other Pokemon, will be matched by 'fire'.
+  
+  'types' is an array of type names, and it will return Pokemon such that at least one of the Pokemon's Types belongs to 'types'. E.g. 'heatran', 'charmander', and 'steelix', among other Pokemon, will be matched by ['fire', 'steel', 'water'].
+
+  'typing' is an array of type names, and it will return Pokemon whose set of Types matches the set of type names in 'typing'. E.g. 'heatran' will be matched by ['fire', 'steel'], among other Pokemon of the Fire/Steel typing, but 'charmander' will not be since it fails to be have the Steel Type.
+  """
+  pokemon(
+    cursor: String,
+    limit: Int,
+    contains: String,
+    endsWith: String,
+    introducedAfter: Int,
+    introducedBefore: Int,
+    maxHP: Int,
+    minHP: Int,
+    maxAttack: Int,
+    minAttack: Int,
+    maxDefense: Int,
+    minDefense: Int,
+    maxSpecialAttack: Int,
+    minSpecialAttack: Int,
+    maxSpecialDefense: Int,
+    minSpecialDefense: Int,
+    maxSpeed: Int,
+    minSpeed: Int,
+    startsWith: String,
+    type: String,
+    types: [String],
+    typing: [String],
+  ): [Pokemon!]!
+}
+
+#
 # NODES AND HELPER TYPES
 #
 
