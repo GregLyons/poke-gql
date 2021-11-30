@@ -1,5 +1,31 @@
-type Sprite {
+#
+# NODES AND HELPER TYPES
+#
+
+type Sprite implements Node {
   id: ID!
+
+  """
+  True if the Sprite is of a back-facing Pokemon. False otherwise (always false for Items).
+  """
+  back: Boolean!
+
+  """
+  The entity represented by the Sprite (e.g. Item or Pokemon).
+  """
+  entity(input: ConnectionInput): SpriteItemConnection | SpritePokemonConnection
+
+  """
+  The type of entity that the Sprite is depicting, e.g. 'ITEM'.
+  """
+  entityClass: SpriteClass!
+
+  """
+  True if the Sprite is specifically of a female Pokemon. False otherwise (always false for items).
+
+  To clarify, a Sprite of 'nidoran_f' or of 'nidoqueen' is not considered a 'female' Sprite, even though the Pokemon being depicted is clearly female. This designation only applies to Pokemon who have separate Sprites for male and female versions of that Pokemon, e.g. female Raticates have shorter whiskers than male Raticates from Gen 4 onwards.
+  """
+  female: Boolean!
 
   """
   A string representing the filepath to the Sprite in the 'sprites' folder from https://github.com/PokeAPI/sprites. 
@@ -9,7 +35,81 @@ type Sprite {
   filepath: String!
 
   """
-  The entity represented by the Sprite (e.g. Item or Pokemon).
+  The Item represented by the Sprite.
   """
-  entity: Item | Pokemon
+  item(input: ConnectionInput): SpriteItemConnection
+
+  """
+  The Pokemon represented by the Sprite.
+  """
+  pokemon(input: ConnectionInput): SpritePokemonConnection
+
+  """
+  True if the Sprite is of a shiny Pokemon. False otherwise (always false for items).
+  """
+  shiny: Boolean!
+
+  """
+  True if the Sprite has a transparent background. False otherwise. 
+
+  Only applies to Sprites Generation 2 and earlier.
+  """
+  transparent: Boolean!
+
+  """
+  The VersionGroup(s) in which this Sprite is present.
+  """
+  versionGroups(input: ConnectionInput): SpriteVersionGroupConnection
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ITEM
+
+type SpriteItemConnection implements Connection {
+  edges: [SpriteItemEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type SpriteItemEdge implements Edge {
+  cursor: String!
+  node: Item!
+}
+
+# POKEMON
+
+type SpritePokemonConnection implements Connection {
+  edges: [SpritePokemonEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type SpritePokemonEdge implements Edge {
+  cursor: String!
+  node: Pokemon!
+}
+
+# VERSION GROUP
+
+type SpriteVersionGroupConnection implements Connection {
+  edges: [SpriteVersionGroupEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type SpriteVersionGroupEdge implements Edge {
+  cursor: String!
+  node: VersionGroup!
+}
+
+#
+# ENUMS
+#
+
+"""
+The type of entity that the Sprite is depicting.
+"""
+enum SpriteClass {
+  ITEM
+  POKEMON
 }

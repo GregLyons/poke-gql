@@ -6,14 +6,14 @@ type Description implements Node {
   id: ID!
 
   """
-  The type of entity that the Description is describing.
-  """ 
-  class: DescriptionClass!
-
-  """
   The entity to which the Description applies.
   """
   entity(input: ConnectionInput): DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection
+
+  """
+  The class of entity that the Description is describing, e.g. 'ITEM'.
+  """ 
+  entityClass: DescriptionClass!
 
   """
   The text of the Description as it appears on in-game/on Bulbapedia.
