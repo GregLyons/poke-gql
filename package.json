@@ -1,0 +1,25 @@
+{
+  "name": "poke-gql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GregLyons/poke-gql.git"
+  },
+  "keywords": [],
+  "author": "Greg Lyons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GregLyons/poke-gql/issues"
+  },
+  "homepage": "https://github.com/GregLyons/poke-gql#readme",
+  "dependencies": {
+    "@graphql-tools/schema": "^8.3.1",
+    "apollo-server": "^3.5.0",
+    "graphql": "^16.0.1"
+  }
+}

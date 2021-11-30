@@ -21,7 +21,7 @@ type Item implements Node {
   """
   Entities which the Item enables.
   """
-  enables(input: ConnectionInput): ItemEnablesMoveConnection | ItemEnablesPokemonConnection
+  enables(input: ConnectionInput): ItemEnablesConnection
 
   """
   E.g. Z-Crystals enable their corresponding Z-Moves.
@@ -153,7 +153,7 @@ type ItemRequiresPokemonEdge implements Edge {
 # STAT
 
 type ItemModifiesStatConnection implements Connection {
-  edges: [AbilitiyModifiesStatEdge!]!
+  edges: [AbilityModifiesStatEdge!]!
   pageInfo: PageInfo!
 }
 
@@ -265,7 +265,7 @@ type ItemBoostsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type ItemUsageMethodEdge implements Edge {
+type ItemBoostsUsageMethodEdge implements Edge {
   cursor: String!
   node: UsageMethod!
 
@@ -280,7 +280,7 @@ type ItemResistsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type ItemUsageMethodEdge implements Edge {
+type ItemResistsUsageMethodEdge implements Edge {
   cursor: String!
   node: UsageMethod!
 
@@ -289,3 +289,9 @@ type ItemUsageMethodEdge implements Edge {
   """
   multiplier: Float!
 }
+
+#
+# UNIONS
+#
+
+union ItemEnablesConnection = ItemEnablesMoveConnection | ItemEnablesPokemonConnection

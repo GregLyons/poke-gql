@@ -23,7 +23,7 @@ type Pokemon implements Node {
   """
   Entities which the Pokemon enables.
   """
-  enables(input: ConnectionInput): PokemonEnablesItemConnection | PokemonEnablesMoveConnection
+  enables(input: ConnectionInput): PokemonEnablesConnection
 
   """
   E.g. 'venusaur' enables the use of 'venusaurite', and 'latias' enables the use of 'soul_dew'.
@@ -363,3 +363,9 @@ enum FormClass {
   MEGA
   OTHER
 }
+
+#
+# UNIONS
+#
+
+union PokemonEnablesConnection = PokemonEnablesItemConnection | PokemonEnablesMoveConnection

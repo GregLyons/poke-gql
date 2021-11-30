@@ -89,7 +89,7 @@ type AbilityGenerationEdge implements Edge {
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
-  edges: [AbilitiyModifiesStatEdge!]!
+  edges: [AbilityModifiesStatEdge!]!
   pageInfo: PageInfo!
 }
 
@@ -188,7 +188,7 @@ type AbilityBoostsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type AbilityUsageMethodEdge implements Edge {
+type AbilityBoostsUsageMethodEdge implements Edge {
   cursor: String!
   node: UsageMethod!
 
@@ -203,7 +203,7 @@ type AbilityResistsUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
-type AbilityUsageMethodEdge implements Edge {
+type AbilityResistsUsageMethodEdge implements Edge {
   cursor: String!
   node: UsageMethod!
 

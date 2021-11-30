@@ -54,12 +54,12 @@ type StatusCausedByAbilityEdge implements Edge {
   chance: Float!
 }
 
-type StatusResistdByAbilityConnection implements Connection {
-  edges: [StatusResistdByAbilityEdge!]!
+type StatusResistedByAbilityConnection implements Connection {
+  edges: [StatusResistedByAbilityEdge!]!
   pageInfo: PageInfo!
 }
 
-type StatusResistdByAbilityEdge implements Edge {
+type StatusResistedByAbilityEdge implements Edge {
   cursor: String!
   node: Ability!
 }
@@ -81,12 +81,12 @@ type StatusCausedByItemEdge implements Edge {
   chance: Float!
 }
 
-type StatusResistdByItemConnection implements Connection {
-  edges: [StatusResistdByItemEdge!]!
+type StatusResistedByItemConnection implements Connection {
+  edges: [StatusResistedByItemEdge!]!
   pageInfo: PageInfo!
 }
 
-type StatusResistdByItemEdge implements Edge {
+type StatusResistedByItemEdge implements Edge {
   cursor: String!
   node: Item!
 }
@@ -108,12 +108,12 @@ type StatusCausedByMoveEdge implements Edge {
   chance: Float!
 }
 
-type StatusResistdByMoveConnection implements Connection {
-  edges: [StatusResistdByMoveEdge!]!
+type StatusResistedByMoveConnection implements Connection {
+  edges: [StatusResistedByMoveEdge!]!
   pageInfo: PageInfo!
 }
 
-type StatusResistdByMoveEdge implements Edge {
+type StatusResistedByMoveEdge implements Edge {
   cursor: String!
   node: Move!
 }

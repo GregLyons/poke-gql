@@ -13,7 +13,7 @@ type Sprite implements Node {
   """
   The entity represented by the Sprite (e.g. Item or Pokemon).
   """
-  entity(input: ConnectionInput): SpriteItemConnection | SpritePokemonConnection
+  entity(input: ConnectionInput): SpriteEntityConnection
 
   """
   The type of entity that the Sprite is depicting, e.g. 'ITEM'.
@@ -113,3 +113,9 @@ enum SpriteClass {
   ITEM
   POKEMON
 }
+
+#
+# UNIONS
+#
+
+union SpriteEntityConnection = SpriteItemConnection | SpritePokemonConnection

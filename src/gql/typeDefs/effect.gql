@@ -51,12 +51,12 @@ type EffectAbilityEdge implements Edge {
 
 # GENERATION
 
-type GenerationGenerationConnection implements Connection {
-  edges: [GenerationGenerationEdge!]! 
+type EffectGenerationConnection implements Connection {
+  edges: [EffectGenerationEdge!]! 
   pageInfo: PageInfo!
 }
 
-type GenerationGenerationEdge implements Edge {
+type EffectGenerationEdge implements Edge {
   cursor: String!
   node: Generation!
 }

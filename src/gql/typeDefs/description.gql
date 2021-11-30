@@ -8,7 +8,7 @@ type Description implements Node {
   """
   The entity to which the Description applies.
   """
-  entity(input: ConnectionInput): DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection
+  entity(input: ConnectionInput): DescriptionEntityConnection
 
   """
   The class of entity that the Description is describing, e.g. 'ITEM'.
@@ -90,3 +90,9 @@ enum DescriptionClass {
   ITEM
   MOVE
 }
+
+#
+# UNIONS 
+#
+
+union DescriptionEntityConnection = DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection

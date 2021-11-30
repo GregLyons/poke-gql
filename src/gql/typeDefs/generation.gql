@@ -111,7 +111,7 @@ type GenerationTypeEdge implements Edge {
 # USAGE METHOD
 
 type GenerationUsageMethodConnection implements Connection {
-  edges: [GenerationMethodEdge!]! 
+  edges: [GenerationUsageMethodEdge!]! 
   pageInfo: PageInfo!
 }
 
@@ -123,7 +123,7 @@ type GenerationUsageMethodEdge implements Edge {
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
-  edges: [GenerationGroupEdge!]! 
+  edges: [GenerationVersionGroupEdge!]! 
   pageInfo: PageInfo!
 }
 

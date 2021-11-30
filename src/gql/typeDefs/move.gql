@@ -27,7 +27,7 @@ type Move implements Node {
   """
   Entities which the Move enables.
   """
-  enables(input: ConnectionInput): MoveEnablesMoveConnection
+  enables(input: ConnectionInput): MoveEnablesConnection
 
   """
   E.g. 'volt_tackle' (partly) enables 'catastropika'.
@@ -57,6 +57,8 @@ type Move implements Node {
   """
   name: String!
 
+  pokemon(input: ConnectionInput): MovePokemonConnection
+
   """
   Non-damaging moves (e.g. status moves), fixed damage moves (e.g. sonic_boom), and variable damage (e.g. magnitude) moves have null in this field. 
   """
@@ -69,7 +71,7 @@ type Move implements Node {
   """
   Entities which the Move requires.
   """
-  requires(input: ConnectionInput): MoveRequiresItemConnection | MoveRequiresMoveConnection | MoveRequiresPokemonConnection | MoveRequiresTypeConnection
+  requires(input: ConnectionInput): MoveRequiresConnection
 
   """
   E.g. 'breakneck_blitz' requires 'normalium_z'.
@@ -188,6 +190,31 @@ type MoveRequiresMoveEdge implements Edge {
 
 # POKEMON
 
+type MovePokemonConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [MovePokemonEdge!]!
+}
+
+type MovePokemonEdge implements Edge {
+  cursor: String!
+  node: Move!
+
+  """
+  A string representing how the Pokemon can learn the Move, taken mostly from the system used by Pokemon Showdown.
+
+  M: TM/HM
+  T: Tutor
+  L: Start or level-up, second character onwards is the level
+  R: Restricted (special moves like Rotom moves)
+  E: Egg
+  D: Dream World
+  S: Event, second character onwards is the index in eventData.
+  V: Virtual Console or Let's Go transfer
+  C: NOT A REAL SOURCE
+  """
+  learnMethod: String!
+}
+
 type MoveRequiresPokemonConnection implements Connection {
   edges: [MoveRequiresPokemonEdge!]!
   pageInfo: PageInfo!
@@ -201,7 +228,7 @@ type MoveRequiresPokemonEdge implements Edge {
 # STAT
 
 type MoveModifiesStatConnection implements Connection {
-  edges: [AbilitiyModifiesStatEdge!]!
+  edges: [AbilityModifiesStatEdge!]!
   pageInfo: PageInfo!
 }
 
@@ -322,3 +349,11 @@ enum TargetClass {
   USER_AND_ALL_ALLIES
   USER_OR_ADJACENT_ALLY
 }
+
+#
+# UNIONS
+#
+
+union MoveRequiresConnection = MoveRequiresItemConnection | MoveRequiresMoveConnection | MoveRequiresPokemonConnection | MoveRequiresTypeConnection
+
+union MoveEnablesConnection = MoveEnablesMoveConnection
