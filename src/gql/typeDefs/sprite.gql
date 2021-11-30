@@ -10,7 +10,7 @@ extend type Query {
   """
   sprites(
     cursor: String,
-    limit: Int
+    limit: Int,
   ): [Sprite!]!
 }
 

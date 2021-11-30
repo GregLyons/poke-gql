@@ -10,7 +10,7 @@ extend type Query {
   """
   descriptions(
     cursor: String,
-    limit: Int
+    limit: Int,
   ): [Description!]!
 }
 

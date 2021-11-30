@@ -11,7 +11,9 @@ extend type Query {
   pokemonByName(id: ID!): Pokemon!
   
   """
-  Select Pokemons, with optional cursor-based pagination.
+  Select Pokemon, with optional cursor-based pagination.
+
+  'generation' refers to the (number of the) Generation in which to consider the Pokemon. Defaults to the latest Generation.
 
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
 
@@ -28,6 +30,7 @@ extend type Query {
   pokemon(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     contains: String,
     endsWith: String,
     introducedAfter: Int,

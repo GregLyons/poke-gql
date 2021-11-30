@@ -13,6 +13,8 @@ extend type Query {
   """
   Select Items, with optional cursor-based pagination.
 
+  'generation' refers to the (number of the) Generation in which to consider the Item. Defaults to the latest Generation.
+
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
 
   'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
@@ -23,6 +25,7 @@ extend type Query {
   items(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     contains: String,
     endsWith: String,
     introducedAfter: Int,

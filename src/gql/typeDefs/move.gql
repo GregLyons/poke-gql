@@ -13,6 +13,8 @@ extend type Query {
   """
   Select Moves, with optional cursor-based pagination.
 
+  'generation' refers to the (number of the) Generation in which to consider the Move. Defaults to the latest Generation.
+
   'category' refers to 'physical', 'status', etc. See the MoveCategory enum for all possibilities.
 
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
@@ -28,6 +30,7 @@ extend type Query {
   moves(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     category: String,
     contains: String,
     endsWith: String,

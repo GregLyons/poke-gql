@@ -6,9 +6,11 @@ interface Node {
 }
 
 """
-Interface for relationships between Nodes. See the description for Connection for more information.
+Interface for relationships between Nodes. See the description for Connection for more information. 
 
-May contain additional data about the relationship. 'node' refers to the ending Node. 
+'node' refers to the ending Node. 
+
+May contain additional fields depending on the relationship.
 
 For example, PokemonMoveEdge represents an edge starting from a Pokemon Node and ending in a Move Node. It has an additional field 'learnMethod', which is a string describing how the Pokemon can learn the given Move. The 'node' field would be of type Move.
 """
