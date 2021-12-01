@@ -17,9 +17,9 @@ extend type Query {
 
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
 
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
 
-  'itemClass' is a case-insensitive string, with words separated by underscores, e.g. 'mega_stone', 'z_crystal'. See the ItemClass enum for all possibilities.
+  'itemClass' is a case-insensitive.tring, with words separated by underscores, e.g. 'mega_stone', 'z_crystal'. See the ItemClass enum for all possibilities.
 
   """
   items(

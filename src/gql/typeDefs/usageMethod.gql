@@ -15,7 +15,7 @@ extend type Query {
 
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
 
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case- and punctuation- insensitive.
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   usageMethods(
     cursor: String,

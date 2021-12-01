@@ -31,9 +31,10 @@ A grouping of the 'Pokemon' games (further divided into VersionGroups), separate
 type Generation implements Node {
   id: ID!
 
+  """
+  All Abilities present in this Generation.
+  """
   abilities(input: ConnectionInput): GenerationAbilityConnection
-
-  effects(input: ConnectionInput): GenerationEffectConnection
 
   """
   The roman numeral for the Generation.
@@ -45,17 +46,25 @@ type Generation implements Node {
   """
   genNumber: Int!
 
+  """
+  All Items present in this Generation.
+  """
   items(input: ConnectionInput): GenerationItemConnection
 
+  """
+  All Moves present in this Generation.
+  """
   moves(input: ConnectionInput): GenerationMoveConnection
 
+  """
+  All Pokemon present in this Generation.
+  """
   pokemon(input: ConnectionInput): GenerationPokemonConnection
 
+  """
+  All Types present in this Generation.
+  """
   types(input: ConnectionInput): GenerationTypeConnection
-
-  usageMethods(input: ConnectionInput): GenerationUsageMethodConnection
-
-  versionGroups(input: ConnectionInput): GenerationVersionGroupConnection
 }
 
 #

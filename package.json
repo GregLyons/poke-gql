@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,8 +21,10 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
     "apollo-server": "^3.5.0",
+    "dataloader": "^2.0.0",
     "dotenv": "^10.0.0",
     "graphql": "^16.0.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15"
   }
 }
