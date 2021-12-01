@@ -37,6 +37,21 @@ type Generation implements Node {
   abilities(input: ConnectionInput): GenerationAbilityConnection
 
   """
+  All Abilities introduced in this Generation.
+  """
+  abilitiesIntroduced(input: ConnectionInput): GenerationIntroducedAbilityConnection
+
+  """
+  All Effects present in this Generation.
+  """
+  effects(input: ConnectionInput): GenerationEffectConnection
+  
+  """
+  All Effects introduced in this Generation.
+  """
+  effectsIntroduced(input: ConnectionInput): GenerationIntroducedEffectConnection
+
+  """
   The roman numeral for the Generation.
   """
   genCode: GenerationCode!
@@ -80,7 +95,7 @@ type GenerationAbilityConnection implements Connection {
 
 type GenerationAbilityEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: Ability!
 }
 
 # EFFECT
@@ -92,7 +107,7 @@ type GenerationEffectConnection implements Connection {
 
 type GenerationEffectEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: Effect!
 }
 
 # ITEM
@@ -104,7 +119,7 @@ type GenerationItemConnection implements Connection {
 
 type GenerationItemEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: Item!
 }
 
 # MOVE
@@ -116,7 +131,7 @@ type GenerationMoveConnection implements Connection {
 
 type GenerationMoveEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: Move!
 }
 
 # POKEMON
@@ -128,7 +143,7 @@ type GenerationPokemonConnection implements Connection {
 
 type GenerationPokemonEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: Pokemon!
 }
 
 # TYPE
@@ -140,7 +155,7 @@ type GenerationTypeConnection implements Connection {
 
 type GenerationTypeEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: Type!
 }
 
 # USAGE METHOD
@@ -152,7 +167,7 @@ type GenerationUsageMethodConnection implements Connection {
 
 type GenerationUsageMethodEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: UsageMethod!
 }
 
 # VERSION GROUP
@@ -164,7 +179,7 @@ type GenerationVersionGroupConnection implements Connection {
 
 type GenerationVersionGroupEdge implements Edge {
   cursor: String!
-  node: Generation!
+  node: VersionGroup!
 }
 
 #

@@ -78,22 +78,19 @@ const Query = {
 */
 //#region
 
-const formattedName = async (parent, args, context, info) => {
-  return parent.ability_formatted_name;
-}
-
-const introduced = async (parent, args, context, info) => {
-  return parent.introduced;
-}
-
-const name = async (parent, args, context, info) => {
-  return parent.ability_name
-}
 
 const Ability = {
-  formattedName,
-  introduced,
-  name,
+  formattedName: async (parent, args, context, info) => {
+    return parent.ability_formatted_name;
+  },
+  
+  introduced: async (parent, args, context, info) => {
+    return parent.introduced;
+  },
+  
+  name: async (parent, args, context, info) => {
+    return parent.ability_name
+  },
 }
 
 //#endregion

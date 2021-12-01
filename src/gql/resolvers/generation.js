@@ -8,6 +8,7 @@
     'generation_code', corresponding to genCode.
 */
 
+
 // Query
 /*
     generationByID(id)
@@ -17,47 +18,43 @@
 */
 //#region
 
-const generationByNumber = async (parent, args, context, info) => {
-  const results = await context.db.promise().query(
-    `
-      SELECT * FROM generation
-      WHERE generation_id = ${args.number}
-    `
-  )
-  .catch(console.log)
-  return results[0][0];
-};
-
-const generationByCode = async (parent, args, context, info) => {
-  args.code = args.code.toUpperCase();
-
-  const results = await context.db.promise().query(
-    `
-      SELECT * FROM generation
-      WHERE generation_code = '${args.code}'
-    `
-  )
-  .catch(console.log)
-
-  return results[0][0];
-};
-
-// TODO: cursor
-const generations = async (parent, args, context, info) => {
-  const results = await context.db.promise().query(
-    `
-      SELECT * FROM generation
-    `
-  )
-  .catch(console.log)
-
-  return results[0];
-};
-
 const Query = {
-  generationByNumber,
-  generationByCode,
-  generations,
+  generationByNumber: async (parent, args, context, info) => {
+    const results = await context.db.promise().query(
+      `
+        SELECT * FROM generation
+        WHERE generation_id = ${args.number}
+      `
+    )
+    .catch(console.log)
+    return results[0][0];
+  },
+  
+  generationByCode: async (parent, args, context, info) => {
+    args.code = args.code.toUpperCase();
+  
+    const results = await context.db.promise().query(
+      `
+        SELECT * FROM generation
+        WHERE generation_code = '${args.code}'
+      `
+    )
+    .catch(console.log)
+  
+    return results[0][0];
+  },
+  
+  // TODO: cursor
+  generations: async (parent, args, context, info) => {
+    const results = await context.db.promise().query(
+      `
+        SELECT * FROM generation
+      `
+    )
+    .catch(console.log)
+  
+    return results[0];
+  },
 }
 
 //#endregion
@@ -75,17 +72,66 @@ const Query = {
 */
 //#region
 
-const genCode = async (parent, args, context, info) => {
-  return parent.generation_code;
-}
-
-const genNumber = async (parent, args, context, info) => {
-  return parent.generation_id;
-}
+// Helper function which returns the generation_id of the parent.
+const parentGenID = async (parent) => parent.generation_id;
 
 const Generation = {
-  genCode,
-  genNumber,
+  abilities: async (parent) => parent.generation_id,
+
+  genCode: async (parent, args, context, info) => {
+    return parent.generation_code;
+  },
+
+  genNumber: async (parent) => parent.generation_id,
+
+  items: async (parent) => parent.generation_id,
+  
+  moves: async (parent) => parent.generation_id,
+
+  pokemon: async (parent) => parent.generation_id,
+
+  types: async (parent) => parent.generation_id,
+};
+
+//#endregion
+
+// Connections and edges
+/*
+
+*/
+//#region
+
+const presenceConnection = entityName => {
+  return {
+    // 'parent' = 'introduced'
+    edges: async (parent, args, {loaders}, info) => {
+      return await loaders.generation[entityName].present.load(parent);
+    }
+  };
+}
+
+const presenceEdge = () => {
+  return {
+    node: parent => parent,
+  };
+}
+
+const ConnectionsAndEdges = {
+  GenerationAbilityConnection: presenceConnection('ability'),
+  GenerationAbilityEdge: presenceEdge(),
+
+  GenerationItemConnection: presenceConnection('item'),
+  GenerationItemEdge: presenceEdge(),
+
+  GenerationMoveConnection: presenceConnection('move'),
+  GenerationMoveEdge: presenceEdge(),
+
+  GenerationPokemonConnection: presenceConnection('pokemon'),
+  GenerationPokemonEdge: presenceEdge(),
+
+  GenerationTypeConnection: presenceConnection('type'),
+  GenerationTypeEdge: presenceEdge(),
+
 }
 
 //#endregion
@@ -93,4 +139,5 @@ const Generation = {
 module.exports = {
   Query,
   Generation,
+  ...ConnectionsAndEdges,
 }
