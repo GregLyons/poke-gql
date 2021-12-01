@@ -45,7 +45,7 @@ type Generation implements Node {
   All Effects present in this Generation.
   """
   effects(input: ConnectionInput): GenerationEffectConnection
-  
+
   """
   All Effects introduced in this Generation.
   """
@@ -67,9 +67,19 @@ type Generation implements Node {
   items(input: ConnectionInput): GenerationItemConnection
 
   """
+  All Items present in this Generation.
+  """
+  itemsIntroduced(input: ConnectionInput): GenerationIntroducedItemConnection
+
+  """
   All Moves present in this Generation.
   """
   moves(input: ConnectionInput): GenerationMoveConnection
+
+  """
+  All Moves introduced in this Generation.
+  """
+  movesIntroduced(input: ConnectionInput): GenerationIntroducedMoveConnection
 
   """
   All Pokemon present in this Generation.
@@ -77,9 +87,39 @@ type Generation implements Node {
   pokemon(input: ConnectionInput): GenerationPokemonConnection
 
   """
+  All Pokemon introduced in this Generation.
+  """
+  pokemonIntroduced(input: ConnectionInput): GenerationIntroducedPokemonConnection
+
+  """
   All Types present in this Generation.
   """
   types(input: ConnectionInput): GenerationTypeConnection
+
+  """
+  All Types introduced in this Generation.
+  """
+  typesIntroduced(input: ConnectionInput): GenerationIntroducedTypeConnection
+
+  """
+  All UsageMethods present in this Generation.
+  """
+  usageMethods(input: ConnectionInput): GenerationUsageMethodConnection
+
+  """
+  All UsageMethods introduced in this Generation.
+  """
+  usageMethodsIntroduced(input: ConnectionInput): GenerationIntroducedUsageMethodConnection
+
+  """
+  All VersionGroups present in this Generation.
+  """
+  versionGroups(input: ConnectionInput): GenerationVersionGroupConnection
+
+  """
+  All VersionGroups introduced in this Generation.
+  """
+  versionGroupsIntroduced(input: ConnectionInput): GenerationIntroducedVersionGroupConnection
 }
 
 #
@@ -96,6 +136,12 @@ type GenerationAbilityConnection implements Connection {
 type GenerationAbilityEdge implements Edge {
   cursor: String!
   node: Ability!
+
+}
+
+type GenerationIntroducedAbilityConnection implements Connection {
+  edges: [GenerationAbilityEdge!]! 
+  pageInfo: PageInfo!
 }
 
 # EFFECT
@@ -105,14 +151,25 @@ type GenerationEffectConnection implements Connection {
   pageInfo: PageInfo!
 }
 
+type GenerationIntroducedEffectConnection implements Connection {
+  edges: [GenerationEffectEdge!]! 
+  pageInfo: PageInfo!
+}
+
 type GenerationEffectEdge implements Edge {
   cursor: String!
   node: Effect!
 }
 
+
 # ITEM
 
 type GenerationItemConnection implements Connection {
+  edges: [GenerationItemEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationIntroducedItemConnection implements Connection {
   edges: [GenerationItemEdge!]! 
   pageInfo: PageInfo!
 }
@@ -129,6 +186,11 @@ type GenerationMoveConnection implements Connection {
   pageInfo: PageInfo!
 }
 
+type GenerationIntroducedMoveConnection implements Connection {
+  edges: [GenerationMoveEdge!]! 
+  pageInfo: PageInfo!
+}
+
 type GenerationMoveEdge implements Edge {
   cursor: String!
   node: Move!
@@ -137,6 +199,11 @@ type GenerationMoveEdge implements Edge {
 # POKEMON
 
 type GenerationPokemonConnection implements Connection {
+  edges: [GenerationPokemonEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationIntroducedPokemonConnection implements Connection {
   edges: [GenerationPokemonEdge!]! 
   pageInfo: PageInfo!
 }
@@ -153,6 +220,11 @@ type GenerationTypeConnection implements Connection {
   pageInfo: PageInfo!
 }
 
+type GenerationIntroducedTypeConnection implements Connection {
+  edges: [GenerationTypeEdge!]! 
+  pageInfo: PageInfo!
+}
+
 type GenerationTypeEdge implements Edge {
   cursor: String!
   node: Type!
@@ -165,6 +237,11 @@ type GenerationUsageMethodConnection implements Connection {
   pageInfo: PageInfo!
 }
 
+type GenerationIntroducedUsageMethodConnection implements Connection {
+  edges: [GenerationUsageMethodEdge!]! 
+  pageInfo: PageInfo!
+}
+
 type GenerationUsageMethodEdge implements Edge {
   cursor: String!
   node: UsageMethod!
@@ -173,6 +250,11 @@ type GenerationUsageMethodEdge implements Edge {
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
+  edges: [GenerationVersionGroupEdge!]! 
+  pageInfo: PageInfo!
+}
+
+type GenerationIntroducedVersionGroupConnection implements Connection {
   edges: [GenerationVersionGroupEdge!]! 
   pageInfo: PageInfo!
 }

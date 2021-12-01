@@ -73,24 +73,35 @@ const Query = {
 //#region
 
 // Helper function which returns the generation_id of the parent.
-const parentGenID = async (parent) => parent.generation_id;
+const parentGenID = parent => parent.generation_id;
 
 const Generation = {
-  abilities: async (parent) => parent.generation_id,
+  abilities: parentGenID,
+  abilitiesIntroduced: parentGenID,
 
-  genCode: async (parent, args, context, info) => {
-    return parent.generation_code;
-  },
+  effects: parentGenID,
+  effectsIntroduced: parentGenID,
 
-  genNumber: async (parent) => parent.generation_id,
+  genCode: parent => parent.generation_code,
 
-  items: async (parent) => parent.generation_id,
+  genNumber: parentGenID,
+
+  items: parentGenID,
+  itemsIntroduced: parentGenID,
   
-  moves: async (parent) => parent.generation_id,
+  moves: parentGenID,
+  movesIntroduced: parentGenID,
 
-  pokemon: async (parent) => parent.generation_id,
+  pokemon: parentGenID,
+  pokemonIntroduced: parentGenID,
 
-  types: async (parent) => parent.generation_id,
+  types: parentGenID,
+  typesIntroduced: parentGenID,
+
+  usageMethods: parentGenID,
+  usageMethodsIntroduced: parentGenID,
+
+  versionGroupsIntroduced: parentGenID,
 };
 
 //#endregion
@@ -103,14 +114,23 @@ const Generation = {
 
 const presenceConnection = entityName => {
   return {
-    // 'parent' = 'introduced'
+    // 'parent' = 'generation_id'
     edges: async (parent, args, {loaders}, info) => {
       return await loaders.generation[entityName].present.load(parent);
     }
   };
 }
 
-const presenceEdge = () => {
+const debutConnection = entityName => {
+  return {
+    // 'parent' = 'generation_id'
+    edges: async (parent, args, {loaders}, info) => {
+      return await loaders.generation[entityName].introduced.load(parent);
+    }
+  };
+}
+
+const basicEdge = () => {
   return {
     node: parent => parent,
   };
@@ -118,20 +138,36 @@ const presenceEdge = () => {
 
 const ConnectionsAndEdges = {
   GenerationAbilityConnection: presenceConnection('ability'),
-  GenerationAbilityEdge: presenceEdge(),
+  GenerationIntroducedAbilityConnection: debutConnection('ability'),
+  GenerationAbilityEdge: basicEdge(),
+
+  GenerationEffectConnection: presenceConnection('effect'),
+  GenerationIntroducedEffectConnection: debutConnection('effect'),
+  GenerationEffectEdge: basicEdge(),
 
   GenerationItemConnection: presenceConnection('item'),
-  GenerationItemEdge: presenceEdge(),
+  GenerationIntroducedItemConnection: debutConnection('item'),
+  GenerationItemEdge: basicEdge(),
 
   GenerationMoveConnection: presenceConnection('move'),
-  GenerationMoveEdge: presenceEdge(),
+  GenerationIntroducedMoveConnection: debutConnection('move'),
+  GenerationMoveEdge: basicEdge(),
 
   GenerationPokemonConnection: presenceConnection('pokemon'),
-  GenerationPokemonEdge: presenceEdge(),
+  GenerationIntroducedPokemonConnection: debutConnection('pokemon'),
+  GenerationPokemonEdge: basicEdge(),
 
   GenerationTypeConnection: presenceConnection('type'),
-  GenerationTypeEdge: presenceEdge(),
+  GenerationIntroducedTypeConnection: debutConnection('type'),
+  GenerationTypeEdge: basicEdge(),
 
+  GenerationUsageMethodConnection: presenceConnection('usageMethod'),
+  GenerationIntroducedUsageMethodConnection: debutConnection('usageMethod'),
+  GenerationUsageMethodEdge: basicEdge(),
+
+  GenerationVersionGroupConnection: presenceConnection('versionGroup'),
+  GenerationIntroducedVersionGroupConnection: debutConnection('versionGroup'),
+  GenerationVersionGroupEdge: basicEdge(),
 }
 
 //#endregion
