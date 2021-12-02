@@ -1,6 +1,6 @@
 const DataLoader = require('dataloader');
 const {db} = require('../models/index.js');
-const {batchGens, effectBatcher} = require('./helpers.js');
+const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let item = {
   introduced(pagination) {
@@ -8,7 +8,7 @@ let item = {
   },
 
   effect(pagination) {
-    return new DataLoader(effectBatcher(pagination, 'ability'));
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'effect'));
   }
 }
 

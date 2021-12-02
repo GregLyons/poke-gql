@@ -16,8 +16,8 @@
 
 const {
   basicEdge,
-  effectConnection,
   introductionConnection,
+  basicJunctionConnection,
   parentPK,
 } = require('./helpers.js');
 const movePK = parentPK('move');
@@ -119,7 +119,7 @@ const ConnectionsAndEdges = {
   MoveGenerationConnection: introductionConnection('move'),
   MoveGenerationEdge: basicEdge(),
 
-  MoveEffectConnection: effectConnection('move'),
+  MoveEffectConnection: basicJunctionConnection('move', 'effect'),
   MoveEffectEdge: basicEdge(),
 }
 

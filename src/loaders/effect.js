@@ -8,7 +8,7 @@ let effect = {
   },
 
   effect(pagination) {
-    return new DataLoader(effectBatcher(pagination, 'item'));
+    return new DataLoader(basicJunctionBatcher(pagination, 'item'));
   }
 }
 

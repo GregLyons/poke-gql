@@ -66,36 +66,27 @@ const introductionConnection = entityName => {
   }
 }
 
-const effectConnection = entityName => {
-  const tableName = entityNameToTableName(entityName);
+const basicJunctionConnection = (ownerName, ownedName) => {
+  const ownerTableName = entityNameToTableName(ownerName);
+  const ownedTableName = entityNameToTableName(ownedName);
 
-  // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].effect(args.pagination).load(parent);
+      return await context.loaders[ownerName][ownedName](args.pagination).load(parent);
     },
 
     count: async (parent, args, context, info) => {
-      const {genID, entityID} = parent; 
-
-      return await context.db.promise().query(
-        `
-          SELECT COUNT(*) FROM ${tableName}_effect
-          WHERE (${tableName}_generation_id, ${tableName}_id) = (${genID}, ${entityID})
-        `
-      )
-      .then( ([results, fields]) => { return Object.values(results[0])[0] })
-      .catch(console.log);
+      return 'yo';
     },
   }
-}
+};
 
 module.exports = {
   entityNameToTableName,
   
   basicEdge,
-  effectConnection,
   introductionConnection,
+  basicJunctionConnection,
   parentGenID,
   parentPK,
 }

@@ -16,8 +16,8 @@
 
 const {
   basicEdge,
-  effectConnection,
   introductionConnection,
+  basicJunctionConnection,
   parentPK,
 } = require('./helpers.js');
 const abilityPK = parentPK('ability');
@@ -119,7 +119,7 @@ const ConnectionsAndEdges = {
   AbilityGenerationConnection: introductionConnection('ability'),
   AbilityGenerationEdge: basicEdge(),
 
-  AbilityEffectConnection: effectConnection('ability'),
+  AbilityEffectConnection: basicJunctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),
 }
 

@@ -14,7 +14,14 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  basicEdge,
+  introductionConnection,
+  basicJunctionConnection,
+  parentPK,
+  typeConnection,
+} = require('./helpers.js');
+const pokemonPK = parentPK('pokemon');
 
 //#endregion
 
@@ -52,7 +59,6 @@ const Query = {
 
   // TODO: cursor
   pokemon: async (parent, { generation }, context, info) => {
-    console.log('hi');
     return await context.db.promise().query(
       `
         SELECT * FROM pokemon
@@ -98,6 +104,8 @@ const Pokemon = {
   name: async (parent, args, context, info) => {
     return parent.pokemon_name
   },
+
+  typing: pokemonPK,
 }
 
 //#endregion
@@ -111,6 +119,9 @@ const Pokemon = {
 const ConnectionsAndEdges = {
   PokemonGenerationConnection: introductionConnection('pokemon'),
   PokemonGenerationEdge: basicEdge(),
+
+  PokemonTypeConnection: basicJunctionConnection('pokemon', 'type'),
+  PokemonTypeEdge: basicEdge(),
 }
 
 //#endregion

@@ -1,5 +1,36 @@
 const {db} = require('../models/index.js');
 
+const entityNameToTableName = entityName => {
+  switch(entityName) {
+    case 'usageMethod':
+      return 'usage_method';
+    case 'versionGroup':
+      return 'version_group';
+    case 'type':
+      return 'ptype';
+    case 'move':
+      return 'pmove';
+    case 'status':
+      return 'pstatus';
+    case 'description':
+      return 'pdescription';
+    case 'generation':
+    case 'sprite':
+    case 'ability':
+    case 'item':
+    case 'effect':
+    case 'pokemon':
+    case 'stat':
+      return entityName;
+    default:
+      throw `Invalid entity name: ${entityName}.`;
+  }
+}
+
+const isGenDependent = tableName => {
+  return !['effect', 'generation', 'pstatus', 'stat', 'usage_method', 'version_group'].includes(tableName);
+}
+
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 const getPaginationQueryString = (pagination, tableName) => {
   const {limit, offset, orderBy, sortBy, search} = pagination;
@@ -55,29 +86,43 @@ const batchGens = (pagination) => {
   }
 }
 
-const effectBatcher = (pagination, tableName) => {
-  return async entityPKs => { 
-    const paginationString = getPaginationQueryString(pagination, `${tableName}_effect`);
+const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName) => {
+  return async entityPKs => {
+    const owner = entityNameToTableName(ownerEntityName);
+    const ownerGen = owner + '_generation_id';
+    const ownerID = owner + '_id';
 
-    const effectJunctionData = await db.promise().query(
+    const owned = entityNameToTableName(ownedEntityName);
+    const ownedID = owned + '_id';
+    const ownedGen = owned + '_generation_id';
+
+    const junctionTableName = owner + '_' + owned;
+
+    const paginationString = getPaginationQueryString(pagination, `${owner}_${owned}`);
+
+    const onString = isGenDependent(owned) 
+      ? `ON (${junctionTableName}.${ownedGen}, ${junctionTableName}.${ownedID}) = (${owned}.generation_id, ${owned}.${ownedID})`
+      : `ON ${junctionTableName}.${ownedID} = ${owned}.${ownedID}`;
+
+    const whereString = `WHERE (${ownerGen}, ${ownerID}) IN ?`
+
+    const junctionData = await db.promise().query(
       `
-        SELECT * FROM ${tableName}_effect RIGHT JOIN effect
-        ON ${tableName}_effect.effect_id = effect.effect_id
-        WHERE (${tableName}_generation_id, ${tableName}_id) IN ?
+        SELECT * FROM ${owner}_${owned} RIGHT JOIN ${owned} 
+        ${onString}
+        ${whereString}
         ${paginationString}
-      `, [[entityPKs.map(d => [d.genID, d.entityID])]]
+      `,
+      [[entityPKs.map(d => [d.genID, d.entityID])]]
     )
     .then( ([results, fields]) => {
       return results;
     })
     .catch(console.log);
 
-    const entityGenIDColumn = `${tableName}_generation_id`;
-    const entityIDColumn = `${tableName}_id`;
-
-    return entityPKs.map(entityPK => effectJunctionData.filter(d => 
-      d[entityGenIDColumn] === entityPK.genID 
-      && d[entityIDColumn] === entityPK.entityID));
+    return entityPKs.map(entityPK => junctionData.filter(d => 
+      d[ownerGen] === entityPK.genID 
+      && d[ownerID] === entityPK.entityID));
   }
 }
 
@@ -85,5 +130,5 @@ module.exports = {
   getPaginationQueryString,
 
   batchGens,
-  effectBatcher,
+  basicJunctionBatcher,
 }
