@@ -42,35 +42,35 @@ extend type Query {
 type Item implements Node {
   id: ID!
 
-  boostsType(input: ConnectionInput): ItemBoostsTypeConnection
+  boostsType: ItemBoostsTypeConnection
 
-  boostsUsageMethod(input: ConnectionInput): ItemBoostsUsageMethodConnection
+  boostsUsageMethod: ItemBoostsUsageMethodConnection
 
-  causesStatus(input: ConnectionInput): ItemCausesStatusConnection
+  causesStatus: ItemCausesStatusConnection
 
   class: ItemClass
 
   """
   The Descriptions for the Move across the different VersionGroups.
   """
-  descriptions(input: ConnectionInput): ItemDescriptionConnection
+  descriptions: ItemDescriptionConnection
 
-  effect(input: ConnectionInput): ItemEffectConnection
+  effect: ItemEffectConnection
 
   """
   Entities which the Item enables.
   """
-  enables(input: ConnectionInput): ItemEnablesConnection
+  enables: ItemEnablesConnection
 
   """
   E.g. Z-Crystals enable their corresponding Z-Moves.
   """
-  enablesMove(input: ConnectionInput): ItemEnablesMoveConnection
+  enablesMove: ItemEnablesMoveConnection
 
   """
   E.g. Mega Stones enable their corresponding mega-evolved Pokemon.
   """
-  enablesPokemon(input: ConnectionInput): ItemEnablesPokemonConnection
+  enablesPokemon: ItemEnablesPokemonConnection
 
   """
   The formatted name of the Item, with correct punctuation.
@@ -80,9 +80,9 @@ type Item implements Node {
   """
   The Generation in which the Item was introduced.
   """
-  introduced(input: ConnectionInput): ItemGenerationConnection
+  introduced: ItemGenerationConnection
 
-  modifiesStat(input: ConnectionInput): ItemModifiesStatConnection
+  modifiesStat: ItemModifiesStatConnection
 
   """
   The name of the Item in snake_case. Hyphens are converted to underscores.
@@ -92,12 +92,12 @@ type Item implements Node {
   """
   Describes the Type and power of the Move Natural Gift when the user holds the Item.
   """
-  naturalGift(input: ConnectionInput): ItemNaturalGiftConnection
+  naturalGift: ItemNaturalGiftConnection
 
   """
   Entities which the Item requires.
   """
-  requires(input: ConnectionInput): ItemRequiresPokemonConnection
+  requires: ItemRequiresPokemonConnection
 
   """
   The Pokemon necessary for this item to take effect.
@@ -106,13 +106,13 @@ type Item implements Node {
     Only Venusaur can use Venasaurite to Mega-evolve.
     Only Latias and Latios can obtain the effects of Soul Dew.
   """
-  requiresPokemon(input: ConnectionInput): ItemRequiresPokemonConnection
+  requiresPokemon: ItemRequiresPokemonConnection
 
-  resistsType(input: ConnectionInput): ItemResistsTypeConnection
+  resistsType: ItemResistsTypeConnection
 
-  resistsUsageMethod(input: ConnectionInput): ItemResistsUsageMethodConnection
+  resistsUsageMethod: ItemResistsUsageMethodConnection
 
-  resistsStatus(input: ConnectionInput): ItemResistsStatusConnection
+  resistsStatus: ItemResistsStatusConnection
 }
 
 #
@@ -122,82 +122,75 @@ type Item implements Node {
 # DESCRIPTION 
 
 type ItemDescriptionConnection implements Connection {
-  edges: [ItemDescriptionEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemDescriptionEdge!]!
+  count: Int!
 }
 
-type ItemDescriptionEdge implements Edge {
-  cursor: String!
+type ItemDescriptionEdge implements Edge {  
   node: Description!
 }
 
 # EFFECT
 
 type ItemEffectConnection implements Connection {
-  edges: [ItemEffectEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemEffectEdge!]! 
+  count: Int!
 }
 
-type ItemEffectEdge implements Edge {
-  cursor: String!
+type ItemEffectEdge implements Edge {  
   node: Effect!
 }
 
 # GENERATION
 
 type ItemGenerationConnection implements Connection {
-  edges: [ItemGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemGenerationEdge!]! 
+  count: Int!
 }
 
-type ItemGenerationEdge implements Edge {
-  cursor: String!
+type ItemGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # MOVE
 
 type ItemEnablesMoveConnection implements Connection {
-  edges: [ItemEnablesMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemEnablesMoveEdge!]!
+  count: Int!
 }
 
-type ItemEnablesMoveEdge implements Edge {
-  cursor: String!
+type ItemEnablesMoveEdge implements Edge {  
   node: Move!
 }
 
 # POKEMON
 
 type ItemEnablesPokemonConnection implements Connection {
-  edges: [ItemEnablesPokemonEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemEnablesPokemonEdge!]!
+  count: Int!
 }
 
-type ItemEnablesPokemonEdge implements Edge {
-  cursor: String!
+type ItemEnablesPokemonEdge implements Edge {  
   node: Pokemon!
 }
 
 type ItemRequiresPokemonConnection implements Connection {
-  edges: [ItemRequiresPokemonEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemRequiresPokemonEdge!]!
+  count: Int!
 }
 
-type ItemRequiresPokemonEdge implements Edge {
-  cursor: String!
+type ItemRequiresPokemonEdge implements Edge {  
   node: Pokemon!
 }
 
 # STAT
 
 type ItemModifiesStatConnection implements Connection {
-  edges: [ItemModifiesStatEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemModifiesStatEdge!]!
+  count: Int!
 }
 
-type ItemModifiesStatEdge implements Edge {
-  cursor: String!
+type ItemModifiesStatEdge implements Edge {  
   node: Stat!
 
   """
@@ -226,12 +219,11 @@ type ItemModifiesStatEdge implements Edge {
 # STATUS
 
 type ItemCausesStatusConnection implements Connection {
-  edges: [ItemCausesStatusEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemCausesStatusEdge!]!
+  count: Int!
 }
 
-type ItemCausesStatusEdge implements Edge {
-  cursor: String!
+type ItemCausesStatusEdge implements Edge {  
   node: Status!
 
   """
@@ -241,24 +233,22 @@ type ItemCausesStatusEdge implements Edge {
 }
 
 type ItemResistsStatusConnection implements Connection {
-  edges: [ItemResistsStatusEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemResistsStatusEdge!]!
+  count: Int!
 }
 
-type ItemResistsStatusEdge implements Edge {
-  cursor: String!
+type ItemResistsStatusEdge implements Edge {  
   node: Status!
 }
 
 # TYPE
 
 type ItemBoostsTypeConnection implements Connection {
-  edges: [ItemBoostsTypeEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemBoostsTypeEdge!]!
+  count: Int!
 }
 
-type ItemBoostsTypeEdge implements Edge {
-  cursor: String!
+type ItemBoostsTypeEdge implements Edge {  
   node: Type!
 
   """
@@ -268,12 +258,11 @@ type ItemBoostsTypeEdge implements Edge {
 }
 
 type ItemResistsTypeConnection implements Connection {
-  edges: [ItemResistsTypeEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemResistsTypeEdge!]!
+  count: Int!
 }
 
-type ItemResistsTypeEdge implements Edge {
-  cursor: String!
+type ItemResistsTypeEdge implements Edge {  
   node: Type!
 
   """
@@ -283,12 +272,11 @@ type ItemResistsTypeEdge implements Edge {
 }
 
 type ItemNaturalGiftConnection implements Connection {
-  edges: [ItemNaturalGiftEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemNaturalGiftEdge!]!
+  count: Int!
 }
 
-type ItemNaturalGiftEdge implements Edge {
-  cursor: String!
+type ItemNaturalGiftEdge implements Edge {  
   node: Type!
 
   """
@@ -300,12 +288,11 @@ type ItemNaturalGiftEdge implements Edge {
 # USAGE METHOD
 
 type ItemBoostsUsageMethodConnection implements Connection {
-  edges: [ItemBoostsUsageMethodEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemBoostsUsageMethodEdge!]!
+  count: Int!
 }
 
-type ItemBoostsUsageMethodEdge implements Edge {
-  cursor: String!
+type ItemBoostsUsageMethodEdge implements Edge {  
   node: UsageMethod!
 
   """
@@ -315,12 +302,11 @@ type ItemBoostsUsageMethodEdge implements Edge {
 }
 
 type ItemResistsUsageMethodConnection implements Connection {
-  edges: [ItemResistsUsageMethodEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [ItemResistsUsageMethodEdge!]!
+  count: Int!
 }
 
-type ItemResistsUsageMethodEdge implements Edge {
-  cursor: String!
+type ItemResistsUsageMethodEdge implements Edge {  
   node: UsageMethod!
 
   """

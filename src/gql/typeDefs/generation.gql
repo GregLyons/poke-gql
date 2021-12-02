@@ -34,22 +34,22 @@ type Generation implements Node {
   """
   All Abilities present in this Generation.
   """
-  abilities(input: ConnectionInput): GenerationAbilityConnection
+  abilities: GenerationAbilityConnection
 
   """
   All Abilities introduced in this Generation.
   """
-  abilitiesIntroduced(input: ConnectionInput): GenerationIntroducedAbilityConnection
+  abilitiesIntroduced: GenerationIntroducedAbilityConnection
 
   """
   All Effects present in this Generation.
   """
-  effects(input: ConnectionInput): GenerationEffectConnection
+  effects: GenerationEffectConnection
 
   """
   All Effects introduced in this Generation.
   """
-  effectsIntroduced(input: ConnectionInput): GenerationIntroducedEffectConnection
+  effectsIntroduced: GenerationIntroducedEffectConnection
 
   """
   The roman numeral for the Generation.
@@ -64,62 +64,62 @@ type Generation implements Node {
   """
   All Items present in this Generation.
   """
-  items(input: ConnectionInput): GenerationItemConnection
+  items: GenerationItemConnection
 
   """
   All Items present in this Generation.
   """
-  itemsIntroduced(input: ConnectionInput): GenerationIntroducedItemConnection
+  itemsIntroduced: GenerationIntroducedItemConnection
 
   """
   All Moves present in this Generation.
   """
-  moves(input: ConnectionInput): GenerationMoveConnection
+  moves: GenerationMoveConnection
 
   """
   All Moves introduced in this Generation.
   """
-  movesIntroduced(input: ConnectionInput): GenerationIntroducedMoveConnection
+  movesIntroduced: GenerationIntroducedMoveConnection
 
   """
   All Pokemon present in this Generation.
   """
-  pokemon(input: ConnectionInput): GenerationPokemonConnection
+  pokemon: GenerationPokemonConnection
 
   """
   All Pokemon introduced in this Generation.
   """
-  pokemonIntroduced(input: ConnectionInput): GenerationIntroducedPokemonConnection
+  pokemonIntroduced: GenerationIntroducedPokemonConnection
 
   """
   All Types present in this Generation.
   """
-  types(input: ConnectionInput): GenerationTypeConnection
+  types: GenerationTypeConnection
 
   """
   All Types introduced in this Generation.
   """
-  typesIntroduced(input: ConnectionInput): GenerationIntroducedTypeConnection
+  typesIntroduced: GenerationIntroducedTypeConnection
 
   """
   All UsageMethods present in this Generation.
   """
-  usageMethods(input: ConnectionInput): GenerationUsageMethodConnection
+  usageMethods: GenerationUsageMethodConnection
 
   """
   All UsageMethods introduced in this Generation.
   """
-  usageMethodsIntroduced(input: ConnectionInput): GenerationIntroducedUsageMethodConnection
+  usageMethodsIntroduced: GenerationIntroducedUsageMethodConnection
 
   """
   All VersionGroups present in this Generation.
   """
-  versionGroups(input: ConnectionInput): GenerationVersionGroupConnection
+  versionGroups: GenerationVersionGroupConnection
 
   """
   All VersionGroups introduced in this Generation.
   """
-  versionGroupsIntroduced(input: ConnectionInput): GenerationIntroducedVersionGroupConnection
+  versionGroupsIntroduced: GenerationIntroducedVersionGroupConnection
 }
 
 #
@@ -129,35 +129,32 @@ type Generation implements Node {
 # ABILITY
 
 type GenerationAbilityConnection implements Connection {
-  edges: [GenerationAbilityEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationAbilityEdge!]! 
+  count: Int!
 }
 
-type GenerationAbilityEdge implements Edge {
-  cursor: String!
+type GenerationAbilityEdge implements Edge {  
   node: Ability!
-
 }
 
 type GenerationIntroducedAbilityConnection implements Connection {
-  edges: [GenerationAbilityEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationAbilityEdge!]! 
+  count: Int!
 }
 
 # EFFECT
 
 type GenerationEffectConnection implements Connection {
-  edges: [GenerationEffectEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationEffectEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedEffectConnection implements Connection {
-  edges: [GenerationEffectEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationEffectEdge!]! 
+  count: Int!
 }
 
-type GenerationEffectEdge implements Edge {
-  cursor: String!
+type GenerationEffectEdge implements Edge {  
   node: Effect!
 }
 
@@ -165,102 +162,96 @@ type GenerationEffectEdge implements Edge {
 # ITEM
 
 type GenerationItemConnection implements Connection {
-  edges: [GenerationItemEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationItemEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedItemConnection implements Connection {
-  edges: [GenerationItemEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationItemEdge!]! 
+  count: Int!
 }
 
-type GenerationItemEdge implements Edge {
-  cursor: String!
+type GenerationItemEdge implements Edge {  
   node: Item!
 }
 
 # MOVE
 
 type GenerationMoveConnection implements Connection {
-  edges: [GenerationMoveEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationMoveEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedMoveConnection implements Connection {
-  edges: [GenerationMoveEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationMoveEdge!]! 
+  count: Int!
 }
 
-type GenerationMoveEdge implements Edge {
-  cursor: String!
+type GenerationMoveEdge implements Edge {  
   node: Move!
 }
 
 # POKEMON
 
 type GenerationPokemonConnection implements Connection {
-  edges: [GenerationPokemonEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationPokemonEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedPokemonConnection implements Connection {
-  edges: [GenerationPokemonEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationPokemonEdge!]! 
+  count: Int!
 }
 
-type GenerationPokemonEdge implements Edge {
-  cursor: String!
+type GenerationPokemonEdge implements Edge {  
   node: Pokemon!
 }
 
 # TYPE
 
 type GenerationTypeConnection implements Connection {
-  edges: [GenerationTypeEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationTypeEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedTypeConnection implements Connection {
-  edges: [GenerationTypeEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationTypeEdge!]! 
+  count: Int!
 }
 
-type GenerationTypeEdge implements Edge {
-  cursor: String!
+type GenerationTypeEdge implements Edge {  
   node: Type!
 }
 
 # USAGE METHOD
 
 type GenerationUsageMethodConnection implements Connection {
-  edges: [GenerationUsageMethodEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationUsageMethodEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedUsageMethodConnection implements Connection {
-  edges: [GenerationUsageMethodEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationUsageMethodEdge!]! 
+  count: Int!
 }
 
-type GenerationUsageMethodEdge implements Edge {
-  cursor: String!
+type GenerationUsageMethodEdge implements Edge {  
   node: UsageMethod!
 }
 
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
-  edges: [GenerationVersionGroupEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationVersionGroupEdge!]! 
+  count: Int!
 }
 
 type GenerationIntroducedVersionGroupConnection implements Connection {
-  edges: [GenerationVersionGroupEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [GenerationVersionGroupEdge!]! 
+  count: Int!
 }
 
-type GenerationVersionGroupEdge implements Edge {
-  cursor: String!
+type GenerationVersionGroupEdge implements Edge {  
   node: VersionGroup!
 }
 

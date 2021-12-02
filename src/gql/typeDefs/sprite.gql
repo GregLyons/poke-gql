@@ -29,7 +29,7 @@ type Sprite implements Node {
   """
   The entity represented by the Sprite (e.g. Item or Pokemon).
   """
-  entity(input: ConnectionInput): SpriteEntityConnection
+  entity: SpriteEntityConnection
 
   """
   The type of entity that the Sprite is depicting, e.g. 'ITEM'.
@@ -53,12 +53,12 @@ type Sprite implements Node {
   """
   The Item represented by the Sprite.
   """
-  item(input: ConnectionInput): SpriteItemConnection
+  item: SpriteItemConnection
 
   """
   The Pokemon represented by the Sprite.
   """
-  pokemon(input: ConnectionInput): SpritePokemonConnection
+  pokemon: SpritePokemonConnection
 
   """
   True if the Sprite is of a shiny Pokemon. False otherwise (always false for items).
@@ -75,7 +75,7 @@ type Sprite implements Node {
   """
   The VersionGroup(s) in which this Sprite is present.
   """
-  versionGroups(input: ConnectionInput): SpriteVersionGroupConnection
+  versionGroups: SpriteVersionGroupConnection
 }
 
 #
@@ -85,36 +85,33 @@ type Sprite implements Node {
 # ITEM
 
 type SpriteItemConnection implements Connection {
-  edges: [SpriteItemEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [SpriteItemEdge!]! 
+  count: Int!
 }
 
-type SpriteItemEdge implements Edge {
-  cursor: String!
+type SpriteItemEdge implements Edge {  
   node: Item!
 }
 
 # POKEMON
 
 type SpritePokemonConnection implements Connection {
-  edges: [SpritePokemonEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [SpritePokemonEdge!]! 
+  count: Int!
 }
 
-type SpritePokemonEdge implements Edge {
-  cursor: String!
+type SpritePokemonEdge implements Edge {  
   node: Pokemon!
 }
 
 # VERSION GROUP
 
 type SpriteVersionGroupConnection implements Connection {
-  edges: [SpriteVersionGroupEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [SpriteVersionGroupEdge!]! 
+  count: Int!
 }
 
-type SpriteVersionGroupEdge implements Edge {
-  cursor: String!
+type SpriteVersionGroupEdge implements Edge {  
   node: VersionGroup!
 }
 

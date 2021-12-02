@@ -15,40 +15,35 @@ May contain additional fields depending on the relationship.
 For example, PokemonMoveEdge represents an edge starting from a Pokemon Node and ending in a Move Node. It has an additional field 'learnMethod', which is a string describing how the Pokemon can learn the given Move. The 'node' field would be of type Move.
 """
 interface Edge {
-  cursor: String!
   node: Node!
 }
 
 """
-Interface for relationships between Nodes, satisfying the Relay spec. 'pageInfo' allows for pagination, while 'edges' refers to the Edges in the Connection.
+Interface for relationships between Nodes. 'count' returns the total number of edges, while 'edges' refers to the Edges in the Connection.
 
 For example, the 'moves' field in a Pokemon Node has type PokemonMoveConnection. The 'edges' field has type '[PokemonMoveEdge!]!'. The 'node' field of the PokemonMoveEdge type, in turn, has type 'Move!'. 
 
 Continuing the example, PokemonMoveConnection has a counterpart in MovePokemonConnection, which is the type of the 'pokemon' field in a Move Node. The corresponding 'edges' field type is then '[MovePokemonEdge!]!', and the 'node' field of the MovePokemonEdge type has type 'Pokemon!'. 
 """
 interface Connection {
-  edges: [Edge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [Edge!]!
+  count: Int!
 }
 
 """
-Input field for fields of Connection type, e.g. PokemonMoveConnection.
+Input for offset-based pagination.
 """
-input ConnectionInput {
-  first: Int
-  last: Int
-  before: String
-  after: String
+input PaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: String = "formatted_name"
+  sortBy: SortByEnum = ASC
+  search: String = ""
 }
 
-"""
-Used for cursor-based pagination.
-"""
-type PageInfo {
-  startCursor: String!
-  endCursor: String!
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
+enum SortByEnum {
+  ASC,
+  DESC
 }
 
 type Query {

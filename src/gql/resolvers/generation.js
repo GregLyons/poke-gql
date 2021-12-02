@@ -18,6 +18,8 @@
 */
 //#region
 
+const {entityNameToTableName} = require('./helpers.js');
+
 const Query = {
   generationByNumber: async (parent, args, context, info) => {
     const results = await context.db.promise().query(
@@ -125,20 +127,49 @@ const Generation = {
 //#region
 
 const presenceConnection = entityName => {
+  // 'parent' = 'generation_id'
   return {
-    // 'parent' = 'generation_id'
-    edges: async (parent, args, {loaders}, info) => {
-      return await loaders.generation[entityName].present.load(parent);
-    }
+    edges: async (parent, args, context, info) => {
+      return await context.loaders.generation[entityName].present(args.pagination).load(parent);
+    },
+
+    count: async (parent, args, context, info) => {
+      const tableName = entityNameToTableName(entityName);
+      const genDependent = !['effect', 'usage_method', 'version_group'].includes(tableName);
+      const columnName = genDependent ? 'generation_id' : 'introduced'
+      const whereString = genDependent 
+        ? `WHERE generation_id = ${parent}`
+        : `WHERE introduced <= ${parent}`;
+
+      return await context.db.promise().query(
+        `
+          SELECT COUNT(${columnName}) FROM ${tableName}
+          ${whereString}
+        `
+      )
+      .then( ([results, fields]) => { return Object.values(results[0])[0] })
+      .catch(console.log);
+    },
   };
 };
 
 const debutConnection = entityName => {
+  // 'parent' = 'generation_id'
   return {
-    // 'parent' = 'generation_id'
-    edges: async (parent, args, {loaders}, info) => {
-      return await loaders.generation[entityName].introduced.load(parent);
-    }
+    edges: async (parent, args, context, info) => {
+      return await context.loaders.generation[entityName].introduced(args.pagination).load(parent);
+    },
+
+    count: async (parent, args, context, info) => {
+      return await context.db.promise().query(
+        `
+          SELECT COUNT(introduced) FROM ${entityNameToTableName(entityName)}
+          WHERE introduced = ${parent}
+        `
+      )
+      .then( ([results, fields]) => { return Object.values(results[0])[0] })
+      .catch(console.log);
+    },
   };
 };
 

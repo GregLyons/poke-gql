@@ -35,25 +35,25 @@ extend type Query {
 type Status implements Node {
   id: ID!
 
-  abilityCauses(input: ConnectionInput): StatusCausedByAbilityConnection
+  abilityCauses: StatusCausedByAbilityConnection
 
-  abilityResists(input: ConnectionInput): StatusResistedByAbilityConnection
+  abilityResists: StatusResistedByAbilityConnection
 
   """
   The name of the Status in Title Case, with appropriate punctuation.
   """
   formattedName: String!
 
-  itemCauses(input: ConnectionInput): StatusCausedByItemConnection
+  itemCauses: StatusCausedByItemConnection
 
-  itemResists(input: ConnectionInput): StatusResistedByItemConnection
+  itemResists: StatusResistedByItemConnection
 
-  moveCauses(input: ConnectionInput): StatusCausedByMoveConnection
+  moveCauses: StatusCausedByMoveConnection
 
   """
   Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
   """
-  moveResists(input: ConnectionInput): StatusResistedByMoveConnection
+  moveResists: StatusResistedByMoveConnection
 
   """
   The name of the Status in snake_case.
@@ -68,12 +68,11 @@ type Status implements Node {
 # ABILITY
 
 type StatusCausedByAbilityConnection implements Connection {
-  edges: [StatusCausedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatusCausedByAbilityEdge!]!
+  count: Int!
 }
 
-type StatusCausedByAbilityEdge implements Edge {
-  cursor: String!
+type StatusCausedByAbilityEdge implements Edge {  
   node: Ability!
   
   """
@@ -85,24 +84,22 @@ type StatusCausedByAbilityEdge implements Edge {
 }
 
 type StatusResistedByAbilityConnection implements Connection {
-  edges: [StatusResistedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatusResistedByAbilityEdge!]!
+  count: Int!
 }
 
-type StatusResistedByAbilityEdge implements Edge {
-  cursor: String!
+type StatusResistedByAbilityEdge implements Edge {  
   node: Ability!
 }
 
 # ITEM
 
 type StatusCausedByItemConnection implements Connection {
-  edges: [StatusCausedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatusCausedByItemEdge!]!
+  count: Int!
 }
 
-type StatusCausedByItemEdge implements Edge {
-  cursor: String!
+type StatusCausedByItemEdge implements Edge {  
   node: Item!
   
   """
@@ -112,24 +109,22 @@ type StatusCausedByItemEdge implements Edge {
 }
 
 type StatusResistedByItemConnection implements Connection {
-  edges: [StatusResistedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatusResistedByItemEdge!]!
+  count: Int!
 }
 
-type StatusResistedByItemEdge implements Edge {
-  cursor: String!
+type StatusResistedByItemEdge implements Edge {  
   node: Item!
 }
 
 # MOVE
 
 type StatusCausedByMoveConnection implements Connection {
-  edges: [StatusCausedByMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatusCausedByMoveEdge!]!
+  count: Int!
 }
 
-type StatusCausedByMoveEdge implements Edge {
-  cursor: String!
+type StatusCausedByMoveEdge implements Edge {  
   node: Move!
   
   """
@@ -139,11 +134,10 @@ type StatusCausedByMoveEdge implements Edge {
 }
 
 type StatusResistedByMoveConnection implements Connection {
-  edges: [StatusResistedByMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatusResistedByMoveEdge!]!
+  count: Int!
 }
 
-type StatusResistedByMoveEdge implements Edge {
-  cursor: String!
+type StatusResistedByMoveEdge implements Edge {  
   node: Move!
 }

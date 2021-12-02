@@ -38,19 +38,19 @@ extend type Query {
 type Type implements Node {
   id: ID!
 
-  abilityBoosts(input: ConnectionInput): TypeBoostedByAbilityConnection
+  abilityBoosts: TypeBoostedByAbilityConnection
 
-  abilityResists(input: ConnectionInput): TypeResistedByAbilityConnection
+  abilityResists: TypeResistedByAbilityConnection
 
   """
   Entities which the Type enables.
   """
-  enables(input: ConnectionInput): TypeEnablesMoveConnection
+  enables: TypeEnablesMoveConnection
 
   """
   E.g. 'normal'-Type Moves enable 'breakneck_blitz'.
   """
-  enablesMove(input: ConnectionInput): TypeEnablesMoveConnection
+  enablesMove: TypeEnablesMoveConnection
 
 
   """
@@ -61,18 +61,18 @@ type Type implements Node {
   """
   The Generation in which the Type was introduced.
   """
-  introduced(input: ConnectionInput): TypeGenerationConnection
+  introduced: TypeGenerationConnection
 
-  itemBoosts(input: ConnectionInput): TypeBoostedByItemConnection
+  itemBoosts: TypeBoostedByItemConnection
 
-  itemResists(input: ConnectionInput): TypeResistedByItemConnection
+  itemResists: TypeResistedByItemConnection
 
   """
   The matchups of this Type as the attacking-type against other defending Types.
   """
-  matchups(input: ConnectionInput): TypeMatchupConnection
+  matchups: TypeMatchupConnection
 
-  moves(input: ConnectionInput): TypeMoveConnection
+  moves: TypeMoveConnection
 
   """
   The name of the Type in snake_case. 
@@ -82,9 +82,9 @@ type Type implements Node {
   """
   The Items which grant their holder a 'natural_gift' of this Type.
   """
-  naturalGift(input: ConnectionInput): ItemNaturalGiftConnection
+  naturalGift: ItemNaturalGiftConnection
 
-  pokemon(input: ConnectionInput): TypePokemonConnection
+  pokemon: TypePokemonConnection
 
   #
   # CONVENIENCE FIELDS
@@ -138,23 +138,21 @@ type Type implements Node {
 # ABILITY
 
 type TypeBoostedByAbilityConnection implements Connection {
-  edges: [TypeBoostedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeBoostedByAbilityEdge!]!
+  count: Int!
 }
 
-type TypeBoostedByAbilityEdge implements Edge {
-  cursor: String!
+type TypeBoostedByAbilityEdge implements Edge {  
   node: Type!
   multiplier: Float!
 }
 
 type TypeResistedByAbilityConnection implements Connection {
-  edges: [TypeResistedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeResistedByAbilityEdge!]!
+  count: Int!
 }
 
-type TypeResistedByAbilityEdge implements Edge {
-  cursor: String!
+type TypeResistedByAbilityEdge implements Edge {  
   node: Type!
   multiplier: Float!
 }
@@ -162,24 +160,22 @@ type TypeResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type TypeGenerationConnection implements Connection {
-  edges: [TypeGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeGenerationEdge!]! 
+  count: Int!
 }
 
-type TypeGenerationEdge implements Edge {
-  cursor: String!
+type TypeGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # ITEM
 
 type TypeNaturalGiftConnection implements Connection {
-  edges: [TypeNaturalGiftEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeNaturalGiftEdge!]!
+  count: Int!
 }
 
-type TypeNaturalGiftEdge implements Edge {
-  cursor: String!
+type TypeNaturalGiftEdge implements Edge {  
   node: Item!
 
   """
@@ -189,23 +185,21 @@ type TypeNaturalGiftEdge implements Edge {
 }
 
 type TypeBoostedByItemConnection implements Connection {
-  edges: [TypeBoostedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeBoostedByItemEdge!]!
+  count: Int!
 }
 
-type TypeBoostedByItemEdge implements Edge {
-  cursor: String!
+type TypeBoostedByItemEdge implements Edge {  
   node: Type!
   multiplier: Float!
 }
 
 type TypeResistedByItemConnection implements Connection {
-  edges: [TypeResistedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeResistedByItemEdge!]!
+  count: Int!
 }
 
-type TypeResistedByItemEdge implements Edge {
-  cursor: String!
+type TypeResistedByItemEdge implements Edge {  
   node: Type!
   multiplier: Float!
 }
@@ -213,46 +207,42 @@ type TypeResistedByItemEdge implements Edge {
 # MOVE
 
 type TypeMoveConnection implements Connection {
-  edges: [TypeMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeMoveEdge!]!
+  count: Int!
 }
 
-type TypeMoveEdge implements Edge {
-  cursor: String!
+type TypeMoveEdge implements Edge {  
   node: Move!
 }
 
 type TypeEnablesMoveConnection implements Connection {
-  edges: [TypeEnablesMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeEnablesMoveEdge!]!
+  count: Int!
 }
 
-type TypeEnablesMoveEdge implements Edge {
-  cursor: String!
+type TypeEnablesMoveEdge implements Edge {  
   node: Move!
 }
 
 # POKEMON
 
 type TypePokemonConnection implements Connection {
-  edges: [TypePokemonEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypePokemonEdge!]!
+  count: Int!
 }
 
-type TypePokemonEdge implements Edge {
-  cursor: String!
+type TypePokemonEdge implements Edge {  
   node: Pokemon!
 }
 
 # TYPE
 
 type TypeMatchupConnection implements Connection {
-  edges: [TypeMatchupEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [TypeMatchupEdge!]!
+  count: Int!
 }
 
-type TypeMatchupEdge implements Edge {
-  cursor: String!
+type TypeMatchupEdge implements Edge {  
   node: Type!
 
   """

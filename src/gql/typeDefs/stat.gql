@@ -35,16 +35,16 @@ extend type Query {
 type Stat implements Node {
   id: ID!
 
-  abilityModifies(input: ConnectionInput): StatModifiedByAbilityConnection
+  abilityModifies: StatModifiedByAbilityConnection
 
   """
   The name of the Stat in Title Case, with appropriate punctuation.
   """
   formattedName: String!
 
-  itemModifies(input: ConnectionInput): StatModifiedByItemConnection
+  itemModifies: StatModifiedByItemConnection
 
-  moveModifies(input: ConnectionInput): StatModifiedByMoveConnection
+  moveModifies: StatModifiedByMoveConnection
 
   """
   The name of the Stat in snake_case.
@@ -59,12 +59,11 @@ type Stat implements Node {
 # ABILITY
 
 type StatModifiedByAbilityConnection implements Connection {
-  edges: [StatModifiedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatModifiedByAbilityEdge!]!
+  count: Int!
 }
 
-type StatModifiedByAbilityEdge implements Edge {
-  cursor: String!
+type StatModifiedByAbilityEdge implements Edge {  
   node: Ability!
 
   """
@@ -93,12 +92,11 @@ type StatModifiedByAbilityEdge implements Edge {
 # ITEM
 
 type StatModifiedByItemConnection implements Connection {
-  edges: [StatModifiedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatModifiedByItemEdge!]!
+  count: Int!
 }
 
-type StatModifiedByItemEdge implements Edge {
-  cursor: String!
+type StatModifiedByItemEdge implements Edge {  
   node: Item!
 
   """
@@ -127,12 +125,11 @@ type StatModifiedByItemEdge implements Edge {
 # MOVE
 
 type StatModifiedByMoveConnection implements Connection {
-  edges: [StatModifiedByMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [StatModifiedByMoveEdge!]!
+  count: Int!
 }
 
-type StatModifiedByMoveEdge implements Edge {
-  cursor: String!
+type StatModifiedByMoveEdge implements Edge {  
   node: Move!
 
   """

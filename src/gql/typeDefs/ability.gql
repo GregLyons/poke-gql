@@ -39,19 +39,19 @@ extend type Query {
 type Ability implements Node {
   id: ID!
 
-  boostsType(input: ConnectionInput): AbilityBoostsTypeConnection
+  boostsType: AbilityBoostsTypeConnection
 
-  boostsUsageMethod(input: ConnectionInput): AbilityBoostsUsageMethodConnection
+  boostsUsageMethod: AbilityBoostsUsageMethodConnection
 
-  causesStatus(input: ConnectionInput): AbilityCausesStatusConnection
+  causesStatus: AbilityCausesStatusConnection
 
   """
   The Descriptions for the Ability across the different VersionGroups.
   """
-  descriptions(input: ConnectionInput): AbilityDescriptionConnection
+  descriptions: AbilityDescriptionConnection
 
 
-  effect(input: ConnectionInput): AbilityEffectConnection
+  effect: AbilityEffectConnection
 
   """
   The name of the Ability in Title Case, with appropriate punctuation and capitalization. 
@@ -65,20 +65,20 @@ type Ability implements Node {
   """
   The Generation in which the Ability was introduced.
   """ 
-  introduced(input: ConnectionInput): AbilityGenerationConnection
+  introduced: AbilityGenerationConnection
 
-  modifiesStat(input: ConnectionInput): AbilityModifiesStatConnection
+  modifiesStat: AbilityModifiesStatConnection
 
   """
   The name of the Ability in snake_case.
   """
   name: String!
 
-  resistsType(input: ConnectionInput): AbilityResistsTypeConnection
+  resistsType: AbilityResistsTypeConnection
 
-  resistsUsageMethod(input: ConnectionInput): AbilityResistsUsageMethodConnection
+  resistsUsageMethod: AbilityResistsUsageMethodConnection
 
-  resistsStatus(input: ConnectionInput): AbilityResistsStatusConnection
+  resistsStatus: AbilityResistsStatusConnection
 }
 
 #
@@ -88,48 +88,44 @@ type Ability implements Node {
 # DESCRIPTION 
 
 type AbilityDescriptionConnection implements Connection {
-  edges: [AbilityDescriptionEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityDescriptionEdge!]!
+  count: Int!
 }
 
-type AbilityDescriptionEdge implements Edge {
-  cursor: String!
+type AbilityDescriptionEdge implements Edge {  
   node: Description!
 }
 
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
-  edges: [AbilityEffectEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityEffectEdge!]! 
+  count: Int!
 }
 
-type AbilityEffectEdge implements Edge {
-  cursor: String!
+type AbilityEffectEdge implements Edge {  
   node: Effect!
 }
 
 # GENERATION
 
 type AbilityGenerationConnection implements Connection {
-  edges: [AbilityGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityGenerationEdge!]! 
+  count: Int!
 }
 
-type AbilityGenerationEdge implements Edge {
-  cursor: String!
+type AbilityGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
-  edges: [AbilityModifiesStatEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityModifiesStatEdge!]!
+  count: Int!
 }
 
-type AbilityModifiesStatEdge implements Edge {
-  cursor: String!
+type AbilityModifiesStatEdge implements Edge {  
   node: Stat!
 
   """
@@ -158,12 +154,11 @@ type AbilityModifiesStatEdge implements Edge {
 # STATUS
 
 type AbilityCausesStatusConnection implements Connection {
-  edges: [AbilityCausesStatusEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityCausesStatusEdge!]!
+  count: Int!
 }
 
-type AbilityCausesStatusEdge implements Edge {
-  cursor: String!
+type AbilityCausesStatusEdge implements Edge {  
   node: Status!
 
   """
@@ -175,24 +170,22 @@ type AbilityCausesStatusEdge implements Edge {
 }
 
 type AbilityResistsStatusConnection implements Connection {
-  edges: [AbilityResistsStatusEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityResistsStatusEdge!]!
+  count: Int!
 }
 
-type AbilityResistsStatusEdge implements Edge {
-  cursor: String!
+type AbilityResistsStatusEdge implements Edge {  
   node: Status!
 }
 
 # TYPE
 
 type AbilityBoostsTypeConnection implements Connection {
-  edges: [AbilityBoostsTypeEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityBoostsTypeEdge!]!
+  count: Int!
 }
 
-type AbilityBoostsTypeEdge implements Edge {
-  cursor: String!
+type AbilityBoostsTypeEdge implements Edge {  
   node: Type!
 
   """
@@ -202,12 +195,11 @@ type AbilityBoostsTypeEdge implements Edge {
 }
 
 type AbilityResistsTypeConnection implements Connection {
-  edges: [AbilityResistsTypeEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityResistsTypeEdge!]!
+  count: Int!
 }
 
-type AbilityResistsTypeEdge implements Edge {
-  cursor: String!
+type AbilityResistsTypeEdge implements Edge {  
   node: Type!
 
   """
@@ -219,12 +211,11 @@ type AbilityResistsTypeEdge implements Edge {
 # USAGE METHOD
 
 type AbilityBoostsUsageMethodConnection implements Connection {
-  edges: [AbilityBoostsUsageMethodEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityBoostsUsageMethodEdge!]!
+  count: Int!
 }
 
-type AbilityBoostsUsageMethodEdge implements Edge {
-  cursor: String!
+type AbilityBoostsUsageMethodEdge implements Edge {  
   node: UsageMethod!
 
   """
@@ -234,12 +225,11 @@ type AbilityBoostsUsageMethodEdge implements Edge {
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {
-  edges: [AbilityResistsUsageMethodEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [AbilityResistsUsageMethodEdge!]!
+  count: Int!
 }
 
-type AbilityResistsUsageMethodEdge implements Edge {
-  cursor: String!
+type AbilityResistsUsageMethodEdge implements Edge {  
   node: UsageMethod!
 
   """

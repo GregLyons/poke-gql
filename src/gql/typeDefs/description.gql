@@ -24,7 +24,7 @@ type Description implements Node {
   """
   The entity to which the Description applies.
   """
-  entity(input: ConnectionInput): DescriptionEntityConnection
+  entity: DescriptionEntityConnection
 
   """
   The class of entity that the Description is describing, e.g. 'ITEM'.
@@ -39,7 +39,7 @@ type Description implements Node {
   """
   The VersionGroup(s) in which the Description is present.
   """
-  versionGroups(input: ConnectionInput): DescriptionVersionGroupConnection
+  versionGroups: DescriptionVersionGroupConnection
 }
 
 #
@@ -49,48 +49,44 @@ type Description implements Node {
 # ABILITY
 
 type DescriptionAbilityConnection implements Connection {
-  edges: [DescriptionAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [DescriptionAbilityEdge!]!
+  count: Int!
 }
 
-type DescriptionAbilityEdge implements Edge {
-  cursor: String!
+type DescriptionAbilityEdge implements Edge {  
   node: Ability!
 }
 
 # ITEM
 
 type DescriptionItemConnection implements Connection {
-  edges: [DescriptionItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [DescriptionItemEdge!]!
+  count: Int!
 }
 
-type DescriptionItemEdge implements Edge {
-  cursor: String!
+type DescriptionItemEdge implements Edge {  
   node: Item!
 }
 
 # MOVE 
 
 type DescriptionMoveConnection implements Connection {
-  edges: [DescriptionMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [DescriptionMoveEdge!]!
+  count: Int!
 }
 
-type DescriptionMoveEdge implements Edge {
-  cursor: String!
+type DescriptionMoveEdge implements Edge {  
   node: Move!
 }
 
 # VERSION GROUP 
 
 type DescriptionVersionGroupConnection implements Connection {
-  edges: [DescriptionVersionGroupEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [DescriptionVersionGroupEdge!]!
+  count: Int!
 }
 
-type DescriptionVersionGroupEdge implements Edge {
-  cursor: String!
+type DescriptionVersionGroupEdge implements Edge {  
   node: VersionGroup!
 }
 

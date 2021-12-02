@@ -35,7 +35,7 @@ extend type Query {
 type Effect implements Node {
   id: ID!
 
-  abilities(input: ConnectionInput): EffectAbilityConnection
+  abilities: EffectAbilityConnection
 
   """
   The name of the Effect in Title Case, with appropriate punctuation.
@@ -47,11 +47,11 @@ type Effect implements Node {
 
   For example, 'low_kick' was introduced in Generation 1, but it didn't have the Effect 'depends_on_weight' until Generation 3.
   """
-  introduced(input: ConnectionInput): EffectGenerationConnection
+  introduced: EffectGenerationConnection
 
-  items(input: ConnectionInput): EffectItemConnection
+  items: EffectItemConnection
 
-  moves(input: ConnectionInput): EffectMoveConnection
+  moves: EffectMoveConnection
 
   """
   The name of the Effect in snake_case. If the Effect has a verb in its name, the verb is conjugated in third person.
@@ -70,47 +70,43 @@ type Effect implements Node {
 # ABILITY
 
 type EffectAbilityConnection implements Connection {
-  edges: [EffectAbilityEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [EffectAbilityEdge!]! 
+  count: Int!
 }
 
-type EffectAbilityEdge implements Edge {
-  cursor: String!
+type EffectAbilityEdge implements Edge {  
   node: Effect!
 }
 
 # GENERATION
 
 type EffectGenerationConnection implements Connection {
-  edges: [EffectGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [EffectGenerationEdge!]! 
+  count: Int!
 }
 
-type EffectGenerationEdge implements Edge {
-  cursor: String!
+type EffectGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # ITEM
 
 type EffectItemConnection implements Connection {
-  edges: [EffectItemEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [EffectItemEdge!]! 
+  count: Int!
 }
 
-type EffectItemEdge implements Edge {
-  cursor: String!
+type EffectItemEdge implements Edge {  
   node: Effect!
 }
 
 # MOVE
 
 type EffectMoveConnection implements Connection {
-  edges: [EffectMoveEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [EffectMoveEdge!]! 
+  count: Int!
 }
 
-type EffectMoveEdge implements Edge {
-  cursor: String!
+type EffectMoveEdge implements Edge {  
   node: Effect!
 }

@@ -64,7 +64,7 @@ type Pokemon implements Node {
   """
   The Abilities that the Pokemon can possess.
   """
-  abilities(input: ConnectionInput): PokemonAbilityConnection
+  abilities: PokemonAbilityConnection
 
   """
   The base stats of the Pokemon.
@@ -79,29 +79,29 @@ type Pokemon implements Node {
   """
   Entities which the Pokemon enables.
   """
-  enables(input: ConnectionInput): PokemonEnablesConnection
+  enables: PokemonEnablesConnection
 
   """
   E.g. 'venusaur' enables the use of 'venusaurite', and 'latias' enables the use of 'soul_dew'.
   """
-  enablesItem(input: ConnectionInput): PokemonEnablesItemConnection
+  enablesItem: PokemonEnablesItemConnection
 
   """
   E.g. 'charizard_gmax' enables 'g_max_wildfire'. 
   
   We wouldn't say, however, that 'smeargle' enables 'sketch', even though it is the only Pokemon that can learn that Move.
   """
-  enablesMove(input: ConnectionInput): PokemonEnablesMoveConnection
+  enablesMove: PokemonEnablesMoveConnection
 
   """
   Pokemon for which this Pokemon is a prevolution. 
   """
-  evolvesTo(input: ConnectionInput): PokemonEvolutionConnection
+  evolvesTo: PokemonEvolutionConnection
 
   """
   Pokemon for which this Pokemon is an evolution.
   """
-  evolvesFrom(input: ConnectionInput): PokemonPrevolutionConnection
+  evolvesFrom: PokemonPrevolutionConnection
 
   """
   The name of the Pokemon in Title Case, and with appropriate punctuation. The species name is capitalized, and form data is in parentheses.
@@ -127,7 +127,7 @@ type Pokemon implements Node {
     'raticate_alola' has the form 'raticate'.
 
   """
-  formData(input: ConnectionInput): PokemonFormConnection
+  formData: PokemonFormConnection
 
   """
   The height of the Pokemon in meters. 0.0 if unknown.
@@ -137,12 +137,12 @@ type Pokemon implements Node {
   """
   The Generation in which the Pokemon was introduced.
   """
-  introduced(input: ConnectionInput): PokemonGenerationConnection
+  introduced: PokemonGenerationConnection
 
   """
   The Moves that the Pokemon can learn.
   """
-  moves(input: ConnectionInput): PokemonMoveConnection!
+  moves: PokemonMoveConnection!
 
   """
   The name of the Pokemon in snake_case. Periods are removed, whereas hyphens become underscores. The species name comes first, followed by the form name. 
@@ -159,12 +159,12 @@ type Pokemon implements Node {
   """
   Entities which the Pokemon requires.
   """
-  requires(input: ConnectionInput): PokemonRequiresItemConnection 
+  requires: PokemonRequiresItemConnection 
 
   """
   E.g. Mega-evolutions require their corresponding Mega Stone.
   """
-  requiresItem(input: ConnectionInput): PokemonRequiresItemConnection
+  requiresItem: PokemonRequiresItemConnection
 
   """
   The name of the Pokemon species in snake_case. Two Pokemon belong to the same species if and only if they have the same National Dex number.
@@ -179,7 +179,7 @@ type Pokemon implements Node {
   """
   The elemental typing of the Pokemon, as an array of Types of length 1 or 2. For example, 'charizard' would have Types ['fire', 'flying'], and 'blastoise' would have Types ['water'].
   """
-  typing(input: ConnectionInput): PokemonTypeConnection!
+  typing: PokemonTypeConnection!
 
   """
   The weight of the Pokemon in kilograms. 0.0 if unknown.
@@ -241,12 +241,11 @@ type BaseStats {
 # ABILITY
 
 type PokemonAbilityConnection implements Connection {
-  pageInfo: PageInfo!
-  edges: [PokemonAbilityEdge!]!
+  count: Int!
+  edges(pagination: PaginationInput): [PokemonAbilityEdge!]!
 }
 
-type PokemonAbilityEdge implements Edge {
-  cursor: String!
+type PokemonAbilityEdge implements Edge {  
   node: Ability!
 
   """
@@ -258,56 +257,51 @@ type PokemonAbilityEdge implements Edge {
 # GENERATION
 
 type PokemonGenerationConnection implements Connection {
-  edges: [PokemonGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonGenerationEdge!]! 
+  count: Int!
 }
 
-type PokemonGenerationEdge implements Edge {
-  cursor: String!
+type PokemonGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # ITEM
 
 type PokemonEnablesItemConnection implements Connection {
-  edges: [PokemonEnablesItemEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonEnablesItemEdge!]! 
+  count: Int!
 }
 
-type PokemonEnablesItemEdge implements Edge {
-  cursor: String!
+type PokemonEnablesItemEdge implements Edge {  
   node: Item!
 }
 
 type PokemonRequiresItemConnection implements Connection {
-  edges: [PokemonRequiresItemEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonRequiresItemEdge!]! 
+  count: Int!
 }
 
-type PokemonRequiresItemEdge implements Edge {
-  cursor: String!
+type PokemonRequiresItemEdge implements Edge {  
   node: Item!
 }
 
 # MOVE
 
 type PokemonEnablesMoveConnection implements Connection {
-  edges: [PokemonEnablesMoveEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonEnablesMoveEdge!]! 
+  count: Int!
 }
 
-type PokemonEnablesMoveEdge implements Edge {
-  cursor: String!
+type PokemonEnablesMoveEdge implements Edge {  
   node: Pokemon!
 }
 
 type PokemonMoveConnection implements Connection {
-  pageInfo: PageInfo!
-  edges: [PokemonMoveEdge!]!
+  count: Int!
+  edges(pagination: PaginationInput): [PokemonMoveEdge!]!
 }
 
-type PokemonMoveEdge implements Edge {
-  cursor: String!
+type PokemonMoveEdge implements Edge {  
   node: Move!
 
   """
@@ -329,12 +323,11 @@ type PokemonMoveEdge implements Edge {
 # POKEMON
 
 type PokemonEvolutionConnection implements Connection {
-  edges: [PokemonEvolutionEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonEvolutionEdge!]!
+  count: Int!
 }
 
-type PokemonEvolutionEdge implements Edge {
-  cursor: String!
+type PokemonEvolutionEdge implements Edge {  
 
   """
   The evolved form in the evolution relationship.
@@ -348,12 +341,11 @@ type PokemonEvolutionEdge implements Edge {
 }
 
 type PokemonPrevolutionConnection implements Connection {
-  edges: [PokemonPrevolutionEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonPrevolutionEdge!]!
+  count: Int!
 }
 
-type PokemonPrevolutionEdge implements Edge {
-  cursor: String!
+type PokemonPrevolutionEdge implements Edge {  
 
   """
   The pre-evolved form in the evolution relationship.
@@ -367,12 +359,11 @@ type PokemonPrevolutionEdge implements Edge {
 }
 
 type PokemonFormConnection implements Connection {
-  edges: [PokemonFormEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [PokemonFormEdge!]!
+  count: Int!
 }
 
-type PokemonFormEdge implements Edge {
-  cursor: String!
+type PokemonFormEdge implements Edge {  
 
   """
   If the starting node is a base form, then this is the alternate form (e.g. the Mega form, Alola form, etc.). 
@@ -392,12 +383,11 @@ type PokemonFormEdge implements Edge {
 # TYPE
 
 type PokemonTypeConnection implements Connection {
-  pageInfo: PageInfo!
-  edges: [PokemonTypeEdge!]!
+  count: Int!
+  edges(pagination: PaginationInput): [PokemonTypeEdge!]!
 }
 
-type PokemonTypeEdge implements Edge {
-  cursor: String!
+type PokemonTypeEdge implements Edge {  
   node: Type!
 }
 

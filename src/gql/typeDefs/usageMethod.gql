@@ -35,9 +35,9 @@ extend type Query {
 type UsageMethod implements Node {
   id: ID!
 
-  abilityBoosts(input: ConnectionInput): UsageMethodBoostedByAbilityConnection
+  abilityBoosts: UsageMethodBoostedByAbilityConnection
 
-  abilityResists(input: ConnectionInput): UsageMethodResistedByAbilityConnection
+  abilityResists: UsageMethodResistedByAbilityConnection
 
   """
   The name of the UsageMethod in Title Case.
@@ -49,13 +49,13 @@ type UsageMethod implements Node {
   
   For example, whether a Move had the UsageMethod 'bite' only became relevant when the ability 'strong_jaw' was introduced in Generation 6, even though Moves like 'crunch' have been around since Generation 2.
   """
-  introduced(input: ConnectionInput): UsageMethodGenerationConnection
+  introduced: UsageMethodGenerationConnection
 
-  itemBoosts(input: ConnectionInput): UsageMethodBoostedByItemConnection
+  itemBoosts: UsageMethodBoostedByItemConnection
 
-  itemResists(input: ConnectionInput): UsageMethodResistedByItemConnection
+  itemResists: UsageMethodResistedByItemConnection
 
-  moves(input: ConnectionInput): UsageMethodMoveConnection
+  moves: UsageMethodMoveConnection
 
   """
   The name of the UsageMethod in snake_case. 
@@ -71,23 +71,21 @@ type UsageMethod implements Node {
 # ABILITY
 
 type UsageMethodBoostedByAbilityConnection implements Connection {
-  edges: [UsageMethodBoostedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [UsageMethodBoostedByAbilityEdge!]!
+  count: Int!
 }
 
-type UsageMethodBoostedByAbilityEdge implements Edge {
-  cursor: String!
+type UsageMethodBoostedByAbilityEdge implements Edge {  
   node: UsageMethod!
   multiplier: Float!
 }
 
 type UsageMethodResistedByAbilityConnection implements Connection {
-  edges: [UsageMethodResistedByAbilityEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [UsageMethodResistedByAbilityEdge!]!
+  count: Int!
 }
 
-type UsageMethodResistedByAbilityEdge implements Edge {
-  cursor: String!
+type UsageMethodResistedByAbilityEdge implements Edge {  
   node: UsageMethod!
   multiplier: Float!
 }
@@ -95,35 +93,32 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
-  edges: [UsageMethodGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [UsageMethodGenerationEdge!]! 
+  count: Int!
 }
 
-type UsageMethodGenerationEdge implements Edge {
-  cursor: String!
+type UsageMethodGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # ITEM
 
 type UsageMethodBoostedByItemConnection implements Connection {
-  edges: [UsageMethodBoostedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [UsageMethodBoostedByItemEdge!]!
+  count: Int!
 }
 
-type UsageMethodBoostedByItemEdge implements Edge {
-  cursor: String!
+type UsageMethodBoostedByItemEdge implements Edge {  
   node: UsageMethod!
   multiplier: Float!
 }
 
 type UsageMethodResistedByItemConnection implements Connection {
-  edges: [UsageMethodResistedByItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [UsageMethodResistedByItemEdge!]!
+  count: Int!
 }
 
-type UsageMethodResistedByItemEdge implements Edge {
-  cursor: String!
+type UsageMethodResistedByItemEdge implements Edge {  
   node: UsageMethod!
   multiplier: Float!
 }
@@ -131,11 +126,10 @@ type UsageMethodResistedByItemEdge implements Edge {
 # MOVE
 
 type UsageMethodMoveConnection implements Connection {
-  edges: [UsageMethodMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [UsageMethodMoveEdge!]!
+  count: Int!
 }
 
-type UsageMethodMoveEdge implements Edge {
-  cursor: String!
+type UsageMethodMoveEdge implements Edge {  
   node: UsageMethod!
 }

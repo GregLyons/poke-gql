@@ -59,7 +59,7 @@ type Move implements Node {
   """
   accuracy: Int
 
-  causesStatus(input: ConnectionInput): MoveCausesStatusConnection
+  causesStatus: MoveCausesStatusConnection
 
   """
   Whether or not the Move makes contact (e.g. for interacting with the Move 'static').
@@ -69,19 +69,19 @@ type Move implements Node {
   """
   The Descriptions for the Move across the different VersionGroups.
   """
-  descriptions(input: ConnectionInput): MoveDescriptionConnection
+  descriptions: MoveDescriptionConnection
 
-  effect(input: ConnectionInput): MoveEffectConnection
+  effect: MoveEffectConnection
 
   """
   Entities which the Move enables.
   """
-  enables(input: ConnectionInput): MoveEnablesConnection
+  enables: MoveEnablesConnection
 
   """
   E.g. 'volt_tackle' (partly) enables 'catastropika'.
   """
-  enablesMove(input: ConnectionInput): MoveEnablesMoveConnection
+  enablesMove: MoveEnablesMoveConnection
 
   """
   The name of the Move in Title Case.
@@ -91,9 +91,9 @@ type Move implements Node {
   """
   The Generation in which the Move was introduced.
   """ 
-  introduced(input: ConnectionInput): MoveGenerationConnection
+  introduced: MoveGenerationConnection
 
-  modifiesStat(input: ConnectionInput): MoveModifiesStatConnection
+  modifiesStat: MoveModifiesStatConnection
 
   """
   The name of the Move in snake_case. 
@@ -106,7 +106,7 @@ type Move implements Node {
   """
   name: String!
 
-  pokemon(input: ConnectionInput): MovePokemonConnection
+  pokemon: MovePokemonConnection
 
   """
   Non-damaging moves (e.g. status moves), fixed damage moves (e.g. sonic_boom), and variable damage (e.g. magnitude) moves have null in this field. 
@@ -120,32 +120,32 @@ type Move implements Node {
   """
   Entities which the Move requires.
   """
-  requires(input: ConnectionInput): MoveRequiresConnection
+  requires: MoveRequiresConnection
 
   """
   E.g. 'breakneck_blitz' requires 'normalium_z'.
   """
-  requiresItem(input: ConnectionInput): MoveRequiresItemConnection
+  requiresItem: MoveRequiresItemConnection
 
   """
   E.g. 'catastropika' requires the Move 'volt_tackle'.
   """
-  requiresMove(input: ConnectionInput): MoveRequiresMoveConnection
+  requiresMove: MoveRequiresMoveConnection
 
   """
   E.g. 'g_max_wildfire' requires the user to be 'charizard_gmax'.
   """
-  requiresPokemon(input: ConnectionInput): MoveRequiresPokemonConnection
+  requiresPokemon: MoveRequiresPokemonConnection
 
   """
   E.g. 'inferno_overdrive', the Fire Z-Move, requires a 'fire'-Type base move.
   """
-  requiresType(input: ConnectionInput): MoveRequiresTypeConnection
+  requiresType: MoveRequiresTypeConnection
 
   """
   Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
   """
-  resistsStatus(input: ConnectionInput): MoveResistsStatusConnection
+  resistsStatus: MoveResistsStatusConnection
 
   """
   Who the Move can target.
@@ -155,12 +155,12 @@ type Move implements Node {
   """
   The Type possessed by the Move, e.g. 'flamethrower' is 'fire'-type. 
   """
-  type(input: ConnectionInput): MoveTypeConnection
+  type: MoveTypeConnection
 
   """
   E.g. The Move 'aura_sphere' has both 'ball' and 'pulse' as UsageMethods.
   """
-  usageMethod(input: ConnectionInput): MoveUsageMethodConnection
+  usageMethod: MoveUsageMethodConnection
 }
 
 #
@@ -170,82 +170,75 @@ type Move implements Node {
 # DESCRIPTION 
 
 type MoveDescriptionConnection implements Connection {
-  edges: [MoveDescriptionEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveDescriptionEdge!]!
+  count: Int!
 }
 
-type MoveDescriptionEdge implements Edge {
-  cursor: String!
+type MoveDescriptionEdge implements Edge {  
   node: Description!
 }
 
 # EFFECT
 
 type MoveEffectConnection implements Connection {
-  edges: [MoveEffectEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveEffectEdge!]! 
+  count: Int!
 }
 
-type MoveEffectEdge implements Edge {
-  cursor: String!
+type MoveEffectEdge implements Edge {  
   node: Effect!
 }
 
 # GENERATION
 
 type MoveGenerationConnection implements Connection {
-  edges: [MoveGenerationEdge!]! 
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveGenerationEdge!]! 
+  count: Int!
 }
 
-type MoveGenerationEdge implements Edge {
-  cursor: String!
+type MoveGenerationEdge implements Edge {  
   node: Generation!
 }
 
 # ITEM
 
 type MoveRequiresItemConnection implements Connection {
-  edges: [MoveRequiresItemEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveRequiresItemEdge!]!
+  count: Int!
 }
 
-type MoveRequiresItemEdge implements Edge {
-  cursor: String!
+type MoveRequiresItemEdge implements Edge {  
   node: Item!
 }
 
 # MOVE
 
 type MoveEnablesMoveConnection implements Connection {
-  edges: [MoveEnablesMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveEnablesMoveEdge!]!
+  count: Int!
 }
 
-type MoveEnablesMoveEdge implements Edge {
-  cursor: String!
+type MoveEnablesMoveEdge implements Edge {  
   node: Move!
 }
 
 type MoveRequiresMoveConnection implements Connection {
-  edges: [MoveRequiresMoveEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveRequiresMoveEdge!]!
+  count: Int!
 }
 
-type MoveRequiresMoveEdge implements Edge {
-  cursor: String!
+type MoveRequiresMoveEdge implements Edge {  
   node: Move!
 }
 
 # POKEMON
 
 type MovePokemonConnection implements Connection {
-  pageInfo: PageInfo!
-  edges: [MovePokemonEdge!]!
+  count: Int!
+  edges(pagination: PaginationInput): [MovePokemonEdge!]!
 }
 
-type MovePokemonEdge implements Edge {
-  cursor: String!
+type MovePokemonEdge implements Edge {  
   node: Move!
 
   """
@@ -265,24 +258,22 @@ type MovePokemonEdge implements Edge {
 }
 
 type MoveRequiresPokemonConnection implements Connection {
-  edges: [MoveRequiresPokemonEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveRequiresPokemonEdge!]!
+  count: Int!
 }
 
-type MoveRequiresPokemonEdge implements Edge {
-  cursor: String!
+type MoveRequiresPokemonEdge implements Edge {  
   node: Pokemon!
 }
 
 # STAT
 
 type MoveModifiesStatConnection implements Connection {
-  edges: [MoveModifiesStatEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveModifiesStatEdge!]!
+  count: Int!
 }
 
-type MoveModifiesStatEdge implements Edge {
-  cursor: String!
+type MoveModifiesStatEdge implements Edge {  
   node: Stat!
 
   """
@@ -309,12 +300,11 @@ type MoveModifiesStatEdge implements Edge {
 # STATUS
 
 type MoveCausesStatusConnection implements Connection {
-  edges: [MoveCausesStatusEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveCausesStatusEdge!]!
+  count: Int!
 }
 
-type MoveCausesStatusEdge implements Edge {
-  cursor: String!
+type MoveCausesStatusEdge implements Edge {  
   node: Status!
 
   """
@@ -324,46 +314,42 @@ type MoveCausesStatusEdge implements Edge {
 }
 
 type MoveResistsStatusConnection implements Connection {
-  edges: [MoveResistsStatusEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveResistsStatusEdge!]!
+  count: Int!
 }
 
-type MoveResistsStatusEdge implements Edge {
-  cursor: String!
+type MoveResistsStatusEdge implements Edge {  
   node: Status!
 }
 
 # TYPE
 
 type MoveTypeConnection implements Connection {
-  edges: [MoveTypeEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveTypeEdge!]!
+  count: Int!
 }
 
-type MoveTypeEdge implements Edge {
-  cursor: String!
+type MoveTypeEdge implements Edge {  
   node: Type!
 }
 
 type MoveRequiresTypeConnection implements Connection {
-  edges: [MoveRequiresTypeEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveRequiresTypeEdge!]!
+  count: Int!
 }
 
-type MoveRequiresTypeEdge implements Edge {
-  cursor: String!
+type MoveRequiresTypeEdge implements Edge {  
   node: Type!
 }
 
 # USAGE METHOD
 
 type MoveUsageMethodConnection implements Connection {
-  edges: [MoveUsageMethodEdge!]!
-  pageInfo: PageInfo!
+  edges(pagination: PaginationInput): [MoveUsageMethodEdge!]!
+  count: Int!
 }
 
-type MoveUsageMethodEdge implements Edge {
-  cursor: String!
+type MoveUsageMethodEdge implements Edge {  
   node: UsageMethod!
 }
 
