@@ -40,11 +40,12 @@ const batchEntitiesByGen = (presence = true, tableName, pagination) => {
     })
     .catch(console.log);
 
-    return gens.map(gen => entities.filter(entity => genDependent
-      ? entity.generation_id === gen
-      : presence 
-        ? entity.introduced <= gen
-        : entity.introduced === gen
+    return gens.map(gen => entities.filter(entity => 
+      genDependent
+        ? entity.generation_id === gen
+        : presence 
+          ? entity.introduced <= gen
+          : entity.introduced === gen
     ));
   }
 }
@@ -90,6 +91,6 @@ let generation = {};
     };
     
     return;
-  }, {});
+  });
 
 module.exports = generation;

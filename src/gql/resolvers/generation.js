@@ -18,7 +18,12 @@
 */
 //#region
 
-const {entityNameToTableName} = require('./helpers.js');
+// Import helpers
+//#region
+
+const {entityNameToTableName, basicEdge} = require('./helpers.js');
+
+//#endregion
 
 const Query = {
   generationByNumber: async (parent, args, context, info) => {
@@ -170,12 +175,6 @@ const debutConnection = entityName => {
       .then( ([results, fields]) => { return Object.values(results[0])[0] })
       .catch(console.log);
     },
-  };
-};
-
-const basicEdge = () => {
-  return {
-    node: parent => parent,
   };
 };
 

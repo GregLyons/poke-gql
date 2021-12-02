@@ -11,6 +11,13 @@
     'introduced'
 */
 
+// Import helpers
+//#region
+
+const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+
+//#endregion
+
 // Query
 /*
     typeByID(id)
@@ -101,28 +108,8 @@ const Type = {
 //#region
 
 const ConnectionsAndEdges = {
-  TypeGenerationConnection: {
-    // 'parent' = 'introduced'
-    edges: async (parent, args, context, info) => {
-      return await context.db.promise().query(
-        `
-          SELECT * FROM generation
-          WHERE generation_id = ${parent}
-        `
-      )
-      .then( ([results, fields]) => {
-        return results;
-      })
-      .catch();
-    }
-  },
-  
-  TypeGenerationEdge: {
-    node: async (parent, args, context, info) => {
-      return parent;
-    }
-  },
-
+  TypeGenerationConnection: introductionConnection('type'),
+  TypeGenerationEdge: basicEdge(),
 }
 
 //#endregion

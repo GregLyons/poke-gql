@@ -10,6 +10,13 @@
     'introduced'
 */
 
+// Import helpers
+//#region
+
+const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+
+//#endregion
+
 // Query
 /*
     effectByID(id)
@@ -91,28 +98,8 @@ const Effect = {
 //#region
 
 const ConnectionsAndEdges = {
-  EffectGenerationConnection: {
-    // 'parent' = 'introduced'
-    edges: async (parent, args, context, info) => {
-      return await context.db.promise().query(
-        `
-          SELECT * FROM generation
-          WHERE generation_id = ${parent}
-        `
-      )
-      .then( ([results, fields]) => {
-        return results;
-      })
-      .catch();
-    }
-  },
-  
-  EffectGenerationEdge: {
-    node: async (parent, args, context, info) => {
-      return parent;
-    }
-  },
-
+  EffectGenerationConnection: introductionConnection('effect'),
+  EffectGenerationEdge: basicEdge(),
 }
 
 //#endregion

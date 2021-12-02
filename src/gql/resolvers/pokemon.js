@@ -11,6 +11,13 @@
     'introduced'
 */
 
+// Import helpers
+//#region
+
+const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+
+//#endregion
+
 // Query
 /*
     pokemonByID(id)
@@ -102,28 +109,8 @@ const Pokemon = {
 //#region
 
 const ConnectionsAndEdges = {
-  PokemonGenerationConnection: {
-    // 'parent' = 'introduced'
-    edges: async (parent, args, context, info) => {
-      return await context.db.promise().query(
-        `
-          SELECT * FROM generation
-          WHERE generation_id = ${parent}
-        `
-      )
-      .then( ([results, fields]) => {
-        return results;
-      })
-      .catch();
-    }
-  },
-  
-  PokemonGenerationEdge: {
-    node: async (parent, args, context, info) => {
-      return parent;
-    }
-  },
-
+  PokemonGenerationConnection: introductionConnection('pokemon'),
+  PokemonGenerationEdge: basicEdge(),
 }
 
 //#endregion

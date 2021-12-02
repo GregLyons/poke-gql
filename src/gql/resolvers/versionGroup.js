@@ -10,6 +10,13 @@
     'introduced'
 */
 
+// Import helpers
+//#region
+
+const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+
+//#endregion
+
 // Query
 /*
     versionGroupByID(id)
@@ -88,28 +95,8 @@ const VersionGroup = {
 //#region
 
 const ConnectionsAndEdges = {
-  VersionGroupGenerationConnection: {
-    // 'parent' = 'introduced'
-    edges: async (parent, args, context, info) => {
-      return await context.db.promise().query(
-        `
-          SELECT * FROM generation
-          WHERE generation_id = ${parent}
-        `
-      )
-      .then( ([results, fields]) => {
-        return results;
-      })
-      .catch();
-    }
-  },
-  
-  VersionGroupGenerationEdge: {
-    node: async (parent, args, context, info) => {
-      return parent;
-    }
-  },
-
+  VersionGroupGenerationConnection: introductionConnection('versionGroup'),
+  VersionGroupGenerationEdge: basicEdge(),
 }
 
 //#endregion

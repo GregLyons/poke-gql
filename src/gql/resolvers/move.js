@@ -11,6 +11,13 @@
     'introduced'
 */
 
+// Import helpers
+//#region
+
+const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+
+//#endregion
+
 // Query
 /*
     moveByID(id)

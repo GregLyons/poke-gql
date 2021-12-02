@@ -11,6 +11,13 @@
     'introduced'
 */
 
+// Import helpers
+//#region
+
+const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+
+//#endregion
+
 // Query
 /*
     abilityByID(id)
@@ -101,28 +108,8 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityGenerationConnection: {
-    // 'parent' = 'introduced'
-    edges: async (parent, args, context, info) => {
-      return await context.db.promise().query(
-        `
-          SELECT * FROM generation
-          WHERE generation_id = ${parent}
-        `
-      )
-      .then( ([results, fields]) => {
-        return results;
-      })
-      .catch();
-    }
-  },
-  
-  AbilityGenerationEdge: {
-    node: async (parent, args, context, info) => {
-      return parent;
-    }
-  },
-
+  AbilityGenerationConnection: introductionConnection('ability'),
+  AbilityGenerationEdge: basicEdge(),
 }
 
 //#endregion
