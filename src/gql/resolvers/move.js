@@ -14,7 +14,13 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  basicEdge,
+  effectConnection,
+  introductionConnection,
+  parentPK,
+} = require('./helpers.js');
+const movePK = parentPK('move');
 
 //#endregion
 
@@ -86,6 +92,8 @@ const Query = {
 //#region
 
 const Move = {
+  effects: movePK,
+
   formattedName: async (parent, args, context, info) => {
     return parent.pmove_formatted_name;
   },
@@ -108,28 +116,11 @@ const Move = {
 //#region
 
 const ConnectionsAndEdges = {
-  MoveGenerationConnection: {
-    // 'parent' = 'introduced'
-    edges: async (parent, args, context, info) => {
-      return await context.db.promise().query(
-        `
-          SELECT * FROM generation
-          WHERE generation_id = ${parent}
-        `
-      )
-      .then( ([results, fields]) => {
-        return results;
-      })
-      .catch();
-    }
-  },
-  
-  MoveGenerationEdge: {
-    node: async (parent, args, context, info) => {
-      return parent;
-    }
-  },
+  MoveGenerationConnection: introductionConnection('move'),
+  MoveGenerationEdge: basicEdge(),
 
+  MoveEffectConnection: effectConnection('move'),
+  MoveEffectEdge: basicEdge(),
 }
 
 //#endregion

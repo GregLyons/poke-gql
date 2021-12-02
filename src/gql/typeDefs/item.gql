@@ -55,7 +55,7 @@ type Item implements Node {
   """
   descriptions: ItemDescriptionConnection
 
-  effect: ItemEffectConnection
+  effects: ItemEffectConnection
 
   """
   Entities which the Item enables.

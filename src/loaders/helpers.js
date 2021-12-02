@@ -55,7 +55,35 @@ const batchGens = (pagination) => {
   }
 }
 
+const effectBatcher = (pagination, tableName) => {
+  return async entityPKs => { 
+    const paginationString = getPaginationQueryString(pagination, `${tableName}_effect`);
+
+    const effectJunctionData = await db.promise().query(
+      `
+        SELECT * FROM ${tableName}_effect RIGHT JOIN effect
+        ON ${tableName}_effect.effect_id = effect.effect_id
+        WHERE (${tableName}_generation_id, ${tableName}_id) IN ?
+        ${paginationString}
+      `, [[entityPKs.map(d => [d.genID, d.entityID])]]
+    )
+    .then( ([results, fields]) => {
+      return results;
+    })
+    .catch(console.log);
+
+    const entityGenIDColumn = `${tableName}_generation_id`;
+    const entityIDColumn = `${tableName}_id`;
+
+    return entityPKs.map(entityPK => effectJunctionData.filter(d => 
+      d[entityGenIDColumn] === entityPK.genID 
+      && d[entityIDColumn] === entityPK.entityID));
+  }
+}
+
 module.exports = {
   getPaginationQueryString,
+
   batchGens,
+  effectBatcher,
 }

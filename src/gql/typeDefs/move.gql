@@ -71,7 +71,7 @@ type Move implements Node {
   """
   descriptions: MoveDescriptionConnection
 
-  effect: MoveEffectConnection
+  effects: MoveEffectConnection
 
   """
   Entities which the Move enables.

@@ -51,7 +51,7 @@ type Ability implements Node {
   descriptions: AbilityDescriptionConnection
 
 
-  effect: AbilityEffectConnection
+  effects: AbilityEffectConnection
 
   """
   The name of the Ability in Title Case, with appropriate punctuation and capitalization. 

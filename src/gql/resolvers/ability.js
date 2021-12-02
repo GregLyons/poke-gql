@@ -14,7 +14,13 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  basicEdge,
+  effectConnection,
+  introductionConnection,
+  parentPK,
+} = require('./helpers.js');
+const abilityPK = parentPK('ability');
 
 //#endregion
 
@@ -86,6 +92,8 @@ const Query = {
 //#region
 
 const Ability = {
+  effects: abilityPK,
+
   formattedName: async (parent, args, context, info) => {
     return parent.ability_formatted_name;
   },
@@ -110,6 +118,9 @@ const Ability = {
 const ConnectionsAndEdges = {
   AbilityGenerationConnection: introductionConnection('ability'),
   AbilityGenerationEdge: basicEdge(),
+
+  AbilityEffectConnection: effectConnection('ability'),
+  AbilityEffectEdge: basicEdge(),
 }
 
 //#endregion

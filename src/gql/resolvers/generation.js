@@ -21,7 +21,7 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, basicEdge} = require('./helpers.js');
+const {entityNameToTableName, basicEdge, parentGenID} = require('./helpers.js');
 
 //#endregion
 
@@ -89,9 +89,6 @@ const Query = {
     versionGroupsIntroduced(input)
 */
 //#region
-
-// Helper function which returns the generation_id of the parent.
-const parentGenID = parent => parent.generation_id;
 
 const Generation = {
   abilities: parentGenID,
