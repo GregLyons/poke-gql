@@ -1,21 +1,21 @@
 /* 
-  Resolvers for Ability.
+  Resolvers for Type.
 
   db is a mysql2 database instance. 
 
-  The 'ability' table has columns:
+  The 'type' table has columns:
     'generation_id'
-    'ability_id'
-    'ability_name'
-    'ability_formatted_name'
+    'type_id'
+    'type_name'
+    'type_formatted_name'
     'introduced'
 */
 
 // Query
 /*
-    abilityByID(id)
-    abilityByName(name)
-    abilities(
+    typeByID(id)
+    typeByName(name)
+    types(
       cursor,
       limit,
       generation,
@@ -29,12 +29,12 @@
 //#region
 
 const Query = {
-  abilityByName: async (parent, { generation, name }, context, info) => {
+  typeByName: async (parent, { generation, name }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
+        SELECT * FROM ptype
         WHERE generation_id = ${generation}
-        AND ability_name = '${name.toLowerCase()}'
+        AND ptype_name = '${name.toLowerCase()}'
       `
     )
     .then( ([results, fields]) => {
@@ -44,10 +44,10 @@ const Query = {
   },
 
   // TODO: cursor
-  abilities: async (parent, { generation }, context, info) => {
+  types: async (parent, { generation }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
+        SELECT * FROM ptype
         WHERE generation_id = ${generation}
       `
     )
@@ -60,7 +60,7 @@ const Query = {
 
 //#endregion
 
-// Ability
+// Type
 /*
     id
     boostsType(input)
@@ -78,9 +78,9 @@ const Query = {
 */
 //#region
 
-const Ability = {
+const Type = {
   formattedName: async (parent, args, context, info) => {
-    return parent.ability_formatted_name;
+    return parent.ptype_formatted_name;
   },
   
   introduced: async (parent, args, context, info) => {
@@ -88,7 +88,7 @@ const Ability = {
   },
   
   name: async (parent, args, context, info) => {
-    return parent.ability_name
+    return parent.ptype_name
   },
 }
 
@@ -101,7 +101,7 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityGenerationConnection: {
+  TypeGenerationConnection: {
     // 'parent' = 'introduced'
     edges: async (parent, args, context, info) => {
       return await context.db.promise().query(
@@ -117,7 +117,7 @@ const ConnectionsAndEdges = {
     }
   },
   
-  AbilityGenerationEdge: {
+  TypeGenerationEdge: {
     node: async (parent, args, context, info) => {
       return parent;
     }
@@ -129,6 +129,6 @@ const ConnectionsAndEdges = {
 
 module.exports = {
   Query,
-  Ability,
+  Type,
   ...ConnectionsAndEdges,
 }

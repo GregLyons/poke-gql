@@ -3,18 +3,33 @@ const {db} = require('../models/index.js');
 
 const batchEntitiesByGen = (presence = true, tableName) => {
   return async gens => {
+    const genDependent = !['effect', 'usage_method', 'version_group'].includes(tableName);
+    const genArray = Array.from(Array(8).keys());
+    const gensToConsider = genDependent
+      ? gens
+      : presence
+        ?genArray
+        : genArray
+          .map(i => i + 1)
+          .filter(i => i >= Math.min(gens));
+
     const entities = await db.promise().query(
       `
         SELECT * FROM ${tableName}
-        WHERE ${presence ? 'generation_id' : 'introduced'} IN ?
-      `, [[gens]]
+        WHERE ${presence && genDependent ? 'generation_id' : 'introduced'} IN ?
+      `, [[gensToConsider]]
     )
     .then( ([results, fields]) => {
       return results;
     })
     .catch(console.log);
-  
-    return gens.map(gen => entities.filter(entity => entity.generation_id === gen));
+
+    return gens.map(gen => entities.filter(entity => genDependent
+      ? entity.generation_id === gen
+      : presence 
+        ? entity.introduced <= gen
+        : entity.introduced === gen
+    ));
   }
 }
 
@@ -36,25 +51,14 @@ let generation = {};
       case 'type':
         tableName = 'ptype';
         break;
+      case 'move':
+        tableName = 'pmove';
+        break;
       default:
         tableName = entityName;
     }
 
-    // Determine whether the entity has a 'presence' field (i.e. whether it changes across generations).
-    let presence;
-    switch(entityName) {
-      case 'effect':
-      case 'usageMethod':
-      case 'versionGroup':
-        presence = false;
-        break;
-      default:
-        presence = true;
-    }
-
-    if (presence) {
-      generation[entityName].present = new DataLoader(batchEntitiesByGen(true, tableName));
-    }
+    generation[entityName].present = new DataLoader(batchEntitiesByGen(true, tableName));
     
     // The entity always has an 'introduced' field.
     generation[entityName].introduced = new DataLoader(batchEntitiesByGen(false, tableName));

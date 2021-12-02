@@ -63,12 +63,23 @@ const Query = {
 /*
     id
     abilities(input)
+    abilitiesIntroduced(input)
+    effects(input)
+    effectsIntroduced(input)
     genCode
     genNumber
     items(input)
+    itemsIntroduced(input)
     moves(input)
+    movesIntroduced(input)
     pokemon(input)
+    pokemonIntroduced(input)
     types(input)
+    typesIntroduced(input)
+    usageMethods(input)
+    usageMethodsIntroduced(input)
+    versionGroups(input)
+    versionGroupsIntroduced(input)
 */
 //#region
 
@@ -101,6 +112,7 @@ const Generation = {
   usageMethods: parentGenID,
   usageMethodsIntroduced: parentGenID,
 
+  versionGroups: parentGenID,
   versionGroupsIntroduced: parentGenID,
 };
 
@@ -119,7 +131,7 @@ const presenceConnection = entityName => {
       return await loaders.generation[entityName].present.load(parent);
     }
   };
-}
+};
 
 const debutConnection = entityName => {
   return {
@@ -128,14 +140,15 @@ const debutConnection = entityName => {
       return await loaders.generation[entityName].introduced.load(parent);
     }
   };
-}
+};
 
 const basicEdge = () => {
   return {
     node: parent => parent,
   };
-}
+};
 
+// TODO: cursor
 const ConnectionsAndEdges = {
   GenerationAbilityConnection: presenceConnection('ability'),
   GenerationIntroducedAbilityConnection: debutConnection('ability'),

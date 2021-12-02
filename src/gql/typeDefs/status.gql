@@ -6,7 +6,7 @@ extend type Query {
   statusByID(id: ID!): Status!
 
   """
-  Select an Status by its snake_case name, e.g. 'rks_system'.
+  Select a Status by its snake_case name, e.g. 'center_of_attention'.
   """
   statusByName(name: String!): Status!
   

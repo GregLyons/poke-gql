@@ -1,40 +1,34 @@
 /* 
-  Resolvers for Ability.
+  Resolvers for VersionGroup.
 
   db is a mysql2 database instance. 
 
-  The 'ability' table has columns:
-    'generation_id'
-    'ability_id'
-    'ability_name'
-    'ability_formatted_name'
+  The 'version_group' table has columns:
+    'version_group_id'
+    'version_group_name'
+    'version_group_formatted_name'
     'introduced'
 */
 
 // Query
 /*
-    abilityByID(id)
-    abilityByName(name)
-    abilities(
+    versionGroupByID(id)
+    versionGroupByName(name)
+    versionGroups(
       cursor,
       limit,
-      generation,
-      contains,
-      endsWith,
       introducedAfter,
-      introducedBefore,
-      startsWith
+      introducedBefore
     )
 */
 //#region
 
 const Query = {
-  abilityByName: async (parent, { generation, name }, context, info) => {
+  versionGroupByName: async (parent, { name }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
-        WHERE generation_id = ${generation}
-        AND ability_name = '${name.toLowerCase()}'
+        SELECT * FROM version_group
+        WHERE version_group_name = '${name.toLowerCase()}'
       `
     )
     .then( ([results, fields]) => {
@@ -44,11 +38,10 @@ const Query = {
   },
 
   // TODO: cursor
-  abilities: async (parent, { generation }, context, info) => {
+  versionGroups: async (parent, { generation }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
-        WHERE generation_id = ${generation}
+        SELECT * FROM version_group
       `
     )
     .then( ([results, fields]) => {
@@ -60,36 +53,30 @@ const Query = {
 
 //#endregion
 
-// Ability
+// VersionGroup
 /*
     id
-    boostsType(input)
-    boostsUsageMethod(input)
-    causesStatus(input)
-    descriptions(input)
-    effect(input)
+    code
+    descriptions
     formattedName
-    introduced(input)
-    modifiesStat(input)
-    name
-    resistsType(input)
-    resistsUsageMethod(input)
-    resistsStatus(input)
+    introduced
+    sprites
 */
 //#region
 
-const Ability = {
+const VersionGroup = {
+  code: async (parent, args, context, info) => {
+    return parent.version_group_code
+  },
+
   formattedName: async (parent, args, context, info) => {
-    return parent.ability_formatted_name;
+    return parent.version_group_formatted_name;
   },
   
   introduced: async (parent, args, context, info) => {
     return parent.introduced;
   },
-  
-  name: async (parent, args, context, info) => {
-    return parent.ability_name
-  },
+ 
 }
 
 //#endregion
@@ -101,7 +88,7 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityGenerationConnection: {
+  VersionGroupGenerationConnection: {
     // 'parent' = 'introduced'
     edges: async (parent, args, context, info) => {
       return await context.db.promise().query(
@@ -117,7 +104,7 @@ const ConnectionsAndEdges = {
     }
   },
   
-  AbilityGenerationEdge: {
+  VersionGroupGenerationEdge: {
     node: async (parent, args, context, info) => {
       return parent;
     }
@@ -129,6 +116,6 @@ const ConnectionsAndEdges = {
 
 module.exports = {
   Query,
-  Ability,
+  VersionGroup,
   ...ConnectionsAndEdges,
 }

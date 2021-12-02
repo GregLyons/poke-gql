@@ -6,7 +6,7 @@ extend type Query {
   moveByID(id: ID!): Move!
 
   """
-  Select an Move by its snake_case name, e.g. 'rks_system'.
+  Select a Move by its snake_case name, e.g. 'u_turn'.
   """
   moveByName(name: String!): Move!
   

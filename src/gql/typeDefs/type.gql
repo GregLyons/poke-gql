@@ -6,7 +6,7 @@ extend type Query {
   typeByID(id: ID!): Type!
 
   """
-  Select an Type by its snake_case name, e.g. 'rks_system'.
+  Select a Type by its snake_case name, e.g. 'dark'.
   """
   typeByName(name: String!): Type!
   

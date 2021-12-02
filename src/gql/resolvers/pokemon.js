@@ -1,21 +1,21 @@
 /* 
-  Resolvers for Ability.
+  Resolvers for Pokemon.
 
   db is a mysql2 database instance. 
 
-  The 'ability' table has columns:
+  The 'pokemon' table has columns:
     'generation_id'
-    'ability_id'
-    'ability_name'
-    'ability_formatted_name'
+    'pokemon_id'
+    'pokemon_name'
+    'pokemon_formatted_name'
     'introduced'
 */
 
 // Query
 /*
-    abilityByID(id)
-    abilityByName(name)
-    abilities(
+    pokemonByID(id)
+    pokemonByName(name)
+    pokemons(
       cursor,
       limit,
       generation,
@@ -29,12 +29,12 @@
 //#region
 
 const Query = {
-  abilityByName: async (parent, { generation, name }, context, info) => {
+  pokemonByName: async (parent, { generation, name }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
+        SELECT * FROM pokemon
         WHERE generation_id = ${generation}
-        AND ability_name = '${name.toLowerCase()}'
+        AND pokemon_name = '${name.toLowerCase()}'
       `
     )
     .then( ([results, fields]) => {
@@ -44,10 +44,11 @@ const Query = {
   },
 
   // TODO: cursor
-  abilities: async (parent, { generation }, context, info) => {
+  pokemon: async (parent, { generation }, context, info) => {
+    console.log('hi');
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
+        SELECT * FROM pokemon
         WHERE generation_id = ${generation}
       `
     )
@@ -60,7 +61,7 @@ const Query = {
 
 //#endregion
 
-// Ability
+// Pokemon
 /*
     id
     boostsType(input)
@@ -78,9 +79,9 @@ const Query = {
 */
 //#region
 
-const Ability = {
+const Pokemon = {
   formattedName: async (parent, args, context, info) => {
-    return parent.ability_formatted_name;
+    return parent.pokemon_formatted_name;
   },
   
   introduced: async (parent, args, context, info) => {
@@ -88,7 +89,7 @@ const Ability = {
   },
   
   name: async (parent, args, context, info) => {
-    return parent.ability_name
+    return parent.pokemon_name
   },
 }
 
@@ -101,7 +102,7 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityGenerationConnection: {
+  PokemonGenerationConnection: {
     // 'parent' = 'introduced'
     edges: async (parent, args, context, info) => {
       return await context.db.promise().query(
@@ -117,7 +118,7 @@ const ConnectionsAndEdges = {
     }
   },
   
-  AbilityGenerationEdge: {
+  PokemonGenerationEdge: {
     node: async (parent, args, context, info) => {
       return parent;
     }
@@ -129,6 +130,6 @@ const ConnectionsAndEdges = {
 
 module.exports = {
   Query,
-  Ability,
+  Pokemon,
   ...ConnectionsAndEdges,
 }

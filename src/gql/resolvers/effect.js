@@ -1,24 +1,22 @@
 /* 
-  Resolvers for Ability.
+  Resolvers for Effect.
 
   db is a mysql2 database instance. 
 
-  The 'ability' table has columns:
-    'generation_id'
-    'ability_id'
-    'ability_name'
-    'ability_formatted_name'
+  The 'effect' table has columns:
+    'effect_id'
+    'effect_name'
+    'effect_formatted_name'
     'introduced'
 */
 
 // Query
 /*
-    abilityByID(id)
-    abilityByName(name)
-    abilities(
+    effectByID(id)
+    effectByName(name)
+    effects(
       cursor,
       limit,
-      generation,
       contains,
       endsWith,
       introducedAfter,
@@ -29,12 +27,11 @@
 //#region
 
 const Query = {
-  abilityByName: async (parent, { generation, name }, context, info) => {
+  effectByName: async (parent, { name }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
-        WHERE generation_id = ${generation}
-        AND ability_name = '${name.toLowerCase()}'
+        SELECT * FROM effect
+        WHERE effect_name = '${name.toLowerCase()}'
       `
     )
     .then( ([results, fields]) => {
@@ -44,11 +41,10 @@ const Query = {
   },
 
   // TODO: cursor
-  abilities: async (parent, { generation }, context, info) => {
+  effects: async (parent, { generation }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM ability
-        WHERE generation_id = ${generation}
+        SELECT * FROM effect
       `
     )
     .then( ([results, fields]) => {
@@ -60,27 +56,21 @@ const Query = {
 
 //#endregion
 
-// Ability
+// Effect
 /*
     id
-    boostsType(input)
-    boostsUsageMethod(input)
-    causesStatus(input)
-    descriptions(input)
-    effect(input)
+    abilities
     formattedName
-    introduced(input)
-    modifiesStat(input)
+    introduced
+    items
+    moves
     name
-    resistsType(input)
-    resistsUsageMethod(input)
-    resistsStatus(input)
 */
 //#region
 
-const Ability = {
+const Effect = {
   formattedName: async (parent, args, context, info) => {
-    return parent.ability_formatted_name;
+    return parent.effect_formatted_name;
   },
   
   introduced: async (parent, args, context, info) => {
@@ -88,7 +78,7 @@ const Ability = {
   },
   
   name: async (parent, args, context, info) => {
-    return parent.ability_name
+    return parent.effect_name
   },
 }
 
@@ -101,7 +91,7 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityGenerationConnection: {
+  EffectGenerationConnection: {
     // 'parent' = 'introduced'
     edges: async (parent, args, context, info) => {
       return await context.db.promise().query(
@@ -117,7 +107,7 @@ const ConnectionsAndEdges = {
     }
   },
   
-  AbilityGenerationEdge: {
+  EffectGenerationEdge: {
     node: async (parent, args, context, info) => {
       return parent;
     }
@@ -129,6 +119,6 @@ const ConnectionsAndEdges = {
 
 module.exports = {
   Query,
-  Ability,
+  Effect,
   ...ConnectionsAndEdges,
 }

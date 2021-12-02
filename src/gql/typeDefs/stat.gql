@@ -6,7 +6,7 @@ extend type Query {
   statByID(id: ID!): Stat!
 
   """
-  Select an Stat by its snake_case name, e.g. 'rks_system'.
+  Select a Stat by its snake_case name, e.g. 'critical_hit_ratio'.
   """
   statByName(name: String!): Stat!
   
