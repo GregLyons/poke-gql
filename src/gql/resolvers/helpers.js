@@ -66,13 +66,16 @@ const introductionConnection = entityName => {
   }
 }
 
-const basicJunctionConnection = (ownerName, ownedName) => {
-  const ownerTableName = entityNameToTableName(ownerName);
-  const ownedTableName = entityNameToTableName(ownedName);
+const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
+  const ownerTableName = entityNameToTableName(ownerEntityName);
+  const ownedTableName = entityNameToTableName(ownedEntityName);
+  const innerKey = extra
+    ? extra + ownedEntityName[0].toUpperCase() + ownedEntityName.slice(1)
+    : ownedEntityName;
 
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerName][ownedName](args.pagination).load(parent);
+      return await context.loaders[ownerEntityName][innerKey](args.pagination).load(parent);
     },
 
     count: async (parent, args, context, info) => {

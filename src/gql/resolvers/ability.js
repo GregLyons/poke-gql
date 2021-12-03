@@ -76,18 +76,13 @@ const Query = {
 // Ability
 /*
     id
-    boostsType(input)
-    boostsUsageMethod(input)
-    causesStatus(input)
-    descriptions(input)
-    effect(input)
-    formattedName
-    introduced(input)
-    modifiesStat(input)
-    name
-    resistsType(input)
-    resistsUsageMethod(input)
-    resistsStatus(input)
+    boostsType
+    boostsUsageMethod
+    causesStatus
+    descriptions
+    modifiesStat
+    resistsType
+    resistsUsageMethod
 */
 //#region
 
@@ -105,6 +100,8 @@ const Ability = {
   name: async (parent, args, context, info) => {
     return parent.ability_name
   },
+
+  resistsStatus: abilityPK,
 }
 
 //#endregion
@@ -121,6 +118,9 @@ const ConnectionsAndEdges = {
 
   AbilityEffectConnection: basicJunctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),
+
+  AbilityResistsStatusConnection: basicJunctionConnection('ability', 'status', 'resist'),
+  AbilityResistsStatusEdge: basicEdge(),
 }
 
 //#endregion

@@ -77,35 +77,52 @@ const Query = {
 // Pokemon
 /*
     id
-    boostsType(input)
-    boostsUsageMethod(input)
-    causesStatus(input)
-    descriptions(input)
-    effect(input)
-    formattedName
-    introduced(input)
-    modifiesStat(input)
-    name
-    resistsType(input)
-    resistsUsageMethod(input)
-    resistsStatus(input)
+    abilities
+    enables
+    enablesItem
+    enablesMove
+    evolvesTo
+    evolvesFrom
+    formData
+    moves
+    requires
+    requiresItem // TODO: put in db
+    quadDamageFrom
+    doubleDamageFrom
+    neutralDamageFrom
+    halfDamageFrom
+    quarterDamageFrom
+    noDamageFrom
 */
 //#region
 
 const Pokemon = {
-  formattedName: async (parent, args, context, info) => {
-    return parent.pokemon_formatted_name;
-  },
-  
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
-  
-  name: async (parent, args, context, info) => {
-    return parent.pokemon_name
+  baseStats: parent => {
+    return {
+      hp: parent.pokemon_hp,
+      attack: parent.pokemon_attack,
+      defense: parent.pokemon_defense,
+      specialAttack: parent.pokemon_special_attack,
+      specialDefense: parent.pokemon_special_defense,
+      speed: parent.pokemon_speed,
+    };
   },
 
+  dexNumber: parent => parent.pokemon_dex,
+
+  formattedName: parent => parent.pokemon_formattedName,
+  
+  height: parent => parent.pokemon_height,
+
+  introduced: parent => parent.introduced,
+  
+  name: parent => parent.pokemon_name,
+
+  speciesName: parent => parent.pokemon_species,
+
   typing: pokemonPK,
+
+  weight: parent => parent.pokemon_weight,
 }
 
 //#endregion

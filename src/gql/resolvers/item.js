@@ -76,18 +76,15 @@ const Query = {
 // Item
 /*
     id
-    boostsType(input)
-    boostsUsageMethod(input)
-    causesStatus(input)
-    descriptions(input)
-    effect(input)
-    formattedName
-    introduced(input)
-    modifiesStat(input)
+    boostsType
+    boostsUsageMethod
+    causesStatus
+    descriptions
+    modifiesStat
     name
-    resistsType(input)
-    resistsUsageMethod(input)
-    resistsStatus(input)
+    requiresPokemon
+    resistsType
+    resistsUsageMethod
 */
 //#region
 
@@ -105,6 +102,10 @@ const Item = {
   name: async (parent, args, context, info) => {
     return parent.item_name
   },
+
+  requiresPokemon: itemPK,
+
+  resistsStatus: itemPK,
 }
 
 //#endregion
@@ -121,6 +122,12 @@ const ConnectionsAndEdges = {
 
   ItemEffectConnection: basicJunctionConnection('item', 'effect'),
   ItemEffectEdge: basicEdge(),
+
+  ItemRequiresPokemonConnection: basicJunctionConnection('item', 'pokemon', 'requires'),
+  ItemRequiresPokemonEdge: basicEdge(),
+
+  ItemResistsStatusConnection: basicJunctionConnection('item', 'status', 'resist'),
+  ItemResistsStatusEdge: basicEdge(),
 }
 
 //#endregion

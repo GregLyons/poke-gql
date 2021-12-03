@@ -9,7 +9,15 @@ let item = {
 
   effect(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'item', 'effect'));
-  }
+  },
+
+  requiresPokemon(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'pokemon', 'requires'));
+  },
+
+  resistStatus(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'status', 'resists'));
+  },
 }
 
 module.exports = item;

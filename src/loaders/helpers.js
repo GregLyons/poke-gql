@@ -86,8 +86,9 @@ const batchGens = (pagination) => {
   }
 }
 
-const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName) => {
+const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, middle = '') => {
   return async entityPKs => {
+    // Compute table and column names
     const owner = entityNameToTableName(ownerEntityName);
     const ownerGen = owner + '_generation_id';
     const ownerID = owner + '_id';
@@ -96,19 +97,38 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName) => {
     const ownedID = owned + '_id';
     const ownedGen = owned + '_generation_id';
 
-    const junctionTableName = owner + '_' + owned;
+    const junctionTableName = middle 
+      ? owner + '_' + middle + '_' + owned
+      : owner + '_' + owned;
+
+
+    // May need to change column names
+    let junctionOwnedID, junctionOwnedGen;
+    switch (junctionTableName) {
+      // 'base_pmove_generation_id'
+      case 'pmove_requires_pmove':
+        junctionOwnedID = 'base_' + ownedID;
+        junctionOwnedGen = 'base_' + ownedGen;
+        break;
+      default:
+        junctionOwnedID = ownedID;
+        junctionOwnedGen = ownedGen;
+    }
+
+
+    // Compute other clauses
+    const onString = isGenDependent(owned) 
+      ? `ON (${junctionTableName}.${junctionOwnedGen}, ${junctionTableName}.${junctionOwnedID}) = (${owned}.generation_id, ${owned}.${ownedID})`
+      : `ON ${junctionTableName}.${junctionOwnedID} = ${owned}.${ownedID}`;
+
+    // If the two entity tables are the same, then ambiguity will arise without the junction table name.
+    const whereString = `WHERE (${junctionTableName}.${ownerGen}, ${junctionTableName}.${ownerID}) IN ?`
 
     const paginationString = getPaginationQueryString(pagination, `${owner}_${owned}`);
 
-    const onString = isGenDependent(owned) 
-      ? `ON (${junctionTableName}.${ownedGen}, ${junctionTableName}.${ownedID}) = (${owned}.generation_id, ${owned}.${ownedID})`
-      : `ON ${junctionTableName}.${ownedID} = ${owned}.${ownedID}`;
-
-    const whereString = `WHERE (${ownerGen}, ${ownerID}) IN ?`
-
     const junctionData = await db.promise().query(
       `
-        SELECT * FROM ${owner}_${owned} RIGHT JOIN ${owned} 
+        SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
         ${onString}
         ${whereString}
         ${paginationString}

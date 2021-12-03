@@ -9,7 +9,11 @@ let ability = {
 
   effect(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'effect'));
-  }
+  },
+
+  resistStatus(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'resists'));
+  },
 }
 
 module.exports = ability;
