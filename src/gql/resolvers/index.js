@@ -4,6 +4,7 @@ const effectResolvers = require('./effect.js');
 const itemResolvers = require('./item.js');
 const moveResolvers = require('./move.js');
 const pokemonResolvers = require('./pokemon.js');
+const statResolvers = require('./stat.js');
 const statusResolvers = require('./status.js');
 const typeResolvers = require('./type.js');
 const usageMethodResolvers = require('./usageMethod.js');
@@ -16,6 +17,7 @@ const resolvers = [
   itemResolvers,
   moveResolvers,
   pokemonResolvers,
+  statResolvers,
   statusResolvers,
   typeResolvers,
   usageMethodResolvers,

@@ -1,12 +1,12 @@
 /* 
-  Resolvers for Status.
+  Resolvers for stat.
 
   db is a mysql2 database instance. 
 
-  The 'status' table has columns:
-    'status_id'
-    'status_name'
-    'status_formatted_name'
+  The 'stat' table has columns:
+    'stat_id'
+    'stat_name'
+    'stat_formatted_name'
     'introduced'
 */
 
@@ -19,9 +19,9 @@ const {entityNameToTableName, introductionConnection, basicEdge} = require('./he
 
 // Query
 /*
-    statusByID(id)
-    statusByName(name)
-    statuses(
+    statByID(id)
+    statByName(name)
+    stats(
       cursor,
       limit,
       contains,
@@ -34,11 +34,11 @@ const {entityNameToTableName, introductionConnection, basicEdge} = require('./he
 //#region
 
 const Query = {
-  statusByName: async (parent, { name }, context, info) => {
+  statByName: async (parent, { name }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM pstatus
-        WHERE status_name = '${name.toLowerCase()}'
+        SELECT * FROM stat
+        WHERE stat_name = '${name.toLowerCase()}'
       `
     )
     .then( ([results, fields]) => {
@@ -48,10 +48,10 @@ const Query = {
   },
 
   // TODO: cursor
-  statuses: async (parent, { generation }, context, info) => {
+  stats: async (parent, { generation }, context, info) => {
     return await context.db.promise().query(
       `
-        SELECT * FROM pstatus
+        SELECT * FROM stat
       `
     )
     .then( ([results, fields]) => {
@@ -63,25 +63,22 @@ const Query = {
 
 //#endregion
 
-// Status
+// Stat
 /*
     id
-    abilityCauses
-    abilityResists
-    itemCauses
-    itemResists
-    moveCauses
-    moveResists
+    abilityModifies
+    itemModifies
+    moveModifies
 */
 //#region
 
-const Status = {
+const Stat = {
   formattedName: async (parent, args, context, info) => {
-    return parent.pstatus_formatted_name;
+    return parent.stat_formatted_name;
   },
   
   name: async (parent, args, context, info) => {
-    return parent.pstatus_name
+    return parent.stat_name
   },
 }
 
@@ -100,6 +97,6 @@ const ConnectionsAndEdges = {
 
 module.exports = {
   Query,
-  Status,
+  Stat,
   ...ConnectionsAndEdges,
 }

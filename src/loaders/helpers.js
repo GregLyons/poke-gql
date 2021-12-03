@@ -115,7 +115,6 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
         junctionOwnedGen = ownedGen;
     }
 
-
     // Compute other clauses
     const onString = isGenDependent(owned) 
       ? `ON (${junctionTableName}.${junctionOwnedGen}, ${junctionTableName}.${junctionOwnedID}) = (${owned}.generation_id, ${owned}.${ownedID})`
@@ -126,7 +125,7 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
 
     const paginationString = getPaginationQueryString(pagination, `${owner}_${owned}`);
 
-    const junctionData = await db.promise().query(
+    const ownedData = await db.promise().query(
       `
         SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
         ${onString}
@@ -140,7 +139,7 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
     })
     .catch(console.log);
 
-    return entityPKs.map(entityPK => junctionData.filter(d => 
+    return entityPKs.map(entityPK => ownedData.filter(d => 
       d[ownerGen] === entityPK.genID 
       && d[ownerID] === entityPK.entityID));
   }

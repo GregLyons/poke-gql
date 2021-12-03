@@ -70,18 +70,24 @@ const Query = {
 // Type
 /*
     id
-    boostsType(input)
-    boostsUsageMethod(input)
-    causesStatus(input)
-    descriptions(input)
-    effect(input)
-    formattedName
-    introduced(input)
-    modifiesStat(input)
-    name
-    resistsType(input)
-    resistsUsageMethod(input)
-    resistsStatus(input)
+    abilityBoosts
+    abilityResists
+    enables
+    enablesMove
+    itemBoosts
+    itemResists
+    matchups
+    moves
+    naturalGift
+    pokemon
+    doubleDamageFrom
+    neutralDamageFrom
+    halfDamageFrom
+    noDamageFrom
+    doubleDamageTo
+    neutralDamageTo
+    halfDamageTo
+    noDamageTo
 */
 //#region
 

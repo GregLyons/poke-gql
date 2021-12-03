@@ -16,6 +16,10 @@
 
 const {
   basicEdge,
+  causeStatusEdge, 
+  modifyStatEdge,
+  multiplierEdge,
+
   introductionConnection,
   basicJunctionConnection,
   parentPK,
@@ -76,19 +80,19 @@ const Query = {
 // Item
 /*
     id
-    boostsType
-    boostsUsageMethod
-    causesStatus
     descriptions
-    modifiesStat
-    name
-    requiresPokemon
-    resistsType
-    resistsUsageMethod
 */
 //#region
 
 const Item = {
+  boostsType: itemPK,
+  
+  boostsUsageMethod: itemPK,
+
+  causesStatus: itemPK,
+
+  descriptions: itemPK,
+
   effects: itemPK,
 
   formattedName: async (parent, args, context, info) => {
@@ -99,6 +103,8 @@ const Item = {
     return parent.introduced;
   },
   
+  modifiesStat: itemPK,
+
   name: async (parent, args, context, info) => {
     return parent.item_name
   },
@@ -106,6 +112,10 @@ const Item = {
   requiresPokemon: itemPK,
 
   resistsStatus: itemPK,
+
+  resistsType: itemPK,
+
+  resistsUsageMethod: itemPK,
 }
 
 //#endregion
@@ -117,17 +127,35 @@ const Item = {
 //#region
 
 const ConnectionsAndEdges = {
+  ItemBoostsTypeConnection: basicJunctionConnection('item', 'type', 'boosts'),
+  ItemBoostsTypeEdge: multiplierEdge(),
+
+  ItemBoostsUsageMethodConnection: basicJunctionConnection('item', 'usageMethod', 'boosts'),
+  ItemBoostsUsageMethodEdge: multiplierEdge(),
+  
+  ItemCausesStatusConnection: basicJunctionConnection('item', 'status', 'causes'),
+  ItemCausesStatusEdge: causeStatusEdge(),
+  
   ItemGenerationConnection: introductionConnection('item'),
   ItemGenerationEdge: basicEdge(),
-
+  
   ItemEffectConnection: basicJunctionConnection('item', 'effect'),
   ItemEffectEdge: basicEdge(),
 
+  ItemModifiesStatConnection: basicJunctionConnection('item', 'stat', 'modifies'),
+  ItemModifiesStatEdge: modifyStatEdge(),
+  
   ItemRequiresPokemonConnection: basicJunctionConnection('item', 'pokemon', 'requires'),
   ItemRequiresPokemonEdge: basicEdge(),
-
-  ItemResistsStatusConnection: basicJunctionConnection('item', 'status', 'resist'),
+  
+  ItemResistsStatusConnection: basicJunctionConnection('item', 'status', 'resists'),
   ItemResistsStatusEdge: basicEdge(),
+
+  ItemResistsTypeConnection: basicJunctionConnection('item', 'type', 'resists'),
+  ItemResistsTypeEdge: multiplierEdge(),
+  
+  ItemResistsUsageMethodConnection: basicJunctionConnection('item', 'usageMethod', 'resists'),
+  ItemResistsUsageMethodEdge: multiplierEdge(),
 }
 
 //#endregion

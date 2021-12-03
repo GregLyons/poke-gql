@@ -16,8 +16,13 @@
 
 const {
   basicEdge,
-  introductionConnection,
+  causeStatusEdge,
+  modifyStatEdge,
+  multiplierEdge,
+
   basicJunctionConnection,
+  introductionConnection,
+
   parentPK,
 } = require('./helpers.js');
 const abilityPK = parentPK('ability');
@@ -87,6 +92,14 @@ const Query = {
 //#region
 
 const Ability = {
+  boostsType: abilityPK,
+
+  boostsUsageMethod: abilityPK,
+
+  causesStatus: abilityPK,
+
+  descriptions: abilityPK,
+
   effects: abilityPK,
 
   formattedName: async (parent, args, context, info) => {
@@ -97,11 +110,17 @@ const Ability = {
     return parent.introduced;
   },
   
+  modifiesStat: abilityPK,
+
   name: async (parent, args, context, info) => {
     return parent.ability_name
   },
 
   resistsStatus: abilityPK,
+
+  resistsType: abilityPK,
+
+  resistsUsageMethod: abilityPK,
 }
 
 //#endregion
@@ -113,14 +132,32 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
+  AbilityBoostsTypeConnection: basicJunctionConnection('ability', 'type', 'boosts'),
+  AbilityBoostsTypeEdge: multiplierEdge(),
+
+  AbilityBoostsUsageMethodConnection: basicJunctionConnection('ability', 'usageMethod', 'boosts'),
+  AbilityBoostsUsageMethodEdge: multiplierEdge(),
+
+  AbilityCausesStatusConnection: basicJunctionConnection('ability', 'status', 'causes'),
+  AbilityCausesStatusEdge: causeStatusEdge(),
+
   AbilityGenerationConnection: introductionConnection('ability'),
   AbilityGenerationEdge: basicEdge(),
 
   AbilityEffectConnection: basicJunctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),
 
-  AbilityResistsStatusConnection: basicJunctionConnection('ability', 'status', 'resist'),
+  AbilityModifiesStatConnection: basicJunctionConnection('ability', 'stat', 'modifies'),
+  AbilityModifiesStatEdge: modifyStatEdge(),
+  
+  AbilityResistsStatusConnection: basicJunctionConnection('ability', 'status', 'resists'),
   AbilityResistsStatusEdge: basicEdge(),
+
+  AbilityResistsTypeConnection: basicJunctionConnection('ability', 'type', 'resists'),
+  AbilityResistsTypeEdge: multiplierEdge(),
+  
+  AbilityResistsUsageMethodConnection: basicJunctionConnection('ability', 'usageMethod', 'resists'),
+  AbilityResistsUsageMethodEdge: multiplierEdge(),
 }
 
 //#endregion

@@ -15,11 +15,13 @@
 //#region
 
 const {
+  abilityEdge,
   basicEdge,
+  learnsetEdge,
+
   introductionConnection,
   basicJunctionConnection,
   parentPK,
-  typeConnection,
 } = require('./helpers.js');
 const pokemonPK = parentPK('pokemon');
 
@@ -97,6 +99,8 @@ const Query = {
 //#region
 
 const Pokemon = {
+  abilities: pokemonPK,
+
   baseStats: parent => {
     return {
       hp: parent.pokemon_hp,
@@ -115,6 +119,8 @@ const Pokemon = {
   height: parent => parent.pokemon_height,
 
   introduced: parent => parent.introduced,
+
+  moves: pokemonPK,
   
   name: parent => parent.pokemon_name,
 
@@ -134,8 +140,14 @@ const Pokemon = {
 //#region
 
 const ConnectionsAndEdges = {
+  PokemonAbilityConnection: basicJunctionConnection('pokemon', 'ability'),
+  PokemonAbilityEdge: abilityEdge(),
+
   PokemonGenerationConnection: introductionConnection('pokemon'),
   PokemonGenerationEdge: basicEdge(),
+
+  PokemonMoveConnection: basicJunctionConnection('pokemon', 'move'),
+  PokemonMoveEdge: learnsetEdge(),
 
   PokemonTypeConnection: basicJunctionConnection('pokemon', 'type'),
   PokemonTypeEdge: basicEdge(),

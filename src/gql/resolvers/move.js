@@ -16,6 +16,10 @@
 
 const {
   basicEdge,
+  causeStatusEdge,
+  learnsetEdge,
+  modifyStatEdge,
+  
   introductionConnection,
   basicJunctionConnection,
   parentPK,
@@ -76,11 +80,9 @@ const Query = {
 // Move
 /*
     id
-    causesStatus
     descriptions
     enables
     enablesMove
-    modifiesStat
     pokemon
     requires
 */
@@ -89,21 +91,35 @@ const Query = {
 const Move = {
   accuracy: parent => parent.pmove_accuracy,
 
+  causesStatus: movePK,
+
   contact: parent => parent.pmove_contact,
+  
+  descriptions: movePK,
 
   effects: movePK,
+  
+  enables: movePK,
+  
+  enablesMove: movePK,
 
   formattedName: parent => parent.pmove_formatted_name,
   
   introduced: parent => parent.introduced,
+
+  modifiesStat: movePK,
   
   name: parent => parent.pmove_name,
+
+  pokemon: movePK,
 
   power: parent => parent.pmove_power,
 
   pp: parent => parent.pmove_pp,
 
   priority: parent => parent.pmove_priority,
+
+  requires: movePK,
 
   requiresItem: movePK,
 
@@ -131,17 +147,18 @@ const Move = {
 //#region
 
 const ConnectionsAndEdges = {
-  // Introduced
   MoveGenerationConnection: introductionConnection('move'),
   MoveGenerationEdge: basicEdge(),
 
-
-  // Effect
   MoveEffectConnection: basicJunctionConnection('move', 'effect'),
   MoveEffectEdge: basicEdge(),
-  
 
-  // Requirements
+  MoveModifiesStatConnection: basicJunctionConnection('move', 'stat', 'modifies'),
+  MoveModifiesStatEdge: modifyStatEdge(),
+
+  MovePokemonConnection: basicJunctionConnection('move', 'pokemon'),
+  MovePokemonEdge: learnsetEdge(),
+  
   MoveRequiresItemConnection: basicJunctionConnection('move', 'item', 'requires'),
   MoveRequiresItemEdge: basicEdge(),
 
@@ -154,19 +171,13 @@ const ConnectionsAndEdges = {
   MoveRequiresTypeConnection: basicJunctionConnection('move', 'type', 'requires'),
   MoveRequiresTypeEdge: basicEdge(),
 
-
-  // Status
-  MoveResistsStatusConnection: basicJunctionConnection('move', 'status', 'resist'),
+  MoveResistsStatusConnection: basicJunctionConnection('move', 'status', 'resists'),
   MoveResistsStatusEdge: basicEdge(),
 
-  
-  // Type
   // TODO: Change 'pmove_has_ptype' table to remove 'has'
   MoveTypeConnection: basicJunctionConnection('move', 'type', 'has'),
   MoveTypeEdge: basicEdge(),
 
-  
-  // Usage method
   MoveUsageMethodConnection: basicJunctionConnection('move', 'usageMethod'),
   MoveUsageMethodEdge: basicEdge(),
 }

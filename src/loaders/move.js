@@ -11,32 +11,32 @@ let move = {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'effect'));
   },
 
-  type(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type'));
+  modifiesStat(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'stat', 'modifies'));
   },
-
+  
   resistStatus(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'resists'));
   },
-
+  
   requiresItem(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'item', 'requires'));
   },
-
+  
   requiresMove(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'move', 'requires'));
   },
-
+  
   requiresPokemon(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'pokemon', 'requires'));
   },
-
+  
   requiresType(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'requires'));
   },
-
+  
   // TODO: change pmove_has_ptype to pmove_type to remove 'hasType'
-  hasType(pagination) {
+  type(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'has'));
   },
 

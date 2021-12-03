@@ -40,11 +40,61 @@ const parentPK = (entityName) => {
   };
 }  
 
+const abilityEdge = () => {
+  return {
+    node: parent => parent,
+    slot: parent => {
+      const abilitySlot = parent.ability_slot;
+      switch(abilitySlot) {
+        case '1':
+          return 'ONE';
+        case '2':
+          return 'TWO';
+        case 'hidden':
+          return 'HIDDEN';
+        default:
+          return;
+      }
+    }
+  }
+}
+
 const basicEdge = () => {
   return {
     node: parent => parent,
   };
 };
+
+const causeStatusEdge = () => {
+  return {
+    node: parent => parent,
+    chance: parent => parent.chance,
+  }
+}
+
+const learnsetEdge = () => {
+  return {
+    node: parent => parent,
+    learnMethod: parent => parent.learn_method,
+  }
+}
+
+const modifyStatEdge = () => {
+  return {
+    node: parent => parent,
+    chance: parent => parent.chance,
+    multiplier: parent => parent.multiplier,
+    recipient: parent => parent.recipient.toUpperCase(),
+    stage: parent => parent.stage,
+  }
+}
+
+const multiplierEdge = () => {
+  return {
+    node: parent => parent,
+    multiplier: parent => parent.multiplier,
+  }
+}
 
 const introductionConnection = entityName => {
   // 'parent' = 'introduced'
@@ -87,7 +137,13 @@ const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') =
 module.exports = {
   entityNameToTableName,
   
+  abilityEdge,
   basicEdge,
+  causeStatusEdge,
+  learnsetEdge,
+  modifyStatEdge,
+  multiplierEdge,
+
   introductionConnection,
   basicJunctionConnection,
   parentGenID,
