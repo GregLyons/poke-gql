@@ -20,6 +20,7 @@ extend type Query {
   usageMethods(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     contains: String,
     endsWith: String,
     introducedAfter: Int,
@@ -76,7 +77,7 @@ type UsageMethodBoostedByAbilityConnection implements Connection {
 }
 
 type UsageMethodBoostedByAbilityEdge implements Edge {  
-  node: UsageMethod!
+  node: Ability!
   multiplier: Float!
 }
 
@@ -86,7 +87,7 @@ type UsageMethodResistedByAbilityConnection implements Connection {
 }
 
 type UsageMethodResistedByAbilityEdge implements Edge {  
-  node: UsageMethod!
+  node: Ability!
   multiplier: Float!
 }
 
@@ -109,7 +110,7 @@ type UsageMethodBoostedByItemConnection implements Connection {
 }
 
 type UsageMethodBoostedByItemEdge implements Edge {  
-  node: UsageMethod!
+  node: Item!
   multiplier: Float!
 }
 
@@ -119,7 +120,7 @@ type UsageMethodResistedByItemConnection implements Connection {
 }
 
 type UsageMethodResistedByItemEdge implements Edge {  
-  node: UsageMethod!
+  node: Item!
   multiplier: Float!
 }
 
@@ -131,5 +132,5 @@ type UsageMethodMoveConnection implements Connection {
 }
 
 type UsageMethodMoveEdge implements Edge {  
-  node: UsageMethod!
+  node: Move!
 }

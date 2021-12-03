@@ -13,7 +13,15 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  parentPK,
+  
+  basicEdge,
+
+  basicJunctionConnection,
+  introductionConnection,
+} = require('./helpers.js');
+const effectPK = parentPK('effect');
 
 //#endregion
 
@@ -52,6 +60,7 @@ const Query = {
     return await context.db.promise().query(
       `
         SELECT * FROM effect
+        WHERE generation_id = ${generation}
       `
     )
     .then( ([results, fields]) => {
@@ -66,16 +75,12 @@ const Query = {
 // Effect
 /*
     id
-    abilities
-    formattedName
-    introduced
-    items
-    moves
-    name
 */
 //#region
 
 const Effect = {
+  abilities: effectPK,
+
   formattedName: async (parent, args, context, info) => {
     return parent.effect_formatted_name;
   },
@@ -87,6 +92,10 @@ const Effect = {
   name: async (parent, args, context, info) => {
     return parent.effect_name
   },
+
+  items: effectPK,
+
+  moves: effectPK,
 }
 
 //#endregion
@@ -98,8 +107,17 @@ const Effect = {
 //#region
 
 const ConnectionsAndEdges = {
+  EffectAbilityConnection: basicJunctionConnection('effect', 'ability'),
+  EffectAbilityEdge: basicEdge(),
+  
   EffectGenerationConnection: introductionConnection('effect'),
   EffectGenerationEdge: basicEdge(),
+
+  EffectItemConnection: basicJunctionConnection('effect', 'item'),
+  EffectItemEdge: basicEdge(),
+
+  EffectMoveConnection: basicJunctionConnection('effect', 'move'),
+  EffectMoveEdge: basicEdge(),
 }
 
 //#endregion

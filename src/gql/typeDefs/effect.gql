@@ -20,6 +20,7 @@ extend type Query {
   effects(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     contains: String,
     endsWith: String,
     introducedAfter: Int,
@@ -75,7 +76,7 @@ type EffectAbilityConnection implements Connection {
 }
 
 type EffectAbilityEdge implements Edge {  
-  node: Effect!
+  node: Ability!
 }
 
 # GENERATION
@@ -97,7 +98,7 @@ type EffectItemConnection implements Connection {
 }
 
 type EffectItemEdge implements Edge {  
-  node: Effect!
+  node: Item!
 }
 
 # MOVE
@@ -108,5 +109,5 @@ type EffectMoveConnection implements Connection {
 }
 
 type EffectMoveEdge implements Edge {  
-  node: Effect!
+  node: Move!
 }

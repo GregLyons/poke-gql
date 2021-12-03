@@ -20,6 +20,7 @@ extend type Query {
   statuses(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     contains: String,
     endsWith: String,
     introducedAfter: Int,

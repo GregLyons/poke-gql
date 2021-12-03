@@ -14,6 +14,10 @@ let move = {
   modifiesStat(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'stat', 'modifies'));
   },
+
+  pokemon(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'move', '', true));
+  },
   
   resistStatus(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'resists'));

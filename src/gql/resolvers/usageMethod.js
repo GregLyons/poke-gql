@@ -13,7 +13,16 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  parentPK,
+  
+  basicEdge,
+  multiplierEdge,
+  
+  basicJunctionConnection,
+  introductionConnection,
+} = require('./helpers.js');
+const usageMethodPK = parentPK('usageMethod');
 
 //#endregion
 
@@ -52,6 +61,7 @@ const Query = {
     return await context.db.promise().query(
       `
         SELECT * FROM usage_method
+        WHERE generation_id = ${generation}
       `
     )
     .then( ([results, fields]) => {
@@ -66,18 +76,14 @@ const Query = {
 // UsageMethod
 /*
     id
-    abilityBoosts
-    abilityResists
-    formattedName
-    introduced
-    itemBoosts
-    itemResists
-    moves
-    name
 */
 //#region
 
 const UsageMethod = {
+  abilityBoosts: usageMethodPK,
+
+  abilityResists: usageMethodPK,
+
   formattedName: async (parent, args, context, info) => {
     return parent.usage_method_formatted_name;
   },
@@ -85,6 +91,12 @@ const UsageMethod = {
   introduced: async (parent, args, context, info) => {
     return parent.introduced;
   },
+
+  itemBoosts: usageMethodPK,
+
+  itemResists: usageMethodPK,
+
+  moves: usageMethodPK,
   
   name: async (parent, args, context, info) => {
     return parent.usage_method_name
@@ -94,14 +106,26 @@ const UsageMethod = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {
+  UsageMethodBoostedByAbilityConnection: basicJunctionConnection('usageMethod', 'ability', 'boostedBy'),
+  UsageMethodBoostedByAbilityEdge: multiplierEdge(),
+
+  UsageMethodBoostedByItemConnection: basicJunctionConnection('usageMethod', 'item', 'boostedBy'),
+  UsageMethodBoostedByItemEdge: multiplierEdge(),
+
   UsageMethodGenerationConnection: introductionConnection('usageMethod'),
   UsageMethodGenerationEdge: basicEdge(),
+
+  UsageMethodMoveConnection: basicJunctionConnection('usageMethod', 'move'),
+  UsageMethodMoveEdge: basicEdge(),
+  
+  UsageMethodResistedByAbilityConnection: basicJunctionConnection('usageMethod', 'ability', 'resistedBy'),
+  UsageMethodResistedByAbilityEdge: multiplierEdge(),
+
+  UsageMethodResistedByItemConnection: basicJunctionConnection('usageMethod', 'item', 'resistedBy'),
+  UsageMethodResistedByItemEdge: multiplierEdge(),
 }
 
 //#endregion

@@ -20,6 +20,7 @@ extend type Query {
   stats(
     cursor: String,
     limit: Int,
+    generation: Int = 8,
     contains: String,
     endsWith: String,
     introducedAfter: Int,

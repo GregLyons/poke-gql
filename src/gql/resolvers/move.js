@@ -83,7 +83,6 @@ const Query = {
     descriptions
     enables
     enablesMove
-    pokemon
     requires
 */
 //#region

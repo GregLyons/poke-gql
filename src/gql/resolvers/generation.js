@@ -69,24 +69,6 @@ const Query = {
 // Generation
 /*
     id
-    abilities(input)
-    abilitiesIntroduced(input)
-    effects(input)
-    effectsIntroduced(input)
-    genCode
-    genNumber
-    items(input)
-    itemsIntroduced(input)
-    moves(input)
-    movesIntroduced(input)
-    pokemon(input)
-    pokemonIntroduced(input)
-    types(input)
-    typesIntroduced(input)
-    usageMethods(input)
-    usageMethodsIntroduced(input)
-    versionGroups(input)
-    versionGroupsIntroduced(input)
 */
 //#region
 
@@ -137,7 +119,7 @@ const presenceConnection = entityName => {
 
     count: async (parent, args, context, info) => {
       const tableName = entityNameToTableName(entityName);
-      const genDependent = !['effect', 'usage_method', 'version_group'].includes(tableName);
+      const genDependent = !['version_group', 'sprite', 'pdescription', 'generation'].includes(tableName);
       const columnName = genDependent ? 'generation_id' : 'introduced'
       const whereString = genDependent 
         ? `WHERE generation_id = ${parent}`

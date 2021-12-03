@@ -28,7 +28,7 @@ const entityNameToTableName = entityName => {
 }
 
 const isGenDependent = tableName => {
-  return !['effect', 'generation', 'pstatus', 'stat', 'usage_method', 'version_group'].includes(tableName);
+  return !['generation', 'version_group', 'sprite', 'pdescription'].includes(tableName);
 }
 
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.

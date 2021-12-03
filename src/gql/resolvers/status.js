@@ -61,6 +61,7 @@ const Query = {
     return await context.db.promise().query(
       `
         SELECT * FROM pstatus
+        WHERE generation_id = ${generation}
       `
     )
     .then( ([results, fields]) => {
@@ -75,12 +76,6 @@ const Query = {
 // Status
 /*
     id
-    abilityCauses
-    abilityResists
-    itemCauses
-    itemResists
-    moveCauses
-    moveResists
 */
 //#region
 

@@ -59,6 +59,7 @@ const Query = {
     return await context.db.promise().query(
       `
         SELECT * FROM stat
+        WHERE generation_id = ${generation}
       `
     )
     .then( ([results, fields]) => {
@@ -73,9 +74,6 @@ const Query = {
 // Stat
 /*
     id
-    abilityModifies
-    itemModifies
-    moveModifies
 */
 //#region
 

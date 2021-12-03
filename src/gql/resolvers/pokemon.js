@@ -79,14 +79,12 @@ const Query = {
 // Pokemon
 /*
     id
-    abilities
     enables
     enablesItem
     enablesMove
     evolvesTo
     evolvesFrom
     formData
-    moves
     requires
     requiresItem // TODO: put in db
     quadDamageFrom

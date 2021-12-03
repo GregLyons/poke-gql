@@ -239,7 +239,7 @@ type MovePokemonConnection implements Connection {
 }
 
 type MovePokemonEdge implements Edge {  
-  node: Move!
+  node: Pokemon!
 
   """
   A string representing how the Pokemon can learn the Move, taken mostly from the system used by Pokemon Showdown.

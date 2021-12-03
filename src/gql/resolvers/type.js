@@ -14,7 +14,16 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  parentPK,
+
+  basicEdge,
+  multiplierEdge,
+
+  basicJunctionConnection,
+  introductionConnection,
+} = require('./helpers.js');
+const typePK = parentPK('type');
 
 //#endregion
 
@@ -70,16 +79,10 @@ const Query = {
 // Type
 /*
     id
-    abilityBoosts
-    abilityResists
     enables
     enablesMove
-    itemBoosts
-    itemResists
     matchups
-    moves
     naturalGift
-    pokemon
     doubleDamageFrom
     neutralDamageFrom
     halfDamageFrom
@@ -92,6 +95,10 @@ const Query = {
 //#region
 
 const Type = {
+  abilityBoosts: typePK,
+
+  abilityResists: typePK,
+  
   formattedName: async (parent, args, context, info) => {
     return parent.ptype_formatted_name;
   },
@@ -99,23 +106,46 @@ const Type = {
   introduced: async (parent, args, context, info) => {
     return parent.introduced;
   },
+
+  itemBoosts: typePK,
+
+  itemResists: typePK,
+
+  moves: typePK,
   
   name: async (parent, args, context, info) => {
     return parent.ptype_name
   },
+
+  pokemon: typePK,
 }
 
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {
+  TypeBoostedByAbilityConnection: basicJunctionConnection('type', 'ability', 'boostedBy'),
+  TypeBoostedByAbilityEdge: multiplierEdge(),
+
+  TypeBoostedByItemConnection: basicJunctionConnection('type', 'item', 'boostedBy'),
+  TypeBoostedByItemEdge: multiplierEdge(),
+
   TypeGenerationConnection: introductionConnection('type'),
   TypeGenerationEdge: basicEdge(),
+
+  TypeMoveConnection: basicJunctionConnection('type', 'move'),
+  TypeMoveEdge: basicEdge(),
+
+  TypePokemonConnection: basicJunctionConnection('type', 'pokemon'),
+  TypePokemonEdge: basicEdge(),
+  
+  TypeResistedByAbilityConnection: basicJunctionConnection('type', 'ability', 'resistedBy'),
+  TypeResistedByAbilityEdge: multiplierEdge(),
+
+  TypeResistedByItemConnection: basicJunctionConnection('type', 'item', 'resistedBy'),
+  TypeResistedByItemEdge: multiplierEdge(),
 }
 
 //#endregion

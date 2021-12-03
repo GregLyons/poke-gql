@@ -81,13 +81,7 @@ const Query = {
 // Ability
 /*
     id
-    boostsType
-    boostsUsageMethod
-    causesStatus
     descriptions
-    modifiesStat
-    resistsType
-    resistsUsageMethod
 */
 //#region
 

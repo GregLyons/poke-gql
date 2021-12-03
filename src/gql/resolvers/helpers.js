@@ -62,6 +62,10 @@ const abilityEdge = () => {
 const basicEdge = () => {
   return {
     node: parent => parent,
+    // node: parent => {
+    //   console.log(parent);
+    //   return parent
+    // },
   };
 };
 
@@ -117,8 +121,6 @@ const introductionConnection = entityName => {
 }
 
 const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
-  const ownerTableName = entityNameToTableName(ownerEntityName);
-  const ownedTableName = entityNameToTableName(ownedEntityName);
   const innerKey = extra
     ? extra + ownedEntityName[0].toUpperCase() + ownedEntityName.slice(1)
     : ownedEntityName;
