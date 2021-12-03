@@ -124,7 +124,7 @@ const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') =
     : ownedEntityName;
 
   return {
-    edges: async (parent, args, context, info) => {
+    edges: async (parent, args, context, info) => { 
       return await context.loaders[ownerEntityName][innerKey](args.pagination).load(parent);
     },
 

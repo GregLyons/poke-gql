@@ -86,8 +86,12 @@ const batchGens = (pagination) => {
   }
 }
 
-const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, middle = '') => {
+const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, middle = '', reverse = false) => {
   return async entityPKs => {
+    if (reverse) {
+      [ownerEntityName, ownedEntityName] = [ownedEntityName, ownerEntityName]
+    }
+
     // Compute table and column names
     const owner = entityNameToTableName(ownerEntityName);
     const ownerGen = owner + '_generation_id';
@@ -97,10 +101,17 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
     const ownedID = owned + '_id';
     const ownedGen = owned + '_generation_id';
 
-    const junctionTableName = middle 
-      ? owner + '_' + middle + '_' + owned
-      : owner + '_' + owned;
-
+    let junctionTableName;
+    if (reverse) {
+      junctionTableName = middle 
+        ? owned + '_' + middle + '_' + owner
+        : owned + '_' + owner;
+    } 
+    else {
+      junctionTableName = middle 
+        ? owner + '_' + middle + '_' + owned
+        : owner + '_' + owned;
+    }
 
     // May need to change column names
     let junctionOwnedID, junctionOwnedGen;
@@ -121,25 +132,31 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
       : `ON ${junctionTableName}.${junctionOwnedID} = ${owned}.${ownedID}`;
 
     // If the two entity tables are the same, then ambiguity will arise without the junction table name.
-    const whereString = `WHERE (${junctionTableName}.${ownerGen}, ${junctionTableName}.${ownerID}) IN ?`
+    const whereString = isGenDependent(owner) 
+      ? `WHERE (${junctionTableName}.${ownerGen}, ${junctionTableName}.${ownerID}) IN ?`
+      : `WHERE (${junctionTableName}.${ownerID}) IN ?`
 
     const paginationString = getPaginationQueryString(pagination, `${owner}_${owned}`);
 
-    const ownedData = await db.promise().query(
+    const data = await db.promise().query(
       `
         SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
         ${onString}
         ${whereString}
         ${paginationString}
       `,
-      [[entityPKs.map(d => [d.genID, d.entityID])]]
+      [[entityPKs.map(d => {
+        return isGenDependent(owner) 
+          ? [d.genID, d.entityID]
+          : [d.entityID];
+      })]]
     )
     .then( ([results, fields]) => {
       return results;
     })
     .catch(console.log);
 
-    return entityPKs.map(entityPK => ownedData.filter(d => 
+    return entityPKs.map(entityPK => data.filter(d => 
       d[ownerGen] === entityPK.genID 
       && d[ownerID] === entityPK.entityID));
   }

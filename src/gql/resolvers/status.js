@@ -13,7 +13,16 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  basicEdge,
+  causeStatusEdge,
+  
+  basicJunctionConnection,
+  introductionConnection,
+
+  parentPK,
+} = require('./helpers.js');
+const statusPK = parentPK('status');
 
 //#endregion
 
@@ -76,10 +85,22 @@ const Query = {
 //#region
 
 const Status = {
+  abilityCauses: statusPK,
+
+  abilityResists: statusPK,
+
   formattedName: async (parent, args, context, info) => {
     return parent.pstatus_formatted_name;
   },
+
+  itemCauses: statusPK,
+
+  itemResists: statusPK,
   
+  moveCauses: statusPK,
+
+  moveResists: statusPK,
+
   name: async (parent, args, context, info) => {
     return parent.pstatus_name
   },
@@ -94,6 +115,23 @@ const Status = {
 //#region
 
 const ConnectionsAndEdges = {
+  StatusCausedByAbilityConnection: basicJunctionConnection('status', 'ability', 'causedBy'),
+  StatusCausedByAbilityEdge: causeStatusEdge(),
+
+  StatusCausedByItemConnection: basicJunctionConnection('status', 'item', 'causedBy'),
+  StatusCausedByItemEdge: causeStatusEdge(),
+
+  StatusCausedByMoveConnection: basicJunctionConnection('status', 'move', 'causedBy'),
+  StatusCausedByMoveEdge: causeStatusEdge(),
+  
+  StatusResistedByAbilityConnection: basicJunctionConnection('status', 'ability', 'resistedBy'),
+  StatusResistedByAbilityEdge: basicEdge(),
+
+  StatusResistedByItemConnection: basicJunctionConnection('status', 'item', 'resistedBy'),
+  StatusResistedByItemEdge: basicEdge(),
+
+  StatusResistedByMoveConnection: basicJunctionConnection('status', 'move', 'resistedBy'),
+  StatusResistedByMoveEdge: basicEdge(),
 }
 
 //#endregion

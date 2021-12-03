@@ -13,7 +13,14 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  basicEdge,
+  modifyStatEdge,
+  parentPK,
+
+  basicJunctionConnection,
+} = require('./helpers.js');
+const statPK = parentPK('stat');
 
 //#endregion
 
@@ -73,13 +80,19 @@ const Query = {
 //#region
 
 const Stat = {
+  abilityModifies: statPK,
+  
   formattedName: async (parent, args, context, info) => {
     return parent.stat_formatted_name;
   },
   
+  itemModifies: statPK,
+  
   name: async (parent, args, context, info) => {
     return parent.stat_name
   },
+  
+  moveModifies: statPK,
 }
 
 //#endregion
@@ -91,6 +104,14 @@ const Stat = {
 //#region
 
 const ConnectionsAndEdges = {
+  StatModifiedByAbilityConnection: basicJunctionConnection('stat', 'ability', 'modifiedBy'),
+  StatModifiedByAbilityEdge: modifyStatEdge(),
+
+  StatModifiedByItemConnection: basicJunctionConnection('stat', 'item', 'modifiedBy'),
+  StatModifiedByItemEdge: modifyStatEdge(),
+
+  StatModifiedByMoveConnection: basicJunctionConnection('stat', 'move', 'modifiedBy'),
+  StatModifiedByMoveEdge: modifyStatEdge(),
 }
 
 //#endregion
