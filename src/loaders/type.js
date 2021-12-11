@@ -11,16 +11,32 @@ let type = {
     return new DataLoader(basicJunctionBatcher(pagination, 'item', 'type', 'boosts', true));
   },
 
+  defensiveMatchup(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'type', 'type', 'ptype_matchup', true))
+  },
+  
+  enablesMove(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'requires', true));
+  },
+  
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },
-
+  
   move(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', '', true));
   },
-
+  
+  naturalGift(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'type', 'natural_gift', true))
+  },
+  
   pokemon(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'type', '', true));
+  },
+
+  offensiveMatchup(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'type', 'type', 'ptype_matchup'))
   },
   
   resistedByAbility(pagination) {

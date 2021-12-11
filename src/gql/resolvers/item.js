@@ -19,6 +19,7 @@ const {
   causeStatusEdge, 
   modifyStatEdge,
   multiplierEdge,
+  powerEdge,
 
   introductionConnection,
   basicJunctionConnection,
@@ -95,6 +96,10 @@ const Item = {
 
   effects: itemPK,
 
+  enablesMove: itemPK,
+
+  enablesPokemon: itemPK,
+
   formattedName: async (parent, args, context, info) => {
     return parent.item_formatted_name;
   },
@@ -108,6 +113,8 @@ const Item = {
   name: async (parent, args, context, info) => {
     return parent.item_name
   },
+
+  naturalGift: itemPK,
 
   requiresPokemon: itemPK,
 
@@ -133,14 +140,23 @@ const ConnectionsAndEdges = {
   ItemCausesStatusConnection: basicJunctionConnection('item', 'status', 'causes'),
   ItemCausesStatusEdge: causeStatusEdge(),
   
-  ItemGenerationConnection: introductionConnection('item'),
-  ItemGenerationEdge: basicEdge(),
-  
   ItemEffectConnection: basicJunctionConnection('item', 'effect'),
   ItemEffectEdge: basicEdge(),
 
+  ItemEnablesMoveConnection: basicJunctionConnection('item', 'move', 'enables'),
+  ItemEnablesMoveEdge: basicEdge(),
+
+  ItemEnablesPokemonConnection: basicJunctionConnection('item', 'pokemon', 'enables'),
+  ItemEnablesPokemonEdge: basicEdge(),
+
+  ItemGenerationConnection: introductionConnection('item'),
+  ItemGenerationEdge: basicEdge(),
+  
   ItemModifiesStatConnection: basicJunctionConnection('item', 'stat', 'modifies'),
   ItemModifiesStatEdge: modifyStatEdge(),
+
+  ItemNaturalGiftConnection: basicJunctionConnection('item', 'naturalGift'),
+  ItemNaturalGiftEdge: powerEdge(),
   
   ItemRequiresPokemonConnection: basicJunctionConnection('item', 'pokemon', 'requires'),
   ItemRequiresPokemonEdge: basicEdge(),

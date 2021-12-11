@@ -19,6 +19,7 @@ const {
 
   basicEdge,
   multiplierEdge,
+  powerEdge,
 
   basicJunctionConnection,
   introductionConnection,
@@ -80,9 +81,6 @@ const Query = {
 /*
     id
     enables
-    enablesMove
-    matchups
-    naturalGift
     doubleDamageFrom
     neutralDamageFrom
     halfDamageFrom
@@ -98,14 +96,14 @@ const Type = {
   abilityBoosts: typePK,
 
   abilityResists: typePK,
+
+  defensiveMatchups: typePK,
   
-  formattedName: async (parent, args, context, info) => {
-    return parent.ptype_formatted_name;
-  },
+  enablesMove: typePK,
   
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
+  formattedName: parent => parent.ptype_formatted_name,
+  
+  introduced: parent => parent.introduced,
 
   itemBoosts: typePK,
 
@@ -113,9 +111,11 @@ const Type = {
 
   moves: typePK,
   
-  name: async (parent, args, context, info) => {
-    return parent.ptype_name
-  },
+  name: parent => parent.ptype_name,
+  
+  offensiveMatchups: typePK,
+
+  naturalGift: typePK,
 
   pokemon: typePK,
 }
@@ -126,17 +126,29 @@ const Type = {
 //#region
 
 const ConnectionsAndEdges = {
+  DefensiveTypeMatchupConnection: basicJunctionConnection('type', 'defensiveMatchup'),
+  DefensiveTypeMatchupEdge: multiplierEdge(),
+
+  OffensiveTypeMatchupConnection: basicJunctionConnection('type', 'offensiveMatchup'),
+  OffensiveTypeMatchupEdge: multiplierEdge(),
+
   TypeBoostedByAbilityConnection: basicJunctionConnection('type', 'ability', 'boostedBy'),
   TypeBoostedByAbilityEdge: multiplierEdge(),
 
   TypeBoostedByItemConnection: basicJunctionConnection('type', 'item', 'boostedBy'),
   TypeBoostedByItemEdge: multiplierEdge(),
 
+  TypeEnablesMoveConnection: basicJunctionConnection('type', 'move', 'enables'),
+  TypeEnablesMoveEdge: basicEdge(),
+
   TypeGenerationConnection: introductionConnection('type'),
   TypeGenerationEdge: basicEdge(),
 
   TypeMoveConnection: basicJunctionConnection('type', 'move'),
   TypeMoveEdge: basicEdge(),
+
+  TypeNaturalGiftConnection: basicJunctionConnection('type', 'naturalGift'),
+  TypeNaturalGiftEdge: powerEdge(),
 
   TypePokemonConnection: basicJunctionConnection('type', 'pokemon'),
   TypePokemonEdge: basicEdge(),

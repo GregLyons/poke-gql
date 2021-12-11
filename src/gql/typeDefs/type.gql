@@ -43,6 +43,11 @@ type Type implements Node {
   abilityResists: TypeResistedByAbilityConnection
 
   """
+  The matchups of this Type as the defending-type against other attacking Types.
+  """
+  defensiveMatchups: DefensiveTypeMatchupConnection
+
+  """
   Entities which the Type enables.
   """
   enables: TypeEnablesMoveConnection
@@ -67,10 +72,6 @@ type Type implements Node {
 
   itemResists: TypeResistedByItemConnection
 
-  """
-  The matchups of this Type as the attacking-type against other defending Types.
-  """
-  matchups: TypeMatchupConnection
 
   moves: TypeMoveConnection
 
@@ -82,9 +83,14 @@ type Type implements Node {
   """
   The Items which grant their holder a 'natural_gift' of this Type.
   """
-  naturalGift: ItemNaturalGiftConnection
+  naturalGift: TypeNaturalGiftConnection
 
   pokemon: TypePokemonConnection
+
+  """
+  The matchups of this Type as the attacking-type against other defending Types.
+  """
+  offensiveMatchups: OffensiveTypeMatchupConnection
 
   #
   # CONVENIENCE FIELDS
@@ -237,12 +243,26 @@ type TypePokemonEdge implements Edge {
 
 # TYPE
 
-type TypeMatchupConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeMatchupEdge!]!
+type DefensiveTypeMatchupConnection implements Connection {
+  edges(pagination: PaginationInput): [DefensiveTypeMatchupEdge!]!
   count: Int!
 }
 
-type TypeMatchupEdge implements Edge {  
+type DefensiveTypeMatchupEdge implements Edge {  
+  node: Type!
+
+  """
+  The multiplier of the Type-matchup, with the starting node as the defendingType and the ending node as the attacking Type.
+  """
+  multiplier: Float!
+}
+
+type OffensiveTypeMatchupConnection implements Connection {
+  edges(pagination: PaginationInput): [OffensiveTypeMatchupEdge!]!
+  count: Int!
+}
+
+type OffensiveTypeMatchupEdge implements Edge {  
   node: Type!
 
   """

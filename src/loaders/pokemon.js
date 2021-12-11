@@ -6,6 +6,14 @@ let pokemon = {
   ability(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'ability'));
   },
+  
+  enablesItem(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'pokemon', 'requires', true));
+  },
+
+  enablesMove(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'pokemon', 'requires', true));
+  },
 
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));

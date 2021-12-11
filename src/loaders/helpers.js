@@ -102,7 +102,13 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
     const ownedGen = owned + '_generation_id';
 
     let junctionTableName;
-    if (reverse) {
+    if (middle === 'natural_gift') {
+      junctionTableName = 'natural_gift';
+    }
+    else if (middle === 'ptype_matchup') {
+      junctionTableName = 'ptype_matchup';
+    }
+    else if (reverse) {
       junctionTableName = middle 
         ? owned + '_' + middle + '_' + owner
         : owned + '_' + owner;
@@ -131,6 +137,38 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
           junctionOwnerGen = 'required_pmove_generation_id';
           junctionOwnedID = 'requiring_pmove_id';
           junctionOwnedGen = 'requiring_pmove_generation_id';
+        }
+        break;
+      case 'natural_gift':
+        // 'owned' is the type
+        if(!reverse) {
+          junctionOwnerID = 'item_id';
+          junctionOwnerGen = 'item_generation_id';
+          junctionOwnedID = 'ptype_id';
+          junctionOwnedGen = 'ptype_generation_id';
+        }
+        // 'owned' is the item
+        else {
+          junctionOwnerID = 'ptype_id';
+          junctionOwnerGen = 'ptype_generation_id';
+          junctionOwnedID = 'item_id';
+          junctionOwnedGen = 'item_generation_id';
+        }
+        break;
+      case 'ptype_matchup':
+        // 'owned' is the offensive type
+        if(!reverse) {
+          junctionOwnerID = 'attacking_ptype_id';
+          junctionOwnerGen = 'attacking_ptype_generation_id';
+          junctionOwnedID = 'defending_ptype_id';
+          junctionOwnedGen = 'defending_ptype_generation_id';
+        }
+        // 'owned' is the defensive type
+        else {
+          junctionOwnerID = 'defending_ptype_id';
+          junctionOwnerGen = 'defending_ptype_generation_id';
+          junctionOwnedID = 'attacking_ptype_id';
+          junctionOwnedGen = 'attacking_ptype_generation_id';
         }
         break;
       default:
@@ -166,17 +204,18 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
       })]]
     )
     .then( ([results, fields]) => {
-      // console.log(`
-      // SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
-      // ${onString}
-      // ${whereString}
-      // ${paginationString}
-      // `)
+      console.log(`
+      SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
+      ${onString}
+      ${whereString}
+      ${paginationString}
+      `)
       // console.log(entityPKs.map(d => {
       //   return isGenDependent(owner) 
       //     ? [d.genID, d.entityID]
       //     : [d.entityID];
       // }))
+      console.log(results);
       return results;
     })
     .catch(console.log);

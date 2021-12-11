@@ -14,17 +14,29 @@ let item = {
   causesStatus(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'causes'));
   },
+  
+  effect(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'effect'));
+  },
+  
+  enablesMove(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'item', 'requires', true));
+  },
+
+  enablesPokemon(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'item', 'requires', true));
+  },
 
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },
 
-  effect(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'effect'));
-  },
-
   modifiesStat(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'item', 'stat', 'modifies'));
+  },
+
+  naturalGift(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'type', 'natural_gift'))
   },
 
   resistsStatus(pagination) {

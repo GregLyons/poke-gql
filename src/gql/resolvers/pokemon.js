@@ -112,6 +112,10 @@ const Pokemon = {
 
   dexNumber: parent => parent.pokemon_dex,
 
+  enablesItem: pokemonPK,
+
+  enablesMove: pokemonPK,
+
   formattedName: parent => parent.pokemon_formattedName,
   
   height: parent => parent.pokemon_height,
@@ -139,6 +143,12 @@ const Pokemon = {
 const ConnectionsAndEdges = {
   PokemonAbilityConnection: basicJunctionConnection('pokemon', 'ability'),
   PokemonAbilityEdge: abilityEdge(),
+  
+  PokemonEnablesItemConnection: basicJunctionConnection('pokemon', 'item', 'enables'),
+  PokemonEnablesItemEdge: basicEdge(),
+
+  PokemonEnablesMoveConnection: basicJunctionConnection('pokemon', 'move', 'enables'),
+  PokemonEnablesMoveEdge: basicEdge(),
 
   PokemonGenerationConnection: introductionConnection('pokemon'),
   PokemonGenerationEdge: basicEdge(),

@@ -99,6 +99,13 @@ const multiplierEdge = () => {
   }
 }
 
+const powerEdge = () => {
+  return {
+    node: parent => parent,
+    power: parent => parent.power,
+  }
+}
+
 const introductionConnection = entityName => {
   // 'parent' = 'introduced'
   return {
@@ -144,6 +151,7 @@ module.exports = {
   learnsetEdge,
   modifyStatEdge,
   multiplierEdge,
+  powerEdge,
 
   introductionConnection,
   basicJunctionConnection,

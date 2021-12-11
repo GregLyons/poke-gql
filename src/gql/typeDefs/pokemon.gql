@@ -293,7 +293,7 @@ type PokemonEnablesMoveConnection implements Connection {
 }
 
 type PokemonEnablesMoveEdge implements Edge {  
-  node: Pokemon!
+  node: Move!
 }
 
 type PokemonMoveConnection implements Connection {
