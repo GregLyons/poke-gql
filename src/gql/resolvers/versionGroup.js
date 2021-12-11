@@ -13,8 +13,14 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, introductionConnection, basicEdge} = require('./helpers.js');
+const {
+  parentPK,
 
+  basicEdge,
+
+  introductionConnection,
+} = require('./helpers.js');
+const versionGroupPK = parentPK('versionGroup');
 //#endregion
 
 // Query
@@ -63,10 +69,7 @@ const Query = {
 // VersionGroup
 /*
     id
-    code
     descriptions
-    formattedName
-    introduced
     sprites
 */
 //#region
@@ -89,9 +92,6 @@ const VersionGroup = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {

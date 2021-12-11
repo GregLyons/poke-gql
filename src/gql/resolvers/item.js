@@ -121,9 +121,6 @@ const Item = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {

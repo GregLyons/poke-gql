@@ -120,9 +120,6 @@ const Ability = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {

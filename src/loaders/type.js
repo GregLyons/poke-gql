@@ -15,9 +15,8 @@ let type = {
     return new DataLoader(batchGens(pagination));
   },
 
-  // TODO: remove 'has' from db
   move(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'has', true));
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', '', true));
   },
 
   pokemon(pagination) {

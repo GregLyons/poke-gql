@@ -118,12 +118,26 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
     switch (junctionTableName) {
       // 'base_pmove_generation_id'
       case 'pmove_requires_pmove':
-        junctionOwnedID = 'base_' + ownedID;
-        junctionOwnedGen = 'base_' + ownedGen;
+        // 'owned' is the move being required, i.e. base move
+        if(!reverse) {
+          junctionOwnerID = 'requiring_pmove_id';
+          junctionOwnerGen = 'requiring_pmove_generation_id';
+          junctionOwnedID = 'required_pmove_id';
+          junctionOwnedGen = 'required_pmove_generation_id';
+        } 
+        // 'owned' is the move doing the requiring 
+        else {
+          junctionOwnerID = 'required_pmove_id';
+          junctionOwnerGen = 'required_pmove_generation_id';
+          junctionOwnedID = 'requiring_pmove_id';
+          junctionOwnedGen = 'requiring_pmove_generation_id';
+        }
         break;
       default:
-        junctionOwnedID = ownedID;
-        junctionOwnedGen = ownedGen;
+        junctionOwnerID = owner + '_id';
+        junctionOwnerGen = owner + '_generation_id';
+        junctionOwnedID = owned + '_id';
+        junctionOwnedGen = owned + '_generation_id';
     }
 
     // Compute other clauses
@@ -133,10 +147,10 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
 
     // If the two entity tables are the same, then ambiguity will arise without the junction table name.
     const whereString = isGenDependent(owner) 
-      ? `WHERE (${junctionTableName}.${ownerGen}, ${junctionTableName}.${ownerID}) IN ?`
-      : `WHERE (${junctionTableName}.${ownerID}) IN ?`
+      ? `WHERE (${junctionTableName}.${junctionOwnerGen}, ${junctionTableName}.${junctionOwnerID}) IN ?`
+      : `WHERE (${junctionTableName}.${junctionOwnerID}) IN ?`
 
-    const paginationString = getPaginationQueryString(pagination, `${owner}_${owned}`);
+    const paginationString = getPaginationQueryString(pagination, junctionTableName);
 
     const data = await db.promise().query(
       `
@@ -152,13 +166,24 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
       })]]
     )
     .then( ([results, fields]) => {
+      // console.log(`
+      // SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
+      // ${onString}
+      // ${whereString}
+      // ${paginationString}
+      // `)
+      // console.log(entityPKs.map(d => {
+      //   return isGenDependent(owner) 
+      //     ? [d.genID, d.entityID]
+      //     : [d.entityID];
+      // }))
       return results;
     })
     .catch(console.log);
 
     return entityPKs.map(entityPK => data.filter(d => 
-      d[ownerGen] === entityPK.genID 
-      && d[ownerID] === entityPK.entityID));
+      d[junctionOwnerGen] === entityPK.genID 
+      && d[junctionOwnerID] === entityPK.entityID));
   }
 }
 

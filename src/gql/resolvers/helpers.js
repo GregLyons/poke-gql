@@ -61,11 +61,10 @@ const abilityEdge = () => {
 
 const basicEdge = () => {
   return {
-    node: parent => parent,
-    // node: parent => {
-    //   console.log(parent);
-    //   return parent
-    // },
+    // node: parent => parent,
+    node: parent => {
+      return parent
+    },
   };
 };
 
@@ -126,7 +125,7 @@ const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') =
     : ownedEntityName;
 
   return {
-    edges: async (parent, args, context, info) => { 
+    edges: async (parent, args, context, info) => {
       return await context.loaders[ownerEntityName][innerKey](args.pagination).load(parent);
     },
 

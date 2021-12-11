@@ -122,6 +122,8 @@ const Pokemon = {
   
   name: parent => parent.pokemon_name,
 
+  requiresItem: pokemonPK,
+
   speciesName: parent => parent.pokemon_species,
 
   typing: pokemonPK,
@@ -132,9 +134,6 @@ const Pokemon = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {
@@ -146,6 +145,9 @@ const ConnectionsAndEdges = {
 
   PokemonMoveConnection: basicJunctionConnection('pokemon', 'move'),
   PokemonMoveEdge: learnsetEdge(),
+
+  PokemonRequiresItemConnection: basicJunctionConnection('pokemon', 'item', 'requires'),
+  PokemonRequiresItemEdge: basicEdge(),
 
   PokemonTypeConnection: basicJunctionConnection('pokemon', 'type'),
   PokemonTypeEdge: basicEdge(),

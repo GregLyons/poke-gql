@@ -140,18 +140,21 @@ const Move = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const ConnectionsAndEdges = {
-  MoveGenerationConnection: introductionConnection('move'),
-  MoveGenerationEdge: basicEdge(),
-
+  MoveCausesStatusConnection: basicJunctionConnection('move', 'status', 'causes'),
+  MoveCausesStatusEdge: causeStatusEdge(),
+  
   MoveEffectConnection: basicJunctionConnection('move', 'effect'),
   MoveEffectEdge: basicEdge(),
+  
+  MoveEnablesMoveConnection: basicJunctionConnection('move', 'move', 'enables'),
+  MoveEnablesMoveEdge: basicEdge(),
 
+  MoveGenerationConnection: introductionConnection('move'),
+  MoveGenerationEdge: basicEdge(),
+  
   MoveModifiesStatConnection: basicJunctionConnection('move', 'stat', 'modifies'),
   MoveModifiesStatEdge: modifyStatEdge(),
 
@@ -173,8 +176,7 @@ const ConnectionsAndEdges = {
   MoveResistsStatusConnection: basicJunctionConnection('move', 'status', 'resists'),
   MoveResistsStatusEdge: basicEdge(),
 
-  // TODO: Change 'pmove_has_ptype' table to remove 'has'
-  MoveTypeConnection: basicJunctionConnection('move', 'type', 'has'),
+  MoveTypeConnection: basicJunctionConnection('move', 'type'),
   MoveTypeEdge: basicEdge(),
 
   MoveUsageMethodConnection: basicJunctionConnection('move', 'usageMethod'),

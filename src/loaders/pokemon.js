@@ -15,6 +15,10 @@ let pokemon = {
     return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'move'));
   },
 
+  requiresItem(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'item', 'requires'));
+  },
+
   type(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'type'));
   },

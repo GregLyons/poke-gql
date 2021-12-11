@@ -105,9 +105,6 @@ const Generation = {
 //#endregion
 
 // Connections and edges
-/*
-
-*/
 //#region
 
 const presenceConnection = entityName => {

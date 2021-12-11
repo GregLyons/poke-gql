@@ -3,12 +3,20 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let move = {
+  causesStatus(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'causes'));
+  },
+
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },
 
   effect(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'effect'));
+  },
+  
+  enablesMove(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'move', 'requires', true));
   },
 
   modifiesStat(pagination) {
@@ -39,9 +47,8 @@ let move = {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'requires'));
   },
   
-  // TODO: change pmove_has_ptype to pmove_type to remove 'hasType'
   type(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'has'));
+    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type'));
   },
 
   usageMethod(pagination) {
