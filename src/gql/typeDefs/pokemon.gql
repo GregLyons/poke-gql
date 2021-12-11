@@ -127,7 +127,12 @@ type Pokemon implements Node {
     'raticate_alola' has the form 'raticate'.
 
   """
-  formData: PokemonFormConnection
+  forms: PokemonFormConnection
+
+  """
+  The Generation of this Pokemon.
+  """ 
+  generation: PokemonGenerationConnection
 
   """
   The height of the Pokemon in meters. 0.0 if unknown.
@@ -137,7 +142,7 @@ type Pokemon implements Node {
   """
   The Generation in which the Pokemon was introduced.
   """
-  introduced: PokemonGenerationConnection
+  introduced: PokemonIntroductionConnection
 
   """
   The Moves that the Pokemon can learn.
@@ -265,6 +270,15 @@ type PokemonGenerationEdge implements Edge {
   node: Generation!
 }
 
+type PokemonIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput): [PokemonIntroductionEdge!]! 
+  count: Int!
+}
+
+type PokemonIntroductionEdge implements Edge {  
+  node: Generation!
+}
+
 # ITEM
 
 type PokemonEnablesItemConnection implements Connection {
@@ -377,7 +391,7 @@ type PokemonFormEdge implements Edge {
 
   BASE if the starting node is an alternate form, in which case the ending node is the base form.
   """
-  formClass: FormClass!
+  class: FormClass!
 }
 
 # TYPE
@@ -401,9 +415,10 @@ enum AbilitySlot {
   HIDDEN
 }
 
+# TODO: rename 'BASE_FORM' to 'BASE'
 enum FormClass {
   ALOLA
-  BASE
+  BASE_FORM
   GALAR
   GMAX
   MEGA

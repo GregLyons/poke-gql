@@ -21,8 +21,10 @@ const {
   multiplierEdge,
 
   basicJunctionConnection,
+  generationConnection,
   introductionConnection,
 
+  parentGenID,
   parentPK,
 } = require('./helpers.js');
 const abilityPK = parentPK('ability');
@@ -99,10 +101,10 @@ const Ability = {
   formattedName: async (parent, args, context, info) => {
     return parent.ability_formatted_name;
   },
+
+  generation: parentGenID,
   
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
+  introduced: parent => parent.introduced,
   
   modifiesStat: abilityPK,
 
@@ -131,12 +133,15 @@ const ConnectionsAndEdges = {
 
   AbilityCausesStatusConnection: basicJunctionConnection('ability', 'status', 'causes'),
   AbilityCausesStatusEdge: causeStatusEdge(),
-
-  AbilityGenerationConnection: introductionConnection('ability'),
-  AbilityGenerationEdge: basicEdge(),
-
+  
   AbilityEffectConnection: basicJunctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),
+
+  AbilityGenerationConnection: generationConnection('ability'),
+  AbilityGenerationEdge: basicEdge(),
+  
+  AbilityIntroductionConnection: introductionConnection('ability'),
+  AbilityIntroductionEdge: basicEdge(),
 
   AbilityModifiesStatConnection: basicJunctionConnection('ability', 'stat', 'modifies'),
   AbilityModifiesStatEdge: modifyStatEdge(),

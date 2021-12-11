@@ -64,9 +64,14 @@ type Type implements Node {
   formattedName: String!
 
   """
+  The Generation of this Type.
+  """ 
+  generation:TypeGenerationConnection
+
+  """
   The Generation in which the Type was introduced.
   """
-  introduced: TypeGenerationConnection
+  introduced: TypeIntroductionConnection
 
   itemBoosts: TypeBoostedByItemConnection
 
@@ -171,6 +176,15 @@ type TypeGenerationConnection implements Connection {
 }
 
 type TypeGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type TypeIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput): [TypeIntroductionEdge!]! 
+  count: Int!
+}
+
+type TypeIntroductionEdge implements Edge {  
   node: Generation!
 }
 

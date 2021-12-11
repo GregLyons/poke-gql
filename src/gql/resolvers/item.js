@@ -21,8 +21,10 @@ const {
   multiplierEdge,
   powerEdge,
 
-  introductionConnection,
   basicJunctionConnection,
+  generationConnection,
+  introductionConnection,
+  
   parentPK,
 } = require('./helpers.js');
 const itemPK = parentPK('item');
@@ -100,19 +102,15 @@ const Item = {
 
   enablesPokemon: itemPK,
 
-  formattedName: async (parent, args, context, info) => {
-    return parent.item_formatted_name;
-  },
+  formattedName: parent => parent.item_formatted_name,
+
+  generation: parent => parent.generation_id,
   
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
+  introduced: parent => parent.introduced,
   
   modifiesStat: itemPK,
 
-  name: async (parent, args, context, info) => {
-    return parent.item_name
-  },
+  name: parent => parent.item_name,
 
   naturalGift: itemPK,
 
@@ -149,8 +147,11 @@ const ConnectionsAndEdges = {
   ItemEnablesPokemonConnection: basicJunctionConnection('item', 'pokemon', 'enables'),
   ItemEnablesPokemonEdge: basicEdge(),
 
-  ItemGenerationConnection: introductionConnection('item'),
+  ItemGenerationConnection: generationConnection('item'),
   ItemGenerationEdge: basicEdge(),
+
+  ItemIntroductionConnection: introductionConnection('item'),
+  ItemIntroductionEdge: basicEdge(),
   
   ItemModifiesStatConnection: basicJunctionConnection('item', 'stat', 'modifies'),
   ItemModifiesStatEdge: modifyStatEdge(),

@@ -22,6 +22,7 @@ const {
   powerEdge,
 
   basicJunctionConnection,
+  generationConnection,
   introductionConnection,
 } = require('./helpers.js');
 const typePK = parentPK('type');
@@ -102,6 +103,8 @@ const Type = {
   enablesMove: typePK,
   
   formattedName: parent => parent.ptype_formatted_name,
+
+  generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
 
@@ -141,8 +144,11 @@ const ConnectionsAndEdges = {
   TypeEnablesMoveConnection: basicJunctionConnection('type', 'move', 'enables'),
   TypeEnablesMoveEdge: basicEdge(),
 
-  TypeGenerationConnection: introductionConnection('type'),
+  TypeGenerationConnection: generationConnection('type'),
   TypeGenerationEdge: basicEdge(),
+
+  TypeIntroductionConnection: introductionConnection('type'),
+  TypeIntroductionEdge: basicEdge(),
 
   TypeMoveConnection: basicJunctionConnection('type', 'move'),
   TypeMoveEdge: basicEdge(),

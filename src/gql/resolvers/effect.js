@@ -19,6 +19,7 @@ const {
   basicEdge,
 
   basicJunctionConnection,
+  generationConnection,
   introductionConnection,
 } = require('./helpers.js');
 const effectPK = parentPK('effect');
@@ -81,17 +82,13 @@ const Query = {
 const Effect = {
   abilities: effectPK,
 
-  formattedName: async (parent, args, context, info) => {
-    return parent.effect_formatted_name;
-  },
+  formattedName: parent => parent.effect_formatted_name,
+
+  generation: parent => parent.generation_id,
   
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
+  introduced: parent => parent.introduced,
   
-  name: async (parent, args, context, info) => {
-    return parent.effect_name
-  },
+  name: parent => parent.effect_name,
 
   items: effectPK,
 
@@ -107,8 +104,11 @@ const ConnectionsAndEdges = {
   EffectAbilityConnection: basicJunctionConnection('effect', 'ability'),
   EffectAbilityEdge: basicEdge(),
   
-  EffectGenerationConnection: introductionConnection('effect'),
+  EffectGenerationConnection: generationConnection('effect'),
   EffectGenerationEdge: basicEdge(),
+
+  EffectIntroductionConnection: introductionConnection('effect'),
+  EffectIntroductionEdge: basicEdge(),
 
   EffectItemConnection: basicJunctionConnection('effect', 'item'),
   EffectItemEdge: basicEdge(),

@@ -4,8 +4,8 @@
   db is a mysql2 database instance. 
 
   The 'generation' table has columns:
-    'generation_id' (PK), corresponding to genNumber.
-    'generation_code', corresponding to genCode.
+    'generation_id' (PK), corresponding to number.
+    'generation_code', corresponding to code.
 */
 
 
@@ -21,7 +21,10 @@
 // Import helpers
 //#region
 
-const {entityNameToTableName, basicEdge, parentGenID} = require('./helpers.js');
+const {
+  entityNameToTableName,
+  basicEdge
+} = require('./helpers.js');
 
 //#endregion
 
@@ -73,33 +76,33 @@ const Query = {
 //#region
 
 const Generation = {
-  abilities: parentGenID,
-  abilitiesIntroduced: parentGenID,
+  abilities: parent => parent.generation_id,
+  abilitiesIntroduced: parent => parent.generation_id,
 
-  effects: parentGenID,
-  effectsIntroduced: parentGenID,
+  effects: parent => parent.generation_id,
+  effectsIntroduced: parent => parent.generation_id,
 
-  genCode: parent => parent.generation_code,
+  code: parent => parent.generation_code,
 
-  genNumber: parentGenID,
+  number: parent => parent.generation_id,
 
-  items: parentGenID,
-  itemsIntroduced: parentGenID,
+  items: parent => parent.generation_id,
+  itemsIntroduced: parent => parent.generation_id,
   
-  moves: parentGenID,
-  movesIntroduced: parentGenID,
+  moves: parent => parent.generation_id,
+  movesIntroduced: parent => parent.generation_id,
 
-  pokemon: parentGenID,
-  pokemonIntroduced: parentGenID,
+  pokemon: parent => parent.generation_id,
+  pokemonIntroduced: parent => parent.generation_id,
 
-  types: parentGenID,
-  typesIntroduced: parentGenID,
+  types: parent => parent.generation_id,
+  typesIntroduced: parent => parent.generation_id,
 
-  usageMethods: parentGenID,
-  usageMethodsIntroduced: parentGenID,
+  usageMethods: parent => parent.generation_id,
+  usageMethodsIntroduced: parent => parent.generation_id,
 
-  versionGroups: parentGenID,
-  versionGroupsIntroduced: parentGenID,
+  versionGroups: parent => parent.generation_id,
+  versionGroupsIntroduced: parent => parent.generation_id,
 };
 
 //#endregion

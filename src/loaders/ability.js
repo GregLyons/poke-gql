@@ -14,15 +14,19 @@ let ability = {
   causesStatus(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'causes'));
   },
+  
+  effect(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'effect'));
+  },
+  
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
 
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },
-
-  effect(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'effect'));
-  },
-
+  
   modifiesStat(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'stat', 'modifies'));
   },

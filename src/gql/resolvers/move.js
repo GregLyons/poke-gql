@@ -20,8 +20,10 @@ const {
   learnsetEdge,
   modifyStatEdge,
   
-  introductionConnection,
   basicJunctionConnection,
+  generationConnection,
+  introductionConnection,
+  
   parentPK,
 } = require('./helpers.js');
 const movePK = parentPK('move');
@@ -103,6 +105,8 @@ const Move = {
   enablesMove: movePK,
 
   formattedName: parent => parent.pmove_formatted_name,
+
+  generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
 
@@ -152,8 +156,11 @@ const ConnectionsAndEdges = {
   MoveEnablesMoveConnection: basicJunctionConnection('move', 'move', 'enables'),
   MoveEnablesMoveEdge: basicEdge(),
 
-  MoveGenerationConnection: introductionConnection('move'),
+  MoveGenerationConnection: generationConnection('move'),
   MoveGenerationEdge: basicEdge(),
+
+  MoveIntroductionConnection: introductionConnection('move'),
+  MoveIntroductionEdge: basicEdge(),
   
   MoveModifiesStatConnection: basicJunctionConnection('move', 'stat', 'modifies'),
   MoveModifiesStatEdge: modifyStatEdge(),

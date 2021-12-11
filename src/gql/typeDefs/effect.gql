@@ -44,11 +44,16 @@ type Effect implements Node {
   formattedName: String!
 
   """
+  The Generation of this Effect.
+  """ 
+  generation: EffectGenerationConnection
+
+  """
   The Generation in which the Effect was introduced. Note that Moves can gain Effects between Generations.
 
   For example, 'low_kick' was introduced in Generation 1, but it didn't have the Effect 'depends_on_weight' until Generation 3.
   """
-  introduced: EffectGenerationConnection
+  introduced: EffectIntroductionConnection
 
   items: EffectItemConnection
 
@@ -87,6 +92,15 @@ type EffectGenerationConnection implements Connection {
 }
 
 type EffectGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type EffectIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput): [EffectIntroductionEdge!]! 
+  count: Int!
+}
+
+type EffectIntroductionEdge implements Edge {  
   node: Generation!
 }
 

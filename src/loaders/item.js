@@ -27,6 +27,10 @@ let item = {
     return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'item', 'requires', true));
   },
 
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
+
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },

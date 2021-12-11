@@ -6,11 +6,7 @@ let move = {
   causesStatus(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'causes'));
   },
-
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
-  },
-
+  
   effect(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'effect'));
   },
@@ -18,7 +14,15 @@ let move = {
   enablesMove(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'move', 'requires', true));
   },
+  
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
 
+  introduced(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
+  
   modifiesStat(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'stat', 'modifies'));
   },

@@ -108,6 +108,12 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
     else if (middle === 'ptype_matchup') {
       junctionTableName = 'ptype_matchup';
     }
+    else if (middle === 'evolution') {
+      junctionTableName = 'pokemon_evolution';
+    }
+    else if (middle === 'form') {
+      junctionTableName = 'pokemon_form';
+    }
     else if (reverse) {
       junctionTableName = middle 
         ? owned + '_' + middle + '_' + owner
@@ -171,6 +177,38 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
           junctionOwnedGen = 'attacking_ptype_generation_id';
         }
         break;
+      case 'pokemon_evolution':
+        // 'owned' is the evolution
+        if(!reverse) {
+          junctionOwnerID = 'prevolution_id';
+          junctionOwnerGen = 'prevolution_generation_id';
+          junctionOwnedID = 'evolution_id';
+          junctionOwnedGen = 'evolution_generation_id';
+        }
+        // 'owned' is the prevolution
+        else {
+          junctionOwnerID = 'evolution_id';
+          junctionOwnerGen = 'evolution_generation_id';
+          junctionOwnedID = 'prevolution_id';
+          junctionOwnedGen = 'prevolution_generation_id';
+        }
+        break;
+      case 'pokemon_form':
+        // 'owned' is the alternate form
+        if(!reverse) {
+          junctionOwnerID = 'base_form_id';
+          junctionOwnerGen = 'base_form_generation_id';
+          junctionOwnedID = 'form_id';
+          junctionOwnedGen = 'form_generation_id';
+        }
+        // 'owned' is the base form
+        else {
+          junctionOwnerID = 'form_id';
+          junctionOwnerGen = 'form_generation_id';
+          junctionOwnedID = 'base_form_id';
+          junctionOwnedGen = 'base_form_generation_id';
+        }
+        break;
       default:
         junctionOwnerID = owner + '_id';
         junctionOwnerGen = owner + '_generation_id';
@@ -204,18 +242,18 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
       })]]
     )
     .then( ([results, fields]) => {
-      console.log(`
-      SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
-      ${onString}
-      ${whereString}
-      ${paginationString}
-      `)
+      // console.log(`
+      // SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
+      // ${onString}
+      // ${whereString}
+      // ${paginationString}
+      // `)
       // console.log(entityPKs.map(d => {
       //   return isGenDependent(owner) 
       //     ? [d.genID, d.entityID]
       //     : [d.entityID];
       // }))
-      console.log(results);
+      // console.log(results);
       return results;
     })
     .catch(console.log);

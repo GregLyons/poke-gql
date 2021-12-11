@@ -89,9 +89,14 @@ type Move implements Node {
   formattedName: String!
 
   """
+  The Generation of this Move.
+  """ 
+  generation: MoveGenerationConnection
+
+  """
   The Generation in which the Move was introduced.
   """ 
-  introduced: MoveGenerationConnection
+  introduced: MoveIntroductionConnection
 
   modifiesStat: MoveModifiesStatConnection
 
@@ -197,6 +202,15 @@ type MoveGenerationConnection implements Connection {
 }
 
 type MoveGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type MoveIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput): [MoveIntroductionEdge!]! 
+  count: Int!
+}
+
+type MoveIntroductionEdge implements Edge {  
   node: Generation!
 }
 

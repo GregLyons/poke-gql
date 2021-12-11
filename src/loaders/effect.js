@@ -7,16 +7,20 @@ let effect = {
     return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'effect', '', true));
   },
   
+  effect(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'item'));
+  },
+  
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
+
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },
   
   item(pagination) {
     return new DataLoader(basicJunctionBatcher(pagination, 'item', 'effect', '', true));
-  },
-
-  effect(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item'));
   },
 
   move(pagination) {

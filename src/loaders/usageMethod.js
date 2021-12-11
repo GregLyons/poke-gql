@@ -11,6 +11,10 @@ let usagemethod = {
     return new DataLoader(basicJunctionBatcher(pagination, 'item', 'usageMethod', 'boosts', true));
   },
 
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
+
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },

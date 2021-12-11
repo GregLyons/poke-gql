@@ -63,9 +63,14 @@ type Ability implements Node {
   formattedName: String!
 
   """
+  The Generation of this Ability.
+  """ 
+  generation: AbilityGenerationConnection
+
+  """
   The Generation in which the Ability was introduced.
   """ 
-  introduced: AbilityGenerationConnection
+  introduced: AbilityIntroductionConnection
 
   modifiesStat: AbilityModifiesStatConnection
 
@@ -115,6 +120,15 @@ type AbilityGenerationConnection implements Connection {
 }
 
 type AbilityGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type AbilityIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput): [AbilityIntroductionEdge!]! 
+  count: Int!
+}
+
+type AbilityIntroductionEdge implements Edge {  
   node: Generation!
 }
 

@@ -17,10 +17,14 @@
 const {
   abilityEdge,
   basicEdge,
+  evolutionEdge,
+  formEdge,
   learnsetEdge,
 
-  introductionConnection,
   basicJunctionConnection,
+  generationConnection,
+  introductionConnection,
+  
   parentPK,
 } = require('./helpers.js');
 const pokemonPK = parentPK('pokemon');
@@ -80,13 +84,7 @@ const Query = {
 /*
     id
     enables
-    enablesItem
-    enablesMove
-    evolvesTo
-    evolvesFrom
-    formData
     requires
-    requiresItem // TODO: put in db
     quadDamageFrom
     doubleDamageFrom
     neutralDamageFrom
@@ -116,7 +114,15 @@ const Pokemon = {
 
   enablesMove: pokemonPK,
 
-  formattedName: parent => parent.pokemon_formattedName,
+  evolvesFrom: pokemonPK,
+
+  evolvesTo: pokemonPK,
+
+  formattedName: parent => parent.pokemon_formatted_name,
+
+  forms: pokemonPK,
+
+  generation: parent => parent.generation_id,
   
   height: parent => parent.pokemon_height,
 
@@ -150,15 +156,27 @@ const ConnectionsAndEdges = {
   PokemonEnablesMoveConnection: basicJunctionConnection('pokemon', 'move', 'enables'),
   PokemonEnablesMoveEdge: basicEdge(),
 
-  PokemonGenerationConnection: introductionConnection('pokemon'),
+  PokemonEvolutionConnection: basicJunctionConnection('pokemon', 'evolvesTo'),
+  PokemonEvolutionEdge: evolutionEdge(),
+
+  PokemonFormConnection: basicJunctionConnection('pokemon', 'form'),
+  PokemonFormEdge: formEdge(),
+  
+  PokemonGenerationConnection: generationConnection('pokemon'),
   PokemonGenerationEdge: basicEdge(),
 
+  PokemonIntroductionConnection: introductionConnection('pokemon'),
+  PokemonIntroductionEdge: basicEdge(),
+  
   PokemonMoveConnection: basicJunctionConnection('pokemon', 'move'),
   PokemonMoveEdge: learnsetEdge(),
+  
+  PokemonPrevolutionConnection: basicJunctionConnection('pokemon', 'evolvesFrom'),
+  PokemonPrevolutionEdge: evolutionEdge(),
 
   PokemonRequiresItemConnection: basicJunctionConnection('pokemon', 'item', 'requires'),
   PokemonRequiresItemEdge: basicEdge(),
-
+  
   PokemonTypeConnection: basicJunctionConnection('pokemon', 'type'),
   PokemonTypeEdge: basicEdge(),
 }

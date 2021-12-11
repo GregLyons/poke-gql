@@ -78,9 +78,14 @@ type Item implements Node {
   formattedName: String!
 
   """
+  The Generation of this Item.
+  """ 
+  generation: ItemGenerationConnection
+
+  """
   The Generation in which the Item was introduced.
   """
-  introduced: ItemGenerationConnection
+  introduced: ItemIntroductionConnection
 
   modifiesStat: ItemModifiesStatConnection
 
@@ -149,6 +154,15 @@ type ItemGenerationConnection implements Connection {
 }
 
 type ItemGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type ItemIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput): [ItemIntroductionEdge!]! 
+  count: Int!
+}
+
+type ItemIntroductionEdge implements Edge {  
   node: Generation!
 }
 

@@ -25,6 +25,8 @@ const entityNameToTableName = entityName => {
   }
 }
 
+// 
+//#region
 
 // Returns the generation_id of the parent.
 const parentGenID = parent => parent.generation_id;
@@ -39,6 +41,8 @@ const parentPK = (entityName) => {
     }
   };
 }  
+
+//#endregion
 
 const abilityEdge = () => {
   return {
@@ -75,6 +79,20 @@ const causeStatusEdge = () => {
   }
 }
 
+const evolutionEdge = () => {
+  return {
+    node: parent => parent,
+    method: parent => parent.evolution_method,
+  }
+}
+
+const formEdge = () => {
+  return {
+    node: parent => parent,
+    class: parent => parent.form_class.toUpperCase(),
+  }
+}
+
 const learnsetEdge = () => {
   return {
     node: parent => parent,
@@ -103,6 +121,26 @@ const powerEdge = () => {
   return {
     node: parent => parent,
     power: parent => parent.power,
+  }
+}
+
+const generationConnection = entityName => {
+  // 'parent' = 'generation'
+  return {
+    edges: async (parent, args, context, info) => {
+      return await context.loaders[entityName].generation(args.pagination).load(parent);
+    },
+
+    count: async (parent, args, context, info) => {
+      return await context.db.promise().query(
+        `
+          SELECT COUNT(*) FROM 'generation'
+          WHERE generation_id = ${parent}
+        `
+      )
+      .then( ([results, fields]) => { return Object.values(results[0])[0] })
+      .catch(console.log);
+    },
   }
 }
 
@@ -148,13 +186,17 @@ module.exports = {
   abilityEdge,
   basicEdge,
   causeStatusEdge,
+  evolutionEdge,
+  formEdge,
   learnsetEdge,
   modifyStatEdge,
   multiplierEdge,
   powerEdge,
 
-  introductionConnection,
   basicJunctionConnection,
+  generationConnection,
+  introductionConnection,
+  
   parentGenID,
   parentPK,
 }

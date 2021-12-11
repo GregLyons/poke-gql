@@ -15,6 +15,22 @@ let pokemon = {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'pokemon', 'requires', true));
   },
 
+  evolvesFrom(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'pokemon', 'evolution', true));
+  },
+
+  evolvesTo(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'pokemon', 'evolution'));
+  },
+
+  form(pagination) {
+    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'pokemon', 'form'));
+  },
+
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
+
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },

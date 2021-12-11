@@ -19,6 +19,10 @@ let type = {
     return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'requires', true));
   },
   
+  generation(pagination) {
+    return new DataLoader(batchGens(pagination));
+  },
+
   introduced(pagination) {
     return new DataLoader(batchGens(pagination));
   },

@@ -20,6 +20,7 @@ const {
   multiplierEdge,
   
   basicJunctionConnection,
+  generationConnection,
   introductionConnection,
 } = require('./helpers.js');
 const usageMethodPK = parentPK('usageMethod');
@@ -84,13 +85,11 @@ const UsageMethod = {
 
   abilityResists: usageMethodPK,
 
-  formattedName: async (parent, args, context, info) => {
-    return parent.usage_method_formatted_name;
-  },
+  formattedName: parent => parent.usage_method_formatted_name,
+
+  generation: parent => parent.generation_id,
   
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
+  introduced: parent => parent.introduced,
 
   itemBoosts: usageMethodPK,
 
@@ -98,9 +97,7 @@ const UsageMethod = {
 
   moves: usageMethodPK,
   
-  name: async (parent, args, context, info) => {
-    return parent.usage_method_name
-  },
+  name: parent => parent.usage_method_name,
 }
 
 //#endregion
@@ -115,8 +112,11 @@ const ConnectionsAndEdges = {
   UsageMethodBoostedByItemConnection: basicJunctionConnection('usageMethod', 'item', 'boostedBy'),
   UsageMethodBoostedByItemEdge: multiplierEdge(),
 
-  UsageMethodGenerationConnection: introductionConnection('usageMethod'),
+  UsageMethodGenerationConnection: generationConnection('usageMethod'),
   UsageMethodGenerationEdge: basicEdge(),
+
+  UsageMethodIntroductionConnection: introductionConnection('usageMethod'),
+  UsageMethodIntroductionEdge: basicEdge(),
 
   UsageMethodMoveConnection: basicJunctionConnection('usageMethod', 'move'),
   UsageMethodMoveEdge: basicEdge(),

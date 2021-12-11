@@ -54,12 +54,12 @@ type Generation implements Node {
   """
   The roman numeral for the Generation.
   """
-  genCode: GenerationCode!
+  code: GenerationCode!
 
   """
   The literal number of the Generation (e.g. '1' for Generation 1, '2' for Generation 2, etc.).
   """
-  genNumber: Int!
+  number: Int!
 
   """
   All Items present in this Generation.
