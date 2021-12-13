@@ -28,22 +28,8 @@ extend type Query {
   'types' is an array of type names in snake_case, and will return Moves whose Type belongs to 'types'.
   """
   moves(
-    cursor: String,
-    limit: Int,
-    generation: Int = 8,
-    category: String,
-    contains: String,
-    endsWith: String,
-    introducedAfter: Int,
-    introducedBefore: Int,
-    maxPower: Int,
-    minPower: Int,
-    maxAccuracy: Int,
-    minAccuracy: Int,
-    priority: Int,
-    startsWith: String,
-    type: String,
-    types: [String],
+    pagination: PaginationInput
+    filter: ItemFilter
   ): [Move!]!
 }
 
@@ -175,7 +161,7 @@ type Move implements Node {
 # DESCRIPTION 
 
 type MoveDescriptionConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveDescriptionEdge!]!
+  edges(pagination: PaginationInput filter: DescriptionFilter): [MoveDescriptionEdge!]!
   count: Int!
 }
 
@@ -186,7 +172,7 @@ type MoveDescriptionEdge implements Edge {
 # EFFECT
 
 type MoveEffectConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveEffectEdge!]! 
+  edges(pagination: PaginationInput filter: EffectFilter): [MoveEffectEdge!]! 
   count: Int!
 }
 
@@ -197,7 +183,7 @@ type MoveEffectEdge implements Edge {
 # GENERATION
 
 type MoveGenerationConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveGenerationEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [MoveGenerationEdge!]! 
   count: Int!
 }
 
@@ -206,7 +192,7 @@ type MoveGenerationEdge implements Edge {
 }
 
 type MoveIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveIntroductionEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [MoveIntroductionEdge!]! 
   count: Int!
 }
 
@@ -217,7 +203,7 @@ type MoveIntroductionEdge implements Edge {
 # ITEM
 
 type MoveRequiresItemConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveRequiresItemEdge!]!
+  edges(pagination: PaginationInput filter: ItemFilter): [MoveRequiresItemEdge!]!
   count: Int!
 }
 
@@ -228,7 +214,7 @@ type MoveRequiresItemEdge implements Edge {
 # MOVE
 
 type MoveEnablesMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveEnablesMoveEdge!]!
+  edges(pagination: PaginationInput filter: MoveFilter): [MoveEnablesMoveEdge!]!
   count: Int!
 }
 
@@ -237,7 +223,7 @@ type MoveEnablesMoveEdge implements Edge {
 }
 
 type MoveRequiresMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveRequiresMoveEdge!]!
+  edges(pagination: PaginationInput filter: MoveFilter): [MoveRequiresMoveEdge!]!
   count: Int!
 }
 
@@ -248,8 +234,8 @@ type MoveRequiresMoveEdge implements Edge {
 # POKEMON
 
 type MovePokemonConnection implements Connection {
+  edges(pagination: PaginationInput filter: PokemonFilter): [MovePokemonEdge!]!
   count: Int!
-  edges(pagination: PaginationInput): [MovePokemonEdge!]!
 }
 
 type MovePokemonEdge implements Edge {  
@@ -272,7 +258,7 @@ type MovePokemonEdge implements Edge {
 }
 
 type MoveRequiresPokemonConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveRequiresPokemonEdge!]!
+  edges(pagination: PaginationInput filter: PokemonFilter): [MoveRequiresPokemonEdge!]!
   count: Int!
 }
 
@@ -283,7 +269,7 @@ type MoveRequiresPokemonEdge implements Edge {
 # STAT
 
 type MoveModifiesStatConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveModifiesStatEdge!]!
+  edges(pagination: PaginationInput filter: StatFilter): [MoveModifiesStatEdge!]!
   count: Int!
 }
 
@@ -314,7 +300,7 @@ type MoveModifiesStatEdge implements Edge {
 # STATUS
 
 type MoveCausesStatusConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveCausesStatusEdge!]!
+  edges(pagination: PaginationInput filter: StatusFilter): [MoveCausesStatusEdge!]!
   count: Int!
 }
 
@@ -328,7 +314,7 @@ type MoveCausesStatusEdge implements Edge {
 }
 
 type MoveResistsStatusConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveResistsStatusEdge!]!
+  edges(pagination: PaginationInput filter: StatusFilter): [MoveResistsStatusEdge!]!
   count: Int!
 }
 
@@ -339,7 +325,7 @@ type MoveResistsStatusEdge implements Edge {
 # TYPE
 
 type MoveTypeConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveTypeEdge!]!
+  edges(pagination: PaginationInput filter: TypeFilter): [MoveTypeEdge!]!
   count: Int!
 }
 
@@ -348,7 +334,7 @@ type MoveTypeEdge implements Edge {
 }
 
 type MoveRequiresTypeConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveRequiresTypeEdge!]!
+  edges(pagination: PaginationInput filter: TypeFilter): [MoveRequiresTypeEdge!]!
   count: Int!
 }
 
@@ -359,7 +345,7 @@ type MoveRequiresTypeEdge implements Edge {
 # USAGE METHOD
 
 type MoveUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput): [MoveUsageMethodEdge!]!
+  edges(pagination: PaginationInput filter: UsageMethodFilter): [MoveUsageMethodEdge!]!
   count: Int!
 }
 
@@ -406,3 +392,34 @@ enum TargetClass {
 union MoveRequiresConnection = MoveRequiresItemConnection | MoveRequiresMoveConnection | MoveRequiresPokemonConnection | MoveRequiresTypeConnection
 
 union MoveEnablesConnection = MoveEnablesMoveConnection
+
+#
+# INPUTS
+#
+
+input MoveFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
+}
+
+
+# cursor: String,
+# limit: Int,
+# generation: Int = 8,
+# category: String,
+# contains: String,
+# endsWith: String,
+# introducedAfter: Int,
+# introducedBefore: Int,
+# maxPower: Int,
+# minPower: Int,
+# maxAccuracy: Int,
+# minAccuracy: Int,
+# priority: Int,
+# startsWith: String,
+# type: String,
+# types: [String],

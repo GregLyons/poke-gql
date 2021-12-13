@@ -28,29 +28,8 @@ extend type Query {
   'typing' is an array of type names, and it will return Pokemon whose set of Types matches the set of type names in 'typing'. E.g. 'heatran' will be matched by ['fire', 'steel'], among other Pokemon of the Fire/Steel typing, but 'charmander' will not be since it fails to be have the Steel Type.
   """
   pokemon(
-    cursor: String,
-    limit: Int,
-    generation: Int = 8,
-    contains: String,
-    endsWith: String,
-    introducedAfter: Int,
-    introducedBefore: Int,
-    maxHP: Int,
-    minHP: Int,
-    maxAttack: Int,
-    minAttack: Int,
-    maxDefense: Int,
-    minDefense: Int,
-    maxSpecialAttack: Int,
-    minSpecialAttack: Int,
-    maxSpecialDefense: Int,
-    minSpecialDefense: Int,
-    maxSpeed: Int,
-    minSpeed: Int,
-    startsWith: String,
-    type: String,
-    types: [String],
-    typing: [String],
+    pagination: PaginationInput
+    filter: PokemonFilter
   ): [Pokemon!]!
 }
 
@@ -247,7 +226,7 @@ type BaseStats {
 
 type PokemonAbilityConnection implements Connection {
   count: Int!
-  edges(pagination: PaginationInput): [PokemonAbilityEdge!]!
+  edges(pagination: PaginationInput filter: AbilityFilter): [PokemonAbilityEdge!]!
 }
 
 type PokemonAbilityEdge implements Edge {  
@@ -262,7 +241,7 @@ type PokemonAbilityEdge implements Edge {
 # GENERATION
 
 type PokemonGenerationConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonGenerationEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [PokemonGenerationEdge!]! 
   count: Int!
 }
 
@@ -271,7 +250,7 @@ type PokemonGenerationEdge implements Edge {
 }
 
 type PokemonIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonIntroductionEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [PokemonIntroductionEdge!]! 
   count: Int!
 }
 
@@ -282,7 +261,7 @@ type PokemonIntroductionEdge implements Edge {
 # ITEM
 
 type PokemonEnablesItemConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonEnablesItemEdge!]! 
+  edges(pagination: PaginationInput filter: ItemFilter): [PokemonEnablesItemEdge!]! 
   count: Int!
 }
 
@@ -291,7 +270,7 @@ type PokemonEnablesItemEdge implements Edge {
 }
 
 type PokemonRequiresItemConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonRequiresItemEdge!]! 
+  edges(pagination: PaginationInput filter: ItemFilter): [PokemonRequiresItemEdge!]! 
   count: Int!
 }
 
@@ -302,7 +281,7 @@ type PokemonRequiresItemEdge implements Edge {
 # MOVE
 
 type PokemonEnablesMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonEnablesMoveEdge!]! 
+  edges(pagination: PaginationInput filter: MoveFilter): [PokemonEnablesMoveEdge!]! 
   count: Int!
 }
 
@@ -311,8 +290,8 @@ type PokemonEnablesMoveEdge implements Edge {
 }
 
 type PokemonMoveConnection implements Connection {
+  edges(pagination: PaginationInput filter: MoveFilter): [PokemonMoveEdge!]!
   count: Int!
-  edges(pagination: PaginationInput): [PokemonMoveEdge!]!
 }
 
 type PokemonMoveEdge implements Edge {  
@@ -337,7 +316,7 @@ type PokemonMoveEdge implements Edge {
 # POKEMON
 
 type PokemonEvolutionConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonEvolutionEdge!]!
+  edges(pagination: PaginationInput filter: PokemonFilter): [PokemonEvolutionEdge!]!
   count: Int!
 }
 
@@ -355,7 +334,7 @@ type PokemonEvolutionEdge implements Edge {
 }
 
 type PokemonPrevolutionConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonPrevolutionEdge!]!
+  edges(pagination: PaginationInput filter: PokemonFilter): [PokemonPrevolutionEdge!]!
   count: Int!
 }
 
@@ -373,7 +352,7 @@ type PokemonPrevolutionEdge implements Edge {
 }
 
 type PokemonFormConnection implements Connection {
-  edges(pagination: PaginationInput): [PokemonFormEdge!]!
+  edges(pagination: PaginationInput filter: PokemonFilter): [PokemonFormEdge!]!
   count: Int!
 }
 
@@ -397,8 +376,8 @@ type PokemonFormEdge implements Edge {
 # TYPE
 
 type PokemonTypeConnection implements Connection {
+  edges(pagination: PaginationInput filter: TypeFilter): [PokemonTypeEdge!]!
   count: Int!
-  edges(pagination: PaginationInput): [PokemonTypeEdge!]!
 }
 
 type PokemonTypeEdge implements Edge {  
@@ -430,3 +409,40 @@ enum FormClass {
 #
 
 union PokemonEnablesConnection = PokemonEnablesItemConnection | PokemonEnablesMoveConnection
+
+#
+# INPUTS
+#
+
+input PokemonFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
+}
+
+# cursor: String,
+# limit: Int,
+# generation: Int = 8,
+# contains: String,
+# endsWith: String,
+# introducedAfter: Int,
+# introducedBefore: Int,
+# maxHP: Int,
+# minHP: Int,
+# maxAttack: Int,
+# minAttack: Int,
+# maxDefense: Int,
+# minDefense: Int,
+# maxSpecialAttack: Int,
+# minSpecialAttack: Int,
+# maxSpecialDefense: Int,
+# minSpecialDefense: Int,
+# maxSpeed: Int,
+# minSpeed: Int,
+# startsWith: String,
+# type: String,
+# types: [String],
+# typing: [String],

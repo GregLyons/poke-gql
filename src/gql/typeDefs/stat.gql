@@ -18,14 +18,8 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   stats(
-    cursor: String,
-    limit: Int,
-    generation: Int = 8,
-    contains: String,
-    endsWith: String,
-    introducedAfter: Int,
-    introducedBefore: Int,
-    startsWith: String,
+    pagination: PaginationInput
+    filter: StatFilter
   ): [Stat!]!
 }
 
@@ -60,7 +54,7 @@ type Stat implements Node {
 # ABILITY
 
 type StatModifiedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput): [StatModifiedByAbilityEdge!]!
+  edges(pagination: PaginationInput filter: AbilityFilter): [StatModifiedByAbilityEdge!]!
   count: Int!
 }
 
@@ -93,7 +87,7 @@ type StatModifiedByAbilityEdge implements Edge {
 # ITEM
 
 type StatModifiedByItemConnection implements Connection {
-  edges(pagination: PaginationInput): [StatModifiedByItemEdge!]!
+  edges(pagination: PaginationInput filter: ItemFilter): [StatModifiedByItemEdge!]!
   count: Int!
 }
 
@@ -126,7 +120,7 @@ type StatModifiedByItemEdge implements Edge {
 # MOVE
 
 type StatModifiedByMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [StatModifiedByMoveEdge!]!
+  edges(pagination: PaginationInput filter: MoveFilter): [StatModifiedByMoveEdge!]!
   count: Int!
 }
 
@@ -152,4 +146,17 @@ type StatModifiedByMoveEdge implements Edge {
   The recipient of the Stat modification.
   """
   recipient: Recipient!
+}
+
+#
+# INPUTS
+#
+
+input StatFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
 }

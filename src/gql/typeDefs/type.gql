@@ -20,14 +20,8 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   types(
-    cursor: String,
-    limit: Int,
-    generation: Int = 8,
-    contains: String,
-    endsWith: String,
-    introducedAfter: Int,
-    introducedBefore: Int,
-    startsWith: String,
+    pagination: PaginationInput
+    filter: TypeFilter
   ): [Type!]!
 }
 
@@ -149,7 +143,7 @@ type Type implements Node {
 # ABILITY
 
 type TypeBoostedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeBoostedByAbilityEdge!]!
+  edges(pagination: PaginationInput filter: AbilityFilter): [TypeBoostedByAbilityEdge!]!
   count: Int!
 }
 
@@ -159,7 +153,7 @@ type TypeBoostedByAbilityEdge implements Edge {
 }
 
 type TypeResistedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeResistedByAbilityEdge!]!
+  edges(pagination: PaginationInput filter: AbilityFilter): [TypeResistedByAbilityEdge!]!
   count: Int!
 }
 
@@ -171,7 +165,7 @@ type TypeResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type TypeGenerationConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeGenerationEdge!]! 
+  edges(pagination: PaginationInput filter: ItemFilter): [TypeGenerationEdge!]! 
   count: Int!
 }
 
@@ -180,7 +174,7 @@ type TypeGenerationEdge implements Edge {
 }
 
 type TypeIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeIntroductionEdge!]! 
+  edges(pagination: PaginationInput filter: ItemFilter): [TypeIntroductionEdge!]! 
   count: Int!
 }
 
@@ -191,7 +185,7 @@ type TypeIntroductionEdge implements Edge {
 # ITEM
 
 type TypeNaturalGiftConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeNaturalGiftEdge!]!
+  edges(pagination: PaginationInput filter: ItemFilter): [TypeNaturalGiftEdge!]!
   count: Int!
 }
 
@@ -205,7 +199,7 @@ type TypeNaturalGiftEdge implements Edge {
 }
 
 type TypeBoostedByItemConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeBoostedByItemEdge!]!
+  edges(pagination: PaginationInput filter: ItemFilter): [TypeBoostedByItemEdge!]!
   count: Int!
 }
 
@@ -215,7 +209,7 @@ type TypeBoostedByItemEdge implements Edge {
 }
 
 type TypeResistedByItemConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeResistedByItemEdge!]!
+  edges(pagination: PaginationInput filter: ItemFilter): [TypeResistedByItemEdge!]!
   count: Int!
 }
 
@@ -227,7 +221,7 @@ type TypeResistedByItemEdge implements Edge {
 # MOVE
 
 type TypeMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeMoveEdge!]!
+  edges(pagination: PaginationInput filter: MoveFilter): [TypeMoveEdge!]!
   count: Int!
 }
 
@@ -236,7 +230,7 @@ type TypeMoveEdge implements Edge {
 }
 
 type TypeEnablesMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [TypeEnablesMoveEdge!]!
+  edges(pagination: PaginationInput filter: MoveFilter): [TypeEnablesMoveEdge!]!
   count: Int!
 }
 
@@ -247,7 +241,7 @@ type TypeEnablesMoveEdge implements Edge {
 # POKEMON
 
 type TypePokemonConnection implements Connection {
-  edges(pagination: PaginationInput): [TypePokemonEdge!]!
+  edges(pagination: PaginationInput filter: PokemonFilter): [TypePokemonEdge!]!
   count: Int!
 }
 
@@ -258,7 +252,7 @@ type TypePokemonEdge implements Edge {
 # TYPE
 
 type DefensiveTypeMatchupConnection implements Connection {
-  edges(pagination: PaginationInput): [DefensiveTypeMatchupEdge!]!
+  edges(pagination: PaginationInput filter: TypeFilter): [DefensiveTypeMatchupEdge!]!
   count: Int!
 }
 
@@ -272,7 +266,7 @@ type DefensiveTypeMatchupEdge implements Edge {
 }
 
 type OffensiveTypeMatchupConnection implements Connection {
-  edges(pagination: PaginationInput): [OffensiveTypeMatchupEdge!]!
+  edges(pagination: PaginationInput filter: TypeFilter): [OffensiveTypeMatchupEdge!]!
   count: Int!
 }
 
@@ -283,4 +277,17 @@ type OffensiveTypeMatchupEdge implements Edge {
   The multiplier of the Type-matchup, with the starting node as the attacking Type and the ending node as the defending Type.
   """
   multiplier: Float!
+}
+
+#
+# INPUTS
+#
+
+input TypeFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
 }

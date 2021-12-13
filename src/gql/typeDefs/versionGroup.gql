@@ -16,10 +16,8 @@ extend type Query {
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
   """
   versionGroups(
-    cursor: String,
-    limit: Int,
-    introducedAfter: Int,
-    introducedBefore: Int,
+    pagination: PaginationInput
+    filter: VersionGroupFilter
   ): [VersionGroup!]!
 }
 
@@ -57,7 +55,7 @@ type VersionGroup implements Node {
   """
   The Generation in which the VersionGroup was introduced. 
   """
-  introduced: VersionGroupGenerationConnection
+  introduced: VersionGroupIntroductionConnection
 
   sprites: VersionGroupSpriteConnection
 }
@@ -69,7 +67,7 @@ type VersionGroup implements Node {
 # DESCRIPTION
 
 type VersionGroupDescriptionConnection implements Connection {
-  edges(pagination: PaginationInput): [VersionGroupDescriptionEdge!]! 
+  edges(pagination: PaginationInput filter: DescriptionFilter): [VersionGroupDescriptionEdge!]! 
   count: Int!
 }
 
@@ -79,8 +77,8 @@ type VersionGroupDescriptionEdge implements Edge {
 
 # GENERATION
 
-type VersionGroupGenerationConnection implements Connection {
-  edges(pagination: PaginationInput): [VersionGroupGenerationEdge!]! 
+type VersionGroupIntroductionConnection implements Connection {
+  edges(pagination: PaginationInput filter: GenerationFilter): [VersionGroupIntroductionEdge!]! 
   count: Int!
 }
 
@@ -91,10 +89,23 @@ type VersionGroupGenerationEdge implements Edge {
 # SPRITE
 
 type VersionGroupSpriteConnection implements Connection {
-  edges(pagination: PaginationInput): [VersionGroupSpriteEdge!]! 
+  edges(pagination: PaginationInput filter: SpriteFilter): [VersionGroupSpriteEdge!]! 
   count: Int!
 }
 
 type VersionGroupSpriteEdge implements Edge {  
   node: Sprite!
+}
+
+#
+# INPUTS
+#
+
+input VersionGroupFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
 }

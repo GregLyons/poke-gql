@@ -18,14 +18,8 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   effects(
-    cursor: String,
-    limit: Int,
-    generation: Int = 8,
-    contains: String,
-    endsWith: String,
-    introducedAfter: Int,
-    introducedBefore: Int,
-    startsWith: String,
+    pagination: PaginationInput
+    filter: EffectFilter
   ): [Effect!]!
 }
 
@@ -35,8 +29,7 @@ extend type Query {
 
 type Effect implements Node {
   id: ID!
-
-  abilities: EffectAbilityConnection
+abilities: EffectAbilityConnection
 
   """
   The name of the Effect in Title Case, with appropriate punctuation.
@@ -76,7 +69,7 @@ type Effect implements Node {
 # ABILITY
 
 type EffectAbilityConnection implements Connection {
-  edges(pagination: PaginationInput): [EffectAbilityEdge!]! 
+  edges(pagination: PaginationInput filter: AbilityFilter): [EffectAbilityEdge!]! 
   count: Int!
 }
 
@@ -87,7 +80,7 @@ type EffectAbilityEdge implements Edge {
 # GENERATION
 
 type EffectGenerationConnection implements Connection {
-  edges(pagination: PaginationInput): [EffectGenerationEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [EffectGenerationEdge!]! 
   count: Int!
 }
 
@@ -96,7 +89,7 @@ type EffectGenerationEdge implements Edge {
 }
 
 type EffectIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput): [EffectIntroductionEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [EffectIntroductionEdge!]! 
   count: Int!
 }
 
@@ -107,7 +100,7 @@ type EffectIntroductionEdge implements Edge {
 # ITEM
 
 type EffectItemConnection implements Connection {
-  edges(pagination: PaginationInput): [EffectItemEdge!]! 
+  edges(pagination: PaginationInput filter: ItemFilter): [EffectItemEdge!]! 
   count: Int!
 }
 
@@ -118,10 +111,23 @@ type EffectItemEdge implements Edge {
 # MOVE
 
 type EffectMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [EffectMoveEdge!]! 
+  edges(pagination: PaginationInput filter: MoveFilter): [EffectMoveEdge!]! 
   count: Int!
 }
 
 type EffectMoveEdge implements Edge {  
   node: Move!
+}
+
+#
+# INPUTS
+# 
+
+input EffectFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
 }

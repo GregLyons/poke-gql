@@ -26,8 +26,20 @@ For example, the 'moves' field in a Pokemon Node has type PokemonMoveConnection.
 Continuing the example, PokemonMoveConnection has a counterpart in MovePokemonConnection, which is the type of the 'pokemon' field in a Move Node. The corresponding 'edges' field type is then '[MovePokemonEdge!]!', and the 'node' field of the MovePokemonEdge type has type 'Pokemon!'. 
 """
 interface Connection {
-  edges(pagination: PaginationInput): [Edge!]!
+  edges(pagination: PaginationInput filter: GenerationFilter): [Edge!]!
   count: Int!
+}
+
+"""
+Interface for filtering entities.
+"""
+interface Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
 }
 
 """
@@ -40,6 +52,7 @@ input PaginationInput {
   sortBy: SortByEnum = ASC
   search: String = ""
 }
+
 
 enum SortByEnum {
   ASC,

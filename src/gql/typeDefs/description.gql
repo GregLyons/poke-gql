@@ -49,7 +49,7 @@ type Description implements Node {
 # ABILITY
 
 type DescriptionAbilityConnection implements Connection {
-  edges(pagination: PaginationInput): [DescriptionAbilityEdge!]!
+  edges(pagination: PaginationInput filter: AbilityFilter): [DescriptionAbilityEdge!]!
   count: Int!
 }
 
@@ -60,7 +60,7 @@ type DescriptionAbilityEdge implements Edge {
 # ITEM
 
 type DescriptionItemConnection implements Connection {
-  edges(pagination: PaginationInput): [DescriptionItemEdge!]!
+  edges(pagination: PaginationInput filter: ItemFilter): [DescriptionItemEdge!]!
   count: Int!
 }
 
@@ -71,7 +71,7 @@ type DescriptionItemEdge implements Edge {
 # MOVE 
 
 type DescriptionMoveConnection implements Connection {
-  edges(pagination: PaginationInput): [DescriptionMoveEdge!]!
+  edges(pagination: PaginationInput filter: MoveFilter): [DescriptionMoveEdge!]!
   count: Int!
 }
 
@@ -82,7 +82,7 @@ type DescriptionMoveEdge implements Edge {
 # VERSION GROUP 
 
 type DescriptionVersionGroupConnection implements Connection {
-  edges(pagination: PaginationInput): [DescriptionVersionGroupEdge!]!
+  edges(pagination: PaginationInput filter: VersionGroupFilter): [DescriptionVersionGroupEdge!]!
   count: Int!
 }
 
@@ -108,3 +108,16 @@ enum DescriptionClass {
 #
 
 union DescriptionEntityConnection = DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection
+
+#
+# INPUTS
+#
+
+input DescriptionFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
+}

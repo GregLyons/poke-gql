@@ -9,8 +9,8 @@ extend type Query {
   Select Sprites, with optional cursor-based pagination.
   """
   sprites(
-    cursor: String,
-    limit: Int,
+    pagination: PaginationInput
+    filter: SpriteFilter
   ): [Sprite!]!
 }
 
@@ -85,7 +85,7 @@ type Sprite implements Node {
 # ITEM
 
 type SpriteItemConnection implements Connection {
-  edges(pagination: PaginationInput): [SpriteItemEdge!]! 
+  edges(pagination: PaginationInput filter: ItemFilter): [SpriteItemEdge!]! 
   count: Int!
 }
 
@@ -96,7 +96,7 @@ type SpriteItemEdge implements Edge {
 # POKEMON
 
 type SpritePokemonConnection implements Connection {
-  edges(pagination: PaginationInput): [SpritePokemonEdge!]! 
+  edges(pagination: PaginationInput filter: PokemonFilter): [SpritePokemonEdge!]! 
   count: Int!
 }
 
@@ -107,7 +107,7 @@ type SpritePokemonEdge implements Edge {
 # VERSION GROUP
 
 type SpriteVersionGroupConnection implements Connection {
-  edges(pagination: PaginationInput): [SpriteVersionGroupEdge!]! 
+  edges(pagination: PaginationInput filter: VersionGroupFilter): [SpriteVersionGroupEdge!]! 
   count: Int!
 }
 
@@ -132,3 +132,16 @@ enum SpriteClass {
 #
 
 union SpriteEntityConnection = SpriteItemConnection | SpritePokemonConnection
+
+#
+# INPUTS
+#
+
+input SpriteFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
+}

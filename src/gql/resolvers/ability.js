@@ -84,6 +84,7 @@ const Query = {
 /*
     id
     descriptions
+    pokemon
 */
 //#region
 

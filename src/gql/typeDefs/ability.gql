@@ -20,14 +20,8 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   abilities(
-    cursor: String,
-    limit: Int,
-    generation: Int = 8,
-    contains: String,
-    endsWith: String,
-    introducedAfter: Int,
-    introducedBefore: Int,
-    startsWith: String,
+    pagination: PaginationInput
+    filter: AbilityFilter
   ): [Ability!]!
 }
 
@@ -93,7 +87,7 @@ type Ability implements Node {
 # DESCRIPTION 
 
 type AbilityDescriptionConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityDescriptionEdge!]!
+  edges(pagination: PaginationInput filter: DescriptionFilter): [AbilityDescriptionEdge!]!
   count: Int!
 }
 
@@ -104,7 +98,7 @@ type AbilityDescriptionEdge implements Edge {
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityEffectEdge!]! 
+  edges(pagination: PaginationInput filter: EffectFilter): [AbilityEffectEdge!]! 
   count: Int!
 }
 
@@ -115,7 +109,7 @@ type AbilityEffectEdge implements Edge {
 # GENERATION
 
 type AbilityGenerationConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityGenerationEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [AbilityGenerationEdge!]! 
   count: Int!
 }
 
@@ -124,7 +118,7 @@ type AbilityGenerationEdge implements Edge {
 }
 
 type AbilityIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityIntroductionEdge!]! 
+  edges(pagination: PaginationInput filter: GenerationFilter): [AbilityIntroductionEdge!]! 
   count: Int!
 }
 
@@ -135,7 +129,7 @@ type AbilityIntroductionEdge implements Edge {
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityModifiesStatEdge!]!
+  edges(pagination: PaginationInput filter: StatFilter): [AbilityModifiesStatEdge!]!
   count: Int!
 }
 
@@ -168,7 +162,7 @@ type AbilityModifiesStatEdge implements Edge {
 # STATUS
 
 type AbilityCausesStatusConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityCausesStatusEdge!]!
+  edges(pagination: PaginationInput filter: StatusFilter): [AbilityCausesStatusEdge!]!
   count: Int!
 }
 
@@ -184,7 +178,7 @@ type AbilityCausesStatusEdge implements Edge {
 }
 
 type AbilityResistsStatusConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityResistsStatusEdge!]!
+  edges(pagination: PaginationInput filter: StatusFilter): [AbilityResistsStatusEdge!]!
   count: Int!
 }
 
@@ -195,7 +189,7 @@ type AbilityResistsStatusEdge implements Edge {
 # TYPE
 
 type AbilityBoostsTypeConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityBoostsTypeEdge!]!
+  edges(pagination: PaginationInput filter: TypeFilter): [AbilityBoostsTypeEdge!]!
   count: Int!
 }
 
@@ -209,7 +203,7 @@ type AbilityBoostsTypeEdge implements Edge {
 }
 
 type AbilityResistsTypeConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityResistsTypeEdge!]!
+  edges(pagination: PaginationInput filter: TypeFilter): [AbilityResistsTypeEdge!]!
   count: Int!
 }
 
@@ -225,7 +219,7 @@ type AbilityResistsTypeEdge implements Edge {
 # USAGE METHOD
 
 type AbilityBoostsUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityBoostsUsageMethodEdge!]!
+  edges(pagination: PaginationInput filter: UsageMethodFilter): [AbilityBoostsUsageMethodEdge!]!
   count: Int!
 }
 
@@ -239,7 +233,7 @@ type AbilityBoostsUsageMethodEdge implements Edge {
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput): [AbilityResistsUsageMethodEdge!]!
+  edges(pagination: PaginationInput filter: UsageMethodFilter): [AbilityResistsUsageMethodEdge!]!
   count: Int!
 }
 
@@ -259,4 +253,17 @@ enum Recipient {
   ALL_FOES
   TARGET
   USER
+}
+
+#
+# INPUTS
+# 
+
+input AbilityFilter implements Filter {
+  introducedAfter: Int
+  introducedBefore: Int
+
+  contains: String
+  endsWith: String
+  startsWith: String
 }
