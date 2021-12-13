@@ -448,12 +448,14 @@ input MoveFilter {
   The number of the Generation in which the Move was introduced.
   """
   introduced: Int
+
   """
-  The number of the Generation after which the Move was introduced.
+  The number of the Generation after which the Move was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the Move was introduced.
+  The number of the Generation before which the Move was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -461,22 +463,88 @@ input MoveFilter {
   The name of the Move in snake_case.
   """
   name: String
+
   """
-  Entities whose name contains the given string, case-insensitive.
+  Moves whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
-  Entities whose name ends with the given string, case-insensitive.
+  Moves whose name ends with the given string, case-insensitive.
   """
   endsWith: String
+  
   """
-  Entities whose name starts with the given string, case-insensitive.
+  Moves whose name starts with the given string, case-insensitive.
   """
   startsWith: String
 
-  maxPower: Int,
-  minPower: Int,
-  maxAccuracy: Int,
-  minAccuracy: Int,
-  priority: Int,
+
+  # STATS FILTERS
+  
+
+  """
+  Moves whose Accuracy is less than the given number, inclusive.
+  """
+  maxAccuracy: Int
+
+  """
+  Moves whose Accuracy is greater than the given number, inclusive.
+  """
+  minAccuracy: Int
+
+  """
+  Moves whose Power is less than the given number, inclusive.
+  """
+  maxPower: Int
+
+  """
+  Moves whose Power is greater than the given number, inclusive.
+  """
+  minPower: Int
+
+  """
+  Moves whose PP is less than the given number, inclusive.
+  """
+  maxPP: Int
+
+  """
+  Moves whose PP is greater than the given number, inclusive.
+  """
+  minPP: Int
+
+  """
+  Moves whose Priority is less than the given number, inclusive.
+  """
+  maxPriority: Int
+
+  """
+  Moves whose Priority is greater than the given number, inclusive.
+  """
+  minPriority: Int
+
+
+  
+  # OTHER FILTERS
+  
+
+  """
+  Only select Moves which bypass accuracy checks.
+  """
+  bypassAccuracy: Boolean
+
+  """
+  Moves of the given category, e.g. 'PHYSICAL', 'SPECIAL'.
+  """
+  category: MoveCategory
+
+  """
+  Only select Moves which make contact.
+  """
+  contact: Boolean
+
+  """
+  Moves of the given target class, e.g. 'ALL', 'ANY', 'ADJACENT_FOE', 'USER'.
+  """
+  target: TargetClass
 }

@@ -174,12 +174,14 @@ input UsageMethodFilter {
   The number of the Generation in which the UsageMethod was introduced.
   """
   introduced: Int
+
   """
-  The number of the Generation after which the UsageMethod was introduced.
+  The number of the Generation after which the UsageMethod was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the UsageMethod was introduced.
+  The number of the Generation before which the UsageMethod was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -187,14 +189,17 @@ input UsageMethodFilter {
   The name of the UsageMethod in snake_case.
   """
   name: String
+
   """
   Entities whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
   Entities whose name ends with the given string, case-insensitive.
   """
   endsWith: String
+
   """
   Entities whose name starts with the given string, case-insensitive.
   """

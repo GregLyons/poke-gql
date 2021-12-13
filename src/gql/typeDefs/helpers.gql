@@ -54,12 +54,12 @@ interface Filter {
   introduced: Int
 
   """
-  The number of the Generation after which the entity was introduced.
+  The number of the Generation after which the entity was introduced, inclusive.
   """
   introducedAfter: Int
   
   """
-  The number of the Generation before which the entity was introduced.
+  The number of the Generation before which the entity was introduced, inclusive.
   """
   introducedBefore: Int
 

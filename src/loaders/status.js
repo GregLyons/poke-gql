@@ -15,6 +15,14 @@ let status = {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'causes', true));
   },
   
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
+  },
+
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
+  },
+  
   resistedByAbility(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'status', 'resists', true));
   },

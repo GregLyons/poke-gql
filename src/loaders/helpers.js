@@ -70,7 +70,7 @@ const getPaginationQueryString = (pagination, tableName) => {
 // Return a MySQL string for filtering results.
 // 'filter' is an object with 'introduced', 'introducedAfter', 'introducedBefore', 'name', 'contains', 'endsWith', 'startsWith' keys.
 const getFilterQueryString = (filter, tableName) => {
-  // Debut filtering
+  // Introduction filtering
   //#region
 
   const introducedString = filter.introduced
@@ -96,22 +96,228 @@ const getFilterQueryString = (filter, tableName) => {
   // Name filtering
   //#region
 
+  let nameColumn;
+  switch(tableName) {
+    case 'generation':
+      nameColumn = 'code';
+      break;
+    case 'sprite':
+    case 'pdescription':
+      nameColumn = 'entity_name';
+      break;
+    default:
+      nameColumn = 'name';
+  }
+
   const nameString = filter.name 
-    ? `AND ${tableName}_name = '${filter.name}'`
+    ? `AND ${tableName}_${nameColumn} = '${filter.name}'`
     : ``;
 
   const containsString = filter.contains 
-    ? `AND ${tableName}_name LIKE '%${filter.contains}%'`
+    ? `AND ${tableName}_${nameColumn} LIKE '%${filter.contains}%'`
     : ``;
 
   const startsWithString = filter.startsWith 
-    ? `AND ${tableName}_name LIKE '${filter.startsWith}%'`
+    ? `AND ${tableName}_${nameColumn} LIKE '${filter.startsWith}%'`
     : ``;
 
   const  endsWithString = filter.endsWith
-    ? `AND ${tableName}_name LIKE '%${filter.endsWith}'`
+    ? `AND ${tableName}_${nameColumn} LIKE '%${filter.endsWith}'`
     : ``;
   
+  //#endregion
+
+  // Extra filtering, with options dependent on the type of entity.
+  //#region
+
+  let extraFilterString;
+
+  // Pokemon
+  if (tableName === 'pokemon') {
+    // Dex
+    const maxWeightString = filter.maxWeight
+      ? `AND pokemon_weight <= ${filter.maxWeight}`
+      : ``;
+    const minWeightString = filter.minWeight
+      ? `AND pokemon_weight >= ${filter.minWeight}`
+      : ``;
+
+    // Dex
+    const maxHeightString = filter.maxHeight
+      ? `AND pokemon_height <= ${filter.maxHeight}`
+      : ``;
+    const minHeightString = filter.minHeight
+      ? `AND pokemon_height >= ${filter.minHeight}`
+      : ``;
+
+    // Dex
+    const maxDexString = filter.maxDex
+      ? `AND pokemon_dex <= ${filter.maxDex}`
+      : ``;
+    const minDexString = filter.minDex
+      ? `AND pokemon_dex >= ${filter.minDex}`
+      : ``;
+
+    // HP
+    const maxHPString = filter.maxHP
+      ? `AND pokemon_hp <= ${filter.maxHP}`
+      : ``;
+    const minHPString = filter.minHP
+      ? `AND pokemon_hp >= ${filter.minHP}`
+      : ``;
+    
+    // Attack
+    const maxAttackString = filter.maxAttack
+      ? `AND pokemon_attack <= ${filter.maxAttack}`
+      : ``;
+    const minAttackString = filter.minAttack
+      ? `AND pokemon_attack >= ${filter.minAttack}`
+      : ``;
+
+    // Defense
+    const maxDefenseString = filter.maxDefense
+      ? `AND pokemon_defense <= ${filter.maxDefense}`
+      : ``;
+    const minDefenseString = filter.minDefense
+      ? `AND pokemon_defense >= ${filter.minDefense}`
+      : ``;
+
+    // Special Attack
+    const maxSpecialAttackString = filter.maxSpecialAttack
+      ? `AND pokemon_special_attack <= ${filter.maxSpecialAttack}`
+      : ``;
+    const minSpecialAttackString = filter.minSpecialAttack
+      ? `AND pokemon_special_attack >= ${filter.minSpecialAttack}`
+      : ``;
+
+    // Special Defense
+    const maxSpecialDefenseString = filter.maxSpecialDefense
+      ? `AND pokemon_special_defense <= ${filter.maxSpecialDefense}`
+      : ``;
+    const minSpecialDefenseString = filter.minSpecialDefense
+      ? `AND pokemon_special_defense >= ${filter.minSpecialDefense}`
+      : ``;
+
+    // Speed
+    const maxSpeedString = filter.maxSpeed
+      ? `AND pokemon_speed <= ${filter.maxSpeed}`
+      : ``;
+    const minSpeedString = filter.minSpeed
+      ? `AND pokemon_speed >= ${filter.minSpeed}`
+      : ``;
+
+    // Base form
+    const baseFormString = filter.isBaseForm
+    ? `AND pokemon_is_base_form = '${filter.isBaseForm}'`
+    : ``;
+
+    extraFilterString = `
+      ${maxWeightString}
+      ${minWeightString}
+
+      ${maxHeightString}
+      ${minHeightString}
+
+      ${maxDexString}
+      ${minDexString}
+
+      ${maxHPString}
+      ${minHPString}
+
+      ${maxAttackString}
+      ${minAttackString}
+
+      ${maxDefenseString}
+      ${minDefenseString}
+
+      ${maxSpecialAttackString}
+      ${minSpecialAttackString}
+
+      ${maxSpecialDefenseString}
+      ${minSpecialDefenseString}
+
+      ${maxSpeedString}
+      ${minSpeedString}
+
+      ${baseFormString}
+    `
+  }
+  // Moves
+  else if (tableName === 'pmove') {
+    // Power
+    const maxPowerString = filter.maxPower
+      ? `AND pmove_power <= ${filter.maxPower}`
+      : ``;
+    const minPowerString = filter.minPower
+      ? `AND pmove_power >= ${filter.minPower}`
+      : ``;
+
+    // PP
+    const maxPPString = filter.maxPP
+      ? `AND pmove_power <= ${filter.maxPP}`
+      : ``;
+    const minPPString = filter.minPower
+      ? `AND pmove_pp >= ${filter.minPP}`
+      : ``;
+    
+    // Accuracy
+    const maxAccuracyString = filter.maxAccuracy
+      ? `AND pmove_accuracy <= ${filter.maxAccuracy}`
+      : ``;
+    const minAccuracyString = filter.minAccuracy
+      ? `AND pmove_accuracy >= ${filter.minAccuracy}`
+      : ``;
+    const bypassAccuracyString = filter.bypassAccuracy 
+      ? `AND pmove_accuracy = NULL`
+      : ``;
+
+    // Priority
+    const maxPriorityString = filter.maxPriority
+      ? `AND pmove_priority <= ${filter.maxPriority}`
+      : ``;
+    const minPriorityString = filter.minPriority
+      ? `AND pmove_priority >= ${filter.minPriority}`
+      : ``;
+
+    // Category
+    const categoryString = filter.category
+      ? `AND pmove_category = '${filter.category.toLowerCase()}'`
+      : ``;
+
+    // Target
+    const targetString = filter.target
+      ? `AND pmove_target = '${filter.target.toLowerCase()}'`
+      : ``;
+      
+    // Contact
+    const contactString = filter.contact
+      ? `AND pmove_contact = '${filter.contact.toLowerCase()}'`
+      : ``;
+      
+    extraFilterString = `
+      ${maxPowerString}
+      ${minPowerString}
+
+      ${maxPPString}
+      ${minPPString}
+
+      ${maxAccuracyString}
+      ${minAccuracyString}
+      ${bypassAccuracyString}
+
+      ${maxPriorityString}
+      ${minPriorityString}
+      
+      ${categoryString}
+      ${targetString}
+      ${contactString}
+    `;  
+  }
+  // Default case
+  else {
+    extraFilterString = ``;
+  }
+
   //#endregion
 
   const nameFilterString = `
@@ -124,6 +330,7 @@ const getFilterQueryString = (filter, tableName) => {
   return `
     ${debutFilterString}
     ${nameFilterString}
+    ${extraFilterString}
   `;
 }
 

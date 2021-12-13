@@ -395,12 +395,14 @@ input ItemFilter {
   The number of the Generation in which the Item was introduced.
   """
   introduced: Int
+
   """
-  The number of the Generation after which the Item was introduced.
+  The number of the Generation after which the Item was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the Item was introduced.
+  The number of the Generation before which the Item was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -408,14 +410,17 @@ input ItemFilter {
   The name of the Item in snake_case.
   """
   name: String
+
   """
   Entities whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
   Entities whose name ends with the given string, case-insensitive.
   """
   endsWith: String
+
   """
   Entities whose name starts with the given string, case-insensitive.
   """

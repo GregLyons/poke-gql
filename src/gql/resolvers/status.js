@@ -18,6 +18,7 @@ const {
   causeStatusEdge,
   
   basicJunctionConnection,
+  generationConnection,
   introductionConnection,
 
   parentPK,
@@ -88,6 +89,10 @@ const Status = {
     return parent.pstatus_formatted_name;
   },
 
+  generation: parent => parent.generation_id,
+  
+  introduced: parent => parent.introduced,
+
   itemCauses: statusPK,
 
   itemResists: statusPK,
@@ -109,12 +114,18 @@ const Status = {
 const ConnectionsAndEdges = {
   StatusCausedByAbilityConnection: basicJunctionConnection('status', 'ability', 'causedBy'),
   StatusCausedByAbilityEdge: causeStatusEdge(),
-
+  
   StatusCausedByItemConnection: basicJunctionConnection('status', 'item', 'causedBy'),
   StatusCausedByItemEdge: causeStatusEdge(),
-
+  
   StatusCausedByMoveConnection: basicJunctionConnection('status', 'move', 'causedBy'),
   StatusCausedByMoveEdge: causeStatusEdge(),
+
+  StatusGenerationConnection: generationConnection('status'),
+  StatusGenerationEdge: basicEdge(),
+
+  StatusIntroductionConnection: introductionConnection('status'),
+  StatusIntroductionEdge: basicEdge(),
   
   StatusResistedByAbilityConnection: basicJunctionConnection('status', 'ability', 'resistedBy'),
   StatusResistedByAbilityEdge: basicEdge(),

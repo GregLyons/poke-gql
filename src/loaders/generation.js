@@ -14,7 +14,7 @@ const {getPaginationQueryString, getFilterQueryString} = require('./helpers.js')
 const batchEntitiesByGen = (presence = true, tableName, pagination, filter) => {
   return async gens => {
     // If the entity doesn't change across generations, then the database only stores one instance of that entity. To determine the presence of such an entity in a given generation, we check whether the debut gen of that entity is less than or eqal to the given generation.
-    const genDependent = !['effect', 'usage_method', 'version_group'].includes(tableName);
+    const genDependent = !['version_group'].includes(tableName);
     const genArray = Array.from(Array(8).keys());
     const gensToConsider = genDependent
       ? gens
@@ -59,7 +59,7 @@ const batchEntitiesByGen = (presence = true, tableName, pagination, filter) => {
 */
 let generation = {};
 
-['ability', 'effect', 'item', 'move', 'pokemon', 'type', 'usageMethod', 'versionGroup']
+['ability', 'effect', 'item', 'move', 'pokemon', 'type', 'stat', 'status', 'usageMethod', 'versionGroup']
   .map(entityName => {
     generation[entityName] = {};
 
@@ -78,6 +78,8 @@ let generation = {};
       case 'move':
         tableName = 'pmove';
         break;
+      case 'status':
+        tableName = 'pstatus';
       default:
         tableName = entityName;
     }

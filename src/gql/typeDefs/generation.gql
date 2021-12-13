@@ -95,6 +95,26 @@ type Generation implements Node {
   pokemonIntroduced: GenerationIntroducedPokemonConnection
 
   """
+  All Stats present in this Generation.
+  """
+  stats: GenerationStatConnection
+
+  """
+  All Stats introduced in this Generation.
+  """
+  statsIntroduced: GenerationIntroducedStatConnection
+
+  """
+  All Statuses present in this Generation.
+  """
+  statuses: GenerationStatusConnection
+
+  """
+  All Statuses introduced in this Generation.
+  """
+  statusesIntroduced: GenerationIntroducedStatusConnection
+
+  """
   All Types present in this Generation.
   """
   types: GenerationTypeConnection
@@ -241,6 +261,50 @@ type GenerationPokemonEdge implements Edge {
   node: Pokemon!
 }
 
+# STAT
+
+type GenerationStatConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatFilter
+  ): [GenerationStatEdge!]! 
+
+}
+
+type GenerationIntroducedStatConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatFilter
+  ): [GenerationStatEdge!]! 
+
+}
+
+type GenerationStatEdge implements Edge {  
+  node: Stat!
+}
+
+# STATUS
+
+type GenerationStatusConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [GenerationStatusEdge!]! 
+
+}
+
+type GenerationIntroducedStatusConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [GenerationStatusEdge!]! 
+
+}
+
+type GenerationStatusEdge implements Edge {  
+  node: Status!
+}
+
 # TYPE
 
 type GenerationTypeConnection implements Connection {
@@ -336,12 +400,14 @@ input GenerationFilter {
   The number of the Generation in which the Generation was introduced.
   """
   introduced: Int
+
   """
-  The number of the Generation after which the Generation was introduced.
+  The number of the Generation after which the Generation was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the Generation was introduced.
+  The number of the Generation before which the Generation was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -349,14 +415,17 @@ input GenerationFilter {
   The name of the Generation in snake_case.
   """
   name: String
+
   """
   Entities whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
   Entities whose name ends with the given string, case-insensitive.
   """
   endsWith: String
+
   """
   Entities whose name starts with the given string, case-insensitive.
   """

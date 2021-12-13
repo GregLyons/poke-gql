@@ -37,6 +37,16 @@ type Stat implements Node {
   """
   formattedName: String!
 
+  """
+  The Generation of this Stat.
+  """ 
+  generation: StatGenerationConnection
+
+  """
+  The Generation in which the Stat was introduced.
+  """
+  introduced: StatIntroductionConnection
+
   itemModifies: StatModifiedByItemConnection
 
   moveModifies: StatModifiedByMoveConnection
@@ -85,6 +95,32 @@ type StatModifiedByAbilityEdge implements Edge {
   The recipient of the Stat modification.
   """
   recipient: Recipient!
+}
+
+# GENERATION
+
+type StatGenerationConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [StatGenerationEdge!]! 
+
+}
+
+type StatGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type StatIntroductionConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [StatIntroductionEdge!]! 
+
+}
+
+type StatIntroductionEdge implements Edge {  
+  node: Generation!
 }
 
 # ITEM
@@ -166,12 +202,14 @@ input StatFilter {
   The number of the Generation in which the Stat was introduced.
   """
   introduced: Int
+
   """
-  The number of the Generation after which the Stat was introduced.
+  The number of the Generation after which the Stat was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the Stat was introduced.
+  The number of the Generation before which the Stat was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -179,14 +217,17 @@ input StatFilter {
   The name of the Stat in snake_case.
   """
   name: String
+
   """
   Entities whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
   Entities whose name ends with the given string, case-insensitive.
   """
   endsWith: String
+
   """
   Entities whose name starts with the given string, case-insensitive.
   """

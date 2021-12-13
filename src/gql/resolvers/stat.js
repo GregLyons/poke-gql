@@ -19,6 +19,8 @@ const {
   parentPK,
 
   basicJunctionConnection,
+  generationConnection,
+  introductionConnection,
 } = require('./helpers.js');
 const statPK = parentPK('stat');
 
@@ -83,6 +85,10 @@ const Stat = {
   formattedName: async (parent, args, context, info) => {
     return parent.stat_formatted_name;
   },
+
+  generation: parent => parent.generation_id,
+  
+  introduced: parent => parent.introduced,
   
   itemModifies: statPK,
   
@@ -99,6 +105,12 @@ const Stat = {
 //#region
 
 const ConnectionsAndEdges = {
+  StatGenerationConnection: generationConnection('stat'),
+  StatGenerationEdge: basicEdge(),
+
+  StatIntroductionConnection: introductionConnection('stat'),
+  StatIntroductionEdge: basicEdge(),
+
   StatModifiedByAbilityConnection: basicJunctionConnection('stat', 'ability', 'modifiedBy'),
   StatModifiedByAbilityEdge: modifyStatEdge(),
 

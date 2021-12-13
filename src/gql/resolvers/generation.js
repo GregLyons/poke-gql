@@ -95,6 +95,12 @@ const Generation = {
   pokemon: parent => parent.generation_id,
   pokemonIntroduced: parent => parent.generation_id,
 
+  stats: parent => parent.generation_id,
+  statsIntroduced: parent => parent.generation_id,
+
+  statuses: parent => parent.generation_id,
+  statusesIntroduced: parent => parent.generation_id,
+
   types: parent => parent.generation_id,
   typesIntroduced: parent => parent.generation_id,
 
@@ -178,6 +184,14 @@ const ConnectionsAndEdges = {
   GenerationPokemonConnection: presenceConnection('pokemon'),
   GenerationIntroducedPokemonConnection: debutConnection('pokemon'),
   GenerationPokemonEdge: basicEdge(),
+
+  GenerationStatConnection: presenceConnection('stat'),
+  GenerationIntroducedStatConnection: debutConnection('stat'),
+  GenerationStatEdge: basicEdge(),
+
+  GenerationStatusConnection: presenceConnection('status'),
+  GenerationIntroducedStatusConnection: debutConnection('status'),
+  GenerationStatusEdge: basicEdge(),
 
   GenerationTypeConnection: presenceConnection('type'),
   GenerationIntroducedTypeConnection: debutConnection('type'),

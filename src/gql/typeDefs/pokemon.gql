@@ -453,12 +453,14 @@ input PokemonFilter {
   The number of the Generation in which the Pokemon was introduced.
   """
   introduced: Int
+  
   """
-  The number of the Generation after which the Pokemon was introduced.
+  The number of the Generation after which the Pokemon was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the Pokemon was introduced.
+  The number of the Generation before which the Pokemon was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -466,29 +468,127 @@ input PokemonFilter {
   The name of the Pokemon in snake_case.
   """
   name: String
+
   """
-  Entities whose name contains the given string, case-insensitive.
+  Pokemon whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
-  Entities whose name ends with the given string, case-insensitive.
+  Pokemon whose name ends with the given string, case-insensitive.
   """
+
   endsWith: String
+
   """
-  Entities whose name starts with the given string, case-insensitive.
+  Pokemon whose name starts with the given string, case-insensitive.
   """
   startsWith: String
 
-  maxHP: Int,
-  minHP: Int,
-  maxAttack: Int,
-  minAttack: Int,
-  maxDefense: Int,
-  minDefense: Int,
-  maxSpecialAttack: Int,
-  minSpecialAttack: Int,
-  maxSpecialDefense: Int,
-  minSpecialDefense: Int,
-  maxSpeed: Int,
-  minSpeed: Int,
+
+  # STATS FILTERS
+
+
+  """
+  Pokemon whose weight (kg) is less than the given number, inclusive.
+  """
+  maxWeight: Float
+
+  """
+  Pokemon whose weight (kg) is greater than the given number, inclusive.
+  """
+  minWeight: Float
+
+  """
+  Pokemon whose height (m) is less than the given number, inclusive.
+  """
+  maxHeight: Float
+
+  """
+  Pokemon whose height (m) is greater than the given number, inclusive.
+  """
+  minHeight: Float
+
+  """
+  Pokemon whose National Dex number is less than the given number, inclusive.
+  """
+  maxDex: Int
+
+  """
+  Pokemon whose National Dex number is greater than the given number, inclusive.
+  """
+  minDex: Int
+
+
+  # BASE STAT FILTERS
+
+
+  """
+  Pokemon whose HP stat is less than the given number, inclusive.
+  """
+  maxHP: Int
+
+  """
+  Pokemon whose HP stat is greater than the given number, inclusive.
+  """
+  minHP: Int
+
+  """
+  Pokemon whose Attack stat is less than the given number, inclusive.
+  """
+  maxAttack: Int
+
+  """
+  Pokemon whose Attack stat is greater than the given number, inclusive.
+  """
+  minAttack: Int
+
+  """
+  Pokemon whose Defense stat is less than the given number, inclusive.
+  """
+  maxDefense: Int
+
+  """
+  Pokemon whose Defense stat is greater than the given number, inclusive.
+  """
+  minDefense: Int
+
+  """
+  Pokemon whose Special Attack stat is less than the given number, inclusive.
+  """
+  maxSpecialAttack: Int
+
+  """
+  Pokemon whose Special Attack stat is greater than the given number, inclusive.
+  """
+  minSpecialAttack: Int
+
+  """
+  Pokemon whose Special Defense stat is less than the given number, inclusive.
+  """
+  maxSpecialDefense: Int
+
+  """
+  Pokemon whose Special Defense stat is greater than the given number, inclusive.
+  """
+  minSpecialDefense: Int
+
+  """
+  Pokemon whose Speed stat is less than the given number, inclusive.
+  """
+  maxSpeed: Int
+
+  """
+  Pokemon whose Speed stat is greater than the given number, inclusive.
+  """
+  minSpeed: Int
+
+  
+  # OTHER FILTERS
+
+
+  """
+  Pokemon which of the base form of their form group, e.g. Meowth but not Galarian Meowth, Charizard but not Mega Charizard X/Y, nor Gigantamax Charizard.
+  """
+  isBaseForm: Boolean
 }

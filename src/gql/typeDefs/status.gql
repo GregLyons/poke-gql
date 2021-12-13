@@ -39,6 +39,16 @@ type Status implements Node {
   """
   formattedName: String!
 
+  """
+  The Generation of this Status.
+  """ 
+  generation: StatusGenerationConnection
+
+  """
+  The Generation in which the Status was introduced.
+  """
+  introduced: StatusIntroductionConnection
+
   itemCauses: StatusCausedByItemConnection
 
   itemResists: StatusResistedByItemConnection
@@ -91,6 +101,32 @@ type StatusResistedByAbilityConnection implements Connection {
 
 type StatusResistedByAbilityEdge implements Edge {  
   node: Ability!
+}
+
+# GENERATION
+
+type StatusGenerationConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [StatusGenerationEdge!]! 
+
+}
+
+type StatusGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type StatusIntroductionConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [StatusIntroductionEdge!]! 
+
+}
+
+type StatusIntroductionEdge implements Edge {  
+  node: Generation!
 }
 
 # ITEM
@@ -164,12 +200,14 @@ input StatusFilter {
   The number of the Generation in which the Status was introduced.
   """
   introduced: Int
+
   """
-  The number of the Generation after which the Status was introduced.
+  The number of the Generation after which the Status was introduced, inclusive.
   """
   introducedAfter: Int
+
   """
-  The number of the Generation before which the Status was introduced.
+  The number of the Generation before which the Status was introduced, inclusive.
   """
   introducedBefore: Int
 
@@ -177,14 +215,17 @@ input StatusFilter {
   The name of the Status in snake_case.
   """
   name: String
+
   """
   Entities whose name contains the given string, case-insensitive.
   """
   contains: String
+
   """
   Entities whose name ends with the given string, case-insensitive.
   """
   endsWith: String
+
   """
   Entities whose name starts with the given string, case-insensitive.
   """
