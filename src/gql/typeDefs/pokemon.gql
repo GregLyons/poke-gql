@@ -6,9 +6,9 @@ extend type Query {
   pokemonByID(id: ID!): Pokemon!
 
   """
-  Select an Pokemon by its snake_case name, e.g. 'costs_hp'.
+  Select an Pokemon by its snake_case name, e.g. 'pikachu', 'raichu_alola'.
   """
-  pokemonByName(id: ID!): Pokemon!
+  pokemonByName(name: String!): Pokemon!
   
   """
   Select Pokemon, with optional cursor-based pagination.
@@ -225,8 +225,11 @@ type BaseStats {
 # ABILITY
 
 type PokemonAbilityConnection implements Connection {
-  count: Int!
-  edges(pagination: PaginationInput filter: AbilityFilter): [PokemonAbilityEdge!]!
+
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [PokemonAbilityEdge!]!
 }
 
 type PokemonAbilityEdge implements Edge {  
@@ -241,8 +244,11 @@ type PokemonAbilityEdge implements Edge {
 # GENERATION
 
 type PokemonGenerationConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [PokemonGenerationEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [PokemonGenerationEdge!]! 
+
 }
 
 type PokemonGenerationEdge implements Edge {  
@@ -250,8 +256,11 @@ type PokemonGenerationEdge implements Edge {
 }
 
 type PokemonIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [PokemonIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [PokemonIntroductionEdge!]! 
+
 }
 
 type PokemonIntroductionEdge implements Edge {  
@@ -261,8 +270,11 @@ type PokemonIntroductionEdge implements Edge {
 # ITEM
 
 type PokemonEnablesItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [PokemonEnablesItemEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [PokemonEnablesItemEdge!]! 
+
 }
 
 type PokemonEnablesItemEdge implements Edge {  
@@ -270,8 +282,11 @@ type PokemonEnablesItemEdge implements Edge {
 }
 
 type PokemonRequiresItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [PokemonRequiresItemEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [PokemonRequiresItemEdge!]! 
+
 }
 
 type PokemonRequiresItemEdge implements Edge {  
@@ -281,8 +296,11 @@ type PokemonRequiresItemEdge implements Edge {
 # MOVE
 
 type PokemonEnablesMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [PokemonEnablesMoveEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [PokemonEnablesMoveEdge!]! 
+
 }
 
 type PokemonEnablesMoveEdge implements Edge {  
@@ -290,8 +308,11 @@ type PokemonEnablesMoveEdge implements Edge {
 }
 
 type PokemonMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [PokemonMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [PokemonMoveEdge!]!
+
 }
 
 type PokemonMoveEdge implements Edge {  
@@ -316,8 +337,11 @@ type PokemonMoveEdge implements Edge {
 # POKEMON
 
 type PokemonEvolutionConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [PokemonEvolutionEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [PokemonEvolutionEdge!]!
+
 }
 
 type PokemonEvolutionEdge implements Edge {  
@@ -334,8 +358,11 @@ type PokemonEvolutionEdge implements Edge {
 }
 
 type PokemonPrevolutionConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [PokemonPrevolutionEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [PokemonPrevolutionEdge!]!
+
 }
 
 type PokemonPrevolutionEdge implements Edge {  
@@ -352,8 +379,11 @@ type PokemonPrevolutionEdge implements Edge {
 }
 
 type PokemonFormConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [PokemonFormEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [PokemonFormEdge!]!
+
 }
 
 type PokemonFormEdge implements Edge {  
@@ -376,8 +406,11 @@ type PokemonFormEdge implements Edge {
 # TYPE
 
 type PokemonTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [PokemonTypeEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [PokemonTypeEdge!]!
+
 }
 
 type PokemonTypeEdge implements Edge {  
@@ -414,35 +447,47 @@ union PokemonEnablesConnection = PokemonEnablesItemConnection | PokemonEnablesMo
 # INPUTS
 #
 
-input PokemonFilter implements Filter {
+input PokemonFilter {
+  """
+  The number of the Generation in which the Pokemon was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Pokemon was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Pokemon was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Pokemon in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
-}
 
-# cursor: String,
-# limit: Int,
-# generation: Int = 8,
-# contains: String,
-# endsWith: String,
-# introducedAfter: Int,
-# introducedBefore: Int,
-# maxHP: Int,
-# minHP: Int,
-# maxAttack: Int,
-# minAttack: Int,
-# maxDefense: Int,
-# minDefense: Int,
-# maxSpecialAttack: Int,
-# minSpecialAttack: Int,
-# maxSpecialDefense: Int,
-# minSpecialDefense: Int,
-# maxSpeed: Int,
-# minSpeed: Int,
-# startsWith: String,
-# type: String,
-# types: [String],
-# typing: [String],
+  maxHP: Int,
+  minHP: Int,
+  maxAttack: Int,
+  minAttack: Int,
+  maxDefense: Int,
+  minDefense: Int,
+  maxSpecialAttack: Int,
+  minSpecialAttack: Int,
+  maxSpecialDefense: Int,
+  minSpecialDefense: Int,
+  maxSpeed: Int,
+  minSpeed: Int,
+}

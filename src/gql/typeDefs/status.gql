@@ -63,8 +63,11 @@ type Status implements Node {
 # ABILITY
 
 type StatusCausedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [StatusCausedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [StatusCausedByAbilityEdge!]!
+
 }
 
 type StatusCausedByAbilityEdge implements Edge {  
@@ -79,8 +82,11 @@ type StatusCausedByAbilityEdge implements Edge {
 }
 
 type StatusResistedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [StatusResistedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [StatusResistedByAbilityEdge!]!
+
 }
 
 type StatusResistedByAbilityEdge implements Edge {  
@@ -90,8 +96,11 @@ type StatusResistedByAbilityEdge implements Edge {
 # ITEM
 
 type StatusCausedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [StatusCausedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [StatusCausedByItemEdge!]!
+
 }
 
 type StatusCausedByItemEdge implements Edge {  
@@ -104,8 +113,11 @@ type StatusCausedByItemEdge implements Edge {
 }
 
 type StatusResistedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [StatusResistedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [StatusResistedByItemEdge!]!
+
 }
 
 type StatusResistedByItemEdge implements Edge {  
@@ -115,8 +127,11 @@ type StatusResistedByItemEdge implements Edge {
 # MOVE
 
 type StatusCausedByMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [StatusCausedByMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [StatusCausedByMoveEdge!]!
+
 }
 
 type StatusCausedByMoveEdge implements Edge {  
@@ -129,8 +144,11 @@ type StatusCausedByMoveEdge implements Edge {
 }
 
 type StatusResistedByMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [StatusResistedByMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [StatusResistedByMoveEdge!]!
+
 }
 
 type StatusResistedByMoveEdge implements Edge {  
@@ -141,11 +159,34 @@ type StatusResistedByMoveEdge implements Edge {
 # INPUTS
 #
 
-input StatusFilter implements Filter {
+input StatusFilter {
+  """
+  The number of the Generation in which the Status was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Status was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Status was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Status in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

@@ -95,8 +95,8 @@ const VersionGroup = {
 //#region
 
 const ConnectionsAndEdges = {
-  VersionGroupGenerationConnection: introductionConnection('versionGroup'),
-  VersionGroupGenerationEdge: basicEdge(),
+  VersionGroupIntroductionConnection: introductionConnection('versionGroup'),
+  VersionGroupIntroductionEdge: basicEdge(),
 }
 
 //#endregion

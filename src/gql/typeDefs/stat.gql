@@ -54,8 +54,11 @@ type Stat implements Node {
 # ABILITY
 
 type StatModifiedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [StatModifiedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [StatModifiedByAbilityEdge!]!
+
 }
 
 type StatModifiedByAbilityEdge implements Edge {  
@@ -87,8 +90,11 @@ type StatModifiedByAbilityEdge implements Edge {
 # ITEM
 
 type StatModifiedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [StatModifiedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [StatModifiedByItemEdge!]!
+
 }
 
 type StatModifiedByItemEdge implements Edge {  
@@ -120,8 +126,11 @@ type StatModifiedByItemEdge implements Edge {
 # MOVE
 
 type StatModifiedByMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [StatModifiedByMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [StatModifiedByMoveEdge!]!
+
 }
 
 type StatModifiedByMoveEdge implements Edge {  
@@ -152,11 +161,34 @@ type StatModifiedByMoveEdge implements Edge {
 # INPUTS
 #
 
-input StatFilter implements Filter {
+input StatFilter {
+  """
+  The number of the Generation in which the Stat was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Stat was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Stat was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Stat in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

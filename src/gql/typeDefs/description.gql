@@ -49,8 +49,11 @@ type Description implements Node {
 # ABILITY
 
 type DescriptionAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [DescriptionAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [DescriptionAbilityEdge!]!
+
 }
 
 type DescriptionAbilityEdge implements Edge {  
@@ -60,8 +63,11 @@ type DescriptionAbilityEdge implements Edge {
 # ITEM
 
 type DescriptionItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [DescriptionItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [DescriptionItemEdge!]!
+
 }
 
 type DescriptionItemEdge implements Edge {  
@@ -71,8 +77,11 @@ type DescriptionItemEdge implements Edge {
 # MOVE 
 
 type DescriptionMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [DescriptionMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [DescriptionMoveEdge!]!
+
 }
 
 type DescriptionMoveEdge implements Edge {  
@@ -82,8 +91,11 @@ type DescriptionMoveEdge implements Edge {
 # VERSION GROUP 
 
 type DescriptionVersionGroupConnection implements Connection {
-  edges(pagination: PaginationInput filter: VersionGroupFilter): [DescriptionVersionGroupEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: VersionGroupFilter
+  ): [DescriptionVersionGroupEdge!]!
+
 }
 
 type DescriptionVersionGroupEdge implements Edge {  
@@ -113,11 +125,34 @@ union DescriptionEntityConnection = DescriptionAbilityConnection | DescriptionIt
 # INPUTS
 #
 
-input DescriptionFilter implements Filter {
+input DescriptionFilter {
+  """
+  The number of the Generation in which the Description was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Description was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Description was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Description in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

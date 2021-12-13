@@ -71,8 +71,11 @@ type UsageMethod implements Node {
 # ABILITY
 
 type UsageMethodBoostedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [UsageMethodBoostedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [UsageMethodBoostedByAbilityEdge!]!
+
 }
 
 type UsageMethodBoostedByAbilityEdge implements Edge {  
@@ -81,8 +84,11 @@ type UsageMethodBoostedByAbilityEdge implements Edge {
 }
 
 type UsageMethodResistedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [UsageMethodResistedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [UsageMethodResistedByAbilityEdge!]!
+
 }
 
 type UsageMethodResistedByAbilityEdge implements Edge {  
@@ -93,8 +99,11 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [UsageMethodGenerationEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [UsageMethodGenerationEdge!]! 
+
 }
 
 type UsageMethodGenerationEdge implements Edge {  
@@ -102,8 +111,11 @@ type UsageMethodGenerationEdge implements Edge {
 }
 
 type UsageMethodIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [UsageMethodIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [UsageMethodIntroductionEdge!]! 
+
 }
 
 type UsageMethodIntroductionEdge implements Edge {  
@@ -113,8 +125,11 @@ type UsageMethodIntroductionEdge implements Edge {
 # ITEM
 
 type UsageMethodBoostedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [UsageMethodBoostedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [UsageMethodBoostedByItemEdge!]!
+
 }
 
 type UsageMethodBoostedByItemEdge implements Edge {  
@@ -123,8 +138,11 @@ type UsageMethodBoostedByItemEdge implements Edge {
 }
 
 type UsageMethodResistedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [UsageMethodResistedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [UsageMethodResistedByItemEdge!]!
+
 }
 
 type UsageMethodResistedByItemEdge implements Edge {  
@@ -135,8 +153,11 @@ type UsageMethodResistedByItemEdge implements Edge {
 # MOVE
 
 type UsageMethodMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [UsageMethodMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [UsageMethodMoveEdge!]!
+
 }
 
 type UsageMethodMoveEdge implements Edge {  
@@ -147,11 +168,34 @@ type UsageMethodMoveEdge implements Edge {
 # INPUTS
 #
 
-input UsageMethodFilter implements Filter {
+input UsageMethodFilter {
+  """
+  The number of the Generation in which the UsageMethod was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the UsageMethod was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the UsageMethod was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the UsageMethod in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

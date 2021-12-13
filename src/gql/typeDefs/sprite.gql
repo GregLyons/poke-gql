@@ -85,8 +85,11 @@ type Sprite implements Node {
 # ITEM
 
 type SpriteItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [SpriteItemEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [SpriteItemEdge!]! 
+
 }
 
 type SpriteItemEdge implements Edge {  
@@ -96,8 +99,11 @@ type SpriteItemEdge implements Edge {
 # POKEMON
 
 type SpritePokemonConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [SpritePokemonEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [SpritePokemonEdge!]! 
+
 }
 
 type SpritePokemonEdge implements Edge {  
@@ -107,8 +113,11 @@ type SpritePokemonEdge implements Edge {
 # VERSION GROUP
 
 type SpriteVersionGroupConnection implements Connection {
-  edges(pagination: PaginationInput filter: VersionGroupFilter): [SpriteVersionGroupEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: VersionGroupFilter
+  ): [SpriteVersionGroupEdge!]! 
+
 }
 
 type SpriteVersionGroupEdge implements Edge {  
@@ -137,11 +146,34 @@ union SpriteEntityConnection = SpriteItemConnection | SpritePokemonConnection
 # INPUTS
 #
 
-input SpriteFilter implements Filter {
+input SpriteFilter {
+  """
+  The number of the Generation in which the Sprite was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Sprite was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Sprite was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Sprite in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

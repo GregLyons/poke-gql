@@ -8,7 +8,7 @@ extend type Query {
   """
   Select an Effect by its snake_case name, e.g. 'costs_hp'.
   """
-  effectByName(id: ID!): Effect!
+  effectByName(name: String!): Effect!
   
   """
   Select Effects, with optional cursor-based pagination.
@@ -69,8 +69,11 @@ abilities: EffectAbilityConnection
 # ABILITY
 
 type EffectAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [EffectAbilityEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [EffectAbilityEdge!]! 
+
 }
 
 type EffectAbilityEdge implements Edge {  
@@ -80,8 +83,11 @@ type EffectAbilityEdge implements Edge {
 # GENERATION
 
 type EffectGenerationConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [EffectGenerationEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [EffectGenerationEdge!]! 
+
 }
 
 type EffectGenerationEdge implements Edge {  
@@ -89,8 +95,11 @@ type EffectGenerationEdge implements Edge {
 }
 
 type EffectIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [EffectIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [EffectIntroductionEdge!]! 
+
 }
 
 type EffectIntroductionEdge implements Edge {  
@@ -100,8 +109,11 @@ type EffectIntroductionEdge implements Edge {
 # ITEM
 
 type EffectItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [EffectItemEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [EffectItemEdge!]! 
+
 }
 
 type EffectItemEdge implements Edge {  
@@ -111,8 +123,11 @@ type EffectItemEdge implements Edge {
 # MOVE
 
 type EffectMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [EffectMoveEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [EffectMoveEdge!]! 
+
 }
 
 type EffectMoveEdge implements Edge {  
@@ -123,11 +138,34 @@ type EffectMoveEdge implements Edge {
 # INPUTS
 # 
 
-input EffectFilter implements Filter {
+input EffectFilter {
+  """
+  The number of the Generation in which the Effect was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Effect was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Effect was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Effect in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

@@ -6,9 +6,9 @@ extend type Query {
   itemByID(id: ID!): Item!
 
   """
-  Select a Item by its snake_case name, e.g. 'venusaurite'.
+  Select a Item by its snake_case name, e.g. 'venusaurite', 'firium_z'.
   """
-  itemByName(number: Int!): Item!
+  itemByName(name: String!): Item!
   
   """
   Select Items, with optional cursor-based pagination.
@@ -120,8 +120,11 @@ type Item implements Node {
 # DESCRIPTION 
 
 type ItemDescriptionConnection implements Connection {
-  edges(pagination: PaginationInput filter: DescriptionFilter): [ItemDescriptionEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: DescriptionFilter
+  ): [ItemDescriptionEdge!]!
+
 }
 
 type ItemDescriptionEdge implements Edge {  
@@ -131,8 +134,11 @@ type ItemDescriptionEdge implements Edge {
 # EFFECT
 
 type ItemEffectConnection implements Connection {
-  edges(pagination: PaginationInput filter: EffectFilter): [ItemEffectEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: EffectFilter
+  ): [ItemEffectEdge!]! 
+
 }
 
 type ItemEffectEdge implements Edge {  
@@ -142,8 +148,11 @@ type ItemEffectEdge implements Edge {
 # GENERATION
 
 type ItemGenerationConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [ItemGenerationEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [ItemGenerationEdge!]! 
+
 }
 
 type ItemGenerationEdge implements Edge {  
@@ -151,8 +160,11 @@ type ItemGenerationEdge implements Edge {
 }
 
 type ItemIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [ItemIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [ItemIntroductionEdge!]! 
+
 }
 
 type ItemIntroductionEdge implements Edge {  
@@ -162,8 +174,11 @@ type ItemIntroductionEdge implements Edge {
 # MOVE
 
 type ItemEnablesMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [ItemEnablesMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [ItemEnablesMoveEdge!]!
+
 }
 
 type ItemEnablesMoveEdge implements Edge {  
@@ -173,8 +188,11 @@ type ItemEnablesMoveEdge implements Edge {
 # POKEMON
 
 type ItemEnablesPokemonConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [ItemEnablesPokemonEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [ItemEnablesPokemonEdge!]!
+
 }
 
 type ItemEnablesPokemonEdge implements Edge {  
@@ -182,8 +200,11 @@ type ItemEnablesPokemonEdge implements Edge {
 }
 
 type ItemRequiresPokemonConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [ItemRequiresPokemonEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [ItemRequiresPokemonEdge!]!
+
 }
 
 type ItemRequiresPokemonEdge implements Edge {  
@@ -193,8 +214,11 @@ type ItemRequiresPokemonEdge implements Edge {
 # STAT
 
 type ItemModifiesStatConnection implements Connection {
-  edges(pagination: PaginationInput filter: StatFilter): [ItemModifiesStatEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: StatFilter
+  ): [ItemModifiesStatEdge!]!
+
 }
 
 type ItemModifiesStatEdge implements Edge {  
@@ -226,8 +250,11 @@ type ItemModifiesStatEdge implements Edge {
 # STATUS
 
 type ItemCausesStatusConnection implements Connection {
-  edges(pagination: PaginationInput filter: StatusFilter): [ItemCausesStatusEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [ItemCausesStatusEdge!]!
+
 }
 
 type ItemCausesStatusEdge implements Edge {  
@@ -240,8 +267,11 @@ type ItemCausesStatusEdge implements Edge {
 }
 
 type ItemResistsStatusConnection implements Connection {
-  edges(pagination: PaginationInput filter: StatusFilter): [ItemResistsStatusEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [ItemResistsStatusEdge!]!
+
 }
 
 type ItemResistsStatusEdge implements Edge {  
@@ -251,8 +281,11 @@ type ItemResistsStatusEdge implements Edge {
 # TYPE
 
 type ItemBoostsTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [ItemBoostsTypeEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [ItemBoostsTypeEdge!]!
+
 }
 
 type ItemBoostsTypeEdge implements Edge {  
@@ -265,8 +298,11 @@ type ItemBoostsTypeEdge implements Edge {
 }
 
 type ItemResistsTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [ItemResistsTypeEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [ItemResistsTypeEdge!]!
+
 }
 
 type ItemResistsTypeEdge implements Edge {  
@@ -279,8 +315,11 @@ type ItemResistsTypeEdge implements Edge {
 }
 
 type ItemNaturalGiftConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [ItemNaturalGiftEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [ItemNaturalGiftEdge!]!
+
 }
 
 type ItemNaturalGiftEdge implements Edge {  
@@ -295,8 +334,11 @@ type ItemNaturalGiftEdge implements Edge {
 # USAGE METHOD
 
 type ItemBoostsUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput filter: UsageMethodFilter): [ItemBoostsUsageMethodEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: UsageMethodFilter
+  ): [ItemBoostsUsageMethodEdge!]!
+
 }
 
 type ItemBoostsUsageMethodEdge implements Edge {  
@@ -309,8 +351,11 @@ type ItemBoostsUsageMethodEdge implements Edge {
 }
 
 type ItemResistsUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput filter: UsageMethodFilter): [ItemResistsUsageMethodEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: UsageMethodFilter
+  ): [ItemResistsUsageMethodEdge!]!
+
 }
 
 type ItemResistsUsageMethodEdge implements Edge {  
@@ -344,11 +389,34 @@ union ItemEnablesConnection = ItemEnablesMoveConnection | ItemEnablesPokemonConn
 # INPUTS
 #
 
-input ItemFilter implements Filter {
+input ItemFilter {
+  """
+  The number of the Generation in which the Item was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Item was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Item was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Item in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

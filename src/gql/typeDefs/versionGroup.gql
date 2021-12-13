@@ -57,6 +57,16 @@ type VersionGroup implements Node {
   """
   introduced: VersionGroupIntroductionConnection
 
+  """
+  The name of the VersionGroup in snake_case. Separate versions are separeted by hyphens.
+
+  For example:
+    red-blue
+    heart_gold-soul_silver
+    lets_go_pikachu-lets_go_eevee
+  """
+  name: String!
+
   sprites: VersionGroupSpriteConnection
 }
 
@@ -67,8 +77,11 @@ type VersionGroup implements Node {
 # DESCRIPTION
 
 type VersionGroupDescriptionConnection implements Connection {
-  edges(pagination: PaginationInput filter: DescriptionFilter): [VersionGroupDescriptionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: DescriptionFilter
+  ): [VersionGroupDescriptionEdge!]! 
+
 }
 
 type VersionGroupDescriptionEdge implements Edge {  
@@ -78,19 +91,25 @@ type VersionGroupDescriptionEdge implements Edge {
 # GENERATION
 
 type VersionGroupIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [VersionGroupIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [VersionGroupIntroductionEdge!]! 
+
 }
 
-type VersionGroupGenerationEdge implements Edge {  
+type VersionGroupIntroductionEdge implements Edge {  
   node: Generation!
 }
 
 # SPRITE
 
 type VersionGroupSpriteConnection implements Connection {
-  edges(pagination: PaginationInput filter: SpriteFilter): [VersionGroupSpriteEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: SpriteFilter
+  ): [VersionGroupSpriteEdge!]! 
+
 }
 
 type VersionGroupSpriteEdge implements Edge {  
@@ -101,11 +120,34 @@ type VersionGroupSpriteEdge implements Edge {
 # INPUTS
 #
 
-input VersionGroupFilter implements Filter {
+input VersionGroupFilter {
+  """
+  The number of the Generation in which the VersionGroup was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the VersionGroup was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the VersionGroup was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the VersionGroup in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

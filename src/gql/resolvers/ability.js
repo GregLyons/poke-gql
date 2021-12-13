@@ -23,8 +23,7 @@ const {
   basicJunctionConnection,
   generationConnection,
   introductionConnection,
-
-  parentGenID,
+  
   parentPK,
 } = require('./helpers.js');
 const abilityPK = parentPK('ability');
@@ -99,19 +98,15 @@ const Ability = {
 
   effects: abilityPK,
 
-  formattedName: async (parent, args, context, info) => {
-    return parent.ability_formatted_name;
-  },
+  formattedName: parent => parent.ability_formatted_name,
 
-  generation: parentGenID,
+  generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
   
   modifiesStat: abilityPK,
 
-  name: async (parent, args, context, info) => {
-    return parent.ability_name
-  },
+  name: parent => parent.ability_name,
 
   resistsStatus: abilityPK,
 

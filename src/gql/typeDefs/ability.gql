@@ -6,7 +6,7 @@ extend type Query {
   abilityByID(id: ID!): Ability!
 
   """
-  Select an Ability by its snake_case name, e.g. 'rks_system'.
+  Select an Ability by its snake_case name, e.g. 'intimidate', 'rks_system'.
   """
   abilityByName(generation: Int! name: String!): Ability!
   
@@ -24,7 +24,6 @@ extend type Query {
     filter: AbilityFilter
   ): [Ability!]!
 }
-
 
 #
 # NODES AND HELPER TYPES
@@ -87,8 +86,11 @@ type Ability implements Node {
 # DESCRIPTION 
 
 type AbilityDescriptionConnection implements Connection {
-  edges(pagination: PaginationInput filter: DescriptionFilter): [AbilityDescriptionEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: DescriptionFilter
+  ): [AbilityDescriptionEdge!]!
+
 }
 
 type AbilityDescriptionEdge implements Edge {  
@@ -98,8 +100,11 @@ type AbilityDescriptionEdge implements Edge {
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
-  edges(pagination: PaginationInput filter: EffectFilter): [AbilityEffectEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: EffectFilter
+  ): [AbilityEffectEdge!]! 
+
 }
 
 type AbilityEffectEdge implements Edge {  
@@ -109,8 +114,11 @@ type AbilityEffectEdge implements Edge {
 # GENERATION
 
 type AbilityGenerationConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [AbilityGenerationEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [AbilityGenerationEdge!]! 
+
 }
 
 type AbilityGenerationEdge implements Edge {  
@@ -118,8 +126,11 @@ type AbilityGenerationEdge implements Edge {
 }
 
 type AbilityIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [AbilityIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [AbilityIntroductionEdge!]! 
+
 }
 
 type AbilityIntroductionEdge implements Edge {  
@@ -129,8 +140,11 @@ type AbilityIntroductionEdge implements Edge {
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
-  edges(pagination: PaginationInput filter: StatFilter): [AbilityModifiesStatEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: StatFilter
+  ): [AbilityModifiesStatEdge!]!
+
 }
 
 type AbilityModifiesStatEdge implements Edge {  
@@ -162,8 +176,11 @@ type AbilityModifiesStatEdge implements Edge {
 # STATUS
 
 type AbilityCausesStatusConnection implements Connection {
-  edges(pagination: PaginationInput filter: StatusFilter): [AbilityCausesStatusEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [AbilityCausesStatusEdge!]!
+
 }
 
 type AbilityCausesStatusEdge implements Edge {  
@@ -178,8 +195,11 @@ type AbilityCausesStatusEdge implements Edge {
 }
 
 type AbilityResistsStatusConnection implements Connection {
-  edges(pagination: PaginationInput filter: StatusFilter): [AbilityResistsStatusEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [AbilityResistsStatusEdge!]!
+
 }
 
 type AbilityResistsStatusEdge implements Edge {  
@@ -189,8 +209,11 @@ type AbilityResistsStatusEdge implements Edge {
 # TYPE
 
 type AbilityBoostsTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [AbilityBoostsTypeEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [AbilityBoostsTypeEdge!]!
+
 }
 
 type AbilityBoostsTypeEdge implements Edge {  
@@ -203,8 +226,11 @@ type AbilityBoostsTypeEdge implements Edge {
 }
 
 type AbilityResistsTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [AbilityResistsTypeEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [AbilityResistsTypeEdge!]!
+
 }
 
 type AbilityResistsTypeEdge implements Edge {  
@@ -219,8 +245,11 @@ type AbilityResistsTypeEdge implements Edge {
 # USAGE METHOD
 
 type AbilityBoostsUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput filter: UsageMethodFilter): [AbilityBoostsUsageMethodEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: UsageMethodFilter
+  ): [AbilityBoostsUsageMethodEdge!]!
+
 }
 
 type AbilityBoostsUsageMethodEdge implements Edge {  
@@ -233,8 +262,11 @@ type AbilityBoostsUsageMethodEdge implements Edge {
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput filter: UsageMethodFilter): [AbilityResistsUsageMethodEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: UsageMethodFilter
+  ): [AbilityResistsUsageMethodEdge!]!
+
 }
 
 type AbilityResistsUsageMethodEdge implements Edge {  
@@ -259,11 +291,34 @@ enum Recipient {
 # INPUTS
 # 
 
-input AbilityFilter implements Filter {
+input AbilityFilter {
+  """
+  The number of the Generation in which the Ability was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Ability was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Ability was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Ability in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

@@ -76,7 +76,7 @@ type Type implements Node {
 
   """
   The name of the Type in snake_case. 
-  """ 
+  """
   name: String!
 
   """
@@ -143,8 +143,11 @@ type Type implements Node {
 # ABILITY
 
 type TypeBoostedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [TypeBoostedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [TypeBoostedByAbilityEdge!]!
+
 }
 
 type TypeBoostedByAbilityEdge implements Edge {  
@@ -153,8 +156,11 @@ type TypeBoostedByAbilityEdge implements Edge {
 }
 
 type TypeResistedByAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [TypeResistedByAbilityEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [TypeResistedByAbilityEdge!]!
+
 }
 
 type TypeResistedByAbilityEdge implements Edge {  
@@ -165,8 +171,11 @@ type TypeResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type TypeGenerationConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [TypeGenerationEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [TypeGenerationEdge!]! 
+
 }
 
 type TypeGenerationEdge implements Edge {  
@@ -174,8 +183,11 @@ type TypeGenerationEdge implements Edge {
 }
 
 type TypeIntroductionConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [TypeIntroductionEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [TypeIntroductionEdge!]! 
+
 }
 
 type TypeIntroductionEdge implements Edge {  
@@ -185,8 +197,11 @@ type TypeIntroductionEdge implements Edge {
 # ITEM
 
 type TypeNaturalGiftConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [TypeNaturalGiftEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [TypeNaturalGiftEdge!]!
+
 }
 
 type TypeNaturalGiftEdge implements Edge {  
@@ -199,8 +214,11 @@ type TypeNaturalGiftEdge implements Edge {
 }
 
 type TypeBoostedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [TypeBoostedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [TypeBoostedByItemEdge!]!
+
 }
 
 type TypeBoostedByItemEdge implements Edge {  
@@ -209,8 +227,11 @@ type TypeBoostedByItemEdge implements Edge {
 }
 
 type TypeResistedByItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [TypeResistedByItemEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [TypeResistedByItemEdge!]!
+
 }
 
 type TypeResistedByItemEdge implements Edge {  
@@ -221,8 +242,11 @@ type TypeResistedByItemEdge implements Edge {
 # MOVE
 
 type TypeMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [TypeMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [TypeMoveEdge!]!
+
 }
 
 type TypeMoveEdge implements Edge {  
@@ -230,8 +254,11 @@ type TypeMoveEdge implements Edge {
 }
 
 type TypeEnablesMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [TypeEnablesMoveEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [TypeEnablesMoveEdge!]!
+
 }
 
 type TypeEnablesMoveEdge implements Edge {  
@@ -241,8 +268,11 @@ type TypeEnablesMoveEdge implements Edge {
 # POKEMON
 
 type TypePokemonConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [TypePokemonEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [TypePokemonEdge!]!
+
 }
 
 type TypePokemonEdge implements Edge {  
@@ -252,8 +282,11 @@ type TypePokemonEdge implements Edge {
 # TYPE
 
 type DefensiveTypeMatchupConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [DefensiveTypeMatchupEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [DefensiveTypeMatchupEdge!]!
+
 }
 
 type DefensiveTypeMatchupEdge implements Edge {  
@@ -266,8 +299,11 @@ type DefensiveTypeMatchupEdge implements Edge {
 }
 
 type OffensiveTypeMatchupConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [OffensiveTypeMatchupEdge!]!
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [OffensiveTypeMatchupEdge!]!
+
 }
 
 type OffensiveTypeMatchupEdge implements Edge {  
@@ -283,11 +319,34 @@ type OffensiveTypeMatchupEdge implements Edge {
 # INPUTS
 #
 
-input TypeFilter implements Filter {
+input TypeFilter {
+  """
+  The number of the Generation in which the Type was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Type was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Type was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Type in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

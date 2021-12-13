@@ -18,7 +18,10 @@ extend type Query {
   """
   Select Generations, with optional cursor-based pagination.
   """
-  generations(cursor: String, limit: Int): [Generation!]!
+  generations(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [Generation!]!
 }
 
 #
@@ -129,13 +132,19 @@ type Generation implements Node {
 # ABILITY
 
 type GenerationAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [GenerationAbilityEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [GenerationAbilityEdge!]! 
+
 }
 
 type GenerationIntroducedAbilityConnection implements Connection {
-  edges(pagination: PaginationInput filter: AbilityFilter): [GenerationAbilityEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [GenerationAbilityEdge!]! 
+
 }
 
 type GenerationAbilityEdge implements Edge {  
@@ -146,13 +155,19 @@ type GenerationAbilityEdge implements Edge {
 # EFFECT
 
 type GenerationEffectConnection implements Connection {
-  edges(pagination: PaginationInput filter: EffectFilter): [GenerationEffectEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: EffectFilter
+  ): [GenerationEffectEdge!]! 
+
 }
 
 type GenerationIntroducedEffectConnection implements Connection {
-  edges(pagination: PaginationInput filter: EffectFilter): [GenerationEffectEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: EffectFilter
+  ): [GenerationEffectEdge!]! 
+
 }
 
 type GenerationEffectEdge implements Edge {  
@@ -163,13 +178,19 @@ type GenerationEffectEdge implements Edge {
 # ITEM
 
 type GenerationItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [GenerationItemEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [GenerationItemEdge!]! 
+
 }
 
 type GenerationIntroducedItemConnection implements Connection {
-  edges(pagination: PaginationInput filter: ItemFilter): [GenerationItemEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [GenerationItemEdge!]! 
+
 }
 
 type GenerationItemEdge implements Edge {  
@@ -179,13 +200,19 @@ type GenerationItemEdge implements Edge {
 # MOVE
 
 type GenerationMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [GenerationMoveEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [GenerationMoveEdge!]! 
+
 }
 
 type GenerationIntroducedMoveConnection implements Connection {
-  edges(pagination: PaginationInput filter: MoveFilter): [GenerationMoveEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [GenerationMoveEdge!]! 
+
 }
 
 type GenerationMoveEdge implements Edge {  
@@ -195,13 +222,19 @@ type GenerationMoveEdge implements Edge {
 # POKEMON
 
 type GenerationPokemonConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [GenerationPokemonEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [GenerationPokemonEdge!]! 
+
 }
 
 type GenerationIntroducedPokemonConnection implements Connection {
-  edges(pagination: PaginationInput filter: PokemonFilter): [GenerationPokemonEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [GenerationPokemonEdge!]! 
+
 }
 
 type GenerationPokemonEdge implements Edge {  
@@ -211,13 +244,19 @@ type GenerationPokemonEdge implements Edge {
 # TYPE
 
 type GenerationTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [GenerationTypeEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [GenerationTypeEdge!]! 
+
 }
 
 type GenerationIntroducedTypeConnection implements Connection {
-  edges(pagination: PaginationInput filter: TypeFilter): [GenerationTypeEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [GenerationTypeEdge!]! 
+
 }
 
 type GenerationTypeEdge implements Edge {  
@@ -227,13 +266,19 @@ type GenerationTypeEdge implements Edge {
 # USAGE METHOD
 
 type GenerationUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput filter: UsageMethodFilter): [GenerationUsageMethodEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: UsageMethodFilter
+  ): [GenerationUsageMethodEdge!]! 
+
 }
 
 type GenerationIntroducedUsageMethodConnection implements Connection {
-  edges(pagination: PaginationInput filter: UsageMethodFilter): [GenerationUsageMethodEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: UsageMethodFilter
+  ): [GenerationUsageMethodEdge!]! 
+
 }
 
 type GenerationUsageMethodEdge implements Edge {  
@@ -243,13 +288,19 @@ type GenerationUsageMethodEdge implements Edge {
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
-  edges(pagination: PaginationInput filter: VersionGroupFilter): [GenerationVersionGroupEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: VersionGroupFilter
+  ): [GenerationVersionGroupEdge!]! 
+
 }
 
 type GenerationIntroducedVersionGroupConnection implements Connection {
-  edges(pagination: PaginationInput filter: VersionGroupFilter): [GenerationVersionGroupEdge!]! 
-  count: Int!
+  edges(
+    pagination: PaginationInput
+    filter: VersionGroupFilter
+  ): [GenerationVersionGroupEdge!]! 
+
 }
 
 type GenerationVersionGroupEdge implements Edge {  
@@ -280,11 +331,34 @@ enum GenerationCode {
 # INPUTS
 #
 
-input GenerationFilter implements Filter {
+input GenerationFilter {
+  """
+  The number of the Generation in which the Generation was introduced.
+  """
+  introduced: Int
+  """
+  The number of the Generation after which the Generation was introduced.
+  """
   introducedAfter: Int
+  """
+  The number of the Generation before which the Generation was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the Generation in snake_case.
+  """
+  name: String
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }

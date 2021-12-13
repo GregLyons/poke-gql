@@ -1,5 +1,5 @@
 """
-Interface for basic entities such as Ability, Move, etc.
+Interface for entities such as Ability, Move, etc.
 """
 interface Node {
   id: ID!
@@ -15,6 +15,9 @@ May contain additional fields depending on the relationship.
 For example, PokemonMoveEdge represents an edge starting from a Pokemon Node and ending in a Move Node. It has an additional field 'learnMethod', which is a string describing how the Pokemon can learn the given Move. The 'node' field would be of type Move.
 """
 interface Edge {
+  """
+  The ending Node of the Edge.
+  """
   node: Node!
 }
 
@@ -26,19 +29,58 @@ For example, the 'moves' field in a Pokemon Node has type PokemonMoveConnection.
 Continuing the example, PokemonMoveConnection has a counterpart in MovePokemonConnection, which is the type of the 'pokemon' field in a Move Node. The corresponding 'edges' field type is then '[MovePokemonEdge!]!', and the 'node' field of the MovePokemonEdge type has type 'Pokemon!'. 
 """
 interface Connection {
-  edges(pagination: PaginationInput filter: GenerationFilter): [Edge!]!
-  count: Int!
+  """
+  The edges in the connection. The 'pagination' field allows for limit-offset pagination and sorting.
+
+  'edges' also always has a 'filter' field which implements the 'Filter' interface. The filtering is based on the type of node at the end of the edge. For example, if the edges originate from an Ability Node and end at Pokemon Nodes, then the filter will be a 'PokemonFilter'.
+
+  Functionally, the 'filter' field 'implements' the 'Filter' interface (i.e. you can always use the options in the 'Filter' interface, such as 'introducedAfter' and 'startsWith', in your filter input).
+
+  Unfortunately, we could not put the 'filter' field in the interface, which would make the documentation clearer.  However, because we want to extend the 'filter' input depending on the type of entity (e.g. filtering Moves by 'power', 'accuracy', etc.), filters like 'MoveFilter' would need to extend the 'Filter' interface. Since filters are 'input' types in GraphQL, this is impossible, since 'input' types cannot 'implement' interfaces (e.g. we cannot write 'MoveFilter implements Filter'), which would be ideal.
+  """
+  edges(
+    pagination: PaginationInput
+  ): [Edge!]!
+
 }
 
 """
-Interface for filtering entities.
+Interface for filtering connections and queries. 'Entity' refers to, e.g. Ability, Generation, Item, etc. 
 """
 interface Filter {
+  """
+  The number of the Generation in which the entity was introduced.
+  """
+  introduced: Int
+
+  """
+  The number of the Generation after which the entity was introduced.
+  """
   introducedAfter: Int
+  
+  """
+  The number of the Generation before which the entity was introduced.
+  """
   introducedBefore: Int
 
+  """
+  The name of the entity in snake_case.
+  """
+  name: String
+
+  """
+  Entities whose name contains the given string, case-insensitive.
+  """
   contains: String
+
+  """
+  Entities whose name ends with the given string, case-insensitive.
+  """
   endsWith: String
+
+  """
+  Entities whose name starts with the given string, case-insensitive.
+  """
   startsWith: String
 }
 
@@ -52,7 +94,6 @@ input PaginationInput {
   sortBy: SortByEnum = ASC
   search: String = ""
 }
-
 
 enum SortByEnum {
   ASC,
