@@ -14,6 +14,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   parentPK,
   
   basicEdge,
@@ -43,32 +46,9 @@ const effectPK = parentPK('effect');
 //#region
 
 const Query = {
-  effectByName: async (parent, { name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM effect
-        WHERE effect_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  effectByName: queryEntityByColumn('effect', 'name'),
 
-  // TODO: cursor
-  effects: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM effect
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  effects: queryEntities('effect'),
 }
 
 //#endregion

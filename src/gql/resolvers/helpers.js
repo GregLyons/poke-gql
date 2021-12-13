@@ -1,29 +1,77 @@
-const entityNameToTableName = entityName => {
-  switch(entityName) {
-    case 'usageMethod':
-      return 'usage_method';
-    case 'versionGroup':
-      return 'version_group';
-    case 'type':
-      return 'ptype';
-    case 'move':
-      return 'pmove';
-    case 'status':
-      return 'pstatus';
-    case 'description':
-      return 'pdescription';
-    case 'generation':
-    case 'sprite':
-    case 'ability':
-    case 'item':
-    case 'effect':
-    case 'pokemon':
-    case 'stat':
-      return entityName;
-    default:
-      throw `Invalid entity name: ${entityName}.`;
+const {
+  entityNameToTableName,
+  getPaginationQueryString,
+  getFilterQueryString,
+  hasGenID,
+} = require('../../models/index.js');
+
+// MySQL Queries
+//#region
+
+const queryEntities = entityName => {
+  return async (parent, args, context, info) => {
+    tableName = entityNameToTableName(entityName);
+
+    filterString = getFilterQueryString(args.filter, tableName);
+    paginationString = getPaginationQueryString(args.pagination, tableName);
+
+    return await context.db.promise().query(
+      `
+        SELECT * FROM ${tableName}
+        ${
+          hasGenID(tableName) 
+            ? `WHERE generation_id = ${args.generation}`
+            : ''
+        }
+        ${filterString}
+        ${paginationString}
+      `
+    )
+    .then( ([results, fields]) => {
+      return results;
+    })
+    .catch(console.log);
   }
 }
+
+const queryEntityByColumn = (entityName, keyName) => {
+  return async (parent, args, context, info) => {
+    tableName = entityNameToTableName(entityName, keyName);
+
+    // 
+    let columnName;
+    if (tableName === 'generation' && keyName === 'number') {
+      columnName = 'id';
+    }
+    else {
+      columnName = keyName;
+    }
+
+    return await context.db.promise().query(
+      `
+        SELECT * FROM ${tableName}
+
+        ${
+          hasGenID(tableName) 
+            ? `WHERE generation_id = ${args.generation}`
+            : ''
+        }
+        
+        ${
+          hasGenID(tableName)
+            ? `AND ${tableName}_${columnName} = '${args[keyName].toString().toLowerCase()}'`
+            : `WHERE ${tableName}_${columnName} = '${args[keyName].toString().toLowerCase()}'`
+        }
+      `
+    )
+    .then( ([results, fields]) => {
+      return results[0]
+    })
+    .catch(console.log);
+  }
+}
+
+//#endregion
 
 // 
 //#region
@@ -40,8 +88,6 @@ const parentPK = (entityName) => {
 }  
 
 //#endregion
-
-
 
 // EDGES
 //#region
@@ -216,8 +262,9 @@ const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') =
 //#endregion
 
 module.exports = {
-  entityNameToTableName,
-  
+  queryEntities,
+  queryEntityByColumn,
+
   abilityEdge,
   basicEdge,
   causeStatusEdge,

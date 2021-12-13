@@ -8,7 +8,7 @@ extend type Query {
   """
   Select a Stat by its snake_case name, e.g. 'critical_hit_ratio'.
   """
-  statByName(name: String!): Stat!
+  statByName(generatoion: Int = 8, name: String!): Stat!
   
   """
   Select Stats, with optional cursor-based pagination.
@@ -18,6 +18,7 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   stats(
+    generation: Int = 8
     pagination: PaginationInput
     filter: StatFilter
   ): [Stat!]!

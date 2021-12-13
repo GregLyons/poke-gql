@@ -14,6 +14,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   parentPK,
 
   basicEdge,
@@ -21,6 +24,7 @@ const {
   introductionConnection,
 } = require('./helpers.js');
 const versionGroupPK = parentPK('versionGroup');
+
 //#endregion
 
 // Query
@@ -37,31 +41,11 @@ const versionGroupPK = parentPK('versionGroup');
 //#region
 
 const Query = {
-  versionGroupByName: async (parent, { name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM version_group
-        WHERE version_group_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  versionGroupByCode: queryEntityByColumn('versionGroup', 'code'),
 
-  // TODO: cursor
-  versionGroups: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM version_group
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  versionGroupByName: queryEntityByColumn('versionGroup', 'name'),
+
+  versionGroups: queryEntities('versionGroup'),
 }
 
 //#endregion
@@ -75,17 +59,13 @@ const Query = {
 //#region
 
 const VersionGroup = {
-  code: async (parent, args, context, info) => {
-    return parent.version_group_code
-  },
+  code: parent => parent.version_group_code,
 
-  formattedName: async (parent, args, context, info) => {
-    return parent.version_group_formatted_name;
-  },
+  formattedName: parent => parent.version_group_formatted_name,
   
-  introduced: async (parent, args, context, info) => {
-    return parent.introduced;
-  },
+  name: parent => parent.version_group_name,
+
+  introduced: parent => parent.introduced,
  
 }
 

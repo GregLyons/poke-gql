@@ -14,6 +14,8 @@
 //#region
 
 const {
+  queryEntities,
+
   parentPK,
   
   basicEdge,
@@ -57,19 +59,7 @@ const Query = {
     .catch(console.log);
   },
 
-  // TODO: cursor
-  usageMethods: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM usage_method
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  usageMethods: queryEntities('usageMethod'),
 }
 
 //#endregion

@@ -22,49 +22,20 @@
 //#region
 
 const {
-  entityNameToTableName,
-  basicEdge
+  queryEntities,
+  
+  basicEdge,
+  queryEntityByColumn
 } = require('./helpers.js');
 
 //#endregion
 
 const Query = {
-  generationByNumber: async (parent, args, context, info) => {
-    const results = await context.db.promise().query(
-      `
-        SELECT * FROM generation
-        WHERE generation_id = ${args.number}
-      `
-    )
-    .catch(console.log)
-    return results[0][0];
-  },
+  generationByNumber: queryEntityByColumn('generation', 'number'),
   
-  generationByCode: async (parent, args, context, info) => {
-    args.code = args.code.toUpperCase();
+  generationByCode: queryEntityByColumn('generation', 'code'),
   
-    const results = await context.db.promise().query(
-      `
-        SELECT * FROM generation
-        WHERE generation_code = '${args.code}'
-      `
-    )
-    .catch(console.log)
-  
-    return results[0][0];
-  },
-  
-  // TODO: cursor
-  generations: async (parent, args, context, info) => {
-    const results = await context.db.promise().query(
-      `
-        SELECT * FROM generation
-      `
-    )
-    .catch(console.log)
-  
-    return results[0];
-  },
+  generations: queryEntities('generation'),
 }
 
 //#endregion

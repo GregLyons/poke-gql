@@ -15,6 +15,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   parentPK,
 
   basicEdge,
@@ -47,33 +50,10 @@ const typePK = parentPK('type');
 //#region
 
 const Query = {
-  typeByName: async (parent, { generation, name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM ptype
-        WHERE generation_id = ${generation}
-        AND ptype_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  typeByName: queryEntityByColumn('type', 'name'),
 
   // TODO: cursor
-  types: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM ptype
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  types: queryEntities('type'),
 }
 
 //#endregion

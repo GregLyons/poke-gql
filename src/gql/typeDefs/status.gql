@@ -8,7 +8,7 @@ extend type Query {
   """
   Select a Status by its snake_case name, e.g. 'center_of_attention'.
   """
-  statusByName(name: String!): Status!
+  statusByName(generation: Int = 8, name: String!): Status!
   
   """
   Select Statuses, with optional cursor-based pagination.
@@ -18,6 +18,7 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   statuses(
+    generation: Int = 8
     pagination: PaginationInput
     filter: StatusFilter
   ): [Status!]!

@@ -15,6 +15,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   basicEdge,
   causeStatusEdge,
   learnsetEdge,
@@ -27,6 +30,8 @@ const {
   parentPK,
 } = require('./helpers.js');
 const movePK = parentPK('move');
+
+const {getPaginationQueryString, getFilterQueryString} = require('../../models/index.js');
 
 //#endregion
 
@@ -48,33 +53,10 @@ const movePK = parentPK('move');
 //#region
 
 const Query = {
-  moveByName: async (parent, { generation, name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM pmove
-        WHERE generation_id = ${generation}
-        AND pmove_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  moveByName: queryEntityByColumn('move', 'name'),
 
   // TODO: cursor
-  moves: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM pmove
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  moves: queryEntities('move'),
 }
 
 //#endregion

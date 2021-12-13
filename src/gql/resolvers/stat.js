@@ -14,6 +14,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   basicEdge,
   modifyStatEdge,
   parentPK,
@@ -43,32 +46,9 @@ const statPK = parentPK('stat');
 //#region
 
 const Query = {
-  statByName: async (parent, { name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM stat
-        WHERE stat_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  statByName: queryEntityByColumn('stat', 'name'),
 
-  // TODO: cursor
-  stats: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM stat
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  stats: queryEntities('stat'),
 }
 
 //#endregion

@@ -8,7 +8,7 @@ extend type Query {
   """
   Select a Item by its snake_case name, e.g. 'venusaurite', 'firium_z'.
   """
-  itemByName(name: String!): Item!
+  itemByName(generation: Int = 8, name: String!): Item!
   
   """
   Select Items, with optional cursor-based pagination.
@@ -373,11 +373,19 @@ type ItemResistsUsageMethodEdge implements Edge {
 #
 
 enum ItemClass {
+  BERRY
+  CHOICE
+  DRIVE
+  GEM
+  INCENSE
   MEGA_STONE
-  Z_CRYSTAL
-  TYPE_ENHANCER
-  STAT_ENHANCER
+  MEMORY
   OTHER
+  PLATE
+  POWER
+  STAT_ENHANCER
+  TYPE_ENHANCER
+  Z_CRYSTAL
 }
 
 #
@@ -425,4 +433,9 @@ input ItemFilter {
   Entities whose name starts with the given string, case-insensitive.
   """
   startsWith: String
+
+
+  # OTHER FILTERS
+
+  
 }

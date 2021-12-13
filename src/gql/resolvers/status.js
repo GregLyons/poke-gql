@@ -14,6 +14,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   basicEdge,
   causeStatusEdge,
   
@@ -44,32 +47,9 @@ const statusPK = parentPK('status');
 //#region
 
 const Query = {
-  statusByName: async (parent, { name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM pstatus
-        WHERE status_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  statusByName: queryEntityByColumn('status', 'name'),
 
-  // TODO: cursor
-  statuses: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM pstatus
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  statuses: queryEntities('status'),
 }
 
 //#endregion

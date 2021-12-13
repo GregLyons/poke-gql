@@ -8,7 +8,7 @@ extend type Query {
   """
   Select a Move by its snake_case name, e.g. 'u_turn'.
   """
-  moveByName(name: String!): Move!
+  moveByName(generation: Int = 8, name: String!): Move!
   
   """
   Select Moves, with optional cursor-based pagination.

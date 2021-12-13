@@ -8,7 +8,7 @@ extend type Query {
   """
   Select an Ability by its snake_case name, e.g. 'intimidate', 'rks_system'.
   """
-  abilityByName(generation: Int! name: String!): Ability!
+  abilityByName(generation: Int = 8, name: String!): Ability!
   
   """
   Select Abilities, with optional cursor-based pagination.

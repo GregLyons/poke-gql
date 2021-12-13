@@ -8,7 +8,7 @@ extend type Query {
   """
   Select an Effect by its snake_case name, e.g. 'costs_hp'.
   """
-  effectByName(name: String!): Effect!
+  effectByName(generation: Int = 8, name: String!): Effect!
   
   """
   Select Effects, with optional cursor-based pagination.

@@ -15,6 +15,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   abilityEdge,
   basicEdge,
   evolutionEdge,
@@ -49,33 +52,10 @@ const pokemonPK = parentPK('pokemon');
 //#region
 
 const Query = {
-  pokemonByName: async (parent, { generation, name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM pokemon
-        WHERE generation_id = ${generation}
-        AND pokemon_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  pokemonByName: queryEntityByColumn('pokemon', 'name'),
 
   // TODO: cursor
-  pokemon: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM pokemon
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  pokemon: queryEntities('pokemon'),
 }
 
 //#endregion
@@ -119,6 +99,8 @@ const Pokemon = {
   evolvesTo: pokemonPK,
 
   formattedName: parent => parent.pokemon_formatted_name,
+
+  formClass: parent => parent.pokemon_form_class.toUpperCase(),
 
   forms: pokemonPK,
 

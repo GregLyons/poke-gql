@@ -6,6 +6,11 @@ extend type Query {
   versionGroupByID(id: ID!): VersionGroup!
 
   """
+  Select a VersionGroup by its code, e.g. 'RB', 'GSC', 'Colo', 'FRLG', 'SwSh'.
+  """
+  versionGroupByCode(name: String!): VersionGroup!
+
+  """
   Select a VersionGroup by its snake_case name, e.g. 'Blue/Red'.
   """
   versionGroupByName(name: String!): VersionGroup!

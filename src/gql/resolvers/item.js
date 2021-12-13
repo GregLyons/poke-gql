@@ -15,6 +15,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+
   basicEdge,
   causeStatusEdge, 
   modifyStatEdge,
@@ -49,33 +52,9 @@ const itemPK = parentPK('item');
 //#region
 
 const Query = {
-  itemByName: async (parent, { generation, name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM item
-        WHERE generation_id = ${generation}
-        AND item_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  itemByName: queryEntityByColumn('item', 'name'),
 
-  // TODO: cursor
-  items: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM item
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  items: queryEntities('item'),
 }
 
 //#endregion
@@ -93,6 +72,8 @@ const Item = {
   boostsUsageMethod: itemPK,
 
   causesStatus: itemPK,
+
+  class: parent => parent.item_class.toUpperCase(),
 
   descriptions: itemPK,
 

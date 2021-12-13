@@ -15,6 +15,9 @@
 //#region
 
 const {
+  queryEntities,
+  queryEntityByColumn,
+  
   abilityEdge,
   basicEdge,
   causeStatusEdge,
@@ -49,33 +52,9 @@ const abilityPK = parentPK('ability');
 //#region
 
 const Query = {
-  abilityByName: async (parent, { generation, name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM ability
-        WHERE generation_id = ${generation}
-        AND ability_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
-
-  // TODO: cursor
-  abilities: async (parent, { generation }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM ability
-        WHERE generation_id = ${generation}
-      `
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-  },
+  abilityByName: queryEntityByColumn('ability', 'name'),
+  
+  abilities: queryEntities('ability'),
 }
 
 //#endregion

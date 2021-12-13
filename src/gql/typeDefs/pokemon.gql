@@ -8,7 +8,7 @@ extend type Query {
   """
   Select an Pokemon by its snake_case name, e.g. 'pikachu', 'raichu_alola'.
   """
-  pokemonByName(name: String!): Pokemon!
+  pokemonByName(generation: Int = 8, name: String!): Pokemon!
   
   """
   Select Pokemon, with optional cursor-based pagination.
@@ -94,6 +94,11 @@ type Pokemon implements Node {
     Mr. Mime (Galar)
   """
   formattedName: String!
+
+  """
+  The type of form of this Pokemon, e.g. 'MEGA' for 'mega_charizard_x', 'BASE' for 'charizard', 'GMAX' for 'charizard_gmax', 'ALOLA' for 'raticate_alola'. 
+  """
+  formClass: FormClass!
 
   """
   If the Pokemon is a base form, this is the alternate forms the Pokemon can take.
@@ -428,12 +433,12 @@ enum AbilitySlot {
   HIDDEN
 }
 
-# TODO: rename 'BASE_FORM' to 'BASE'
 enum FormClass {
   ALOLA
-  BASE_FORM
+  BASE
   GALAR
   GMAX
+  HISUI
   MEGA
   OTHER
 }
@@ -590,5 +595,5 @@ input PokemonFilter {
   """
   Pokemon which of the base form of their form group, e.g. Meowth but not Galarian Meowth, Charizard but not Mega Charizard X/Y, nor Gigantamax Charizard.
   """
-  isBaseForm: Boolean
+  formClass: FormClass
 }
