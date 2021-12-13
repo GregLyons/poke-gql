@@ -23,6 +23,7 @@ extend type Query {
 
   """
   items(
+    generation: Int = 8
     pagination: PaginationInput
     filter: ItemFilter
   ): [Item!]!

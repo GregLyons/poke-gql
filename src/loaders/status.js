@@ -3,28 +3,28 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let status = {
-  causedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'causes', true));
+  causedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'status', 'causes', true));
   },
 
-  causedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'status', 'causes', true));
+  causedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'status', 'causes', true));
   },
 
-  causedByMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'causes', true));
+  causedByMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'causes', true));
   },
   
-  resistedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'resists', true));
+  resistedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'status', 'resists', true));
   },
 
-  resistedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'status', 'resists', true));
+  resistedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'status', 'resists', true));
   },
 
-  resistedByMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'resists', true));
+  resistedByMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'resists', true));
   },
 }
 

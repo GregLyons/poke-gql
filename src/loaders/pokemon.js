@@ -3,48 +3,48 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let pokemon = {
-  ability(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'ability'));
+  ability(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'ability'));
   },
   
-  enablesItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'pokemon', 'requires', true));
+  enablesItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'pokemon', 'requires', true));
   },
 
-  enablesMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'pokemon', 'requires', true));
+  enablesMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'pokemon', 'requires', true));
   },
 
-  evolvesFrom(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'pokemon', 'evolution', true));
+  evolvesFrom(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'pokemon', 'evolution', true));
   },
 
-  evolvesTo(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'pokemon', 'evolution'));
+  evolvesTo(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'pokemon', 'evolution'));
   },
 
-  form(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'pokemon', 'form'));
+  form(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'pokemon', 'form'));
   },
 
-  generation(pagination) {
-    return new DataLoader(batchGens(pagination));
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  move(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'move'));
+  move(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'move'));
   },
 
-  requiresItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'item', 'requires'));
+  requiresItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'item', 'requires'));
   },
 
-  type(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'type'));
+  type(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'type'));
   },
 }
 

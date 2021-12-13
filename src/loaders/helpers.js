@@ -31,6 +31,7 @@ const isGenDependent = tableName => {
   return !['generation', 'version_group', 'sprite', 'pdescription'].includes(tableName);
 }
 
+// Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 const getPaginationQueryString = (pagination, tableName) => {
   const {limit, offset, orderBy, sortBy, search} = pagination;
@@ -66,14 +67,76 @@ const getPaginationQueryString = (pagination, tableName) => {
   `
 }
 
+// Return a MySQL string for filtering results.
+// 'filter' is an object with 'introduced', 'introducedAfter', 'introducedBefore', 'name', 'contains', 'endsWith', 'startsWith' keys.
+const getFilterQueryString = (filter, tableName) => {
+  // Debut filtering
+  //#region
+
+  const introducedString = filter.introduced
+    ? `AND introduced = ${filter.introduced}`
+    : ``;
+
+  const introducedAfterString = filter.introducedAfter
+    ? `AND introduced >= ${filter.introducedAfter}`
+    : ``;
+
+  const introducedBeforeString = filter.introducedBefore
+    ? `AND introduced <= ${filter.introducedBefore}`
+    : ``;
+
+  const debutFilterString = `
+    ${introducedString}
+    ${introducedAfterString}
+    ${introducedBeforeString}
+  `;
+
+  //#endregion
+
+  // Name filtering
+  //#region
+
+  const nameString = filter.name 
+    ? `AND ${tableName}_name = '${filter.name}'`
+    : ``;
+
+  const containsString = filter.contains 
+    ? `AND ${tableName}_name LIKE '%${filter.contains}%'`
+    : ``;
+
+  const startsWithString = filter.startsWith 
+    ? `AND ${tableName}_name LIKE '${filter.startsWith}%'`
+    : ``;
+
+  const  endsWithString = filter.endsWith
+    ? `AND ${tableName}_name LIKE '%${filter.endsWith}'`
+    : ``;
+  
+  //#endregion
+
+  const nameFilterString = `
+    ${nameString}
+    ${containsString}
+    ${startsWithString}
+    ${endsWithString}
+  `;
+  
+  return `
+    ${debutFilterString}
+    ${nameFilterString}
+  `;
+}
+
 const batchGens = (pagination) => {
   return async gens => {
     const paginationString = getPaginationQueryString(pagination, 'generation');
+    const filterString = getFilterQueryString(filter, 'generation');
 
     const genData = await db.promise().query(
       `
         SELECT * FROM generation
         WHERE generation_id IN ?
+        ${filterString}
         ${paginationString}
       `, [[gens]]
     )
@@ -86,20 +149,20 @@ const batchGens = (pagination) => {
   }
 }
 
-const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, middle = '', reverse = false) => {
+const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityName, middle = '', reverse = false) => {
   return async entityPKs => {
     if (reverse) {
       [ownerEntityName, ownedEntityName] = [ownedEntityName, ownerEntityName]
     }
 
     // Compute table and column names
-    const owner = entityNameToTableName(ownerEntityName);
-    const ownerGen = owner + '_generation_id';
-    const ownerID = owner + '_id';
+    const ownerTableName = entityNameToTableName(ownerEntityName);
+    const ownerGen = ownerTableName + '_generation_id';
+    const ownerID = ownerTableName + '_id';
 
-    const owned = entityNameToTableName(ownedEntityName);
-    const ownedID = owned + '_id';
-    const ownedGen = owned + '_generation_id';
+    const ownedTableName = entityNameToTableName(ownedEntityName);
+    const ownedID = ownedTableName + '_id';
+    const ownedGen = ownedTableName + '_generation_id';
 
     let junctionTableName;
     if (middle === 'natural_gift') {
@@ -116,13 +179,13 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
     }
     else if (reverse) {
       junctionTableName = middle 
-        ? owned + '_' + middle + '_' + owner
-        : owned + '_' + owner;
+        ? ownedTableName + '_' + middle + '_' + ownerTableName
+        : ownedTableName + '_' + ownerTableName;
     } 
     else {
       junctionTableName = middle 
-        ? owner + '_' + middle + '_' + owned
-        : owner + '_' + owned;
+        ? ownerTableName + '_' + middle + '_' + ownedTableName
+        : ownerTableName + '_' + ownedTableName;
     }
 
     // May need to change column names
@@ -210,33 +273,35 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
         }
         break;
       default:
-        junctionOwnerID = owner + '_id';
-        junctionOwnerGen = owner + '_generation_id';
-        junctionOwnedID = owned + '_id';
-        junctionOwnedGen = owned + '_generation_id';
+        junctionOwnerID = ownerTableName + '_id';
+        junctionOwnerGen = ownerTableName + '_generation_id';
+        junctionOwnedID = ownedTableName + '_id';
+        junctionOwnedGen = ownedTableName + '_generation_id';
     }
 
     // Compute other clauses
-    const onString = isGenDependent(owned) 
-      ? `ON (${junctionTableName}.${junctionOwnedGen}, ${junctionTableName}.${junctionOwnedID}) = (${owned}.generation_id, ${owned}.${ownedID})`
-      : `ON ${junctionTableName}.${junctionOwnedID} = ${owned}.${ownedID}`;
+    const onString = isGenDependent(ownedTableName) 
+      ? `ON (${junctionTableName}.${junctionOwnedGen}, ${junctionTableName}.${junctionOwnedID}) = (${ownedTableName}.generation_id, ${ownedTableName}.${ownedID})`
+      : `ON ${junctionTableName}.${junctionOwnedID} = ${ownedTableName}.${ownedID}`;
 
     // If the two entity tables are the same, then ambiguity will arise without the junction table name.
-    const whereString = isGenDependent(owner) 
+    const whereString = isGenDependent(ownerTableName) 
       ? `WHERE (${junctionTableName}.${junctionOwnerGen}, ${junctionTableName}.${junctionOwnerID}) IN ?`
       : `WHERE (${junctionTableName}.${junctionOwnerID}) IN ?`
 
     const paginationString = getPaginationQueryString(pagination, junctionTableName);
+    const filterString = getFilterQueryString(filter, ownedTableName);
 
     const data = await db.promise().query(
       `
-        SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
+        SELECT * FROM ${junctionTableName} RIGHT JOIN ${ownedTableName} 
         ${onString}
         ${whereString}
+        ${filterString}
         ${paginationString}
       `,
       [[entityPKs.map(d => {
-        return isGenDependent(owner) 
+        return isGenDependent(ownerTableName) 
           ? [d.genID, d.entityID]
           : [d.entityID];
       })]]
@@ -266,6 +331,7 @@ const basicJunctionBatcher = (pagination, ownerEntityName, ownedEntityName, midd
 
 module.exports = {
   getPaginationQueryString,
+  getFilterQueryString,
 
   batchGens,
   basicJunctionBatcher,

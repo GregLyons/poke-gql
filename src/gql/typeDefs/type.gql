@@ -20,6 +20,7 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   types(
+    generation: Int = 8
     pagination: PaginationInput
     filter: TypeFilter
   ): [Type!]!

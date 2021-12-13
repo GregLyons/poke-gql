@@ -3,52 +3,52 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let type = {
-  boostedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'type', 'boosts', true));
+  boostedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'type', 'boosts', true));
   },
 
-  boostedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'type', 'boosts', true));
+  boostedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'boosts', true));
   },
 
-  defensiveMatchup(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'type', 'type', 'ptype_matchup', true))
+  defensiveMatchup(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'type', 'type', 'ptype_matchup', true))
   },
   
-  enablesMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'requires', true));
+  enablesMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type', 'requires', true));
   },
   
-  generation(pagination) {
-    return new DataLoader(batchGens(pagination));
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
   
-  move(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', '', true));
+  move(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type', '', true));
   },
   
-  naturalGift(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'type', 'natural_gift', true))
+  naturalGift(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'natural_gift', true))
   },
   
-  pokemon(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'type', '', true));
+  pokemon(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'type', '', true));
   },
 
-  offensiveMatchup(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'type', 'type', 'ptype_matchup'))
+  offensiveMatchup(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'type', 'type', 'ptype_matchup'))
   },
   
-  resistedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'type', 'resists', true));
+  resistedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'type', 'resists', true));
   },
 
-  resistedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'type', 'resists', true));
+  resistedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'resists', true));
   },
 
 }

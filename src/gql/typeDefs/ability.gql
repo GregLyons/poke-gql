@@ -20,6 +20,7 @@ extend type Query {
   'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
   """
   abilities(
+    generation: Int = 8
     pagination: PaginationInput
     filter: AbilityFilter
   ): [Ability!]!
@@ -71,6 +72,8 @@ type Ability implements Node {
   The name of the Ability in snake_case.
   """
   name: String!
+
+  pokemon: AbilityPokemonConnection
 
   resistsType: AbilityResistsTypeConnection
 
@@ -135,6 +138,21 @@ type AbilityIntroductionConnection implements Connection {
 
 type AbilityIntroductionEdge implements Edge {  
   node: Generation!
+}
+
+# POKEMON
+
+type AbilityPokemonConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: PokemonFilter
+  ): [AbilityPokemonEdge!]!
+
+}
+
+type AbilityPokemonEdge implements Edge {  
+  node: Pokemon!
+  slot: AbilitySlot!
 }
 
 # STAT
@@ -285,6 +303,12 @@ enum Recipient {
   ALL_FOES
   TARGET
   USER
+}
+
+enum AbilitySlot {
+  ONE
+  TWO
+  HIDDEN
 }
 
 #

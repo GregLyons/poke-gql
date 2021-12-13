@@ -3,32 +3,32 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let usagemethod = {
-  boostedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'usageMethod', 'boosts', true));
+  boostedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'usageMethod', 'boosts', true));
   },
 
-  boostedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'usageMethod', 'boosts', true));
+  boostedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'usageMethod', 'boosts', true));
   },
 
-  generation(pagination) {
-    return new DataLoader(batchGens(pagination));
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  move(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'usageMethod', '', true));
+  move(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'usageMethod', '', true));
   },
   
-  resistedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'usageMethod', 'resists', true));
+  resistedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'usageMethod', 'resists', true));
   },
 
-  resistedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'usageMethod', 'resists', true));
+  resistedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'usageMethod', 'resists', true));
   },
 }
 

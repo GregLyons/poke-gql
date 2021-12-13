@@ -3,28 +3,28 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let effect = {
-  ability(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'effect', '', true));
+  ability(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'effect', '', true));
   },
   
-  effect(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item'));
+  effect(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item'));
   },
   
-  generation(pagination) {
-    return new DataLoader(batchGens(pagination));
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
   
-  item(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'effect', '', true));
+  item(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'effect', '', true));
   },
 
-  move(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'effect', '', true));
+  move(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'effect', '', true));
   },
 }
 

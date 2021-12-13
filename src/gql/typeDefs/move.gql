@@ -28,6 +28,7 @@ extend type Query {
   'types' is an array of type names in snake_case, and will return Moves whose Type belongs to 'types'.
   """
   moves(
+    generation: Int = 8
     pagination: PaginationInput
     filter: ItemFilter
   ): [Move!]!

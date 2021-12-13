@@ -3,16 +3,16 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let stat = {
-  modifiedByAbility(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'stat', 'modifies', true));
+  modifiedByAbility(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'stat', 'modifies', true));
   },
 
-  modifiedByItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'item', 'stat', 'modifies', true));
+  modifiedByItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'stat', 'modifies', true));
   },
 
-  modifiedByMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'stat', 'modifies', true));
+  modifiedByMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'stat', 'modifies', true));
   },
 }
 

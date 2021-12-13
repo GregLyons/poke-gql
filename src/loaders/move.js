@@ -3,60 +3,60 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let move = {
-  causesStatus(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'causes'));
+  causesStatus(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'causes'));
   },
   
-  effect(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'effect'));
+  effect(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'effect'));
   },
   
-  enablesMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'move', 'requires', true));
+  enablesMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'move', 'requires', true));
   },
   
-  generation(pagination) {
-    return new DataLoader(batchGens(pagination));
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
   
-  modifiesStat(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'stat', 'modifies'));
+  modifiesStat(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'stat', 'modifies'));
   },
 
-  pokemon(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'pokemon', 'move', '', true));
+  pokemon(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'move', '', true));
   },
   
-  resistStatus(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'status', 'resists'));
+  resistStatus(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'resists'));
   },
   
-  requiresItem(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'item', 'requires'));
+  requiresItem(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'item', 'requires'));
   },
   
-  requiresMove(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'move', 'requires'));
+  requiresMove(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'move', 'requires'));
   },
   
-  requiresPokemon(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'pokemon', 'requires'));
+  requiresPokemon(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'pokemon', 'requires'));
   },
   
-  requiresType(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type', 'requires'));
+  requiresType(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type', 'requires'));
   },
   
-  type(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'type'));
+  type(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type'));
   },
 
-  usageMethod(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'move', 'usageMethod'));
+  usageMethod(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'usageMethod'));
   },
 }
 

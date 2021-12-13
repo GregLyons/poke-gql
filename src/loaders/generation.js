@@ -1,6 +1,6 @@
 const DataLoader = require('dataloader');
 const {db} = require('../models/index.js');
-const {getPaginationQueryString} = require('./helpers.js');
+const {getPaginationQueryString, getFilterQueryString} = require('./helpers.js');
 
 /* 
   Returns a function to be passed into the constructor of a DataLoader object.
@@ -11,7 +11,7 @@ const {getPaginationQueryString} = require('./helpers.js');
 
   'pagination' is an object with data for paginating the results.
 */
-const batchEntitiesByGen = (presence = true, tableName, pagination) => {
+const batchEntitiesByGen = (presence = true, tableName, pagination, filter) => {
   return async gens => {
     // If the entity doesn't change across generations, then the database only stores one instance of that entity. To determine the presence of such an entity in a given generation, we check whether the debut gen of that entity is less than or eqal to the given generation.
     const genDependent = !['effect', 'usage_method', 'version_group'].includes(tableName);
@@ -26,12 +26,14 @@ const batchEntitiesByGen = (presence = true, tableName, pagination) => {
 
     // Extract pagination fields.
     const paginationString = getPaginationQueryString(pagination, tableName);
+    const filterString = getFilterQueryString(filter, tableName);
 
     // Query the database
     const entities = await db.promise().query(
       `
         SELECT * FROM ${tableName}
         WHERE ${presence && genDependent ? 'generation_id' : 'introduced'} IN ?
+        ${filterString}
         ${paginationString}
       `, [[gensToConsider]]
     )
@@ -82,11 +84,11 @@ let generation = {};
 
     // Add 'present' and 'introduced' loaders for given entity.
     generation[entityName] = {
-      present(pagination) {
-        return new DataLoader(batchEntitiesByGen(true, tableName, pagination));
+      present(pagination, filter) {
+        return new DataLoader(batchEntitiesByGen(true, tableName, pagination, filter));
       },
-      introduced(pagination) {
-        return new DataLoader(batchEntitiesByGen(false, tableName, pagination));
+      introduced(pagination, filter) {
+        return new DataLoader(batchEntitiesByGen(false, tableName, pagination, filter));
       }
     };
     

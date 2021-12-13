@@ -28,6 +28,7 @@ extend type Query {
   'typing' is an array of type names, and it will return Pokemon whose set of Types matches the set of type names in 'typing'. E.g. 'heatran' will be matched by ['fire', 'steel'], among other Pokemon of the Fire/Steel typing, but 'charmander' will not be since it fails to be have the Steel Type.
   """
   pokemon(
+    generation: Int = 8
     pagination: PaginationInput
     filter: PokemonFilter
   ): [Pokemon!]!

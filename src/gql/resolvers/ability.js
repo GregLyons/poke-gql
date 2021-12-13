@@ -15,6 +15,7 @@
 //#region
 
 const {
+  abilityEdge,
   basicEdge,
   causeStatusEdge,
   modifyStatEdge,
@@ -108,6 +109,8 @@ const Ability = {
 
   name: parent => parent.ability_name,
 
+  pokemon: abilityPK,
+
   resistsStatus: abilityPK,
 
   resistsType: abilityPK,
@@ -141,6 +144,9 @@ const ConnectionsAndEdges = {
 
   AbilityModifiesStatConnection: basicJunctionConnection('ability', 'stat', 'modifies'),
   AbilityModifiesStatEdge: modifyStatEdge(),
+
+  AbilityPokemonConnection: basicJunctionConnection('ability', 'pokemon'),
+  AbilityPokemonEdge: abilityEdge(),
   
   AbilityResistsStatusConnection: basicJunctionConnection('ability', 'status', 'resists'),
   AbilityResistsStatusEdge: basicEdge(),

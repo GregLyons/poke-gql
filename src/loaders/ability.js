@@ -3,44 +3,48 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let ability = {
-  boostsType(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'type', 'boosts'));
+  boostsType(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'type', 'boosts'));
   },
 
-  boostsUsageMethod(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'usageMethod', 'boosts'));
+  boostsUsageMethod(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'usageMethod', 'boosts'));
   },
 
-  causesStatus(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'causes'));
+  causesStatus(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'status', 'causes'));
   },
   
-  effect(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'effect'));
+  effect(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'effect'));
   },
   
-  generation(pagination) {
-    return new DataLoader(batchGens(pagination));
+  generation(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
 
-  introduced(pagination) {
-    return new DataLoader(batchGens(pagination));
+  introduced(pagination, filter) {
+    return new DataLoader(batchGens(pagination, filter));
   },
   
-  modifiesStat(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'stat', 'modifies'));
+  modifiesStat(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'stat', 'modifies'));
   },
 
-  resistsStatus(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'status', 'resists'));
+  pokemon(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'ability', '', true));
   },
 
-  resistsType(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'type', 'resists'));
+  resistsStatus(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'status', 'resists'));
   },
 
-  resistsUsageMethod(pagination) {
-    return new DataLoader(basicJunctionBatcher(pagination, 'ability', 'usageMethod', 'resists'));
+  resistsType(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'type', 'resists'));
+  },
+
+  resistsUsageMethod(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'usageMethod', 'resists'));
   },
 }
 
