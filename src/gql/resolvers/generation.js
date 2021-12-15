@@ -50,18 +50,21 @@ const Generation = {
   abilities: parent => parent.generation_id,
   abilitiesIntroduced: parent => parent.generation_id,
 
+  code: parent => parent.generation_code,
+
   effects: parent => parent.generation_id,
   effectsIntroduced: parent => parent.generation_id,
 
-  code: parent => parent.generation_code,
-
-  number: parent => parent.generation_id,
-
+  fieldStates: parent => parent.generation_id,
+  fieldStatesIntroduced: parent => parent.generation_id,
+  
   items: parent => parent.generation_id,
   itemsIntroduced: parent => parent.generation_id,
   
   moves: parent => parent.generation_id,
   movesIntroduced: parent => parent.generation_id,
+  
+  number: parent => parent.generation_id,
 
   pokemon: parent => parent.generation_id,
   pokemonIntroduced: parent => parent.generation_id,
@@ -143,6 +146,10 @@ const ConnectionsAndEdges = {
   GenerationEffectConnection: presenceConnection('effect'),
   GenerationIntroducedEffectConnection: debutConnection('effect'),
   GenerationEffectEdge: basicEdge(),
+
+  GenerationFieldStateConnection: presenceConnection('fieldState'),
+  GenerationIntroducedFieldStateConnection: debutConnection('fieldState'),
+  GenerationFieldStateEdge: basicEdge(),
 
   GenerationItemConnection: presenceConnection('item'),
   GenerationIntroducedItemConnection: debutConnection('item'),

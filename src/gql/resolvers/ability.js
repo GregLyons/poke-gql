@@ -23,6 +23,7 @@ const {
   causeStatusEdge,
   modifyStatEdge,
   multiplierEdge,
+  turnsEdge,
 
   basicJunctionConnection,
   generationConnection,
@@ -68,11 +69,15 @@ const Query = {
 //#region
 
 const Ability = {
+  activatedByFieldState: abilityPK,
+
   boostsType: abilityPK,
 
   boostsUsageMethod: abilityPK,
 
   causesStatus: abilityPK,
+
+  createsFieldState: abilityPK,
 
   descriptions: abilityPK,
 
@@ -81,6 +86,8 @@ const Ability = {
   formattedName: parent => parent.ability_formatted_name,
 
   generation: parent => parent.generation_id,
+
+  ignoresFieldState: abilityPK,
   
   introduced: parent => parent.introduced,
   
@@ -90,11 +97,17 @@ const Ability = {
 
   pokemon: abilityPK,
 
+  preventsFieldState: abilityPK,
+
+  removesFieldState: abilityPK,
+
   resistsStatus: abilityPK,
 
   resistsType: abilityPK,
 
   resistsUsageMethod: abilityPK,
+
+  suppressesFieldState: abilityPK,
 }
 
 //#endregion
@@ -103,6 +116,9 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
+  AbilityActivatedByFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'activatedBy'),
+  AbilityActivatedByFieldStateEdge: basicEdge(),
+
   AbilityBoostsTypeConnection: basicJunctionConnection('ability', 'type', 'boosts'),
   AbilityBoostsTypeEdge: multiplierEdge(),
 
@@ -111,12 +127,18 @@ const ConnectionsAndEdges = {
 
   AbilityCausesStatusConnection: basicJunctionConnection('ability', 'status', 'causes'),
   AbilityCausesStatusEdge: causeStatusEdge(),
+
+  AbilityCreatesFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'creates'),
+  AbilityCreatesFieldStateEdge: turnsEdge(),
   
   AbilityEffectConnection: basicJunctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),
-
+  
   AbilityGenerationConnection: generationConnection('ability'),
   AbilityGenerationEdge: basicEdge(),
+  
+  AbilityIgnoresFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'ignores'),
+  AbilityIgnoresFieldStateEdge: basicEdge(),
   
   AbilityIntroductionConnection: introductionConnection('ability'),
   AbilityIntroductionEdge: basicEdge(),
@@ -126,6 +148,12 @@ const ConnectionsAndEdges = {
 
   AbilityPokemonConnection: basicJunctionConnection('ability', 'pokemon'),
   AbilityPokemonEdge: abilityEdge(),
+
+  AbilityPreventsFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'prevents'),
+  AbilityPreventsFieldStateEdge: basicEdge(),
+
+  AbilityRemovesFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'removes'),
+  AbilityRemovesFieldStateEdge: basicEdge(),
   
   AbilityResistsStatusConnection: basicJunctionConnection('ability', 'status', 'resists'),
   AbilityResistsStatusEdge: basicEdge(),
@@ -135,6 +163,9 @@ const ConnectionsAndEdges = {
   
   AbilityResistsUsageMethodConnection: basicJunctionConnection('ability', 'usageMethod', 'resists'),
   AbilityResistsUsageMethodEdge: multiplierEdge(),
+
+  AbilitySuppressesFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'suppresses'),
+  AbilitySuppressesFieldStateEdge: basicEdge(),
 }
 
 //#endregion

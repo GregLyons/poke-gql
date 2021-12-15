@@ -6,9 +6,9 @@ let effect = {
   ability(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'effect', '', true));
   },
-  
-  effect(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item'));
+
+  fieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'effect', '', true));
   },
   
   generation(pagination, filter) {

@@ -64,6 +64,8 @@ const Effect = {
 
   formattedName: parent => parent.effect_formatted_name,
 
+  fieldStates: effectPK,
+
   generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
@@ -83,6 +85,9 @@ const Effect = {
 const ConnectionsAndEdges = {
   EffectAbilityConnection: basicJunctionConnection('effect', 'ability'),
   EffectAbilityEdge: basicEdge(),
+
+  EffectFieldStateConnection: basicJunctionConnection('effect', 'fieldState'),
+  EffectFieldStateEdge: basicEdge(),
   
   EffectGenerationConnection: generationConnection('effect'),
   EffectGenerationEdge: basicEdge(),

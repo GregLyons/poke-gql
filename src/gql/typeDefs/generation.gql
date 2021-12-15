@@ -55,6 +55,16 @@ type Generation implements Node {
   effectsIntroduced: GenerationIntroducedEffectConnection
 
   """
+  All FieldStates present in this Generation.
+  """
+  fieldStates: GenerationFieldStateConnection
+
+  """
+  All FieldStates introduced in this Generation.
+  """
+  fieldStatesIntroduced: GenerationIntroducedFieldStateConnection
+
+  """
   The roman numeral for the Generation.
   """
   code: GenerationCode!
@@ -171,7 +181,6 @@ type GenerationAbilityEdge implements Edge {
   node: Ability!
 }
 
-
 # EFFECT
 
 type GenerationEffectConnection implements Connection {
@@ -187,6 +196,28 @@ type GenerationIntroducedEffectConnection implements Connection {
     pagination: PaginationInput
     filter: EffectFilter
   ): [GenerationEffectEdge!]! 
+
+}
+
+type GenerationEffectEdge implements Edge {  
+  node: Effect!
+}
+
+# FIELD STATE
+
+type GenerationFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [GenerationFieldStateEdge!]! 
+
+}
+
+type GenerationIntroducedFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [GenerationFieldStateEdge!]! 
 
 }
 

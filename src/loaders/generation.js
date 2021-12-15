@@ -1,5 +1,5 @@
 const DataLoader = require('dataloader');
-const {db} = require('../models/index.js');
+const {db, entityNameToTableName} = require('../models/index.js');
 const {getPaginationQueryString, getFilterQueryString} = require('./helpers.js');
 
 /* 
@@ -59,30 +59,11 @@ const batchEntitiesByGen = (presence = true, tableName, pagination, filter) => {
 */
 let generation = {};
 
-['ability', 'effect', 'item', 'move', 'pokemon', 'type', 'stat', 'status', 'usageMethod', 'versionGroup']
+['ability', 'effect', 'fieldState', 'item', 'move', 'pokemon', 'type', 'stat', 'status', 'usageMethod', 'versionGroup']
   .map(entityName => {
     generation[entityName] = {};
 
-    // Determine appropriate table name for entity class.
-    let tableName;
-    switch(entityName) {
-      case 'usageMethod':
-        tableName = 'usage_method';
-        break;
-      case 'versionGroup':
-        tableName = 'version_group';
-        break;
-      case 'type':
-        tableName = 'ptype';
-        break;
-      case 'move':
-        tableName = 'pmove';
-        break;
-      case 'status':
-        tableName = 'pstatus';
-      default:
-        tableName = entityName;
-    }
+    const tableName = entityNameToTableName(entityName);
 
     // Add 'present' and 'introduced' loaders for given entity.
     generation[entityName] = {
