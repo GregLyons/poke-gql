@@ -114,15 +114,18 @@ type FieldState implements Node {
 
   onlyGrounded: Boolean!
 
+  """
+  E.g. 'cloud_nine' prevents 'rain' from being set up.
+  """
   preventedByAbility: FieldStatePreventedByAbilityConnection
-
-  preventsStatus: FieldStatePreventsStatusConnection
 
   removedByAbility: FieldStateRemovedByAbilityConnection
 
   removedByMove: FieldStateRemovedByMoveConnection
 
   resistedByItem: FieldStateResistedByItemConnection
+
+  resistsStatus: FieldStateResistsStatusConnection
 
   """
   E.g. 'rain' reduces the power of 'fire' Moves.
@@ -430,15 +433,15 @@ type FieldStateCausesEdge implements Edge {
   chance: Float!
 }
 
-type FieldStatePreventsStatusConnection implements Connection {
+type FieldStateResistsStatusConnection implements Connection {
   edges(
     pagination: PaginationInput
     filter: StatusFilter
-  ): [FieldStatePreventsStatusEdge!]!
+  ): [FieldStateResistsStatusEdge!]!
 
 }
 
-type FieldStatePreventsStatusEdge implements Edge {  
+type FieldStateResistsStatusEdge implements Edge {  
   node: Status!
 }
 

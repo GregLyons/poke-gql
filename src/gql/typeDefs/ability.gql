@@ -33,11 +33,18 @@ extend type Query {
 type Ability implements Node {
   id: ID!
 
+  """
+  E.g. 'harsh_sunlight' activates 'chlorophyll'.
+  """
+  activatedByFieldState: AbilityActivatedByFieldStateConnection
+
   boostsType: AbilityBoostsTypeConnection
 
   boostsUsageMethod: AbilityBoostsUsageMethodConnection
 
   causesStatus: AbilityCausesStatusConnection
+
+  createsFieldState: AbilityCreatesFieldStateConnection
 
   """
   The Descriptions for the Ability across the different VersionGroups.
@@ -61,6 +68,8 @@ type Ability implements Node {
   """ 
   generation: AbilityGenerationConnection
 
+  ignoresFieldState: AbilityIgnoresFieldStateConnection
+
   """
   The Generation in which the Ability was introduced.
   """ 
@@ -75,11 +84,23 @@ type Ability implements Node {
 
   pokemon: AbilityPokemonConnection
 
+  """
+  E.g. 'drizzle' prevents other weather effects.
+  """
+  preventsFieldState: AbilityPreventsFieldStateConnection
+
+  """
+  E.g. 'drizzle' removes other weather effects.
+  """
+  removesFieldState: AbilityRemovesFieldStateConnection
+
   resistsType: AbilityResistsTypeConnection
 
   resistsUsageMethod: AbilityResistsUsageMethodConnection
 
   resistsStatus: AbilityResistsStatusConnection
+
+  suppressesFieldState: AbilitySuppressesFieldStateConnection
 }
 
 #
@@ -107,11 +128,83 @@ type AbilityEffectConnection implements Connection {
     pagination: PaginationInput
     filter: EffectFilter
   ): [AbilityEffectEdge!]! 
-
 }
 
 type AbilityEffectEdge implements Edge {  
   node: Effect!
+}
+
+# FIELD STATE
+
+type AbilityActivatedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [AbilityActivatedByFieldStateEdge!]! 
+}
+
+type AbilityActivatedByFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type AbilityCreatesFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [AbilityCreatesFieldStateEdge!]! 
+}
+
+type AbilityCreatesFieldStateEdge implements Edge {  
+  node: FieldState!
+
+  """
+  The number of turns that the FieldState is present when created by the Ability. '0' implies the FieldState either lasts indefinitely until overwritten, or is present as long as the source is present (e.g. Primal Kyogre's Primordial Sea).
+  """
+  turns: Int!
+}
+
+type AbilityIgnoresFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [AbilityIgnoresFieldStateEdge!]! 
+}
+
+type AbilityIgnoresFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type AbilityPreventsFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [AbilityPreventsFieldStateEdge!]! 
+}
+
+type AbilityPreventsFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type AbilityRemovesFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [AbilityRemovesFieldStateEdge!]! 
+}
+
+type AbilityRemovesFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type AbilitySuppressesFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [AbilitySuppressesFieldStateEdge!]! 
+}
+
+type AbilitySuppressesFieldStateEdge implements Edge {  
+  node: FieldState!
 }
 
 # GENERATION

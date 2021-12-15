@@ -35,6 +35,8 @@ type Type implements Node {
 
   boostedByAbility: TypeBoostedByAbilityConnection
 
+  boostedByFieldState: TypeBoostedByFieldStateConnection
+
   boostedByItem: TypeBoostedByItemConnection
 
   """
@@ -63,6 +65,11 @@ type Type implements Node {
   generation:TypeGenerationConnection
 
   """
+  E.g. 'flying' Type Pokemon ignores 'spikes'.
+  """
+  ignoresFieldState: TypeIgnoresFieldStateConnection
+
+  """
   The Generation in which the Type was introduced.
   """
   introduced: TypeIntroductionConnection
@@ -86,9 +93,24 @@ type Type implements Node {
   
   pokemon: TypePokemonConnection
 
+  """
+  E.g. 'poison' Type Pokemon remove 'toxic_spikes' on entry.
+  """
+  removesFieldState: TypeRemovesFieldStateConnection
+
   resistedByAbility: TypeResistedByAbilityConnection
 
+  """
+  E.g. 'harsh_sunlight' weakens 'water' Type Moves.
+  """
+  resistedByFieldState: TypeResistedByFieldStateConnection
+
   resistedByItem: TypeResistedByItemConnection
+
+  """
+  E.g. 'ground' Type Pokemon take less damage from the 'stealth_rock' FieldState.
+  """ 
+  resistsFieldState: TypeResistsFieldStateConnection
 
   """
   FieldStates which turn 'weather_ball' to this Type.
@@ -183,6 +205,70 @@ type TypeNaturalGiftConnection implements Connection {
 }
 
 type TypeNaturalGiftEdge implements Edge {  
+  node: FieldState!
+}
+
+type TypeBoostedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [TypeBoostedByFieldStateEdge!]!
+
+}
+
+type TypeBoostedByFieldStateEdge implements Edge {  
+  node: FieldState!
+  multiplier: Float!
+}
+
+type TypeResistedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [TypeResistedByFieldStateEdge!]!
+
+}
+
+type TypeResistedByFieldStateEdge implements Edge {  
+  node: FieldState!
+  multiplier: Float!
+}
+
+type TypeIgnoresFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [TypeIgnoresFieldStateEdge!]! 
+
+}
+
+type TypeIgnoresFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type TypeResistsFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [TypeResistsFieldStateEdge!]! 
+
+}
+
+type TypeResistsFieldStateEdge implements Edge {  
+  node: FieldState!
+
+  multiplier: Float!
+}
+
+type TypeRemovesFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [IteRemovesFieldStateEdge!]! 
+
+}
+
+type TypeRemovesFieldStateEdge implements Edge {  
   node: FieldState!
 }
 

@@ -31,9 +31,13 @@ extend type Query {
 type Status implements Node {
   id: ID!
 
-  abilityCauses: StatusCausedByAbilityConnection
+  causedByAbility: StatusCausedByAbilityConnection
 
-  resistedByAbility: StatusResistedByAbilityConnection
+  causedByFieldState: StatusCausedByFieldStateConnection
+
+  causedByItem: StatusCausedByItemConnection
+
+  causedByMove: StatusCausedByMoveConnection
 
   """
   The name of the Status in Title Case, with appropriate punctuation.
@@ -50,16 +54,21 @@ type Status implements Node {
   """
   introduced: StatusIntroductionConnection
 
-  itemCauses: StatusCausedByItemConnection
+  """
+  E.g. 'electric_terrain' prevents opponents from being inflicted with 'sleep' or 'drowsy' Status. (Note that for the case of 'yawn', 'electric_terrain' still prevents 'drowsy' Pokemon from falling asleep.)
+
+  'preventedByFieldState' may be a more appropriate key name, but 'resistedByFieldState' is consistent with the other key names.
+  """
+  resistedByFieldState: StatusResistedByFieldStateConnection
+
+  resistedByAbility: StatusResistedByAbilityConnection
 
   resistedByItem: StatusResistedByItemConnection
-
-  moveCauses: StatusCausedByMoveConnection
 
   """
   Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
   """
-  moveResists: StatusResistedByMoveConnection
+  resistedByMove: StatusResistedByMoveConnection
 
   """
   The name of the Status in snake_case.
@@ -102,6 +111,37 @@ type StatusResistedByAbilityConnection implements Connection {
 
 type StatusResistedByAbilityEdge implements Edge {  
   node: Ability!
+}
+
+# FIELD STATE
+
+type StatusCausedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [StatusCausedByFieldStateEdge!]!
+
+}
+
+type StatusCausedByFieldStateEdge implements Edge {  
+  node: FieldState!
+  
+  """
+  The probability of the FieldState causing the Status once the necessary conditions have been met.
+  """
+  chance: Float!
+}
+
+type StatusResistedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [StatusResistedByFieldStateEdge!]!
+
+}
+
+type StatusResistedByFieldStateEdge implements Edge {  
+  node: FieldState!
 }
 
 # GENERATION

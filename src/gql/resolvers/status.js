@@ -61,7 +61,7 @@ const Query = {
 //#region
 
 const Status = {
-  abilityCauses: statusPK,
+  causedByAbility: statusPK,
 
   resistedByAbility: statusPK,
 
@@ -73,13 +73,13 @@ const Status = {
   
   introduced: parent => parent.introduced,
 
-  itemCauses: statusPK,
+  causedByItem: statusPK,
 
   resistedByItem: statusPK,
   
-  moveCauses: statusPK,
+  causedByMove: statusPK,
 
-  moveResists: statusPK,
+  resistedByMove: statusPK,
 
   name: async (parent, args, context, info) => {
     return parent.pstatus_name

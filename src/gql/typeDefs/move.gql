@@ -54,6 +54,11 @@ type Move implements Node {
   contact: Boolean!
 
   """
+  E.g. The Move 'wonder_room' creates the 'wonder_room' FieldState.
+  """
+  createsFieldState: MoveCreatesFieldStateConnection
+
+  """
   The Descriptions for the Move across the different VersionGroups.
   """
   descriptions: MoveDescriptionConnection
@@ -118,6 +123,11 @@ type Move implements Node {
   pp: Int!
 
   priority: Int!
+
+  """
+  E.g. The Move 'trick_room' removes the FieldState 'trick_room' if it's already present. 'rain_dance' removes 'harsh_sunlight'.
+  """
+  removesFieldState: MoveRemovesFieldStateConnection
 
   """
   Entities which the Move requires.
@@ -198,6 +208,34 @@ type MoveEffectEdge implements Edge {
 }
 
 # FIELD STATE
+
+type MoveCreatesFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [MoveCreatesFieldStateEdge!]! 
+}
+
+type MoveCreatesFieldStateEdge implements Edge {  
+  node: FieldState!
+
+  """
+  The number of turns that the FieldState is present when created by the Move.
+  """
+  turns: Int!
+}
+
+type MoveRemovesFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [MoveRemovesFieldStateEdge!]! 
+}
+
+type MoveRemovesFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
 
 type MoveEnhancedByFieldStateConnection implements Connection {
   edges(

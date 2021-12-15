@@ -36,6 +36,11 @@ extend type Query {
 type Item implements Node {
   id: ID!
 
+  """
+  E.g. 'electric_terrain' activates 'electric_seed'.
+  """
+  activatedByFieldState: ItemActivatedByFieldStateConnection
+
   boostsType: ItemBoostsTypeConnection
 
   boostsUsageMethod: ItemBoostsUsageMethodConnection
@@ -66,6 +71,8 @@ type Item implements Node {
   """
   enablesPokemon: ItemEnablesPokemonConnection
 
+  extendsFieldState: ItemExtendsFieldStateConnection
+
   """
   The formatted name of the Item, with correct punctuation.
   """
@@ -75,6 +82,8 @@ type Item implements Node {
   The Generation of this Item.
   """ 
   generation: ItemGenerationConnection
+
+  ignoresFieldState: ItemIgnoresFieldStateConnection
 
   """
   The Generation in which the Item was introduced.
@@ -107,11 +116,14 @@ type Item implements Node {
   """
   requiresPokemon: ItemRequiresPokemonConnection
 
+  resistsFieldState: ItemResistsFieldStateConnection
+
+  resistsStatus: ItemResistsStatusConnection
+
   resistsType: ItemResistsTypeConnection
 
   resistsUsageMethod: ItemResistsUsageMethodConnection
 
-  resistsStatus: ItemResistsStatusConnection
 }
 
 #
@@ -144,6 +156,63 @@ type ItemEffectConnection implements Connection {
 
 type ItemEffectEdge implements Edge {  
   node: Effect!
+}
+
+# FIELD STATE
+
+type ItemActivatedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [ItemActivatedByFieldStateEdge!]! 
+
+}
+
+type ItemActivatedByFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type ItemExtendsFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [ItemExtendsFieldStateEdge!]! 
+
+}
+
+type ItemExtendsFieldStateEdge implements Edge {  
+  node: FieldState!
+
+  """
+  E.g. 'damp_rock' makes 'rain' last for 8 turns rather than 5.
+  """
+  turns: Int!
+}
+
+type ItemIgnoresFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [ItemIgnoresFieldStateEdge!]! 
+
+}
+
+type ItemIgnoresFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type ItemResistsFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [ItemResistsFieldStateEdge!]! 
+
+}
+
+type ItemResistsFieldStateEdge implements Edge {  
+  node: FieldState!
+
+  multiplier: Float!
 }
 
 # GENERATION
