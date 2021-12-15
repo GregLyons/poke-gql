@@ -30,7 +30,7 @@ extend type Query {
   moves(
     generation: Int = 8
     pagination: PaginationInput
-    filter: ItemFilter
+    filter: MoveFilter
   ): [Move!]!
 }
 
@@ -71,6 +71,11 @@ type Move implements Node {
   enablesMove: MoveEnablesMoveConnection
 
   """
+  E.g. The presence of 'electric_terrain' enhances 'rising_voltage' by increasing its power and making it target all foes.
+  """
+  enhancedByFieldState: MoveEnhancedByFieldStateConnection
+
+  """
   The name of the Move in Title Case.
   """
   formattedName: String!
@@ -79,6 +84,11 @@ type Move implements Node {
   The Generation of this Move.
   """ 
   generation: MoveGenerationConnection
+
+  """
+  E.g. The presence of 'rain' decreases the power of 'solar_beam' and the healing effects of 'morning_sun'.
+  """
+  hinderedByFieldState: MoveHinderedByFieldStateConnection
 
   """
   The Generation in which the Move was introduced.
@@ -185,6 +195,32 @@ type MoveEffectConnection implements Connection {
 
 type MoveEffectEdge implements Edge {  
   node: Effect!
+}
+
+# FIELD STATE
+
+type MoveEnhancedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [MoveEnhancedByFieldStateEdge!]! 
+
+}
+
+type MoveEnhancedByFieldStateEdge implements Edge {  
+  node: FieldState!
+}
+
+type MoveHinderedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [MoveHinderedByFieldStateEdge!]! 
+
+}
+
+type MoveHinderedByFieldStateEdge implements Edge {  
+  node: FieldState!
 }
 
 # GENERATION

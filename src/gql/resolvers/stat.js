@@ -60,7 +60,7 @@ const Query = {
 //#region
 
 const Stat = {
-  abilityModifies: statPK,
+  modifiedByAbility: statPK,
   
   formattedName: async (parent, args, context, info) => {
     return parent.stat_formatted_name;
@@ -70,13 +70,13 @@ const Stat = {
   
   introduced: parent => parent.introduced,
   
-  itemModifies: statPK,
+  modifiedByItem: statPK,
   
   name: async (parent, args, context, info) => {
     return parent.stat_name
   },
   
-  moveModifies: statPK,
+  modifiedByMove: statPK,
 }
 
 //#endregion

@@ -33,6 +33,8 @@ type Effect implements Node {
   
   abilities: EffectAbilityConnection
 
+  fieldStates: EffectFieldStateConnection
+
   """
   The name of the Effect in Title Case, with appropriate punctuation.
   """
@@ -80,6 +82,20 @@ type EffectAbilityConnection implements Connection {
 
 type EffectAbilityEdge implements Edge {  
   node: Ability!
+}
+
+# FIELD STATE
+
+type EffectFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [EffectFieldStateEdge!]! 
+
+}
+
+type EffectFieldStateEdge implements Edge {  
+  node: FieldState!
 }
 
 # GENERATION

@@ -31,8 +31,6 @@ extend type Query {
 type Stat implements Node {
   id: ID!
 
-  abilityModifies: StatModifiedByAbilityConnection
-
   """
   The name of the Stat in Title Case, with appropriate punctuation.
   """
@@ -48,9 +46,13 @@ type Stat implements Node {
   """
   introduced: StatIntroductionConnection
 
-  itemModifies: StatModifiedByItemConnection
+  modifiedByAbility: StatModifiedByAbilityConnection
 
-  moveModifies: StatModifiedByMoveConnection
+  modifiedByFieldState: StatModifiedByFieldStateConnection
+
+  modifiedByItem: StatModifiedByItemConnection
+
+  modifiedByMove: StatModifiedByMoveConnection
 
   """
   The name of the Stat in snake_case.
@@ -89,6 +91,42 @@ type StatModifiedByAbilityEdge implements Edge {
   The probability of the Stat modification occurring once the necessary conditions have been met.
   
   For example, once rain is present for 'swift_swim', the speed boost is guaranteed to occur, so the 'chance' is 100.0.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# FIELD STATE
+
+type StatModifiedByFieldStateConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [StatModifiedByFieldStateEdge!]!
+
+}
+
+type StatModifiedByFieldStateEdge implements Edge {  
+  node: FieldState!
+
+  """
+  An integer between -6 and 6. Null if the FieldState modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the FieldState modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met.
+
+  E.g. once the Move 'tailwind' has been used successfully, setting up the 'tailwind' FieldState, the user and its allies have their 'speed' doubled with a probability of 100.0.
   """
   chance: Float!
 

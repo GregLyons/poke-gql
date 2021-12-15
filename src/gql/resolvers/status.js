@@ -63,7 +63,7 @@ const Query = {
 const Status = {
   abilityCauses: statusPK,
 
-  abilityResists: statusPK,
+  resistedByAbility: statusPK,
 
   formattedName: async (parent, args, context, info) => {
     return parent.pstatus_formatted_name;
@@ -75,7 +75,7 @@ const Status = {
 
   itemCauses: statusPK,
 
-  itemResists: statusPK,
+  resistedByItem: statusPK,
   
   moveCauses: statusPK,
 

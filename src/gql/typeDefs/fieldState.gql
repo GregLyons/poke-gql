@@ -1,0 +1,629 @@
+#
+# QUERIES
+#
+
+extend type Query {
+  fieldStateByID(id: ID!): FieldState!
+
+  """
+  Select a Move by its snake_case name, e.g. 'electric_terrain'.
+  """
+  fieldStateByName(generation: Int = 8, name: String!): FieldState!
+  
+  """
+  Select Moves, with optional cursor-based pagination.
+
+  'generation' refers to the (number of the) Generation in which to consider the Move. Defaults to the latest Generation.
+
+  'category' refers to 'physical', 'status', etc. See the MoveCategory enum for all possibilities.
+
+  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
+
+  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
+
+  'max' and 'min' are inclusive.
+
+  'type' takes the name of a type in snake_case, e.g. 'fire' for Fire-Type Moves.
+
+  'types' is an array of type names in snake_case, and will return Moves whose Type belongs to 'types'.
+  """
+  fieldStates(
+    generation: Int = 8
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [FieldState!]!
+}
+
+#
+# NODES AND HELPER TYPES
+#
+
+type FieldState implements Node {
+  id: ID!
+
+  """
+  E.g. 'rain' enables 'swift_swim'.
+  """
+  activatesAbility: FieldStateActivatesAbilityConnection
+
+  """
+  E.g. 'grassy_terrain' enables 'grassy_seed'.
+  """
+  activatesItem: FieldStateActivatesItemConnection
+
+  """
+  E.g. 'rain' boosts the power of 'water' Moves.
+  """
+  boostsType: FieldStateBoostsTypeConnection
+
+  causesStatus: FieldStateCausesConnection
+
+  class: FieldStateClass!
+
+  createdByAbility: FieldStateCreatedByAbilityConnection
+
+  createdByMove: FieldStateCreatedByMoveConnection
+
+  damagePercent: Float!
+
+  effects: FieldStateEffectConnection
+  
+  """
+  E.g. 'rain' enhances 'thunder' by making it bypass accuracy checks. 'grassy_terrain' enhances 'grassy_glide' by giving it increased priority.
+  """
+  enhancesMove: FieldStateEnhancesMoveConnection
+
+  extendedByItem: FieldStateExtendedByItemConnection
+
+  """
+  The name of the FieldState in Title Case.
+  """
+  formattedName: String!
+
+  """
+  The Generation of this FieldState.
+  """ 
+  generation: FieldStateGenerationConnection
+
+  """
+  E.g. 'grassy_terrain' hinders 'earthquake' by halving its power. 'harsh_sunlight' hinders 'thunder' by reducing its accuracy.
+  """
+  hindersMove: FieldStateHindersMoveConnection
+
+  ignoredByAbility: FieldStateIgnoredByAbilityConnection
+
+  ignoredByItem: FieldStateIgnoredByItemConnection
+
+  """
+  The Generation in which the FieldState was introduced.
+  """ 
+  introduced: FieldStateIntroductionConnection
+
+  maxLayers: Int!
+
+  modifiesStat: FieldStateModifiesStatConnection
+
+  """
+  The name of the FieldState in snake_case. 
+
+  Examples:
+    rain
+    electric_terrain
+  """
+  name: String!
+
+  onlyGrounded: Boolean!
+
+  preventedByAbility: FieldStatePreventedByAbilityConnection
+
+  preventsStatus: FieldStatePreventsStatusConnection
+
+  removedByAbility: FieldStateRemovedByAbilityConnection
+
+  removedByMove: FieldStateRemovedByMoveConnection
+
+  resistedByItem: FieldStateResistedByItemConnection
+
+  """
+  E.g. 'rain' reduces the power of 'fire' Moves.
+  """
+  resistsType: FieldStateResistsTypeConnection
+
+  suppressedByAbility: FieldStateSuppressedByAbilityConnection
+
+  """
+  Who the FieldState targets/affects.
+  """
+  target: FieldStateTargetClass!
+
+  """
+  Describes the Type and power of the Move 'weather_ball' when the FieldState is present.
+  """
+  weatherBall: FieldStateWeatherBallConnection
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# ABILITY
+
+type FieldStateActivatesAbilityConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [FieldStateActivatesAbilityEdge!]!
+
+}
+
+type FieldStateActivatesAbilityEdge implements Edge {  
+  node: Ability!
+}
+
+type FieldStateCreatedByAbilityConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [FieldStateCreatedByAbilityEdge!]!
+
+}
+
+type FieldStateCreatedByAbilityEdge implements Edge {  
+  node: Ability!
+
+  """
+  The number of turns that the FieldState is present when created by the Ability. '0' implies the FieldState either lasts indefinitely until overwritten, or is present as long as the source is present (e.g. Primal Kyogre's Primordial Sea).
+  """
+  turns: Int!
+}
+
+type FieldStateIgnoredByAbilityConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [FieldStateIgnoredByAbilityEdge!]!
+
+}
+
+type FieldStateIgnoredByAbilityEdge implements Edge {  
+  node: Ability!
+}
+
+type FieldStatePreventedByAbilityConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [FieldStatePreventedByAbilityEdge!]!
+
+}
+
+type FieldStatePreventedByAbilityEdge implements Edge {  
+  node: Ability!
+}
+
+type FieldStateRemovedByAbilityConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [FieldStateRemovedByAbilityEdge!]!
+
+}
+
+type FieldStateRemovedByAbilityEdge implements Edge {  
+  node: Ability!
+}
+
+type FieldStateSuppressedByAbilityConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: AbilityFilter
+  ): [FieldStateSuppressedByAbilityEdge!]!
+
+}
+
+type FieldStateSuppressedByAbilityEdge implements Edge {  
+  node: Ability!
+}
+
+# EFFECT
+
+type FieldStateEffectConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: EffectFilter
+  ): [FieldStateEffectEdge!]! 
+
+}
+
+type FieldStateEffectEdge implements Edge {  
+  node: Effect!
+}
+
+# GENERATION
+
+type FieldStateGenerationConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [FieldStateGenerationEdge!]! 
+
+}
+
+type FieldStateGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type FieldStateIntroductionConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: GenerationFilter
+  ): [FieldStateIntroductionEdge!]! 
+
+}
+
+type FieldStateIntroductionEdge implements Edge {  
+  node: Generation!
+}
+
+# ITEM
+
+type FieldStateActivatesItemConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [FieldStateActivatesItemEdge!]!
+
+}
+
+type FieldStateActivatesItemEdge implements Edge {  
+  node: Item!
+}
+
+type FieldStateExtendedByItemConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [FieldStateExtendedByItemEdge!]!
+
+}
+
+type FieldStateExtendedByItemEdge implements Edge {  
+  node: Item!
+
+  """
+  The number of turns that the FieldState is present when the user holds the extending item. E.g. weathers last 8 turns rather than 5 turns when the user holds the corresponding rock (e.g. 'rain' and 'damp_rock').
+  """
+  turns: Int!
+}
+
+type FieldStateIgnoredByItemConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [FieldStateIgnoredByItemEdge!]!
+
+}
+
+type FieldStateIgnoredByItemEdge implements Edge {  
+  node: Item!
+}
+
+type FieldStateResistedByItemConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: ItemFilter
+  ): [FieldStateResistedByItemEdge!]!
+
+}
+
+type FieldStateResistedByItemEdge implements Edge {  
+  node: Item!
+
+  multiplier: Float!
+}
+
+# MOVE
+
+type FieldStateEnhancesMoveConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [FieldStatenhancesMoveEdge!]!
+
+}
+
+type FieldStateEnhancesMoveEdge implements Edge {  
+  node: Move!
+}
+
+type FieldStateHindersMoveConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [FieldStateHindersMoveEdge!]!
+
+}
+
+type FieldStateHindersMoveEdge implements Edge {  
+  node: Move!
+}
+
+type FieldStateCreatedByMoveConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [FieldStateCreatedByMoveEdge!]!
+
+}
+
+type FieldStateCreatedByMoveEdge implements Edge {  
+  node: Move!
+
+  """
+  The number of turns that the FieldState is present when created by the Move, e.g. 'g_max_vine_lash' creates 'vine_lash' lasting 4 turns.
+  """
+  turns: Int!
+}
+
+type FieldStateRemovedByMoveConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: MoveFilter
+  ): [FieldStateRemovedByMoveEdge!]!
+
+}
+
+type FieldStateRemovedByMoveEdge implements Edge {  
+  node: Move!
+}
+
+# STAT
+
+type FieldStateModifiesStatConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatFilter
+  ): [FieldStateModifiesStatEdge!]!
+
+}
+
+type FieldStateModifiesStatEdge implements Edge {  
+  node: Stat!
+
+  """
+  An integer between -6 and 6 (except for moves which max out a stat, e.g. 'belly_drum', in which case is 12). Null if the Move modifies Stat via a multiplier.
+  """
+  stage: Int
+
+  """
+  Null if the Move modifies Stat via a stage increase or decrease.
+  """
+  multiplier: Float
+
+  """
+  The probability of the Stat modification occurring once the necessary conditions have been met (i.e. the move being successful/hitting).
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# STATUS
+
+type FieldStateCausesConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [FieldStateCausesEdge!]!
+
+}
+
+type FieldStateCausesEdge implements Edge {  
+  node: Status!
+
+  """
+  The probability of the Move causing the Status once the necessary conditions have been met (i.e. the move being successful/hitting).
+  """
+  chance: Float!
+}
+
+type FieldStatePreventsStatusConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: StatusFilter
+  ): [FieldStatePreventsStatusEdge!]!
+
+}
+
+type FieldStatePreventsStatusEdge implements Edge {  
+  node: Status!
+}
+
+# TYPE
+
+type FieldStateBoostsTypeConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [FieldStateBoostsTypeEdge!]!
+
+}
+
+type FieldStateBoostsTypeEdge implements Edge {  
+  node: Type!
+
+  """
+  The multiplier by which the FieldState boosts the power of Moves which have the Type. 
+  """
+  multiplier: Float!
+}
+
+type FieldStateResistsTypeConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [FieldStateResistsTypeEdge!]!
+
+}
+
+type FieldStateResistsTypeEdge implements Edge {  
+  node: Type!
+
+  """
+  The multiplier by which the FieldState resists the power of Moves which have the Type. 
+  """
+  multiplier: Float!
+}
+
+type FieldStateWeatherBallConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: TypeFilter
+  ): [FieldStateWeatherBallEdge!]!
+
+}
+
+type FieldStateWeatherBallEdge implements Edge {  
+  node: Type!
+}
+
+
+#
+# ENUMS
+#
+
+"""
+The damage category of a Move. 'VARIES' means that the Move can be one of the other three categories, e.g. hidden_power before Generation 4.
+"""
+enum FieldStateClass {
+  ENTRY_HAZARD
+  OTHER
+  PLEDGE
+  ROOM
+  SCREEN
+  TERRAIN
+  WEATHER
+}
+
+"""
+Describes who the Move can target. 'ADJACENT' refers to triple battles, in reference to the user of the Move; in double battles, all Pokemon are considered adjacent.
+"""
+enum FieldStateTargetClass {
+  ALL
+  ALL_ALLIES
+  ALL_FOES
+}
+
+
+#
+# INPUTS
+#
+
+input FieldStateFilter {
+  """
+  The number of the Generation in which the FieldState was introduced.
+  """
+  introduced: Int
+
+  """
+  The number of the Generation after which the FieldState was introduced, inclusive.
+  """
+  introducedAfter: Int
+
+  """
+  The number of the Generation before which the FieldState was introduced, inclusive.
+  """
+  introducedBefore: Int
+
+  """
+  The name of the FieldState in snake_case.
+  """
+  name: String
+
+  """
+  FieldStates whose name contains the given string, case-insensitive.
+  """
+  contains: String
+
+  """
+  FieldStates whose name ends with the given string, case-insensitive.
+  """
+  endsWith: String
+  
+  """
+  FieldStates whose name starts with the given string, case-insensitive.
+  """
+  startsWith: String
+
+
+  # STATS FILTERS
+  
+
+  """
+  FieldStates whose Accuracy is less than the given number, inclusive.
+  """
+  maxAccuracy: Int
+
+  """
+  FieldStates whose Accuracy is greater than the given number, inclusive.
+  """
+  minAccuracy: Int
+
+  """
+  FieldStates whose Power is less than the given number, inclusive.
+  """
+  maxPower: Int
+
+  """
+  FieldStates whose Power is greater than the given number, inclusive.
+  """
+  minPower: Int
+
+  """
+  FieldStates whose PP is less than the given number, inclusive.
+  """
+  maxPP: Int
+
+  """
+  FieldStates whose PP is greater than the given number, inclusive.
+  """
+  minPP: Int
+
+  """
+  FieldStates whose Priority is less than the given number, inclusive.
+  """
+  maxPriority: Int
+
+  """
+  FieldStates whose Priority is greater than the given number, inclusive.
+  """
+  minPriority: Int
+
+
+  
+  # OTHER FILTERS
+  
+
+  """
+  Only select FieldStates which bypass accuracy checks.
+  """
+  bypassAccuracy: Boolean
+
+  """
+  FieldStates of the given category, e.g. 'PHYSICAL', 'SPECIAL'.
+  """
+  category: FieldStateCategory
+
+  """
+  Only select FieldStates which make contact.
+  """
+  contact: Boolean
+
+  """
+  FieldStates of the given target class, e.g. 'ALL', 'ANY', 'ADJACENT_FOE', 'USER'.
+  """
+  target: FieldStateTargetClass
+}

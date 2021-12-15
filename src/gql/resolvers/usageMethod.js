@@ -71,9 +71,9 @@ const Query = {
 //#region
 
 const UsageMethod = {
-  abilityBoosts: usageMethodPK,
+  boostedByAbility: usageMethodPK,
 
-  abilityResists: usageMethodPK,
+  resistedByAbility: usageMethodPK,
 
   formattedName: parent => parent.usage_method_formatted_name,
 
@@ -81,9 +81,9 @@ const UsageMethod = {
   
   introduced: parent => parent.introduced,
 
-  itemBoosts: usageMethodPK,
+  boostedByItem: usageMethodPK,
 
-  itemResists: usageMethodPK,
+  resistedByItem: usageMethodPK,
 
   moves: usageMethodPK,
   

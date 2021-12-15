@@ -33,7 +33,7 @@ type Status implements Node {
 
   abilityCauses: StatusCausedByAbilityConnection
 
-  abilityResists: StatusResistedByAbilityConnection
+  resistedByAbility: StatusResistedByAbilityConnection
 
   """
   The name of the Status in Title Case, with appropriate punctuation.
@@ -52,7 +52,7 @@ type Status implements Node {
 
   itemCauses: StatusCausedByItemConnection
 
-  itemResists: StatusResistedByItemConnection
+  resistedByItem: StatusResistedByItemConnection
 
   moveCauses: StatusCausedByMoveConnection
 

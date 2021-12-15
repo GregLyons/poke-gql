@@ -33,9 +33,9 @@ extend type Query {
 type Type implements Node {
   id: ID!
 
-  abilityBoosts: TypeBoostedByAbilityConnection
+  boostedByAbility: TypeBoostedByAbilityConnection
 
-  abilityResists: TypeResistedByAbilityConnection
+  boostedByItem: TypeBoostedByItemConnection
 
   """
   The matchups of this Type as the defending-type against other attacking Types.
@@ -52,7 +52,6 @@ type Type implements Node {
   """
   enablesMove: TypeEnablesMoveConnection
 
-
   """
   The name of the Type in Title Case.
   """
@@ -68,11 +67,6 @@ type Type implements Node {
   """
   introduced: TypeIntroductionConnection
 
-  itemBoosts: TypeBoostedByItemConnection
-
-  itemResists: TypeResistedByItemConnection
-
-
   moves: TypeMoveConnection
 
   """
@@ -85,12 +79,21 @@ type Type implements Node {
   """
   naturalGift: TypeNaturalGiftConnection
 
-  pokemon: TypePokemonConnection
-
   """
   The matchups of this Type as the attacking-type against other defending Types.
   """
   offensiveMatchups: OffensiveTypeMatchupConnection
+  
+  pokemon: TypePokemonConnection
+
+  resistedByAbility: TypeResistedByAbilityConnection
+
+  resistedByItem: TypeResistedByItemConnection
+
+  """
+  FieldStates which turn 'weather_ball' to this Type.
+  """
+  weatherBall: TypeWeatherBallConnection
 
   #
   # CONVENIENCE FIELDS
@@ -167,6 +170,20 @@ type TypeResistedByAbilityConnection implements Connection {
 type TypeResistedByAbilityEdge implements Edge {  
   node: Ability!
   multiplier: Float!
+}
+
+# FIELD STATE
+
+type TypeNaturalGiftConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+    filter: FieldStateFilter
+  ): [TypeNaturalGiftEdge!]!
+
+}
+
+type TypeNaturalGiftEdge implements Edge {  
+  node: FieldState!
 }
 
 # GENERATION

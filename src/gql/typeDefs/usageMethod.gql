@@ -31,9 +31,9 @@ extend type Query {
 type UsageMethod implements Node {
   id: ID!
 
-  abilityBoosts: UsageMethodBoostedByAbilityConnection
+  boostedByAbility: UsageMethodBoostedByAbilityConnection
 
-  abilityResists: UsageMethodResistedByAbilityConnection
+  resistedByAbility: UsageMethodResistedByAbilityConnection
 
   """
   The name of the UsageMethod in Title Case.
@@ -52,9 +52,9 @@ type UsageMethod implements Node {
   """
   introduced: UsageMethodIntroductionConnection
 
-  itemBoosts: UsageMethodBoostedByItemConnection
+  boostedByItem: UsageMethodBoostedByItemConnection
 
-  itemResists: UsageMethodResistedByItemConnection
+  resistedByItem: UsageMethodResistedByItemConnection
 
   moves: UsageMethodMoveConnection
 

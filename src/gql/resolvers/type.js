@@ -74,9 +74,9 @@ const Query = {
 //#region
 
 const Type = {
-  abilityBoosts: typePK,
+  boostedByAbility: typePK,
 
-  abilityResists: typePK,
+  resistedByAbility: typePK,
 
   defensiveMatchups: typePK,
   
@@ -88,9 +88,9 @@ const Type = {
   
   introduced: parent => parent.introduced,
 
-  itemBoosts: typePK,
+  boostedByItem: typePK,
 
-  itemResists: typePK,
+  resistedByItem: typePK,
 
   moves: typePK,
   
