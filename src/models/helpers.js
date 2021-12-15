@@ -6,6 +6,8 @@ const hasGenID = (tableName) => {
 // Given the name of an entity, returns the corresponding name of the table in the database.
 const entityNameToTableName = entityName => {
   switch(entityName) {
+    case 'fieldState':
+      return 'field_state';
     case 'usageMethod':
       return 'usage_method';
     case 'versionGroup':
@@ -39,7 +41,17 @@ const getPaginationQueryString = (pagination, tableName) => {
   const {limit, offset, orderBy, sortBy, search} = pagination;
 
   const tablesWithFormattedName = [
-    'ability', 'effect', 'item', 'pmove', 'pokemon', 'stat', 'pstatus', 'ptype', 'usage_method', 'version_group'
+    'ability',
+    'effect',
+    'field_state',
+    'item',
+    'pmove',
+    'pokemon',
+    'pstatus',
+    'ptype',
+    'stat',
+    'usage_method',
+    'version_group'
   ]
 
   const limitOffsetString = `LIMIT ${offset}, ${limit}`;
@@ -326,6 +338,36 @@ const getFilterQueryString = (filter, tableName) => {
 
     extraFilterString = `
       ${itemClassString}
+    `;
+  }
+  // FieldStates
+  else if (tableName === 'item') {
+    const fieldStateClassString = filter.class
+      ? `AND field_state_class = '${filter.class.toLowerCase()}'`
+      : ``;
+
+    const fieldDamagePercentString = filter.damagePercent
+      ? `AND field_state_damage_percent = '${filter.damagePercent.toLowerCase()}'`
+      : ``;
+      
+    const fieldMaxLayersString = filter.maxLayers
+      ? `AND field_state_max_layers = '${filter.maxLayers.toLowerCase()}'`
+      : ``;
+
+    const fieldStateGroundedString = filter.grounded
+      ? `AND field_state_only_grounded = '${filter.grounded.toLowerCase()}'`
+      : ``;
+
+    const fieldStateTargetString = filter.target
+      ? `AND field_state_target = '${filter.target.toLowerCase()}'`
+      : ``;
+
+    extraFilterString = `
+      ${fieldStateClassString}
+      ${fieldDamagePercentString}
+      ${fieldMaxLayersString}
+      ${fieldStateGroundedString}
+      ${fieldStateTargetString}
     `;
   }
   // Default case

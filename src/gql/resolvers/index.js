@@ -1,6 +1,7 @@
 const generationResolvers = require('./generation.js');
 const abilityResolvers = require('./ability.js');
 const effectResolvers = require('./effect.js');
+const fieldStateResolvers = require('./fieldState.js');
 const itemResolvers = require('./item.js');
 const moveResolvers = require('./move.js');
 const pokemonResolvers = require('./pokemon.js');
@@ -14,6 +15,7 @@ const resolvers = [
   generationResolvers,
   abilityResolvers,
   effectResolvers,
+  fieldStateResolvers,
   itemResolvers,
   moveResolvers,
   pokemonResolvers,

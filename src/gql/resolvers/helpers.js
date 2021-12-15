@@ -189,6 +189,14 @@ const powerEdge = () => {
   }
 }
 
+// Edge for turns a FieldState is created.
+const turnsEdge = () => {
+  return {
+    node: parent => parent,
+    turns: parent => parent.turns,
+  }
+}
+
 //#endregion
 
 // CONNECTIONS
@@ -274,6 +282,7 @@ module.exports = {
   modifyStatEdge,
   multiplierEdge,
   powerEdge,
+  turnsEdge,
 
   basicJunctionConnection,
   generationConnection,

@@ -196,15 +196,15 @@ type TypeResistedByAbilityEdge implements Edge {
 
 # FIELD STATE
 
-type TypeNaturalGiftConnection implements Connection {
+type TypeWeatherBallConnection implements Connection {
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
-  ): [TypeNaturalGiftEdge!]!
+  ): [TypeWeatherBallEdge!]!
 
 }
 
-type TypeNaturalGiftEdge implements Edge {  
+type TypeWeatherBallEdge implements Edge {  
   node: FieldState!
 }
 
@@ -264,7 +264,7 @@ type TypeRemovesFieldStateConnection implements Connection {
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
-  ): [IteRemovesFieldStateEdge!]! 
+  ): [TypeRemovesFieldStateEdge!]! 
 
 }
 

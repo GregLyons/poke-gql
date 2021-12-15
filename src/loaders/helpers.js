@@ -57,6 +57,9 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
     if (middle === 'natural_gift') {
       junctionTableName = 'natural_gift';
     }
+    if (middle === 'weather_ball') {
+      junctionTableName = 'weather_ball';
+    }
     else if (middle === 'ptype_matchup') {
       junctionTableName = 'ptype_matchup';
     }
@@ -111,6 +114,22 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
           junctionOwnerGen = 'ptype_generation_id';
           junctionOwnedID = 'item_id';
           junctionOwnedGen = 'item_generation_id';
+        }
+        break;
+      case 'weather_ball':
+        // 'owned' is the type
+        if(!reverse) {
+          junctionOwnerID = 'field_state_id';
+          junctionOwnerGen = 'field_state_generation_id';
+          junctionOwnedID = 'ptype_id';
+          junctionOwnedGen = 'ptype_generation_id';
+        }
+        // 'owned' is the item
+        else {
+          junctionOwnerID = 'ptype_id';
+          junctionOwnerGen = 'ptype_generation_id';
+          junctionOwnedID = 'field_state_id';
+          junctionOwnedGen = 'field_state_generation_id';
         }
         break;
       case 'ptype_matchup':
@@ -199,10 +218,11 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
     )
     .then( ([results, fields]) => {
       // console.log(`
-      // SELECT * FROM ${junctionTableName} RIGHT JOIN ${owned} 
-      // ${onString}
-      // ${whereString}
-      // ${paginationString}
+      //   SELECT * FROM ${junctionTableName} RIGHT JOIN ${ownedTableName} 
+      //   ${onString}
+      //   ${whereString}
+      //   ${filterString}
+      //   ${paginationString}
       // `)
       // console.log(entityPKs.map(d => {
       //   return isGenDependent(owner) 

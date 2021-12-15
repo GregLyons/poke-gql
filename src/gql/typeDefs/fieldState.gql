@@ -56,7 +56,7 @@ type FieldState implements Node {
   """
   boostsType: FieldStateBoostsTypeConnection
 
-  causesStatus: FieldStateCausesConnection
+  causesStatus: FieldStateCausesStatusConnection
 
   class: FieldStateClass!
 
@@ -112,7 +112,7 @@ type FieldState implements Node {
   """
   name: String!
 
-  onlyGrounded: Boolean!
+  grounded: Boolean!
 
   """
   E.g. 'cloud_nine' prevents 'rain' from being set up.
@@ -331,7 +331,7 @@ type FieldStateEnhancesMoveConnection implements Connection {
   edges(
     pagination: PaginationInput
     filter: MoveFilter
-  ): [FieldStatenhancesMoveEdge!]!
+  ): [FieldStateEnhancesMoveEdge!]!
 
 }
 
@@ -416,15 +416,15 @@ type FieldStateModifiesStatEdge implements Edge {
 
 # STATUS
 
-type FieldStateCausesConnection implements Connection {
+type FieldStateCausesStatusConnection implements Connection {
   edges(
     pagination: PaginationInput
     filter: StatusFilter
-  ): [FieldStateCausesEdge!]!
+  ): [FieldStateCausesStatusEdge!]!
 
 }
 
-type FieldStateCausesEdge implements Edge {  
+type FieldStateCausesStatusEdge implements Edge {  
   node: Status!
 
   """
@@ -561,72 +561,22 @@ input FieldStateFilter {
   """
   startsWith: String
 
-
-  # STATS FILTERS
-  
-
-  """
-  FieldStates whose Accuracy is less than the given number, inclusive.
-  """
-  maxAccuracy: Int
-
-  """
-  FieldStates whose Accuracy is greater than the given number, inclusive.
-  """
-  minAccuracy: Int
-
-  """
-  FieldStates whose Power is less than the given number, inclusive.
-  """
-  maxPower: Int
-
-  """
-  FieldStates whose Power is greater than the given number, inclusive.
-  """
-  minPower: Int
-
-  """
-  FieldStates whose PP is less than the given number, inclusive.
-  """
-  maxPP: Int
-
-  """
-  FieldStates whose PP is greater than the given number, inclusive.
-  """
-  minPP: Int
-
-  """
-  FieldStates whose Priority is less than the given number, inclusive.
-  """
-  maxPriority: Int
-
-  """
-  FieldStates whose Priority is greater than the given number, inclusive.
-  """
-  minPriority: Int
-
-
   
   # OTHER FILTERS
   
+  class: FieldStateClass
+
+  damagePercent: Float
 
   """
-  Only select FieldStates which bypass accuracy checks.
+  E.g. 'spikes' can have up to 3 layers, but 'grassy_terrain' can have only 1 layer.
   """
-  bypassAccuracy: Boolean
+  maxLayers: Int
+
+  grounded: Boolean
 
   """
-  FieldStates of the given category, e.g. 'PHYSICAL', 'SPECIAL'.
-  """
-  category: FieldStateCategory
-
-  """
-  Only select FieldStates which make contact.
-  """
-  contact: Boolean
-
-  """
-  FieldStates of the given target class, e.g. 'ALL', 'ANY', 'ADJACENT_FOE', 'USER'.
+  FieldStates of the given target class, e.g. 'ALL', 'ALL_ALLIES', 'ALL_FOES'.
   """
   target: FieldStateTargetClass
 }

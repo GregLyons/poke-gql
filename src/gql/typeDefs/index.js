@@ -7,6 +7,7 @@ const path = require('path');
 const Ability = fs.readFileSync(path.join(__dirname, 'ability.gql'), 'utf-8');
 const Description = fs.readFileSync(path.join(__dirname, 'description.gql'), 'utf-8');
 const Effect = fs.readFileSync(path.join(__dirname, 'effect.gql'), 'utf-8');
+const FieldState = fs.readFileSync(path.join(__dirname, 'fieldState.gql'), 'utf-8');
 const Generation = fs.readFileSync(path.join(__dirname, 'generation.gql'), 'utf-8');
 const Helpers = fs.readFileSync(path.join(__dirname, 'helpers.gql'), 'utf-8');
 const Item = fs.readFileSync(path.join(__dirname, 'item.gql'), 'utf-8');
@@ -23,6 +24,7 @@ const typeDefs = [
   Ability,
   Description,
   Effect,
+  FieldState,
   Generation,
   Helpers,
   Item,

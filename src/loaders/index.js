@@ -1,5 +1,6 @@
 const ability = require('./ability.js');
 const effect = require('./effect.js');
+const fieldState = require('./fieldState.js');
 const generation = require('./generation.js');
 const item = require('./item.js');
 const move = require('./move.js');
@@ -13,6 +14,7 @@ const versionGroup = require('./versionGroup.js');
 module.exports = {
   ability,
   effect,
+  fieldState,
   generation,
   item,
   move,
