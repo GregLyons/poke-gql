@@ -3,6 +3,10 @@ const {db} = require('../models/index.js');
 const {batchGens, basicJunctionBatcher} = require('./helpers.js');
 
 let item = {
+  activatedByFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'item', 'activates', true));
+  },
+
   boostsType(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'boosts'));
   },
@@ -27,8 +31,16 @@ let item = {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'item', 'requires', true));
   },
 
+  extendsFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'fieldState', 'extends'));
+  },
+
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
+  },
+
+  ignoresFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'fieldState', 'ignores'));
   },
 
   introduced(pagination, filter) {
@@ -41,6 +53,10 @@ let item = {
 
   naturalGift(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'natural_gift'))
+  },
+
+  resistsFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'fieldState', 'resists'));
   },
 
   resistsStatus(pagination, filter) {

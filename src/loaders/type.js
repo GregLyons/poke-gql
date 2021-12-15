@@ -7,6 +7,10 @@ let type = {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'type', 'boosts', true));
   },
 
+  boostedByFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'type', 'boosts', true));
+  },
+
   boostedByItem(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'boosts', true));
   },
@@ -21,6 +25,10 @@ let type = {
   
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
+  },
+
+  ignoresFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'type', 'fieldState', 'ignores'));
   },
 
   introduced(pagination, filter) {
@@ -42,15 +50,30 @@ let type = {
   offensiveMatchup(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'type', 'type', 'ptype_matchup'))
   },
+
+  removesFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'type', 'fieldState', 'removes'));
+  },
   
   resistedByAbility(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'type', 'resists', true));
+  },
+
+  resistedByFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'type', 'resists', true));
   },
 
   resistedByItem(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'resists', true));
   },
 
+  resistsFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'type', 'fieldState', 'resists'));
+  },
+
+  weatherBall(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'type', 'natural_gift', true))
+  },
 }
 
 module.exports = type;

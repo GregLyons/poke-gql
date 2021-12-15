@@ -6,6 +6,10 @@ let move = {
   causesStatus(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'causes'));
   },
+
+  createsFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'fieldState', 'creates'));
+  },
   
   effect(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'effect'));
@@ -31,10 +35,10 @@ let move = {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'move', '', true));
   },
   
-  resistStatus(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'resists'));
+  removesFieldState(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'fieldState', 'removes'));
   },
-  
+
   requiresItem(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'item', 'requires'));
   },
@@ -49,6 +53,10 @@ let move = {
   
   requiresType(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type', 'requires'));
+  },
+
+  resistStatus(pagination, filter) {
+    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'resists'));
   },
   
   type(pagination, filter) {

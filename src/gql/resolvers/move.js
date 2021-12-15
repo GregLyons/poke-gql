@@ -22,6 +22,7 @@ const {
   causeStatusEdge,
   learnsetEdge,
   modifyStatEdge,
+  turnsEdge,
   
   basicJunctionConnection,
   generationConnection,
@@ -77,18 +78,22 @@ const Move = {
   causesStatus: movePK,
 
   contact: parent => parent.pmove_contact,
+
+  createsFieldState: movePK,
   
   descriptions: movePK,
 
   effects: movePK,
   
-  enables: movePK,
-  
   enablesMove: movePK,
+
+  enhancedByFieldState: movePK,
 
   formattedName: parent => parent.pmove_formatted_name,
 
   generation: parent => parent.generation_id,
+
+  hinderedByFieldState: movePK,
   
   introduced: parent => parent.introduced,
 
@@ -104,7 +109,7 @@ const Move = {
 
   priority: parent => parent.pmove_priority,
 
-  requires: movePK,
+  removesFieldState: movePK,
 
   requiresItem: movePK,
 
@@ -132,6 +137,9 @@ const ConnectionsAndEdges = {
   MoveCausesStatusConnection: basicJunctionConnection('move', 'status', 'causes'),
   MoveCausesStatusEdge: causeStatusEdge(),
   
+  MoveCreatesFieldStateConnection: basicJunctionConnection('move', 'fieldState', 'creates'),
+  MoveCreatesFieldStateEdge: turnsEdge(),
+
   MoveEffectConnection: basicJunctionConnection('move', 'effect'),
   MoveEffectEdge: basicEdge(),
   
@@ -149,6 +157,9 @@ const ConnectionsAndEdges = {
 
   MovePokemonConnection: basicJunctionConnection('move', 'pokemon'),
   MovePokemonEdge: learnsetEdge(),
+  
+  MoveRemovesFieldStateConnection: basicJunctionConnection('move', 'fieldState', 'removes'),
+  MoveRemovesFieldStateEdge: basicEdge(),
   
   MoveRequiresItemConnection: basicJunctionConnection('move', 'item', 'requires'),
   MoveRequiresItemEdge: basicEdge(),

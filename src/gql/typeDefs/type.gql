@@ -62,7 +62,7 @@ type Type implements Node {
   """
   The Generation of this Type.
   """ 
-  generation:TypeGenerationConnection
+  generation: TypeGenerationConnection
 
   """
   E.g. 'flying' Type Pokemon ignores 'spikes'.
@@ -108,7 +108,7 @@ type Type implements Node {
   resistedByItem: TypeResistedByItemConnection
 
   """
-  E.g. 'ground' Type Pokemon take less damage from the 'stealth_rock' FieldState.
+  E.g. 'ground' Type Pokemon take less damage from the 'stealth_rock' FieldState. 'fairy' Type Pokemon take more damage from 'sharp_steel', but we still group it in this category rather than add an extra field.
   """ 
   resistsFieldState: TypeResistsFieldStateConnection
 

@@ -23,6 +23,7 @@ const {
   modifyStatEdge,
   multiplierEdge,
   powerEdge,
+  turnsEdge,
 
   basicJunctionConnection,
   generationConnection,
@@ -67,6 +68,8 @@ const Query = {
 //#region
 
 const Item = {
+  activatedByFieldState: itemPK,
+
   boostsType: itemPK,
   
   boostsUsageMethod: itemPK,
@@ -83,9 +86,13 @@ const Item = {
 
   enablesPokemon: itemPK,
 
+  extendsFieldState: itemPK,
+
   formattedName: parent => parent.item_formatted_name,
 
   generation: parent => parent.generation_id,
+
+  ignoresFieldState: itemPK,
   
   introduced: parent => parent.introduced,
   
@@ -96,6 +103,8 @@ const Item = {
   naturalGift: itemPK,
 
   requiresPokemon: itemPK,
+
+  resistsFieldState: itemPK,
 
   resistsStatus: itemPK,
 
@@ -110,9 +119,12 @@ const Item = {
 //#region
 
 const ConnectionsAndEdges = {
+  ItemActivatedByFieldStateConnection: basicJunctionConnection('item', 'fieldState', 'activatedBy'),
+  ItemActivatedByFieldStateEdge: basicEdge(),
+  
   ItemBoostsTypeConnection: basicJunctionConnection('item', 'type', 'boosts'),
   ItemBoostsTypeEdge: multiplierEdge(),
-
+  
   ItemBoostsUsageMethodConnection: basicJunctionConnection('item', 'usageMethod', 'boosts'),
   ItemBoostsUsageMethodEdge: multiplierEdge(),
   
@@ -121,15 +133,24 @@ const ConnectionsAndEdges = {
   
   ItemEffectConnection: basicJunctionConnection('item', 'effect'),
   ItemEffectEdge: basicEdge(),
-
+  
   ItemEnablesMoveConnection: basicJunctionConnection('item', 'move', 'enables'),
   ItemEnablesMoveEdge: basicEdge(),
-
+  
   ItemEnablesPokemonConnection: basicJunctionConnection('item', 'pokemon', 'enables'),
   ItemEnablesPokemonEdge: basicEdge(),
-
+  
+  ItemExtendsFieldStateConnection: basicJunctionConnection('item', 'fieldState', 'extends'),
+  ItemExtendsFieldStateEdge: turnsEdge(),
+  
   ItemGenerationConnection: generationConnection('item'),
   ItemGenerationEdge: basicEdge(),
+  
+  ItemIgnoresFieldStateConnection: basicJunctionConnection('item', 'fieldState', 'ignores'),
+  ItemIgnoresFieldStateEdge: basicEdge(),
+
+  ItemIgnoresFieldStateConnection: basicJunctionConnection('item', 'fieldState', 'ignores'),
+  ItemIgnoresFieldStateEdge: basicEdge(),
 
   ItemIntroductionConnection: introductionConnection('item'),
   ItemIntroductionEdge: basicEdge(),
@@ -143,6 +164,9 @@ const ConnectionsAndEdges = {
   ItemRequiresPokemonConnection: basicJunctionConnection('item', 'pokemon', 'requires'),
   ItemRequiresPokemonEdge: basicEdge(),
   
+  ItemResistsFieldStateConnection: basicJunctionConnection('item', 'fieldState', 'resists'),
+  ItemResistsFieldStateEdge: basicEdge(),
+
   ItemResistsStatusConnection: basicJunctionConnection('item', 'status', 'resists'),
   ItemResistsStatusEdge: basicEdge(),
 

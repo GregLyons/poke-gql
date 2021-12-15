@@ -66,11 +66,6 @@ type Move implements Node {
   effects: MoveEffectConnection
 
   """
-  Entities which the Move enables.
-  """
-  enables: MoveEnablesConnection
-
-  """
   E.g. 'volt_tackle' (partly) enables 'catastropika'.
   """
   enablesMove: MoveEnablesMoveConnection
@@ -128,11 +123,6 @@ type Move implements Node {
   E.g. The Move 'trick_room' removes the FieldState 'trick_room' if it's already present. 'rain_dance' removes 'harsh_sunlight'.
   """
   removesFieldState: MoveRemovesFieldStateConnection
-
-  """
-  Entities which the Move requires.
-  """
-  requires: MoveRequiresConnection
 
   """
   E.g. 'breakneck_blitz' requires 'normalium_z'.

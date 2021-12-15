@@ -75,32 +75,44 @@ const Query = {
 
 const Type = {
   boostedByAbility: typePK,
+  
+  boostedByFieldState: typePK,
 
-  resistedByAbility: typePK,
-
+  boostedByItem: typePK,
+  
   defensiveMatchups: typePK,
   
   enablesMove: typePK,
   
   formattedName: parent => parent.ptype_formatted_name,
-
+  
   generation: parent => parent.generation_id,
+
+  ignoresFieldState: typePK,
   
   introduced: parent => parent.introduced,
-
-  boostedByItem: typePK,
-
-  resistedByItem: typePK,
-
+  
   moves: typePK,
   
   name: parent => parent.ptype_name,
   
-  offensiveMatchups: typePK,
-
   naturalGift: typePK,
-
+  
+  offensiveMatchups: typePK,
+  
   pokemon: typePK,
+
+  removesFieldState: typePK,
+
+  resistedByAbility: typePK,
+
+  resistedByFieldState: typePK,
+  
+  resistedByItem: typePK,
+
+  resistsFieldState: typePK,
+
+  weatherBall: typePK,
 }
 
 //#endregion
@@ -118,6 +130,9 @@ const ConnectionsAndEdges = {
   TypeBoostedByAbilityConnection: basicJunctionConnection('type', 'ability', 'boostedBy'),
   TypeBoostedByAbilityEdge: multiplierEdge(),
 
+  TypeBoostedByFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'boostedBy'),
+  TypeBoostedByFieldStateEdge: multiplierEdge(),
+
   TypeBoostedByItemConnection: basicJunctionConnection('type', 'item', 'boostedBy'),
   TypeBoostedByItemEdge: multiplierEdge(),
 
@@ -127,23 +142,38 @@ const ConnectionsAndEdges = {
   TypeGenerationConnection: generationConnection('type'),
   TypeGenerationEdge: basicEdge(),
 
+  TypeIgnoresFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'ignores'),
+  TypeIgnoresFieldStateEdge: basicEdge(),
+  
   TypeIntroductionConnection: introductionConnection('type'),
   TypeIntroductionEdge: basicEdge(),
-
+  
   TypeMoveConnection: basicJunctionConnection('type', 'move'),
   TypeMoveEdge: basicEdge(),
-
+  
   TypeNaturalGiftConnection: basicJunctionConnection('type', 'naturalGift'),
   TypeNaturalGiftEdge: powerEdge(),
 
   TypePokemonConnection: basicJunctionConnection('type', 'pokemon'),
   TypePokemonEdge: basicEdge(),
   
+  TypeRemovesFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'removes'),
+  TypeRemovesFieldStateEdge: basicEdge(),
+
   TypeResistedByAbilityConnection: basicJunctionConnection('type', 'ability', 'resistedBy'),
   TypeResistedByAbilityEdge: multiplierEdge(),
 
+  TypeResistedByFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'resistedBy'),
+  TypeResistedByFieldStateEdge: multiplierEdge(),
+  
   TypeResistedByItemConnection: basicJunctionConnection('type', 'item', 'resistedBy'),
   TypeResistedByItemEdge: multiplierEdge(),
+  
+  TypeResistsFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'resists'),
+  TypeResistsFieldStateEdge: multiplierEdge(),
+
+  TypeWeatherBallConnection: basicJunctionConnection('type', 'weatherBall'),
+  TypeWeatherBallEdge: basicEdge(),
 }
 
 //#endregion

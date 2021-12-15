@@ -221,8 +221,8 @@ type GenerationIntroducedFieldStateConnection implements Connection {
 
 }
 
-type GenerationEffectEdge implements Edge {  
-  node: Effect!
+type GenerationFieldStateEdge implements Edge {  
+  node: FieldState!
 }
 
 
