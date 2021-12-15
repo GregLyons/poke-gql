@@ -1,8 +1,14 @@
 const {db} = require('./db.js');
-const {getFilterQueryString, getPaginationQueryString, hasGenID, entityNameToTableName} = require('./helpers.js');
+const {
+  entityNameToTableName,
+  getFilterQueryString,
+  getPaginationQueryString,
+  hasGenID,
+} = require('./helpers.js');
 
 module.exports = {
   db,
+
   entityNameToTableName,
   getFilterQueryString,
   getPaginationQueryString,

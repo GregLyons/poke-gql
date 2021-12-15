@@ -1,11 +1,12 @@
 const {
   db,
-  getPaginationQueryString,
   getFilterQueryString,
+  getPaginationQueryString,
   entityNameToTableName,
   hasGenID
 } = require('../models/index.js');
 
+// DataLoader batcher for selecting from the 'generation' table.
 const batchGens = (pagination, filter) => {
   return async gens => {
     const filterString = getFilterQueryString(filter, 'generation');
@@ -28,21 +29,30 @@ const batchGens = (pagination, filter) => {
   }
 }
 
+// DataLoader batcher for selecting from junction tables.
+/*
+  'pagination' and 'filter' are objects for getPaginationQueryString and getFilterQueryString, respectively. 
+
+  'owner' and 'owned' refer to the two types of entities in the relationship. For example, in 'ability_effect', 'ability' is the owner, and 'effect' is owned in the relationship. As another example, 'ability_causes_status', 'ability' is again the owner, and 'status' is owned. 
+
+  'middle' is for further determining which junction table, e.g. 'causes' versus 'resists' when 'ability' is the owner and 'status' is owned. 
+
+  'reverse' is used for the inverse relationship. For example, in 'ability_causes_status', we may either be interested in the ability or the status. 'reverse' being false means that we're interested in the owner, i.e. the ability, whereas 'reverse' being true means that we're interested in the owned entity, i.e. the status.
+*/
 const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityName, middle = '', reverse = false) => {
   return async entityPKs => {
+    // A trick so the code can handle both cases of 'reverse.'
     if (reverse) {
       [ownerEntityName, ownedEntityName] = [ownedEntityName, ownerEntityName]
     }
 
-    // Compute table and column names
+    // Compute table and column names for the owner and owned entities.
     const ownerTableName = entityNameToTableName(ownerEntityName);
-    const ownerGen = ownerTableName + '_generation_id';
-    const ownerID = ownerTableName + '_id';
 
     const ownedTableName = entityNameToTableName(ownedEntityName);
     const ownedID = ownedTableName + '_id';
-    const ownedGen = ownedTableName + '_generation_id';
 
+    // Compute junction table name based on the owner and owned entity names, as well as 'middle'.
     let junctionTableName;
     if (middle === 'natural_gift') {
       junctionTableName = 'natural_gift';
@@ -67,7 +77,7 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
         : ownerTableName + '_' + ownedTableName;
     }
 
-    // May need to change column names
+    // May need to change column names when looking at the junction table, e.g. when owned and owner are the same type of entity, as in 'pmove_requires_pmove' (move requiring a move).
     let junctionOwnedID, junctionOwnedGen;
     switch (junctionTableName) {
       // 'base_pmove_generation_id'
@@ -158,7 +168,7 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
         junctionOwnedGen = ownedTableName + '_generation_id';
     }
 
-    // Compute other clauses
+    // Compute ON clause for the JOIN statement.
     const onString = hasGenID(ownedTableName) 
       ? `ON (${junctionTableName}.${junctionOwnedGen}, ${junctionTableName}.${junctionOwnedID}) = (${ownedTableName}.generation_id, ${ownedTableName}.${ownedID})`
       : `ON ${junctionTableName}.${junctionOwnedID} = ${ownedTableName}.${ownedID}`;
@@ -168,9 +178,11 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
       ? `WHERE (${junctionTableName}.${junctionOwnerGen}, ${junctionTableName}.${junctionOwnerID}) IN ?`
       : `WHERE (${junctionTableName}.${junctionOwnerID}) IN ?`
 
+    // Filtering and pagination strings.
     const filterString = getFilterQueryString(filter, ownedTableName);
     const paginationString = getPaginationQueryString(pagination, junctionTableName);
 
+    // Query the database.
     const data = await db.promise().query(
       `
         SELECT * FROM ${junctionTableName} RIGHT JOIN ${ownedTableName} 

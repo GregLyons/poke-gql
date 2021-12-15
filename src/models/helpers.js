@@ -31,7 +31,6 @@ const entityNameToTableName = entityName => {
   }
 }
 
-
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 const getPaginationQueryString = (pagination, tableName) => {
@@ -71,7 +70,8 @@ const getPaginationQueryString = (pagination, tableName) => {
 }
 
 // Return a MySQL string for filtering results.
-// 'filter' is an object with 'introduced', 'introducedAfter', 'introducedBefore', 'name', 'contains', 'endsWith', 'startsWith' keys.
+// 'filter' is an object with 'introduced', 'introducedAfter', 'introducedBefore', 'name', 'contains', 'endsWith', 'startsWith' keys. 
+// 'filter' may have other keys depending on the type of entity being filtered.
 const getFilterQueryString = (filter, tableName) => {
   if (!filter) return ``;
 
