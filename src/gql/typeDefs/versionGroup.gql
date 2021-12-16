@@ -82,6 +82,8 @@ type VersionGroup implements Node {
 # DESCRIPTION
 
 type VersionGroupDescriptionConnection implements Connection {
+  count(filter: DescriptionFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: DescriptionFilter
@@ -96,6 +98,8 @@ type VersionGroupDescriptionEdge implements Edge {
 # GENERATION
 
 type VersionGroupIntroductionConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -110,6 +114,8 @@ type VersionGroupIntroductionEdge implements Edge {
 # SPRITE
 
 type VersionGroupSpriteConnection implements Connection {
+  count(filter: SpriteFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: SpriteFilter

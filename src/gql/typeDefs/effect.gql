@@ -73,6 +73,8 @@ type Effect implements Node {
 # ABILITY
 
 type EffectAbilityConnection implements Connection {
+  count(filter: AbilityFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: AbilityFilter
@@ -87,6 +89,8 @@ type EffectAbilityEdge implements Edge {
 # FIELD STATE
 
 type EffectFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -101,6 +105,8 @@ type EffectFieldStateEdge implements Edge {
 # GENERATION
 
 type EffectGenerationConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -113,6 +119,8 @@ type EffectGenerationEdge implements Edge {
 }
 
 type EffectIntroductionConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -127,6 +135,8 @@ type EffectIntroductionEdge implements Edge {
 # ITEM
 
 type EffectItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -141,6 +151,8 @@ type EffectItemEdge implements Edge {
 # MOVE
 
 type EffectMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter

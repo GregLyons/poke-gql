@@ -72,6 +72,8 @@ type UsageMethod implements Node {
 # ABILITY
 
 type UsageMethodBoostedByAbilityConnection implements Connection {
+  count(filter: AbilityFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: AbilityFilter
@@ -85,6 +87,8 @@ type UsageMethodBoostedByAbilityEdge implements Edge {
 }
 
 type UsageMethodResistedByAbilityConnection implements Connection {
+  count(filter: AbilityFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: AbilityFilter
@@ -100,6 +104,8 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -112,6 +118,8 @@ type UsageMethodGenerationEdge implements Edge {
 }
 
 type UsageMethodIntroductionConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -126,6 +134,8 @@ type UsageMethodIntroductionEdge implements Edge {
 # ITEM
 
 type UsageMethodBoostedByItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -139,6 +149,8 @@ type UsageMethodBoostedByItemEdge implements Edge {
 }
 
 type UsageMethodResistedByItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -154,6 +166,8 @@ type UsageMethodResistedByItemEdge implements Edge {
 # MOVE
 
 type UsageMethodMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter

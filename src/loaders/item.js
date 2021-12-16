@@ -2,76 +2,133 @@ const DataLoader = require('dataloader');
 const {
   batchGens,
   basicJunctionBatcher,
+  basicJunctionBatcherCount,
 } = require('./helpers.js');
 
 let item = {
   activatedByFieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'item', 'activates', true));
-  },
+    const databaseInfo = [pagination, filter, 'fieldState', 'item', 'activates', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   boostsType(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'boosts'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'type', 'boosts', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   boostsUsageMethod(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'usageMethod', 'boosts'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'boosts', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   causesStatus(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'status', 'causes'));
-  },
+    const databaseInfo = [pagination, filter, 'ability', 'status', 'causes', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   effect(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'effect'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'effect', '', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   enablesMove(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'item', 'requires', true));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'item', 'requires', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   enablesPokemon(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'item', 'requires', true));
-  },
+    const databaseInfo = [pagination, filter, 'pokemon', 'item', 'requires', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   extendsFieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'fieldState', 'extends'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'fieldState', 'extends', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
   },
 
   ignoresFieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'fieldState', 'ignores'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'fieldState', 'ignores', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   introduced(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
   },
 
   modifiesStat(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'stat', 'modifies'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   naturalGift(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'natural_gift'))
   },
 
   resistsFieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'fieldState', 'resists'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'fieldState', 'resists', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   resistsStatus(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'status', 'resists'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'status', 'resists', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   resistsType(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'resists'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'type', 'resists', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   resistsUsageMethod(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'usageMethod', 'resists'));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'resists', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 }
 
 module.exports = item;

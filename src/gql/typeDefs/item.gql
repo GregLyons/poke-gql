@@ -133,6 +133,8 @@ type Item implements Node {
 # DESCRIPTION 
 
 type ItemDescriptionConnection implements Connection {
+  count(filter: DescriptionFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: DescriptionFilter
@@ -147,6 +149,8 @@ type ItemDescriptionEdge implements Edge {
 # EFFECT
 
 type ItemEffectConnection implements Connection {
+  count(filter: EffectFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: EffectFilter
@@ -161,6 +165,8 @@ type ItemEffectEdge implements Edge {
 # FIELD STATE
 
 type ItemActivatedByFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -173,6 +179,8 @@ type ItemActivatedByFieldStateEdge implements Edge {
 }
 
 type ItemExtendsFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -190,6 +198,8 @@ type ItemExtendsFieldStateEdge implements Edge {
 }
 
 type ItemIgnoresFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -202,6 +212,8 @@ type ItemIgnoresFieldStateEdge implements Edge {
 }
 
 type ItemResistsFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -218,6 +230,8 @@ type ItemResistsFieldStateEdge implements Edge {
 # GENERATION
 
 type ItemGenerationConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -230,6 +244,8 @@ type ItemGenerationEdge implements Edge {
 }
 
 type ItemIntroductionConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -244,6 +260,8 @@ type ItemIntroductionEdge implements Edge {
 # MOVE
 
 type ItemEnablesMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter
@@ -258,6 +276,8 @@ type ItemEnablesMoveEdge implements Edge {
 # POKEMON
 
 type ItemEnablesPokemonConnection implements Connection {
+  count(filter: PokemonFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: PokemonFilter
@@ -270,6 +290,8 @@ type ItemEnablesPokemonEdge implements Edge {
 }
 
 type ItemRequiresPokemonConnection implements Connection {
+  count(filter: PokemonFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: PokemonFilter
@@ -284,6 +306,8 @@ type ItemRequiresPokemonEdge implements Edge {
 # STAT
 
 type ItemModifiesStatConnection implements Connection {
+  count(filter: StatFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: StatFilter
@@ -320,6 +344,8 @@ type ItemModifiesStatEdge implements Edge {
 # STATUS
 
 type ItemCausesStatusConnection implements Connection {
+  count(filter: StatusFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: StatusFilter
@@ -337,6 +363,8 @@ type ItemCausesStatusEdge implements Edge {
 }
 
 type ItemResistsStatusConnection implements Connection {
+  count(filter: StatusFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: StatusFilter
@@ -351,6 +379,8 @@ type ItemResistsStatusEdge implements Edge {
 # TYPE
 
 type ItemBoostsTypeConnection implements Connection {
+  count(filter: TypeFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: TypeFilter
@@ -368,6 +398,8 @@ type ItemBoostsTypeEdge implements Edge {
 }
 
 type ItemResistsTypeConnection implements Connection {
+  count(filter: TypeFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: TypeFilter
@@ -385,6 +417,8 @@ type ItemResistsTypeEdge implements Edge {
 }
 
 type ItemNaturalGiftConnection implements Connection {
+  count(filter: TypeFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: TypeFilter
@@ -404,6 +438,8 @@ type ItemNaturalGiftEdge implements Edge {
 # USAGE METHOD
 
 type ItemBoostsUsageMethodConnection implements Connection {
+  count(filter: UsageMethodFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: UsageMethodFilter
@@ -421,6 +457,8 @@ type ItemBoostsUsageMethodEdge implements Edge {
 }
 
 type ItemResistsUsageMethodConnection implements Connection {
+  count(filter: UsageMethodFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: UsageMethodFilter

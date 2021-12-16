@@ -83,6 +83,8 @@ type Status implements Node {
 # ABILITY
 
 type StatusCausedByAbilityConnection implements Connection {
+  count(filter: AbilityFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: AbilityFilter
@@ -102,6 +104,8 @@ type StatusCausedByAbilityEdge implements Edge {
 }
 
 type StatusResistedByAbilityConnection implements Connection {
+  count(filter: AbilityFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: AbilityFilter
@@ -116,6 +120,8 @@ type StatusResistedByAbilityEdge implements Edge {
 # FIELD STATE
 
 type StatusCausedByFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -133,6 +139,8 @@ type StatusCausedByFieldStateEdge implements Edge {
 }
 
 type StatusResistedByFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -147,6 +155,8 @@ type StatusResistedByFieldStateEdge implements Edge {
 # GENERATION
 
 type StatusGenerationConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -159,6 +169,8 @@ type StatusGenerationEdge implements Edge {
 }
 
 type StatusIntroductionConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -173,6 +185,8 @@ type StatusIntroductionEdge implements Edge {
 # ITEM
 
 type StatusCausedByItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -190,6 +204,8 @@ type StatusCausedByItemEdge implements Edge {
 }
 
 type StatusResistedByItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -204,6 +220,8 @@ type StatusResistedByItemEdge implements Edge {
 # MOVE
 
 type StatusCausedByMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter
@@ -221,6 +239,8 @@ type StatusCausedByMoveEdge implements Edge {
 }
 
 type StatusResistedByMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter

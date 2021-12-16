@@ -2,24 +2,41 @@ const DataLoader = require('dataloader');
 const {
   batchGens,
   basicJunctionBatcher,
+  basicJunctionBatcherCount,
 } = require('./helpers.js');
 
 let move = {
   causesStatus(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'causes'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'status', 'causes', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   createsFieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'fieldState', 'creates'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'fieldState', 'creates', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   effect(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'effect'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'effect', '', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   enablesMove(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'move', 'requires', true));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'move', 'requires', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
@@ -30,44 +47,84 @@ let move = {
   },
   
   modifiesStat(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'stat', 'modifies'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'stat', 'modifies', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   pokemon(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'pokemon', 'move', '', true));
-  },
+    const databaseInfo = [pagination, filter, 'pokemon', 'move', '', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   removesFieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'fieldState', 'removes'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'fieldState', 'removes', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   requiresItem(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'item', 'requires'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'item', 'requires', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   requiresMove(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'move', 'requires'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'move', 'requires', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   requiresPokemon(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'pokemon', 'requires'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'pokemon', 'requires', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   requiresType(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type', 'requires'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'type', 'requires', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   resistStatus(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'status', 'resists'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'status', 'resists', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   type(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'type'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'type', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   usageMethod(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'usageMethod'));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'usageMethod', false];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 }
 
 module.exports = move;

@@ -259,12 +259,11 @@ const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') =
 
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName][innerKey](args.pagination, args.filter).load(parent);
+      return await context.loaders[ownerEntityName][innerKey](args.pagination, args.filter).loader().load(parent);
     },
 
     count: async (parent, args, context, info) => {
-      
-      return 'yo';
+      return await context.loaders[ownerEntityName][innerKey](args.pagination, args.filter).counter().load(parent);
     },
   }
 };

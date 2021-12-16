@@ -85,6 +85,8 @@ type Sprite implements Node {
 # ITEM
 
 type SpriteItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -99,6 +101,8 @@ type SpriteItemEdge implements Edge {
 # POKEMON
 
 type SpritePokemonConnection implements Connection {
+  count(filter: PokemonFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: PokemonFilter
@@ -113,6 +117,8 @@ type SpritePokemonEdge implements Edge {
 # VERSION GROUP
 
 type SpriteVersionGroupConnection implements Connection {
+  count(filter: VersionGroupFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: VersionGroupFilter

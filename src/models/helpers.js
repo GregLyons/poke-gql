@@ -64,13 +64,6 @@ const computeJunctionTableName = (ownerTableName, ownedTableName, middle, revers
   return junctionTableName;
 }
 
-const computeJunctionTableNameFromEntityNames = (entityName, junctionEntityName, extra) => {
-  
-  
-
-  return;
-}
-
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 const getPaginationQueryString = (pagination, tableName) => {

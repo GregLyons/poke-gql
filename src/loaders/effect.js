@@ -2,16 +2,25 @@ const DataLoader = require('dataloader');
 const {
   batchGens,
   basicJunctionBatcher,
+  basicJunctionBatcherCount,
 } = require('./helpers.js');
 
 let effect = {
   ability(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'ability', 'effect', '', true));
-  },
+    const databaseInfo = [pagination, filter, 'ability', 'effect', '', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   fieldState(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'effect', '', true));
-  },
+    const databaseInfo = [pagination, filter, 'fieldState', 'effect', '', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
   
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
@@ -22,12 +31,20 @@ let effect = {
   },
   
   item(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'effect', '', true));
-  },
+    const databaseInfo = [pagination, filter, 'item', 'effect', '', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 
   move(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'move', 'effect', '', true));
-  },
+    const databaseInfo = [pagination, filter, 'move', 'effect', '', true];
+
+    return {
+        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
+    }  },
 }
 
 module.exports = effect;

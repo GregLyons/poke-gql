@@ -172,6 +172,8 @@ type Move implements Node {
 # DESCRIPTION 
 
 type MoveDescriptionConnection implements Connection {
+  count(filter: DescriptionFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: DescriptionFilter
@@ -186,6 +188,8 @@ type MoveDescriptionEdge implements Edge {
 # EFFECT
 
 type MoveEffectConnection implements Connection {
+  count(filter: EffectFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: EffectFilter
@@ -200,6 +204,8 @@ type MoveEffectEdge implements Edge {
 # FIELD STATE
 
 type MoveCreatesFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -216,6 +222,8 @@ type MoveCreatesFieldStateEdge implements Edge {
 }
 
 type MoveRemovesFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -228,6 +236,8 @@ type MoveRemovesFieldStateEdge implements Edge {
 
 
 type MoveEnhancedByFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -240,6 +250,8 @@ type MoveEnhancedByFieldStateEdge implements Edge {
 }
 
 type MoveHinderedByFieldStateConnection implements Connection {
+  count(filter: FieldStateFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: FieldStateFilter
@@ -254,6 +266,8 @@ type MoveHinderedByFieldStateEdge implements Edge {
 # GENERATION
 
 type MoveGenerationConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -266,6 +280,8 @@ type MoveGenerationEdge implements Edge {
 }
 
 type MoveIntroductionConnection implements Connection {
+  count(filter: GenerationFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -280,6 +296,8 @@ type MoveIntroductionEdge implements Edge {
 # ITEM
 
 type MoveRequiresItemConnection implements Connection {
+  count(filter: ItemFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: ItemFilter
@@ -294,6 +312,8 @@ type MoveRequiresItemEdge implements Edge {
 # MOVE
 
 type MoveEnablesMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter
@@ -306,6 +326,8 @@ type MoveEnablesMoveEdge implements Edge {
 }
 
 type MoveRequiresMoveConnection implements Connection {
+  count(filter: MoveFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: MoveFilter
@@ -320,6 +342,8 @@ type MoveRequiresMoveEdge implements Edge {
 # POKEMON
 
 type MovePokemonConnection implements Connection {
+  count(filter: PokemonFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: PokemonFilter
@@ -347,6 +371,8 @@ type MovePokemonEdge implements Edge {
 }
 
 type MoveRequiresPokemonConnection implements Connection {
+  count(filter: PokemonFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: PokemonFilter
@@ -361,6 +387,8 @@ type MoveRequiresPokemonEdge implements Edge {
 # STAT
 
 type MoveModifiesStatConnection implements Connection {
+  count(filter: StatFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: StatFilter
@@ -395,6 +423,8 @@ type MoveModifiesStatEdge implements Edge {
 # STATUS
 
 type MoveCausesStatusConnection implements Connection {
+  count(filter: StatusFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: StatusFilter
@@ -412,6 +442,8 @@ type MoveCausesStatusEdge implements Edge {
 }
 
 type MoveResistsStatusConnection implements Connection {
+  count(filter: StatusFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: StatusFilter
@@ -426,6 +458,8 @@ type MoveResistsStatusEdge implements Edge {
 # TYPE
 
 type MoveTypeConnection implements Connection {
+  count(filter: TypeFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: TypeFilter
@@ -438,6 +472,8 @@ type MoveTypeEdge implements Edge {
 }
 
 type MoveRequiresTypeConnection implements Connection {
+  count(filter: TypeFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: TypeFilter
@@ -452,6 +488,8 @@ type MoveRequiresTypeEdge implements Edge {
 # USAGE METHOD
 
 type MoveUsageMethodConnection implements Connection {
+  count(filter: UsageMethodFilter): Int!
+  
   edges(
     pagination: PaginationInput
     filter: UsageMethodFilter
