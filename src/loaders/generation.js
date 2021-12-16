@@ -1,6 +1,12 @@
 const DataLoader = require('dataloader');
-const {db, entityNameToTableName} = require('../models/index.js');
-const {getPaginationQueryString, getFilterQueryString} = require('./helpers.js');
+const {
+  db,
+  entityNameToTableName,
+} = require('../models/index.js');
+const {
+  getPaginationQueryString,
+  getFilterQueryString,
+} = require('./helpers.js');
 
 /* 
   Returns a function to be passed into the constructor of a DataLoader object.

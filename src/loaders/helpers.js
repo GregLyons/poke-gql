@@ -1,8 +1,10 @@
 const {
   db,
+
+  computeJunctionTableName,
+  entityNameToTableName,
   getFilterQueryString,
   getPaginationQueryString,
-  entityNameToTableName,
   hasGenID
 } = require('../models/index.js');
 
@@ -53,32 +55,7 @@ const basicJunctionBatcher = (pagination, filter, ownerEntityName, ownedEntityNa
     const ownedID = ownedTableName + '_id';
 
     // Compute junction table name based on the owner and owned entity names, as well as 'middle'.
-    let junctionTableName;
-    if (middle === 'natural_gift') {
-      junctionTableName = 'natural_gift';
-    }
-    if (middle === 'weather_ball') {
-      junctionTableName = 'weather_ball';
-    }
-    else if (middle === 'ptype_matchup') {
-      junctionTableName = 'ptype_matchup';
-    }
-    else if (middle === 'evolution') {
-      junctionTableName = 'pokemon_evolution';
-    }
-    else if (middle === 'form') {
-      junctionTableName = 'pokemon_form';
-    }
-    else if (reverse) {
-      junctionTableName = middle 
-        ? ownedTableName + '_' + middle + '_' + ownerTableName
-        : ownedTableName + '_' + ownerTableName;
-    } 
-    else {
-      junctionTableName = middle 
-        ? ownerTableName + '_' + middle + '_' + ownedTableName
-        : ownerTableName + '_' + ownedTableName;
-    }
+    const junctionTableName = computeJunctionTableName(ownerTableName, ownedTableName, middle, reverse);
 
     // May need to change column names when looking at the junction table, e.g. when owned and owner are the same type of entity, as in 'pmove_requires_pmove' (move requiring a move).
     let junctionOwnedID, junctionOwnedGen;

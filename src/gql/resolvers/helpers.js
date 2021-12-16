@@ -1,4 +1,5 @@
 const {
+  computeJunctionTableName,
   entityNameToTableName,
   getPaginationQueryString,
   getFilterQueryString,
@@ -261,9 +262,10 @@ const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') =
       return await context.loaders[ownerEntityName][innerKey](args.pagination, args.filter).load(parent);
     },
 
-    // count: async (parent, args, context, info) => {
-    //   return 'yo';
-    // },
+    count: async (parent, args, context, info) => {
+      
+      return 'yo';
+    },
   }
 };
 

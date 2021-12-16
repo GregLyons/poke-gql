@@ -33,6 +33,44 @@ const entityNameToTableName = entityName => {
   }
 }
 
+const computeJunctionTableName = (ownerTableName, ownedTableName, middle, reverse) => {
+  let junctionTableName;
+  if (middle === 'natural_gift') {
+    junctionTableName = 'natural_gift';
+  }
+  if (middle === 'weather_ball') {
+    junctionTableName = 'weather_ball';
+  }
+  else if (middle === 'ptype_matchup') {
+    junctionTableName = 'ptype_matchup';
+  }
+  else if (middle === 'evolution') {
+    junctionTableName = 'pokemon_evolution';
+  }
+  else if (middle === 'form') {
+    junctionTableName = 'pokemon_form';
+  }
+  else if (reverse) {
+    junctionTableName = middle 
+      ? ownedTableName + '_' + middle + '_' + ownerTableName
+      : ownedTableName + '_' + ownerTableName;
+  } 
+  else {
+    junctionTableName = middle 
+      ? ownerTableName + '_' + middle + '_' + ownedTableName
+      : ownerTableName + '_' + ownedTableName;
+  }
+
+  return junctionTableName;
+}
+
+const computeJunctionTableNameFromEntityNames = (entityName, junctionEntityName, extra) => {
+  
+  
+
+  return;
+}
+
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 const getPaginationQueryString = (pagination, tableName) => {
@@ -392,6 +430,7 @@ const getFilterQueryString = (filter, tableName) => {
 }
 
 module.exports = {
+  computeJunctionTableName,
   entityNameToTableName,
   getFilterQueryString,
   getPaginationQueryString,
