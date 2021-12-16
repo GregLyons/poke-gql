@@ -505,4 +505,10 @@ input GenerationFilter {
   Entities whose name starts with the given string, case-insensitive.
   """
   startsWith: String
+
+
+  # OTHER FILTERS
+
+
+  
 }

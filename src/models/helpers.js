@@ -364,6 +364,10 @@ const getPaginationQueryString = (pagination, tableName) => {
 const getFilterQueryString = (filter, tableName) => {
   if (!filter) return ``;
 
+  if (!hasGenID(tableName)) {
+    return ``;
+  }
+
   // Introduction filtering
   //#region
 
@@ -501,8 +505,8 @@ const getFilterQueryString = (filter, tableName) => {
       : ``;
 
     // Form class
-    const formClassString = filter.isBaseForm
-      ? `AND pokemon_form_class = '${filter.isBaseForm.toLowerCase()}'`
+    const formClassString = filter.formClass
+      ? `AND pokemon_form_class = '${filter.formClass.toLowerCase()}'`
       : ``;
 
     extraFilterString = `
