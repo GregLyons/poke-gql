@@ -94,7 +94,11 @@ const presenceConnection = entityName => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation[entityName].present(args.pagination, args.filter).load(parent);
+      return await context.loaders.generation[entityName].present(args.pagination, args.filter).loader().load(parent);
+    },
+
+    count: async (parent, args, context, info) => {
+      return await context.loaders.generation[entityName].present(args.pagination, args.filter).counter().load(parent);
     },
 
     // count: async (parent, args, context, info) => {
@@ -121,19 +125,12 @@ const debutConnection = entityName => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation[entityName].introduced(args.pagination, args.filter).load(parent);
+      return await context.loaders.generation[entityName].introduced(args.pagination, args.filter).loader().load(parent);
     },
 
-    // count: async (parent, args, context, info) => {
-    //   return await context.db.promise().query(
-    //     `
-    //       SELECT COUNT(introduced) FROM ${entityNameToTableName(entityName)}
-    //       WHERE introduced = ${parent}
-    //     `
-    //   )
-    //   .then( ([results, fields]) => { return Object.values(results[0])[0] })
-    //   .catch(console.log);
-    // },
+    count: async (parent, args, context, info) => {
+      return await context.loaders.generation[entityName].introduced(args.pagination, args.filter).counter().load(parent);
+    },
   };
 };
 

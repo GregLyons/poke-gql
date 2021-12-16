@@ -2,11 +2,9 @@ const DataLoader = require('dataloader');
 const {
   db,
   entityNameToTableName,
-} = require('../models/index.js');
-const {
   getPaginationQueryString,
   getFilterQueryString,
-} = require('./helpers.js');
+} = require('../models/index.js');
 
 /* 
   Returns a function to be passed into the constructor of a DataLoader object.
@@ -58,6 +56,53 @@ const batchEntitiesByGen = (presence = true, tableName, pagination, filter) => {
   }
 }
 
+const batchEntitiesByGenCount = (presence = true, tableName, pagination, filter) => {
+  return async gens => {
+    // If the entity doesn't change across generations, then the database only stores one instance of that entity. To determine the presence of such an entity in a given generation, we check whether the debut gen of that entity is less than or eqal to the given generation.
+    const genDependent = !['version_group'].includes(tableName);
+    const genArray = Array.from(Array(8).keys());
+    const gensToConsider = genDependent
+      ? gens
+      : presence
+        ? genArray
+        : genArray
+          .map(i => i + 1)
+          .filter(i => i >= Math.min(gens));
+
+    // Extract pagination fields.
+    const paginationString = getPaginationQueryString(pagination, tableName);
+    const filterString = getFilterQueryString(filter, tableName);
+
+    // Query the database
+    const entities = await db.promise().query(
+      `
+        SELECT generation_id, COUNT(*) as row_count FROM ${tableName}
+        WHERE ${presence && genDependent ? 'generation_id' : 'introduced'} IN ?
+        ${filterString}
+        ${paginationString}
+        GROUP BY generation_id
+      `, [[gensToConsider]]
+    )
+    .then( ([results, fields]) => {
+      return results;
+    })
+    .catch(console.log);
+
+    const batch = gens.map(gen => entities.filter(entity => 
+      genDependent
+        ? entity.generation_id === gen
+        : presence 
+          ? entity.introduced <= gen
+          : entity.introduced === gen
+    )
+    .map(d => d.row_count))[0];
+
+    return batch.length > 0
+      ? batch
+      : [0];
+  }
+}
+
 /*
   Construct 'generation', an object whose keys are entity class names, with the corresponding values being objects.
 
@@ -74,10 +119,27 @@ let generation = {};
     // Add 'present' and 'introduced' loaders for given entity.
     generation[entityName] = {
       present(pagination, filter) {
-        return new DataLoader(batchEntitiesByGen(true, tableName, pagination, filter));
+        return {
+          loader: function() { 
+            return new DataLoader(batchEntitiesByGen(true, tableName, pagination, filter));
+          },
+
+          counter: function() { 
+            return new DataLoader(batchEntitiesByGenCount(true, tableName, pagination, filter));
+          },
+        }
       },
+      
       introduced(pagination, filter) {
-        return new DataLoader(batchEntitiesByGen(false, tableName, pagination, filter));
+        return {
+          loader: function() { 
+            return new DataLoader(batchEntitiesByGen(false, tableName, pagination, filter));
+          },
+
+          counter: function() { 
+            return new DataLoader(batchEntitiesByGenCount(false, tableName, pagination, filter));
+          },
+        }
       }
     };
     

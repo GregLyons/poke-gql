@@ -11,6 +11,7 @@ let usagemethod = {
 
     return {
         loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+
         counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
     }  },
 
@@ -19,6 +20,7 @@ let usagemethod = {
 
     return {
         loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+
         counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
     }  },
 
@@ -35,6 +37,7 @@ let usagemethod = {
 
     return {
         loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+
         counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
     }  },
   
@@ -43,6 +46,7 @@ let usagemethod = {
 
     return {
         loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+
         counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
     }  },
 
@@ -51,6 +55,7 @@ let usagemethod = {
 
     return {
         loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+
         counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
     }  },
 }

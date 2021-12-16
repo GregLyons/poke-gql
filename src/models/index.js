@@ -1,8 +1,7 @@
 const {db} = require('./db.js');
 const {
-  computeJunctionTableName,
+  computeJunctionTableQueryString,
   entityNameToTableName,
-  getDataFromJunctionTable,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,
@@ -11,9 +10,8 @@ const {
 module.exports = {
   db,
 
-  computeJunctionTableName,
+  computeJunctionTableQueryString,
   entityNameToTableName,
-  getDataFromJunctionTable,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,
