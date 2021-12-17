@@ -1,8 +1,8 @@
 const DataLoader = require('dataloader');
 const {
   batchGens,
-  basicJunctionBatcher,
-  basicJunctionBatcherCount,
+  junctionBatcher,
+  junctionBatcherCount,
 } = require('./helpers.js');
 
 class UsageMethod {
@@ -10,10 +10,10 @@ class UsageMethod {
     const databaseInfo = [pagination, filter, 'ability', 'usageMethod', 'boosts', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -25,10 +25,10 @@ class UsageMethod {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'boosts', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -58,10 +58,10 @@ class UsageMethod {
     const databaseInfo = [pagination, filter, 'move', 'usageMethod', '', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -73,10 +73,10 @@ class UsageMethod {
     const databaseInfo = [pagination, filter, 'ability', 'usageMethod', 'resists', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -88,10 +88,10 @@ class UsageMethod {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'resists', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,

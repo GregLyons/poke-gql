@@ -24,7 +24,7 @@ const {
   multiplierEdge,
   powerEdge,
 
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
 } = require('./helpers.js');
@@ -121,58 +121,58 @@ const Type = {
 //#region
 
 const ConnectionsAndEdges = {
-  DefensiveTypeMatchupConnection: basicJunctionConnection('type', 'defensiveMatchup'),
+  DefensiveTypeMatchupConnection: junctionConnection('type', 'defensiveMatchup'),
   DefensiveTypeMatchupEdge: multiplierEdge(),
 
-  OffensiveTypeMatchupConnection: basicJunctionConnection('type', 'offensiveMatchup'),
+  OffensiveTypeMatchupConnection: junctionConnection('type', 'offensiveMatchup'),
   OffensiveTypeMatchupEdge: multiplierEdge(),
 
-  TypeBoostedByAbilityConnection: basicJunctionConnection('type', 'ability', 'boostedBy'),
+  TypeBoostedByAbilityConnection: junctionConnection('type', 'ability', 'boostedBy'),
   TypeBoostedByAbilityEdge: multiplierEdge(),
 
-  TypeBoostedByFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'boostedBy'),
+  TypeBoostedByFieldStateConnection: junctionConnection('type', 'fieldState', 'boostedBy'),
   TypeBoostedByFieldStateEdge: multiplierEdge(),
 
-  TypeBoostedByItemConnection: basicJunctionConnection('type', 'item', 'boostedBy'),
+  TypeBoostedByItemConnection: junctionConnection('type', 'item', 'boostedBy'),
   TypeBoostedByItemEdge: multiplierEdge(),
 
-  TypeEnablesMoveConnection: basicJunctionConnection('type', 'move', 'enables'),
+  TypeEnablesMoveConnection: junctionConnection('type', 'move', 'enables'),
   TypeEnablesMoveEdge: basicEdge(),
 
   TypeGenerationConnection: generationConnection('type'),
   TypeGenerationEdge: basicEdge(),
 
-  TypeIgnoresFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'ignores'),
+  TypeIgnoresFieldStateConnection: junctionConnection('type', 'fieldState', 'ignores'),
   TypeIgnoresFieldStateEdge: basicEdge(),
   
   TypeIntroductionConnection: introductionConnection('type'),
   TypeIntroductionEdge: basicEdge(),
   
-  TypeMoveConnection: basicJunctionConnection('type', 'move'),
+  TypeMoveConnection: junctionConnection('type', 'move'),
   TypeMoveEdge: basicEdge(),
   
-  TypeNaturalGiftConnection: basicJunctionConnection('type', 'naturalGift'),
+  TypeNaturalGiftConnection: junctionConnection('type', 'naturalGift'),
   TypeNaturalGiftEdge: powerEdge(),
 
-  TypePokemonConnection: basicJunctionConnection('type', 'pokemon'),
+  TypePokemonConnection: junctionConnection('type', 'pokemon'),
   TypePokemonEdge: basicEdge(),
   
-  TypeRemovesFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'removes'),
+  TypeRemovesFieldStateConnection: junctionConnection('type', 'fieldState', 'removes'),
   TypeRemovesFieldStateEdge: basicEdge(),
 
-  TypeResistedByAbilityConnection: basicJunctionConnection('type', 'ability', 'resistedBy'),
+  TypeResistedByAbilityConnection: junctionConnection('type', 'ability', 'resistedBy'),
   TypeResistedByAbilityEdge: multiplierEdge(),
 
-  TypeResistedByFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'resistedBy'),
+  TypeResistedByFieldStateConnection: junctionConnection('type', 'fieldState', 'resistedBy'),
   TypeResistedByFieldStateEdge: multiplierEdge(),
   
-  TypeResistedByItemConnection: basicJunctionConnection('type', 'item', 'resistedBy'),
+  TypeResistedByItemConnection: junctionConnection('type', 'item', 'resistedBy'),
   TypeResistedByItemEdge: multiplierEdge(),
   
-  TypeResistsFieldStateConnection: basicJunctionConnection('type', 'fieldState', 'resists'),
+  TypeResistsFieldStateConnection: junctionConnection('type', 'fieldState', 'resists'),
   TypeResistsFieldStateEdge: multiplierEdge(),
 
-  TypeWeatherBallConnection: basicJunctionConnection('type', 'weatherBall'),
+  TypeWeatherBallConnection: junctionConnection('type', 'weatherBall'),
   TypeWeatherBallEdge: basicEdge(),
 }
 

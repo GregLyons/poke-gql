@@ -21,7 +21,7 @@ const {
   
   basicEdge,
 
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
 } = require('./helpers.js');
@@ -83,10 +83,10 @@ const Effect = {
 //#region
 
 const ConnectionsAndEdges = {
-  EffectAbilityConnection: basicJunctionConnection('effect', 'ability'),
+  EffectAbilityConnection: junctionConnection('effect', 'ability'),
   EffectAbilityEdge: basicEdge(),
 
-  EffectFieldStateConnection: basicJunctionConnection('effect', 'fieldState'),
+  EffectFieldStateConnection: junctionConnection('effect', 'fieldState'),
   EffectFieldStateEdge: basicEdge(),
   
   EffectGenerationConnection: generationConnection('effect'),
@@ -95,10 +95,10 @@ const ConnectionsAndEdges = {
   EffectIntroductionConnection: introductionConnection('effect'),
   EffectIntroductionEdge: basicEdge(),
 
-  EffectItemConnection: basicJunctionConnection('effect', 'item'),
+  EffectItemConnection: junctionConnection('effect', 'item'),
   EffectItemEdge: basicEdge(),
 
-  EffectMoveConnection: basicJunctionConnection('effect', 'move'),
+  EffectMoveConnection: junctionConnection('effect', 'move'),
   EffectMoveEdge: basicEdge(),
 }
 

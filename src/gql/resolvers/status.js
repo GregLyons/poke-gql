@@ -20,7 +20,7 @@ const {
   basicEdge,
   causeStatusEdge,
   
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
 
@@ -92,13 +92,13 @@ const Status = {
 //#region
 
 const ConnectionsAndEdges = {
-  StatusCausedByAbilityConnection: basicJunctionConnection('status', 'ability', 'causedBy'),
+  StatusCausedByAbilityConnection: junctionConnection('status', 'ability', 'causedBy'),
   StatusCausedByAbilityEdge: causeStatusEdge(),
   
-  StatusCausedByItemConnection: basicJunctionConnection('status', 'item', 'causedBy'),
+  StatusCausedByItemConnection: junctionConnection('status', 'item', 'causedBy'),
   StatusCausedByItemEdge: causeStatusEdge(),
   
-  StatusCausedByMoveConnection: basicJunctionConnection('status', 'move', 'causedBy'),
+  StatusCausedByMoveConnection: junctionConnection('status', 'move', 'causedBy'),
   StatusCausedByMoveEdge: causeStatusEdge(),
 
   StatusGenerationConnection: generationConnection('status'),
@@ -107,13 +107,13 @@ const ConnectionsAndEdges = {
   StatusIntroductionConnection: introductionConnection('status'),
   StatusIntroductionEdge: basicEdge(),
   
-  StatusResistedByAbilityConnection: basicJunctionConnection('status', 'ability', 'resistedBy'),
+  StatusResistedByAbilityConnection: junctionConnection('status', 'ability', 'resistedBy'),
   StatusResistedByAbilityEdge: basicEdge(),
 
-  StatusResistedByItemConnection: basicJunctionConnection('status', 'item', 'resistedBy'),
+  StatusResistedByItemConnection: junctionConnection('status', 'item', 'resistedBy'),
   StatusResistedByItemEdge: basicEdge(),
 
-  StatusResistedByMoveConnection: basicJunctionConnection('status', 'move', 'resistedBy'),
+  StatusResistedByMoveConnection: junctionConnection('status', 'move', 'resistedBy'),
   StatusResistedByMoveEdge: basicEdge(),
 }
 

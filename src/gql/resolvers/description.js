@@ -9,7 +9,6 @@
     'pdescription_index'
     'pdescription_entity_class'
     'pdescription_entity_name'
-    'introduced'
 
   'pdescription_index' doesn't contain any useful information for the purposes of the API, so we don't write a resolver for it.
 */
@@ -24,8 +23,9 @@ const {
   parentPK,
 
   basicEdge,
+  descriptionEdge,
 
-  basicJunctionConnection,
+  junctionConnection,
 } = require('./helpers.js');
 const descriptionPK = parentPK('description');
 
@@ -64,7 +64,12 @@ const Query = {
 
 const Description = {
 
-  entity: descriptionPK,
+  entity: parent => {
+    return {
+      entityID: parent.pdescription_id,
+      entityClass: parent.pdescription_entity_class,
+    }
+  },
 
   // 
   entityClass: parent => parent.pdescription_entity_class.toUpperCase(),
@@ -85,7 +90,7 @@ const Description = {
 const ConnectionsAndEdges = {
   DescriptionEntityConnection: {
     __resolveType(parent, context, info) {
-      switch(parent.pdescription_entity_class) {
+      switch(parent.entityClass) {
         case 'ability':
           return 'DescriptionAbilityConnection';
         case 'item':
@@ -93,13 +98,23 @@ const ConnectionsAndEdges = {
         case 'move':
           return 'DescriptionMoveConnection';
         default:
-          `Invalid entity class: ${parent.pdescription_entity_class}`;
+          `Invalid entity class: ${parent.entityClass}`;
           return null;
       }
     }
   },
 
-  DescriptionVersionGroupConnection: basicJunctionConnection('description', 'versionGroup'),
+  DescriptionAbilityConnection: junctionConnection('description', 'ability'),
+  DescriptionAbilityEdge: descriptionEdge('ability'),
+
+  DescriptionItemConnection: junctionConnection('description', 'item'),
+  DescriptionItemEdge: descriptionEdge('item'),
+
+  DescriptionMoveConnection: junctionConnection('description', 'move'),
+  DescriptionMoveEdge: descriptionEdge('move'),
+
+
+  DescriptionVersionGroupConnection: junctionConnection('description', 'versionGroup'),
   DescriptionVersionGroupEdge: basicEdge(),
   
 }

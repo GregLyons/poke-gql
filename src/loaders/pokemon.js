@@ -1,8 +1,8 @@
 const DataLoader = require('dataloader');
 const {
   batchGens,
-  basicJunctionBatcher,
-  basicJunctionBatcherCount,
+  junctionBatcher,
+  junctionBatcherCount,
 } = require('./helpers.js');
 
 class Pokemon {
@@ -10,10 +10,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'ability', false];
     
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -25,10 +25,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'item', 'pokemon', 'requires', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -40,10 +40,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'move', 'pokemon', 'requires', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -55,10 +55,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'evolution', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -70,10 +70,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'evolution', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -85,10 +85,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'form', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -118,10 +118,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'move', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -133,10 +133,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'item', 'requires', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -148,10 +148,10 @@ class Pokemon {
     const databaseInfo = [pagination, filter, 'pokemon', 'type', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,

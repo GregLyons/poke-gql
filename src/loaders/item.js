@@ -1,8 +1,8 @@
 const DataLoader = require('dataloader');
 const {
   batchGens,
-  basicJunctionBatcher,
-  basicJunctionBatcherCount,
+  junctionBatcher,
+  junctionBatcherCount,
 } = require('./helpers.js');
 
 class Item {
@@ -10,10 +10,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'fieldState', 'item', 'activates', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -25,10 +25,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'type', 'boosts', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -40,10 +40,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'boosts', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -55,10 +55,25 @@ class Item {
     const databaseInfo = [pagination, filter, 'ability', 'status', 'causes', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
+
+  description(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'description', 'item', '', true];
+
+    if (!this.loader) {
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -70,10 +85,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'effect', '', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -85,10 +100,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'move', 'item', 'requires', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -100,10 +115,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'pokemon', 'item', 'requires', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -115,10 +130,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'extends', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -139,10 +154,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'ignores', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -163,10 +178,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -176,17 +191,17 @@ class Item {
 
   // TODO
   naturalGift(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'natural_gift'))
+    return new DataLoader(junctionBatcher(pagination, filter, 'item', 'type', 'natural_gift'))
   }
 
   resistsFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'resists', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -198,10 +213,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'status', 'resists', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -213,10 +228,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'type', 'resists', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -228,10 +243,10 @@ class Item {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'resists', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,

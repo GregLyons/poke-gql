@@ -1,8 +1,8 @@
 const DataLoader = require('dataloader');
 const {
   batchGens,
-  basicJunctionBatcher,
-  basicJunctionBatcherCount,
+  junctionBatcher,
+  junctionBatcherCount,
 } = require('./helpers.js');
 
 
@@ -11,10 +11,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'ability', 'activates', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -26,10 +26,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'item', 'activates', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -41,10 +41,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'type', 'boosts', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -56,10 +56,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'status', 'causes', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -71,10 +71,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'ability', 'fieldState', 'creates', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -86,10 +86,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'move', 'fieldState', 'creates', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -101,10 +101,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'effect', '', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -116,10 +116,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'move', 'enhances', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -131,10 +131,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'extends', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -155,10 +155,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'move', 'hinders', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -170,10 +170,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'ability', 'fieldState', 'ignores', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -185,10 +185,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'ignores', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -209,10 +209,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'stat', 'modifies', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -224,10 +224,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'ability', 'fieldState', 'prevents', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -239,10 +239,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'ability', 'fieldState', 'removes', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -254,10 +254,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'move', 'fieldState', 'removes', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -269,10 +269,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'resists', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -284,10 +284,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'status', 'resists', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -299,10 +299,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'fieldState', 'type', 'resists', false];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -314,10 +314,10 @@ class FieldState {
     const databaseInfo = [pagination, filter, 'ability', 'fieldState', 'suppresses', true];
 
     if (!this.loader) {
-      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+      this.loader = new DataLoader(junctionBatcher(databaseInfo))
     }
     if (!this.counter) {
-      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
     }
     return { 
       loader: this.loader,
@@ -326,7 +326,7 @@ class FieldState {
   }
 
   weatherBall(pagination, filter) {
-    return new DataLoader(basicJunctionBatcher(pagination, filter, 'fieldState', 'type', 'weather_ball'))
+    return new DataLoader(junctionBatcher(pagination, filter, 'fieldState', 'type', 'weather_ball'))
   }
 }
 

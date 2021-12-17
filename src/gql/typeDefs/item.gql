@@ -144,6 +144,11 @@ type ItemDescriptionConnection implements Connection {
 
 type ItemDescriptionEdge implements Edge {  
   node: Description!
+
+  versionGroups(
+    pagination: PaginationInput
+    filter: VersionGroupFilter
+  ): [VersionGroup!]!
 }
 
 # EFFECT

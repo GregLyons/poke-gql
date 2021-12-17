@@ -86,7 +86,7 @@ const parentPK = (entityName) => {
       entityID: parent[idColumn],
     }
   };
-}  
+};
 
 //#endregion
 
@@ -128,6 +128,15 @@ const causeStatusEdge = () => {
   return {
     node: parent => parent,
     chance: parent => parent.chance,
+  }
+}
+
+const descriptionEdge = entityName => {
+  const tableName = entityNameToTableName(entityName);
+
+  return {
+    node: parent => parent,
+    versionGroups: parent => parent,
   }
 }
 
@@ -229,7 +238,7 @@ const introductionConnection = entityName => {
 
   'extra' describes the Connection further, e.g. 'causes' in AbilityCausesStatusConnection, as opposed to 'resists' in AbilityResistsStatusConnection.
 */
-const basicJunctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
+const junctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
   // Function arguments are used to determine which loader to use, via the 'context' object.
   const innerKey = extra
     ? extra + ownedEntityName[0].toUpperCase() + ownedEntityName.slice(1)
@@ -282,6 +291,7 @@ module.exports = {
   abilityEdge,
   basicEdge,
   causeStatusEdge,
+  descriptionEdge,
   evolutionEdge,
   formEdge,
   learnsetEdge,
@@ -290,7 +300,7 @@ module.exports = {
   powerEdge,
   turnsEdge,
 
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
 

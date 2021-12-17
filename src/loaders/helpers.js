@@ -41,7 +41,7 @@ const batchGens = (pagination, filter) => {
 
   'reverse' is used for the inverse relationship. For example, in 'ability_causes_status', we may either be interested in the ability or the status. 'reverse' being false means that we're interested in the owner, i.e. the ability, whereas 'reverse' being true means that we're interested in the owned entity, i.e. the status.
 */
-const basicJunctionBatcher = (databaseInfo) => {
+const junctionBatcher = (databaseInfo) => {
   return async entityPKs => {
     const {
       startTableName,
@@ -73,8 +73,8 @@ const basicJunctionBatcher = (databaseInfo) => {
   }
 }
 
-// DataLoader batcher for counting selections from junction tables. For more information on databaseInfo, see basicJunctionBatcher.
-const basicJunctionBatcherCount = (databaseInfo) => {
+// DataLoader batcher for counting selections from junction tables. For more information on databaseInfo, see junctionBatcher.
+const junctionBatcherCount = (databaseInfo) => {
   return async entityPKs => {
     const {
       startTableName,
@@ -105,10 +105,14 @@ const basicJunctionBatcherCount = (databaseInfo) => {
             && d[junctionStartID] === entityPK.entityID
           : d[junctionStartID] === entityPK.entityID
         )
+      // Select row_count property from results.
       .map(d => d.row_count))
-      .map(d => d[0]);
+      // Change array of arrays to simple array.
+      .map(d => d[0])
+      // If 'undefined' is returned, this means that nothing was found to match entityPK. This happens, for example, when looking up the Description in Sword/Shield for 'abomasite', since that Item was removed from the game, and hence has no description. The same happens for Moves removed from Sword/Shield. In this case, we set the count to 0.
+      .map(d => d || 0);
     
-    return batch.length > 0 
+    return batch && batch.length > 0 
       ? batch
       : [0];
   }
@@ -212,6 +216,6 @@ module.exports = {
   batchEntitiesByGen,
   batchEntitiesByGenCount,
   
-  basicJunctionBatcher,
-  basicJunctionBatcherCount,
+  junctionBatcher,
+  junctionBatcherCount,
 }

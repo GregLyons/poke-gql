@@ -21,7 +21,7 @@ const {
   basicEdge,
   multiplierEdge,
   
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
 } = require('./helpers.js');
@@ -96,10 +96,10 @@ const UsageMethod = {
 //#region
 
 const ConnectionsAndEdges = {
-  UsageMethodBoostedByAbilityConnection: basicJunctionConnection('usageMethod', 'ability', 'boostedBy'),
+  UsageMethodBoostedByAbilityConnection: junctionConnection('usageMethod', 'ability', 'boostedBy'),
   UsageMethodBoostedByAbilityEdge: multiplierEdge(),
 
-  UsageMethodBoostedByItemConnection: basicJunctionConnection('usageMethod', 'item', 'boostedBy'),
+  UsageMethodBoostedByItemConnection: junctionConnection('usageMethod', 'item', 'boostedBy'),
   UsageMethodBoostedByItemEdge: multiplierEdge(),
 
   UsageMethodGenerationConnection: generationConnection('usageMethod'),
@@ -108,13 +108,13 @@ const ConnectionsAndEdges = {
   UsageMethodIntroductionConnection: introductionConnection('usageMethod'),
   UsageMethodIntroductionEdge: basicEdge(),
 
-  UsageMethodMoveConnection: basicJunctionConnection('usageMethod', 'move'),
+  UsageMethodMoveConnection: junctionConnection('usageMethod', 'move'),
   UsageMethodMoveEdge: basicEdge(),
   
-  UsageMethodResistedByAbilityConnection: basicJunctionConnection('usageMethod', 'ability', 'resistedBy'),
+  UsageMethodResistedByAbilityConnection: junctionConnection('usageMethod', 'ability', 'resistedBy'),
   UsageMethodResistedByAbilityEdge: multiplierEdge(),
 
-  UsageMethodResistedByItemConnection: basicJunctionConnection('usageMethod', 'item', 'resistedBy'),
+  UsageMethodResistedByItemConnection: junctionConnection('usageMethod', 'item', 'resistedBy'),
   UsageMethodResistedByItemEdge: multiplierEdge(),
 }
 

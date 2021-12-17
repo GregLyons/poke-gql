@@ -21,11 +21,12 @@ const {
   abilityEdge,
   basicEdge,
   causeStatusEdge,
+  descriptionEdge,
   modifyStatEdge,
   multiplierEdge,
   turnsEdge,
 
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
   
@@ -116,55 +117,58 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityActivatedByFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'activatedBy'),
+  AbilityActivatedByFieldStateConnection: junctionConnection('ability', 'fieldState', 'activatedBy'),
   AbilityActivatedByFieldStateEdge: basicEdge(),
 
-  AbilityBoostsTypeConnection: basicJunctionConnection('ability', 'type', 'boosts'),
+  AbilityBoostsTypeConnection: junctionConnection('ability', 'type', 'boosts'),
   AbilityBoostsTypeEdge: multiplierEdge(),
 
-  AbilityBoostsUsageMethodConnection: basicJunctionConnection('ability', 'usageMethod', 'boosts'),
+  AbilityBoostsUsageMethodConnection: junctionConnection('ability', 'usageMethod', 'boosts'),
   AbilityBoostsUsageMethodEdge: multiplierEdge(),
 
-  AbilityCausesStatusConnection: basicJunctionConnection('ability', 'status', 'causes'),
+  AbilityCausesStatusConnection: junctionConnection('ability', 'status', 'causes'),
   AbilityCausesStatusEdge: causeStatusEdge(),
 
-  AbilityCreatesFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'creates'),
+  AbilityCreatesFieldStateConnection: junctionConnection('ability', 'fieldState', 'creates'),
   AbilityCreatesFieldStateEdge: turnsEdge(),
+
+  AbilityDescriptionConnection: junctionConnection('ability', 'description'),
+  AbilityDescriptionEdge: descriptionEdge('ability'),
   
-  AbilityEffectConnection: basicJunctionConnection('ability', 'effect'),
+  AbilityEffectConnection: junctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),
   
   AbilityGenerationConnection: generationConnection('ability'),
   AbilityGenerationEdge: basicEdge(),
   
-  AbilityIgnoresFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'ignores'),
+  AbilityIgnoresFieldStateConnection: junctionConnection('ability', 'fieldState', 'ignores'),
   AbilityIgnoresFieldStateEdge: basicEdge(),
   
   AbilityIntroductionConnection: introductionConnection('ability'),
   AbilityIntroductionEdge: basicEdge(),
 
-  AbilityModifiesStatConnection: basicJunctionConnection('ability', 'stat', 'modifies'),
+  AbilityModifiesStatConnection: junctionConnection('ability', 'stat', 'modifies'),
   AbilityModifiesStatEdge: modifyStatEdge(),
 
-  AbilityPokemonConnection: basicJunctionConnection('ability', 'pokemon'),
+  AbilityPokemonConnection: junctionConnection('ability', 'pokemon'),
   AbilityPokemonEdge: abilityEdge(),
 
-  AbilityPreventsFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'prevents'),
+  AbilityPreventsFieldStateConnection: junctionConnection('ability', 'fieldState', 'prevents'),
   AbilityPreventsFieldStateEdge: basicEdge(),
 
-  AbilityRemovesFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'removes'),
+  AbilityRemovesFieldStateConnection: junctionConnection('ability', 'fieldState', 'removes'),
   AbilityRemovesFieldStateEdge: basicEdge(),
   
-  AbilityResistsStatusConnection: basicJunctionConnection('ability', 'status', 'resists'),
+  AbilityResistsStatusConnection: junctionConnection('ability', 'status', 'resists'),
   AbilityResistsStatusEdge: basicEdge(),
 
-  AbilityResistsTypeConnection: basicJunctionConnection('ability', 'type', 'resists'),
+  AbilityResistsTypeConnection: junctionConnection('ability', 'type', 'resists'),
   AbilityResistsTypeEdge: multiplierEdge(),
   
-  AbilityResistsUsageMethodConnection: basicJunctionConnection('ability', 'usageMethod', 'resists'),
+  AbilityResistsUsageMethodConnection: junctionConnection('ability', 'usageMethod', 'resists'),
   AbilityResistsUsageMethodEdge: multiplierEdge(),
 
-  AbilitySuppressesFieldStateConnection: basicJunctionConnection('ability', 'fieldState', 'suppresses'),
+  AbilitySuppressesFieldStateConnection: junctionConnection('ability', 'fieldState', 'suppresses'),
   AbilitySuppressesFieldStateEdge: basicEdge(),
 }
 

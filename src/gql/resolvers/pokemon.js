@@ -24,7 +24,7 @@ const {
   formEdge,
   learnsetEdge,
 
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
   
@@ -129,19 +129,19 @@ const Pokemon = {
 //#region
 
 const ConnectionsAndEdges = {
-  PokemonAbilityConnection: basicJunctionConnection('pokemon', 'ability'),
+  PokemonAbilityConnection: junctionConnection('pokemon', 'ability'),
   PokemonAbilityEdge: abilityEdge(),
   
-  PokemonEnablesItemConnection: basicJunctionConnection('pokemon', 'item', 'enables'),
+  PokemonEnablesItemConnection: junctionConnection('pokemon', 'item', 'enables'),
   PokemonEnablesItemEdge: basicEdge(),
 
-  PokemonEnablesMoveConnection: basicJunctionConnection('pokemon', 'move', 'enables'),
+  PokemonEnablesMoveConnection: junctionConnection('pokemon', 'move', 'enables'),
   PokemonEnablesMoveEdge: basicEdge(),
 
-  PokemonEvolutionConnection: basicJunctionConnection('pokemon', 'evolvesTo'),
+  PokemonEvolutionConnection: junctionConnection('pokemon', 'evolvesTo'),
   PokemonEvolutionEdge: evolutionEdge(),
 
-  PokemonFormConnection: basicJunctionConnection('pokemon', 'form'),
+  PokemonFormConnection: junctionConnection('pokemon', 'form'),
   PokemonFormEdge: formEdge(),
   
   PokemonGenerationConnection: generationConnection('pokemon'),
@@ -150,16 +150,16 @@ const ConnectionsAndEdges = {
   PokemonIntroductionConnection: introductionConnection('pokemon'),
   PokemonIntroductionEdge: basicEdge(),
   
-  PokemonMoveConnection: basicJunctionConnection('pokemon', 'move'),
+  PokemonMoveConnection: junctionConnection('pokemon', 'move'),
   PokemonMoveEdge: learnsetEdge(),
   
-  PokemonPrevolutionConnection: basicJunctionConnection('pokemon', 'evolvesFrom'),
+  PokemonPrevolutionConnection: junctionConnection('pokemon', 'evolvesFrom'),
   PokemonPrevolutionEdge: evolutionEdge(),
 
-  PokemonRequiresItemConnection: basicJunctionConnection('pokemon', 'item', 'requires'),
+  PokemonRequiresItemConnection: junctionConnection('pokemon', 'item', 'requires'),
   PokemonRequiresItemEdge: basicEdge(),
   
-  PokemonTypeConnection: basicJunctionConnection('pokemon', 'type'),
+  PokemonTypeConnection: junctionConnection('pokemon', 'type'),
   PokemonTypeEdge: basicEdge(),
 }
 

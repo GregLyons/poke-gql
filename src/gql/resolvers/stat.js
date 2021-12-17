@@ -21,7 +21,7 @@ const {
   modifyStatEdge,
   parentPK,
 
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
 } = require('./helpers.js');
@@ -91,13 +91,13 @@ const ConnectionsAndEdges = {
   StatIntroductionConnection: introductionConnection('stat'),
   StatIntroductionEdge: basicEdge(),
 
-  StatModifiedByAbilityConnection: basicJunctionConnection('stat', 'ability', 'modifiedBy'),
+  StatModifiedByAbilityConnection: junctionConnection('stat', 'ability', 'modifiedBy'),
   StatModifiedByAbilityEdge: modifyStatEdge(),
 
-  StatModifiedByItemConnection: basicJunctionConnection('stat', 'item', 'modifiedBy'),
+  StatModifiedByItemConnection: junctionConnection('stat', 'item', 'modifiedBy'),
   StatModifiedByItemEdge: modifyStatEdge(),
 
-  StatModifiedByMoveConnection: basicJunctionConnection('stat', 'move', 'modifiedBy'),
+  StatModifiedByMoveConnection: junctionConnection('stat', 'move', 'modifiedBy'),
   StatModifiedByMoveEdge: modifyStatEdge(),
 }
 

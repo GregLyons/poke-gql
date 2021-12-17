@@ -20,11 +20,12 @@ const {
 
   basicEdge,
   causeStatusEdge,
+  descriptionEdge,
   learnsetEdge,
   modifyStatEdge,
   turnsEdge,
   
-  basicJunctionConnection,
+  junctionConnection,
   generationConnection,
   introductionConnection,
   
@@ -134,16 +135,19 @@ const Move = {
 //#region
 
 const ConnectionsAndEdges = {
-  MoveCausesStatusConnection: basicJunctionConnection('move', 'status', 'causes'),
+  MoveCausesStatusConnection: junctionConnection('move', 'status', 'causes'),
   MoveCausesStatusEdge: causeStatusEdge(),
   
-  MoveCreatesFieldStateConnection: basicJunctionConnection('move', 'fieldState', 'creates'),
+  MoveCreatesFieldStateConnection: junctionConnection('move', 'fieldState', 'creates'),
   MoveCreatesFieldStateEdge: turnsEdge(),
 
-  MoveEffectConnection: basicJunctionConnection('move', 'effect'),
+  MoveDescriptionConnection: junctionConnection('move', 'description'),
+  MoveDescriptionEdge: descriptionEdge('move'),
+
+  MoveEffectConnection: junctionConnection('move', 'effect'),
   MoveEffectEdge: basicEdge(),
   
-  MoveEnablesMoveConnection: basicJunctionConnection('move', 'move', 'enables'),
+  MoveEnablesMoveConnection: junctionConnection('move', 'move', 'enables'),
   MoveEnablesMoveEdge: basicEdge(),
 
   MoveGenerationConnection: generationConnection('move'),
@@ -152,34 +156,34 @@ const ConnectionsAndEdges = {
   MoveIntroductionConnection: introductionConnection('move'),
   MoveIntroductionEdge: basicEdge(),
   
-  MoveModifiesStatConnection: basicJunctionConnection('move', 'stat', 'modifies'),
+  MoveModifiesStatConnection: junctionConnection('move', 'stat', 'modifies'),
   MoveModifiesStatEdge: modifyStatEdge(),
 
-  MovePokemonConnection: basicJunctionConnection('move', 'pokemon'),
+  MovePokemonConnection: junctionConnection('move', 'pokemon'),
   MovePokemonEdge: learnsetEdge(),
   
-  MoveRemovesFieldStateConnection: basicJunctionConnection('move', 'fieldState', 'removes'),
+  MoveRemovesFieldStateConnection: junctionConnection('move', 'fieldState', 'removes'),
   MoveRemovesFieldStateEdge: basicEdge(),
   
-  MoveRequiresItemConnection: basicJunctionConnection('move', 'item', 'requires'),
+  MoveRequiresItemConnection: junctionConnection('move', 'item', 'requires'),
   MoveRequiresItemEdge: basicEdge(),
 
-  MoveRequiresMoveConnection: basicJunctionConnection('move', 'move', 'requires'),
+  MoveRequiresMoveConnection: junctionConnection('move', 'move', 'requires'),
   MoveRequiresMoveEdge: basicEdge(),
 
-  MoveRequiresPokemonConnection: basicJunctionConnection('move', 'pokemon', 'requires'),
+  MoveRequiresPokemonConnection: junctionConnection('move', 'pokemon', 'requires'),
   MoveRequiresPokemonEdge: basicEdge(),
 
-  MoveRequiresTypeConnection: basicJunctionConnection('move', 'type', 'requires'),
+  MoveRequiresTypeConnection: junctionConnection('move', 'type', 'requires'),
   MoveRequiresTypeEdge: basicEdge(),
 
-  MoveResistsStatusConnection: basicJunctionConnection('move', 'status', 'resists'),
+  MoveResistsStatusConnection: junctionConnection('move', 'status', 'resists'),
   MoveResistsStatusEdge: basicEdge(),
 
-  MoveTypeConnection: basicJunctionConnection('move', 'type'),
+  MoveTypeConnection: junctionConnection('move', 'type'),
   MoveTypeEdge: basicEdge(),
 
-  MoveUsageMethodConnection: basicJunctionConnection('move', 'usageMethod'),
+  MoveUsageMethodConnection: junctionConnection('move', 'usageMethod'),
   MoveUsageMethodEdge: basicEdge(),
 }
 
