@@ -58,15 +58,18 @@ const basicJunctionBatcher = (databaseInfo) => {
           ? [d.genID, d.entityID]
           : [d.entityID];
       })]]
-    )
-    .then( ([results, fields]) => {
-      return results;
-    })
-    .catch(console.log);
-
+      )
+      .then( ([results, fields]) => {
+        return results;
+      })
+      .catch(console.log);
+    
     return entityPKs.map(entityPK => data.filter(d => 
-      d[junctionStartGen] === entityPK.genID 
-      && d[junctionStartID] === entityPK.entityID));
+      hasGenID(startTableName)
+        ? d[junctionStartGen] === entityPK.genID 
+          && d[junctionStartID] === entityPK.entityID
+        : d[junctionStartID] === entityPK.entityID)
+    );
   }
 }
 
@@ -97,8 +100,10 @@ const basicJunctionBatcherCount = (databaseInfo) => {
     const batch =  entityPKs.map(entityPK => 
       data
       .filter(d => 
-          d[junctionStartGen] === entityPK.genID 
-          && d[junctionStartID] === entityPK.entityID
+        hasGenID(startTableName)
+          ? d[junctionStartGen] === entityPK.genID 
+            && d[junctionStartID] === entityPK.entityID
+          : d[junctionStartID] === entityPK.entityID
         )
       .map(d => d.row_count))
       .map(d => d[0]);

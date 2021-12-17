@@ -15,7 +15,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   parentPK,
 
@@ -41,9 +41,9 @@ const versionGroupPK = parentPK('versionGroup');
 //#region
 
 const Query = {
-  versionGroupByCode: queryEntityByColumn('versionGroup', 'code'),
+  versionGroupByCode: queryEntitiesByColumn('versionGroup', 'code'),
 
-  versionGroupByName: queryEntityByColumn('versionGroup', 'name'),
+  versionGroupByName: queryEntitiesByColumn('versionGroup', 'name'),
 
   versionGroups: queryEntities('versionGroup'),
 }

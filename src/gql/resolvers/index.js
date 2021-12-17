@@ -1,5 +1,6 @@
 const generationResolvers = require('./generation.js');
 const abilityResolvers = require('./ability.js');
+const descriptionResolvers = require('./description.js');
 const effectResolvers = require('./effect.js');
 const fieldStateResolvers = require('./fieldState.js');
 const itemResolvers = require('./item.js');
@@ -14,6 +15,7 @@ const versionGroupResolvers = require('./versionGroup.js');
 const resolvers = [
   generationResolvers,
   abilityResolvers,
+  descriptionResolvers,
   effectResolvers,
   fieldStateResolvers,
   itemResolvers,

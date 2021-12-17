@@ -330,4 +330,4 @@ class FieldState {
   }
 }
 
-module.exports = FieldState;
+module.exports = new FieldState();

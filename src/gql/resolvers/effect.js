@@ -15,7 +15,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   parentPK,
   
@@ -46,7 +46,7 @@ const effectPK = parentPK('effect');
 //#region
 
 const Query = {
-  effectByName: queryEntityByColumn('effect', 'name'),
+  effectByName: queryEntitiesByColumn('effect', 'name'),
 
   effects: queryEntities('effect'),
 }

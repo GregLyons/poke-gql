@@ -15,7 +15,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   basicEdge,
   modifyStatEdge,
@@ -46,7 +46,7 @@ const statPK = parentPK('stat');
 //#region
 
 const Query = {
-  statByName: queryEntityByColumn('stat', 'name'),
+  statByName: queryEntitiesByColumn('stat', 'name'),
 
   stats: queryEntities('stat'),
 }

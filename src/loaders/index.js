@@ -1,5 +1,6 @@
 class LoaderSet {
   ability = require('./ability.js');
+  description = require('./description.js');
   effect = require('./effect.js');
   fieldState = require('./fieldState.js');
   generation = require('./generation.js');

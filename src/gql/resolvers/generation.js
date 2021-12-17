@@ -25,7 +25,7 @@ const {
   queryEntities,
   
   basicEdge,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   debutConnection,
   presenceConnection,
@@ -34,9 +34,9 @@ const {
 //#endregion
 
 const Query = {
-  generationByNumber: queryEntityByColumn('generation', 'number'),
+  generationByNumber: queryEntitiesByColumn('generation', 'number'),
   
-  generationByCode: queryEntityByColumn('generation', 'code'),
+  generationByCode: queryEntitiesByColumn('generation', 'code'),
   
   generations: queryEntities('generation'),
 }

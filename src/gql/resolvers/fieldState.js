@@ -21,7 +21,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
   
   basicEdge,
   causeStatusEdge,
@@ -57,7 +57,7 @@ const fieldStatePK = parentPK('fieldState');
 //#region
 
 const Query = {
-  fieldStateByName: queryEntityByColumn('fieldState', 'name'),
+  fieldStateByName: queryEntitiesByColumn('fieldState', 'name'),
   
   fieldStates: queryEntities('fieldState'),
 }

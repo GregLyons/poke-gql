@@ -260,24 +260,32 @@ const computeJunctionTableQueryString = ([
 
   //#endregion
 
+  // Compute columns to be selected, and if countMode, which columns to group by.
+  //#region
+
+  const selectColumns = countMode 
+    ? hasGenID(startTableName)
+      ? `${junctionStartGen}, ${junctionStartID}, COUNT(*) AS row_count`
+      : `${junctionStartID}, COUNT(*) AS row_count`
+    : `*`;
+
+  const groupByString = countMode 
+    ? hasGenID(startTableName)
+      ? `GROUP BY ${junctionStartGen}, ${junctionStartID}`
+      : `GROUP BY ${junctionStartID}`
+    : ``;
+
+  //#endregion
 
   // Finally, compute the query.
-  const queryString = countMode 
-    ? `
-        SELECT ${junctionStartGen}, ${junctionStartID}, COUNT(*) AS row_count FROM ${junctionTableName} RIGHT JOIN ${endTableName} 
-        ${onString}
-        ${whereString}
-        ${filterString}
-        ${paginationString}
-        GROUP BY ${junctionStartGen}, ${junctionStartID}
-      `
-    : `
-        SELECT * FROM ${junctionTableName} RIGHT JOIN ${endTableName} 
-        ${onString}
-        ${whereString}
-        ${filterString}
-        ${paginationString}
-      `;
+  const queryString = `
+    SELECT ${selectColumns} FROM ${junctionTableName} RIGHT JOIN ${endTableName} 
+    ${onString}
+    ${whereString}
+    ${filterString}
+    ${paginationString}
+    ${groupByString}
+  `
 
   return {startTableName, junctionStartGen, junctionStartID, queryString}
 }

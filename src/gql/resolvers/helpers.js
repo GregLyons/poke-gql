@@ -35,7 +35,7 @@ const queryEntities = entityName => {
   }
 }
 
-const queryEntityByColumn = (entityName, keyName) => {
+const queryEntitiesByColumn = (entityName, keyName) => {
   return async (parent, args, context, info) => {
     tableName = entityNameToTableName(entityName, keyName);
 
@@ -66,7 +66,7 @@ const queryEntityByColumn = (entityName, keyName) => {
       `
     )
     .then( ([results, fields]) => {
-      return results[0]
+      return results;
     })
     .catch(console.log);
   }
@@ -277,7 +277,7 @@ const debutConnection = entityName => {
 
 module.exports = {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   abilityEdge,
   basicEdge,

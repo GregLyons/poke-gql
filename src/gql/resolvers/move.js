@@ -16,7 +16,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   basicEdge,
   causeStatusEdge,
@@ -54,7 +54,7 @@ const {getPaginationQueryString, getFilterQueryString} = require('../../models/i
 //#region
 
 const Query = {
-  moveByName: queryEntityByColumn('move', 'name'),
+  moveByName: queryEntitiesByColumn('move', 'name'),
 
   // TODO: cursor
   moves: queryEntities('move'),

@@ -16,7 +16,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
   
   abilityEdge,
   basicEdge,
@@ -53,7 +53,7 @@ const abilityPK = parentPK('ability');
 //#region
 
 const Query = {
-  abilityByName: queryEntityByColumn('ability', 'name'),
+  abilityByName: queryEntitiesByColumn('ability', 'name'),
   
   abilities: queryEntities('ability'),
 }

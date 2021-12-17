@@ -5,12 +5,16 @@
 extend type Query {
   descriptionByID(id: ID!): Description!
 
+  descriptionsByEntityClass(class: DescriptionEntityClass!): [Description!]!
+
+  descriptionsByEntityName(name: ID!): [Description!]!
+
   """
   Select Descriptions, with optional cursor-based pagination.
   """
   descriptions(
-    cursor: String,
-    limit: Int,
+    pagination: PaginationInput
+    filter: DescriptionFilter
   ): [Description!]!
 }
 
@@ -29,7 +33,12 @@ type Description implements Node {
   """
   The class of entity that the Description is describing, e.g. 'ITEM'.
   """ 
-  entityClass: DescriptionClass!
+  entityClass: DescriptionEntityClass!
+
+  """
+  The name of the entity that the Description is describing, e.g. 'venusaurite'.
+  """ 
+  entityName: String!
 
   """
   The text of the Description as it appears on in-game/on Bulbapedia.
@@ -117,7 +126,7 @@ type DescriptionVersionGroupEdge implements Edge {
 """
 The type of entity that the Description is describing.
 """
-enum DescriptionClass {
+enum DescriptionEntityClass {
   ABILITY
   ITEM
   MOVE

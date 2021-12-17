@@ -16,7 +16,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   abilityEdge,
   basicEdge,
@@ -52,7 +52,7 @@ const pokemonPK = parentPK('pokemon');
 //#region
 
 const Query = {
-  pokemonByName: queryEntityByColumn('pokemon', 'name'),
+  pokemonByName: queryEntitiesByColumn('pokemon', 'name'),
 
   // TODO: cursor
   pokemon: queryEntities('pokemon'),

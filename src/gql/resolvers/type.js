@@ -16,7 +16,7 @@
 
 const {
   queryEntities,
-  queryEntityByColumn,
+  queryEntitiesByColumn,
 
   parentPK,
 
@@ -50,7 +50,7 @@ const typePK = parentPK('type');
 //#region
 
 const Query = {
-  typeByName: queryEntityByColumn('type', 'name'),
+  typeByName: queryEntitiesByColumn('type', 'name'),
 
   // TODO: cursor
   types: queryEntities('type'),
