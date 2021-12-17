@@ -46,21 +46,15 @@ class Effect {
   }
   
   generation(pagination, filter) {
-    if (!this.loader) {
-      this.loader = new DataLoader(batchGens(pagination, filter))
+    return {
+      loader: new DataLoader(batchGens(pagination, filter))
     }
-    return { 
-      loader: this.loader,
-    };
   }
 
   introduced(pagination, filter) {
-    if (!this.loader) {
-      this.loader = new DataLoader(batchGens(pagination, filter))
+    return {
+      loader: new DataLoader(batchGens(pagination, filter))
     }
-    return { 
-      loader: this.loader,
-    };
   }
   
   item(pagination, filter) {

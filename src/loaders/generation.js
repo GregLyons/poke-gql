@@ -14,6 +14,28 @@ const {
 
   These nested objects consist of two attributes: 'present' and 'introduced', which are DataLoaders. These DataLoaders are for resolving the entity fields on Generation Nodes.
 */
+class Generation {
+  loaders = {}
+
+  load(key, id, pagination, filter, countMode) {
+    const loader = this.findLoader(key, pagination, filter, countMode);
+    return loader.load(id);
+  }
+
+  clearLoaders() {
+    this.loaders = {};
+  }
+
+  findLoader(key, pagination, filter, countMode) {
+    if (!this.loaders[key]) {
+      this.loaders[key] = this[key](pagination, filter);
+    }
+    return countMode 
+      ? this.loaders[key].counter
+      : this.loaders[key].loader;
+  }
+}
+
 let generation = {};
 
 ['ability', 'effect', 'fieldState', 'item', 'move', 'pokemon', 'type', 'stat', 'status', 'usageMethod', 'versionGroup']

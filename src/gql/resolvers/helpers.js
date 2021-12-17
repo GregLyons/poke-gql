@@ -221,18 +221,30 @@ const generationConnection = entityName => {
   // 'parent' = 'generation'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].generation(args.pagination, args.filter).loader.load(parent);
+      return await context.loaders[entityName].load('generation', parent, args.pagination, args.filter, false)
     },
+
+    // count: async (parent, args, context, info) => {
+    //   return await context.loaders[entityName].load('generation', parent, args.pagination, args.filter, true)
+    // },
   };
 }
+
+
+// return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, args.filter, false);
+// },
 
 // Connection for Generation in which an entity (e.g. Item, Pokemon) was introduced.
 const introductionConnection = entityName => {
   // 'parent' = 'introduced'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].introduced(args.pagination, args.filter).loader.load(parent);
+      return await context.loaders[entityName].load('introduced', parent, args.pagination, args.filter, false)
     },
+
+    // count: async (parent, args, context, info) => {
+    //   return await context.loaders[entityName].load('introduced', parent, args.pagination, args.filter, true)
+    // },
   };
 }
 

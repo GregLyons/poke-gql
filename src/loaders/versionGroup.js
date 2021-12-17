@@ -26,12 +26,9 @@ class VersionGroup {
   }
 
   introduced(pagination, filter) {
-    if (!this.loader) {
-      this.loader = new DataLoader(batchGens(pagination, filter))
+    return {
+      loader: new DataLoader(batchGens(pagination, filter))
     }
-    return { 
-      loader: this.loader,
-    };
   }
 }
 

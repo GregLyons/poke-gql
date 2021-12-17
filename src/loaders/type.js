@@ -69,12 +69,9 @@ class Type {
   }
   
   generation(pagination, filter) {
-    if (!this.loader) {
-      this.loader = new DataLoader(batchGens(pagination, filter))
+    return {
+      loader: new DataLoader(batchGens(pagination, filter))
     }
-    return { 
-      loader: this.loader,
-    };
   }
 
   ignoresFieldState(pagination, filter) {
@@ -87,12 +84,9 @@ class Type {
   }
 
   introduced(pagination, filter) {
-    if (!this.loader) {
-      this.loader = new DataLoader(batchGens(pagination, filter))
+    return {
+      loader: new DataLoader(batchGens(pagination, filter))
     }
-    return { 
-      loader: this.loader,
-    };
   }
   
   move(pagination, filter) {
