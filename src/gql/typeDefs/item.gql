@@ -230,8 +230,6 @@ type ItemResistsFieldStateEdge implements Edge {
 # GENERATION
 
 type ItemGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -244,8 +242,6 @@ type ItemGenerationEdge implements Edge {
 }
 
 type ItemIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

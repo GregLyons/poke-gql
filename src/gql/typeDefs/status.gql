@@ -155,8 +155,6 @@ type StatusResistedByFieldStateEdge implements Edge {
 # GENERATION
 
 type StatusGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -169,8 +167,6 @@ type StatusGenerationEdge implements Edge {
 }
 
 type StatusIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

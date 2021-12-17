@@ -100,7 +100,8 @@ const basicJunctionBatcherCount = (databaseInfo) => {
           d[junctionStartGen] === entityPK.genID 
           && d[junctionStartID] === entityPK.entityID
         )
-      .map(d => d.row_count))[0];
+      .map(d => d.row_count))
+      .map(d => d[0]);
     
     return batch.length > 0 
       ? batch
@@ -191,7 +192,8 @@ const batchEntitiesByGenCount = (presence = true, tableName, pagination, filter)
           ? entity.introduced <= gen
           : entity.introduced === gen
     )
-    .map(d => d.row_count))[0];
+    .map(d => d.row_count))[0]
+    .map(d => d[0]);
 
     return batch.length > 0
       ? batch
@@ -201,8 +203,10 @@ const batchEntitiesByGenCount = (presence = true, tableName, pagination, filter)
 
 module.exports = {
   batchGens,
+
   batchEntitiesByGen,
   batchEntitiesByGenCount,
+  
   basicJunctionBatcher,
   basicJunctionBatcherCount,
 }

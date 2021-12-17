@@ -98,8 +98,6 @@ type VersionGroupDescriptionEdge implements Edge {
 # GENERATION
 
 type VersionGroupIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

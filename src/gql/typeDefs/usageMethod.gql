@@ -104,8 +104,6 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -118,8 +116,6 @@ type UsageMethodGenerationEdge implements Edge {
 }
 
 type UsageMethodIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

@@ -266,8 +266,6 @@ type MoveHinderedByFieldStateEdge implements Edge {
 # GENERATION
 
 type MoveGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -280,8 +278,6 @@ type MoveGenerationEdge implements Edge {
 }
 
 type MoveIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

@@ -251,8 +251,6 @@ type PokemonAbilityEdge implements Edge {
 # GENERATION
 
 type PokemonGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -265,8 +263,6 @@ type PokemonGenerationEdge implements Edge {
 }
 
 type PokemonIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

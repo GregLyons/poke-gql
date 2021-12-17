@@ -52,11 +52,21 @@ class Status {
   }
   
   generation(pagination, filter) {
-    return new DataLoader(batchGens(pagination, filter));
+    if (!this.loader) {
+      this.loader = new DataLoader(batchGens(pagination, filter))
+    }
+    return { 
+      loader: this.loader,
+    };
   }
 
   introduced(pagination, filter) {
-    return new DataLoader(batchGens(pagination, filter));
+    if (!this.loader) {
+      this.loader = new DataLoader(batchGens(pagination, filter))
+    }
+    return { 
+      loader: this.loader,
+    };
   }
   
   resistedByAbility(pagination, filter) {

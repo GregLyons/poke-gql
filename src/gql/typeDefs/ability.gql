@@ -226,8 +226,6 @@ type AbilitySuppressesFieldStateEdge implements Edge {
 # GENERATION
 
 type AbilityGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -240,8 +238,6 @@ type AbilityGenerationEdge implements Edge {
 }
 
 type AbilityIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

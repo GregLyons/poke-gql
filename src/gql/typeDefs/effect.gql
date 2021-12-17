@@ -105,8 +105,6 @@ type EffectFieldStateEdge implements Edge {
 # GENERATION
 
 type EffectGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -119,8 +117,6 @@ type EffectGenerationEdge implements Edge {
 }
 
 type EffectIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

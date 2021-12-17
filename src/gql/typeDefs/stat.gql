@@ -143,8 +143,6 @@ type StatModifiedByFieldStateEdge implements Edge {
 # GENERATION
 
 type StatGenerationConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter
@@ -157,8 +155,6 @@ type StatGenerationEdge implements Edge {
 }
 
 type StatIntroductionConnection implements Connection {
-  count(filter: GenerationFilter): Int!
-  
   edges(
     pagination: PaginationInput
     filter: GenerationFilter

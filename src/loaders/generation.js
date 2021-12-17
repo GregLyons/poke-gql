@@ -25,27 +25,29 @@ let generation = {};
     // Add 'present' and 'introduced' loaders for given entity.
     generation[entityName] = {
       present(pagination, filter) {
-        return {
-          loader: function() { 
-            return new DataLoader(batchEntitiesByGen(true, tableName, pagination, filter));
-          },
-
-          counter: function() { 
-            return new DataLoader(batchEntitiesByGenCount(true, tableName, pagination, filter));
-          },
+        if (!this.loader) {
+          this.loader = new DataLoader(batchEntitiesByGen(true, tableName, pagination, filter))
         }
+        if (!this.counter) {
+          this.counter = new DataLoader(batchEntitiesByGenCount(true, tableName, pagination, filter))
+        }
+        return { 
+          loader: this.loader,
+          counter: this.counter,
+        };
       },
       
       introduced(pagination, filter) {
-        return {
-          loader: function() { 
-            return new DataLoader(batchEntitiesByGen(false, tableName, pagination, filter));
-          },
-
-          counter: function() { 
-            return new DataLoader(batchEntitiesByGenCount(false, tableName, pagination, filter));
-          },
+        if (!this.loader) {
+          this.loader = new DataLoader(batchEntitiesByGen(false, tableName, pagination, filter))
         }
+        if (!this.counter) {
+          this.counter = new DataLoader(batchEntitiesByGenCount(false, tableName, pagination, filter))
+        }
+        return { 
+          loader: this.loader,
+          counter: this.counter,
+        };
       }
     };
     
