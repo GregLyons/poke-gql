@@ -5,41 +5,59 @@ const {
   basicJunctionBatcherCount,
 } = require('./helpers.js');
 
-let stat = {
+class Stat {
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
-  },
+  }
 
   introduced(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
-  },
+  }
 
   modifiedByAbility(pagination, filter) {
     const databaseInfo = [pagination, filter, 'ability', 'stat', 'modifies', true];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   modifiedByItem(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', true];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   modifiedByMove(pagination, filter) {
     const databaseInfo = [pagination, filter, 'move', 'stat', 'modifies', true];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 }
 
-module.exports = stat;
+module.exports = new Stat();

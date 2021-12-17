@@ -5,144 +5,229 @@ const {
   basicJunctionBatcherCount,
 } = require('./helpers.js');
 
-let item = {
+class Item {
   activatedByFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'fieldState', 'item', 'activates', true];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   boostsType(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'type', 'boosts', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   boostsUsageMethod(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'boosts', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   causesStatus(pagination, filter) {
     const databaseInfo = [pagination, filter, 'ability', 'status', 'causes', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
   
   effect(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'effect', '', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
   
   enablesMove(pagination, filter) {
     const databaseInfo = [pagination, filter, 'move', 'item', 'requires', true];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   enablesPokemon(pagination, filter) {
     const databaseInfo = [pagination, filter, 'pokemon', 'item', 'requires', true];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   extendsFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'extends', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   generation(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
-  },
+  }
 
   ignoresFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'ignores', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   introduced(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
-  },
+  }
 
   modifiesStat(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
-
+  // TODO
   naturalGift(pagination, filter) {
     return new DataLoader(basicJunctionBatcher(pagination, filter, 'item', 'type', 'natural_gift'))
-  },
+  }
 
   resistsFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'resists', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   resistsStatus(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'status', 'resists', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   resistsType(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'type', 'resists', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 
   resistsUsageMethod(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'resists', false];
 
-    return {
-        loader: function() { return new DataLoader(basicJunctionBatcher(databaseInfo)) },
-
-        counter: function() { return new DataLoader(basicJunctionBatcherCount(databaseInfo)) },
-    }  },
+    if (!this.loader) {
+      this.loader = new DataLoader(basicJunctionBatcher(databaseInfo))
+    }
+    if (!this.counter) {
+      this.counter = new DataLoader(basicJunctionBatcherCount(databaseInfo))
+    }
+    return { 
+      loader: this.loader,
+      counter: this.counter,
+    };
+  }
 }
 
-module.exports = item;
+module.exports = new Item();

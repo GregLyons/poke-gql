@@ -3,10 +3,10 @@ const {
   batchGens,
 } = require('./helpers.js');
 
-let versiongroup = {
+class VersionGroup {
   introduced(pagination, filter) {
     return new DataLoader(batchGens(pagination, filter));
   }
 }
 
-module.exports = versiongroup;
+module.exports = new VersionGroup();
