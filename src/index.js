@@ -12,14 +12,14 @@ const { ApolloServer } = require('apollo-server');
 
 const { schema } = require('./gql/index.js');
 
-const loaders = require('./loaders/index.js');
+const LoaderSet = require('./loaders/index.js');
 
 const server = new ApolloServer({
   schema,
   context: ({ req }) => ({
     ...req,
     db,
-    loaders,
+    loaders: new LoaderSet(),
   })
 })
 

@@ -5,6 +5,7 @@ const {
   basicJunctionBatcherCount,
 } = require('./helpers.js');
 
+
 let fieldState = {
   activatesAbility(pagination, filter) {
     const databaseInfo = [pagination, filter, 'fieldState', 'ability', 'activates', false];
