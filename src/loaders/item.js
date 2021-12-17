@@ -6,138 +6,105 @@ const {
 } = require('./helpers.js');
 
 class Item {
+    
+  loaders = {};
+
+  load(key, id, pagination, filter, countMode) {
+    const loader = this.findLoader(key, pagination, filter, countMode);
+    return loader.load(id);
+  }
+
+  clearLoaders() {
+    this.loaders = {};
+  }
+
+  findLoader(key, pagination, filter, countMode) {
+    if (!this.loaders[key]) {
+      this.loaders[key] = this[key](pagination, filter);
+    }
+    return countMode 
+      ? this.loaders[key].counter
+      : this.loaders[key].loader;
+  }
+
   activatedByFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'fieldState', 'item', 'activates', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   boostsType(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'type', 'boosts', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   boostsUsageMethod(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'boosts', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   causesStatus(pagination, filter) {
     const databaseInfo = [pagination, filter, 'ability', 'status', 'causes', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   description(pagination, filter) {
     const databaseInfo = [pagination, filter, 'description', 'item', '', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
   
   effect(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'effect', '', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
   
   enablesMove(pagination, filter) {
     const databaseInfo = [pagination, filter, 'move', 'item', 'requires', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   enablesPokemon(pagination, filter) {
     const databaseInfo = [pagination, filter, 'pokemon', 'item', 'requires', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   extendsFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'extends', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
@@ -153,15 +120,9 @@ class Item {
   ignoresFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'ignores', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
@@ -177,15 +138,9 @@ class Item {
   modifiesStat(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
@@ -197,60 +152,36 @@ class Item {
   resistsFieldState(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'fieldState', 'resists', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   resistsStatus(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'status', 'resists', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   resistsType(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'type', 'resists', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   resistsUsageMethod(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'resists', false];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 }

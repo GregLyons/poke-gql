@@ -6,6 +6,27 @@ const {
 } = require('./helpers.js');
 
 class Stat {
+    
+  loaders = {};
+
+  load(key, id, pagination, filter, countMode) {
+    const loader = this.findLoader(key, pagination, filter, countMode);
+    return loader.load(id);
+  }
+
+  clearLoaders() {
+    this.loaders = {};
+  }
+
+  findLoader(key, pagination, filter, countMode) {
+    if (!this.loaders[key]) {
+      this.loaders[key] = this[key](pagination, filter);
+    }
+    return countMode 
+      ? this.loaders[key].counter
+      : this.loaders[key].loader;
+  }
+
   generation(pagination, filter) {
     if (!this.loader) {
       this.loader = new DataLoader(batchGens(pagination, filter))
@@ -27,45 +48,27 @@ class Stat {
   modifiedByAbility(pagination, filter) {
     const databaseInfo = [pagination, filter, 'ability', 'stat', 'modifies', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   modifiedByItem(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 
   modifiedByMove(pagination, filter) {
     const databaseInfo = [pagination, filter, 'move', 'stat', 'modifies', true];
 
-    if (!this.loader) {
-      this.loader = new DataLoader(junctionBatcher(databaseInfo))
-    }
-    if (!this.counter) {
-      this.counter = new DataLoader(junctionBatcherCount(databaseInfo))
-    }
     return { 
-      loader: this.loader,
-      counter: this.counter,
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
 }

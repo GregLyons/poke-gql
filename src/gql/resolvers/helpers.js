@@ -11,6 +11,8 @@ const {
 
 const queryEntities = entityName => {
   return async (parent, args, context, info) => {
+    context.loaders[entityName].clearLoaders();
+
     tableName = entityNameToTableName(entityName);
 
     filterString = getFilterQueryString(args.filter, tableName);
@@ -37,6 +39,8 @@ const queryEntities = entityName => {
 
 const queryEntitiesByColumn = (entityName, keyName) => {
   return async (parent, args, context, info) => {
+    context.loaders[entityName].clearLoaders();
+    
     tableName = entityNameToTableName(entityName, keyName);
 
     // 
@@ -246,11 +250,11 @@ const junctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
 
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName][innerKey](args.pagination, args.filter).loader.load(parent);
+      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, args.filter, false);
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName][innerKey](args.pagination, args.filter).counter.load(parent);
+      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, args.filter, true);
     },
   };
 };
