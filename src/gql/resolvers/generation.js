@@ -50,42 +50,152 @@ const Query = {
 //#region
 
 const Generation = {
-  abilities: parent => parent.generation_id,
-  abilitiesIntroduced: parent => parent.generation_id,
+  abilities: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  abilitiesIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
   code: parent => parent.generation_code,
 
-  effects: parent => parent.generation_id,
-  effectsIntroduced: parent => parent.generation_id,
+  effects: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  effectsIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
-  fieldStates: parent => parent.generation_id,
-  fieldStatesIntroduced: parent => parent.generation_id,
+  fieldStates: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  fieldStatesIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
   
-  items: parent => parent.generation_id,
-  itemsIntroduced: parent => parent.generation_id,
+  items: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  itemsIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
   
-  moves: parent => parent.generation_id,
-  movesIntroduced: parent => parent.generation_id,
+  moves: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  movesIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
   
   number: parent => parent.generation_id,
 
-  pokemon: parent => parent.generation_id,
-  pokemonIntroduced: parent => parent.generation_id,
+  pokemon: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  pokemonIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
-  stats: parent => parent.generation_id,
-  statsIntroduced: parent => parent.generation_id,
+  stats: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  statsIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
-  statuses: parent => parent.generation_id,
-  statusesIntroduced: parent => parent.generation_id,
+  statuses: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  statusesIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
-  types: parent => parent.generation_id,
-  typesIntroduced: parent => parent.generation_id,
+  types: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  typesIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
-  usageMethods: parent => parent.generation_id,
-  usageMethodsIntroduced: parent => parent.generation_id,
+  usageMethods: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  usageMethodsIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 
-  versionGroups: parent => parent.generation_id,
-  versionGroupsIntroduced: parent => parent.generation_id,
+  versionGroups: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
+  versionGroupsIntroduced: async (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      filter: args.filter,
+    }
+  },
 };
 
 //#endregion

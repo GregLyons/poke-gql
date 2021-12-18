@@ -134,7 +134,7 @@ const junctionBatcherCount = databaseInfo => {
     )
     .map(d => d[0] || 0);
 
-    batches = batches && batches.length > 0 
+    return batches && batches.length > 0 
       ? batches
       : [0];
   }

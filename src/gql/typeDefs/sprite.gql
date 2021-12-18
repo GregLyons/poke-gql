@@ -53,12 +53,12 @@ type Sprite implements Node {
   """
   The Item represented by the Sprite.
   """
-  item: SpriteItemConnection
+  item(filter: ItemFilter): SpriteItemConnection
 
   """
   The Pokemon represented by the Sprite.
   """
-  pokemon: SpritePokemonConnection
+  pokemon(filter: PokemonFilter): SpritePokemonConnection
 
   """
   True if the Sprite is of a shiny Pokemon. False otherwise (always false for items).
@@ -75,7 +75,7 @@ type Sprite implements Node {
   """
   The VersionGroup(s) in which this Sprite is present.
   """
-  versionGroups: SpriteVersionGroupConnection
+  versionGroups(filter: VersionGroupFilter): SpriteVersionGroupConnection
 }
 
 #
@@ -89,7 +89,6 @@ type SpriteItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [SpriteItemEdge!]! 
 
 }
@@ -105,7 +104,6 @@ type SpritePokemonConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: PokemonFilter
   ): [SpritePokemonEdge!]! 
 
 }
@@ -121,7 +119,6 @@ type SpriteVersionGroupConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: VersionGroupFilter
   ): [SpriteVersionGroupEdge!]! 
 
 }

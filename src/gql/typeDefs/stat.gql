@@ -39,20 +39,20 @@ type Stat implements Node {
   """
   The Generation of this Stat.
   """ 
-  generation: StatGenerationConnection
+  generation(filter: GenerationFilter): StatGenerationConnection
 
   """
   The Generation in which the Stat was introduced.
   """
-  introduced: StatIntroductionConnection
+  introduced(filter: GenerationFilter): StatIntroductionConnection
 
-  modifiedByAbility: StatModifiedByAbilityConnection
+  modifiedByAbility(filter: AbilityFilter): StatModifiedByAbilityConnection
 
-  modifiedByFieldState: StatModifiedByFieldStateConnection
+  modifiedByFieldState(filter: FieldStateFilter): StatModifiedByFieldStateConnection
 
-  modifiedByItem: StatModifiedByItemConnection
+  modifiedByItem(filter: ItemFilter): StatModifiedByItemConnection
 
-  modifiedByMove: StatModifiedByMoveConnection
+  modifiedByMove(filter: MoveFilter): StatModifiedByMoveConnection
 
   """
   The name of the Stat in snake_case.
@@ -71,7 +71,6 @@ type StatModifiedByAbilityConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [StatModifiedByAbilityEdge!]!
 
 }
@@ -109,7 +108,6 @@ type StatModifiedByFieldStateConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: FieldStateFilter
   ): [StatModifiedByFieldStateEdge!]!
 
 }
@@ -145,7 +143,6 @@ type StatModifiedByFieldStateEdge implements Edge {
 type StatGenerationConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [StatGenerationEdge!]! 
 
 }
@@ -157,7 +154,6 @@ type StatGenerationEdge implements Edge {
 type StatIntroductionConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [StatIntroductionEdge!]! 
 
 }
@@ -173,7 +169,6 @@ type StatModifiedByItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [StatModifiedByItemEdge!]!
 
 }
@@ -211,7 +206,6 @@ type StatModifiedByMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [StatModifiedByMoveEdge!]!
 
 }

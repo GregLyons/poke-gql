@@ -46,7 +46,7 @@ type VersionGroup implements Node {
   """
   code: String!
 
-  descriptions: VersionGroupDescriptionConnection
+  descriptions(filter: DescriptionFilter): VersionGroupDescriptionConnection
 
   """
   The formatted name of the VersionGroup. If there are multiple games in the group, they are separated by a '/'.
@@ -60,7 +60,7 @@ type VersionGroup implements Node {
   """
   The Generation in which the VersionGroup was introduced. 
   """
-  introduced: VersionGroupIntroductionConnection
+  introduced(filter: GenerationFilter): VersionGroupIntroductionConnection
 
   """
   The name of the VersionGroup in snake_case. Separate versions are separeted by hyphens.
@@ -72,7 +72,7 @@ type VersionGroup implements Node {
   """
   name: String!
 
-  sprites: VersionGroupSpriteConnection
+  sprites(filter: SpriteFilter): VersionGroupSpriteConnection
 }
 
 #
@@ -86,7 +86,6 @@ type VersionGroupDescriptionConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: DescriptionFilter
   ): [VersionGroupDescriptionEdge!]! 
 
 }
@@ -100,7 +99,6 @@ type VersionGroupDescriptionEdge implements Edge {
 type VersionGroupIntroductionConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [VersionGroupIntroductionEdge!]! 
 
 }
@@ -116,7 +114,6 @@ type VersionGroupSpriteConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: SpriteFilter
   ): [VersionGroupSpriteEdge!]! 
 
 }

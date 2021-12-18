@@ -84,10 +84,11 @@ const queryEntitiesByColumn = (entityName, keyName) => {
 // Returns the primary key of the parent. 
 const parentPK = (entityName) => {
   const idColumn = entityNameToTableName(entityName) + '_id';
-  return parent => {
+  return (parent, args, context, info) => {
     return {
       genID: parent.generation_id,
       entityID: parent[idColumn],
+      filter: args.filter,
     }
   };
 };
@@ -221,17 +222,17 @@ const generationConnection = entityName => {
   // 'parent' = 'generation'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].load('generation', parent, args.pagination, args.filter, false)
+      return await context.loaders[entityName].load('generation', parent, args.pagination, parent.filter, false)
     },
 
     // count: async (parent, args, context, info) => {
-    //   return await context.loaders[entityName].load('generation', parent, args.pagination, args.filter, true)
+    //   return await context.loaders[entityName].load('generation', parent, args.pagination, parent.filter, true)
     // },
   };
 }
 
 
-// return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, args.filter, false);
+// return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, false);
 // },
 
 // Connection for Generation in which an entity (e.g. Item, Pokemon) was introduced.
@@ -239,11 +240,11 @@ const introductionConnection = entityName => {
   // 'parent' = 'introduced'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].load('introduced', parent, args.pagination, args.filter, false)
+      return await context.loaders[entityName].load('introduced', parent, args.pagination, parent.filter, false)
     },
 
     // count: async (parent, args, context, info) => {
-    //   return await context.loaders[entityName].load('introduced', parent, args.pagination, args.filter, true)
+    //   return await context.loaders[entityName].load('introduced', parent, args.pagination, parent.filter, true)
     // },
   };
 }
@@ -262,11 +263,11 @@ const junctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
 
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, args.filter, false);
+      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, false);
     },
-
+    
     count: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, args.filter, true);
+      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, true);
     },
   };
 };
@@ -275,11 +276,11 @@ const presenceConnection = entityName => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, false, true)
+      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, false, true)
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, true, true)
+      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, true, true)
     },
   };
 };
@@ -288,11 +289,11 @@ const debutConnection = entityName => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, false, false)
+      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, false, false)
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, true, false)
+      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, true, false)
     },
   };
 };

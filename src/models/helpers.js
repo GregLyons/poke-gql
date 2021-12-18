@@ -88,6 +88,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
 // 'filter' is an object with 'introduced', 'introducedAfter', 'introducedBefore', 'name', 'contains', 'endsWith', 'startsWith' keys. 
 // 'filter' may have other keys depending on the type of entity being filtered.
 const getFilterQueryString = (filter, tableName) => {
+  
   if (!filter) return ``;
 
   if (!hasGenID(tableName)) {

@@ -44,7 +44,7 @@ type Pokemon implements Node {
   """
   The Abilities that the Pokemon can possess.
   """
-  abilities: PokemonAbilityConnection
+  abilities(filter: AbilityFilter): PokemonAbilityConnection
 
   """
   The base stats of the Pokemon.
@@ -57,31 +57,26 @@ type Pokemon implements Node {
   dexNumber: Int!
 
   """
-  Entities which the Pokemon enables.
-  """
-  enables: PokemonEnablesConnection
-
-  """
   E.g. 'venusaur' enables the use of 'venusaurite', and 'latias' enables the use of 'soul_dew'.
   """
-  enablesItem: PokemonEnablesItemConnection
+  enablesItem(filter: ItemFilter): PokemonEnablesItemConnection
 
   """
   E.g. 'charizard_gmax' enables 'g_max_wildfire'. 
   
   We wouldn't say, however, that 'smeargle' enables 'sketch', even though it is the only Pokemon that can learn that Move.
   """
-  enablesMove: PokemonEnablesMoveConnection
+  enablesMove(filter: MoveFilter): PokemonEnablesMoveConnection
 
   """
   Pokemon for which this Pokemon is a prevolution. 
   """
-  evolvesTo: PokemonEvolutionConnection
+  evolvesTo(filter: PokemonFilter): PokemonEvolutionConnection
 
   """
   Pokemon for which this Pokemon is an evolution.
   """
-  evolvesFrom: PokemonPrevolutionConnection
+  evolvesFrom(filter: PokemonFilter): PokemonPrevolutionConnection
 
   """
   The name of the Pokemon in Title Case, and with appropriate punctuation. The species name is capitalized, and form data is in parentheses.
@@ -112,12 +107,12 @@ type Pokemon implements Node {
     'raticate_alola' has the form 'raticate'.
 
   """
-  forms: PokemonFormConnection
+  forms(filter: PokemonFilter): PokemonFormConnection
 
   """
   The Generation of this Pokemon.
   """ 
-  generation: PokemonGenerationConnection
+  generation(filter: GenerationFilter): PokemonGenerationConnection
 
   """
   The height of the Pokemon in meters. 0.0 if unknown.
@@ -127,12 +122,12 @@ type Pokemon implements Node {
   """
   The Generation in which the Pokemon was introduced.
   """
-  introduced: PokemonIntroductionConnection
+  introduced(filter: GenerationFilter): PokemonIntroductionConnection
 
   """
   The Moves that the Pokemon can learn.
   """
-  moves: PokemonMoveConnection!
+  moves(filter: MoveFilter): PokemonMoveConnection!
 
   """
   The name of the Pokemon in snake_case. Periods are removed, whereas hyphens become underscores. The species name comes first, followed by the form name. 
@@ -149,12 +144,12 @@ type Pokemon implements Node {
   """
   Entities which the Pokemon requires.
   """
-  requires: PokemonRequiresItemConnection 
+  requires(filter: ItemFilter): PokemonRequiresItemConnection 
 
   """
   E.g. Mega-evolutions require their corresponding Mega Stone.
   """
-  requiresItem: PokemonRequiresItemConnection
+  requiresItem(filter: ItemFilter): PokemonRequiresItemConnection
 
   """
   The name of the Pokemon species in snake_case. Two Pokemon belong to the same species if and only if they have the same National Dex number.
@@ -169,7 +164,7 @@ type Pokemon implements Node {
   """
   The elemental typing of the Pokemon, as an array of Types of length 1 or 2. For example, 'charizard' would have Types ['fire', 'flying'], and 'blastoise' would have Types ['water'].
   """
-  typing: PokemonTypeConnection!
+  typing(filter: TypeFilter): PokemonTypeConnection!
 
   """
   The weight of the Pokemon in kilograms. 0.0 if unknown.
@@ -235,7 +230,6 @@ type PokemonAbilityConnection implements Connection {
 
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [PokemonAbilityEdge!]!
 }
 
@@ -253,7 +247,6 @@ type PokemonAbilityEdge implements Edge {
 type PokemonGenerationConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [PokemonGenerationEdge!]! 
 
 }
@@ -265,7 +258,6 @@ type PokemonGenerationEdge implements Edge {
 type PokemonIntroductionConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [PokemonIntroductionEdge!]! 
 
 }
@@ -281,7 +273,6 @@ type PokemonEnablesItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [PokemonEnablesItemEdge!]! 
 
 }
@@ -295,7 +286,6 @@ type PokemonRequiresItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [PokemonRequiresItemEdge!]! 
 
 }
@@ -311,7 +301,6 @@ type PokemonEnablesMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [PokemonEnablesMoveEdge!]! 
 
 }
@@ -325,7 +314,6 @@ type PokemonMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [PokemonMoveEdge!]!
 
 }
@@ -356,7 +344,6 @@ type PokemonEvolutionConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: PokemonFilter
   ): [PokemonEvolutionEdge!]!
 
 }
@@ -379,7 +366,6 @@ type PokemonPrevolutionConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: PokemonFilter
   ): [PokemonPrevolutionEdge!]!
 
 }
@@ -402,7 +388,6 @@ type PokemonFormConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: PokemonFilter
   ): [PokemonFormEdge!]!
 
 }
@@ -431,7 +416,6 @@ type PokemonTypeConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: TypeFilter
   ): [PokemonTypeEdge!]!
 
 }

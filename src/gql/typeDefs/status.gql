@@ -31,13 +31,13 @@ extend type Query {
 type Status implements Node {
   id: ID!
 
-  causedByAbility: StatusCausedByAbilityConnection
+  causedByAbility(filter: AbilityFilter): StatusCausedByAbilityConnection
 
-  causedByFieldState: StatusCausedByFieldStateConnection
+  causedByFieldState(filter: FieldStateFilter): StatusCausedByFieldStateConnection
 
-  causedByItem: StatusCausedByItemConnection
+  causedByItem(filter: ItemFilter): StatusCausedByItemConnection
 
-  causedByMove: StatusCausedByMoveConnection
+  causedByMove(filter: MoveFilter): StatusCausedByMoveConnection
 
   """
   The name of the Status in Title Case, with appropriate punctuation.
@@ -47,28 +47,28 @@ type Status implements Node {
   """
   The Generation of this Status.
   """ 
-  generation: StatusGenerationConnection
+  generation(filter: GenerationFilter): StatusGenerationConnection
 
   """
   The Generation in which the Status was introduced.
   """
-  introduced: StatusIntroductionConnection
+  introduced(filter: GenerationFilter): StatusIntroductionConnection
 
   """
   E.g. 'electric_terrain' prevents opponents from being inflicted with 'sleep' or 'drowsy' Status. (Note that for the case of 'yawn', 'electric_terrain' still prevents 'drowsy' Pokemon from falling asleep.)
 
   'preventedByFieldState' may be a more appropriate key name, but 'resistedByFieldState' is consistent with the other key names.
   """
-  resistedByFieldState: StatusResistedByFieldStateConnection
+  resistedByFieldState(filter: FieldStateFilter): StatusResistedByFieldStateConnection
 
-  resistedByAbility: StatusResistedByAbilityConnection
+  resistedByAbility(filter: AbilityFilter): StatusResistedByAbilityConnection
 
-  resistedByItem: StatusResistedByItemConnection
+  resistedByItem(filter: ItemFilter): StatusResistedByItemConnection
 
   """
   Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
   """
-  resistedByMove: StatusResistedByMoveConnection
+  resistedByMove(filter: MoveFilter): StatusResistedByMoveConnection
 
   """
   The name of the Status in snake_case.
@@ -87,7 +87,6 @@ type StatusCausedByAbilityConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [StatusCausedByAbilityEdge!]!
 
 }
@@ -108,7 +107,6 @@ type StatusResistedByAbilityConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [StatusResistedByAbilityEdge!]!
 
 }
@@ -124,7 +122,6 @@ type StatusCausedByFieldStateConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: FieldStateFilter
   ): [StatusCausedByFieldStateEdge!]!
 
 }
@@ -143,7 +140,6 @@ type StatusResistedByFieldStateConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: FieldStateFilter
   ): [StatusResistedByFieldStateEdge!]!
 
 }
@@ -157,7 +153,6 @@ type StatusResistedByFieldStateEdge implements Edge {
 type StatusGenerationConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [StatusGenerationEdge!]! 
 
 }
@@ -169,7 +164,6 @@ type StatusGenerationEdge implements Edge {
 type StatusIntroductionConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [StatusIntroductionEdge!]! 
 
 }
@@ -185,7 +179,6 @@ type StatusCausedByItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [StatusCausedByItemEdge!]!
 
 }
@@ -204,7 +197,6 @@ type StatusResistedByItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [StatusResistedByItemEdge!]!
 
 }
@@ -220,7 +212,6 @@ type StatusCausedByMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [StatusCausedByMoveEdge!]!
 
 }
@@ -239,7 +230,6 @@ type StatusResistedByMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [StatusResistedByMoveEdge!]!
 
 }

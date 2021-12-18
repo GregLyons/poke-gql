@@ -31,9 +31,9 @@ extend type Query {
 type UsageMethod implements Node {
   id: ID!
 
-  boostedByAbility: UsageMethodBoostedByAbilityConnection
+  boostedByAbility(filter: AbilityFilter): UsageMethodBoostedByAbilityConnection
 
-  resistedByAbility: UsageMethodResistedByAbilityConnection
+  resistedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
 
   """
   The name of the UsageMethod in Title Case.
@@ -43,20 +43,20 @@ type UsageMethod implements Node {
   """
   The Generation of this UsageMethod.
   """ 
-  generation: UsageMethodGenerationConnection
+  generation(filter: GenerationFilter): UsageMethodGenerationConnection
   
   """
   The Generation in which the UsageMethod became relevant. That is, in which the UsageMethod of the Move would interact with certain Abilities, Moves, etc. 
   
   For example, whether a Move had the UsageMethod 'bite' only became relevant when the ability 'strong_jaw' was introduced in Generation 6, even though Moves like 'crunch' have been around since Generation 2.
   """
-  introduced: UsageMethodIntroductionConnection
+  introduced(filter: GenerationFilter): UsageMethodIntroductionConnection
 
-  boostedByItem: UsageMethodBoostedByItemConnection
+  boostedByItem(filter: ItemFilter): UsageMethodBoostedByItemConnection
 
-  resistedByItem: UsageMethodResistedByItemConnection
+  resistedByItem(filter: ItemFilter): UsageMethodResistedByItemConnection
 
-  moves: UsageMethodMoveConnection
+  moves(filter: MoveFilter): UsageMethodMoveConnection
 
   """
   The name of the UsageMethod in snake_case. 
@@ -76,7 +76,6 @@ type UsageMethodBoostedByAbilityConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [UsageMethodBoostedByAbilityEdge!]!
 
 }
@@ -91,7 +90,6 @@ type UsageMethodResistedByAbilityConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [UsageMethodResistedByAbilityEdge!]!
 
 }
@@ -106,7 +104,6 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 type UsageMethodGenerationConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [UsageMethodGenerationEdge!]! 
 
 }
@@ -118,7 +115,6 @@ type UsageMethodGenerationEdge implements Edge {
 type UsageMethodIntroductionConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [UsageMethodIntroductionEdge!]! 
 
 }
@@ -134,7 +130,6 @@ type UsageMethodBoostedByItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [UsageMethodBoostedByItemEdge!]!
 
 }
@@ -149,7 +144,6 @@ type UsageMethodResistedByItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [UsageMethodResistedByItemEdge!]!
 
 }
@@ -166,7 +160,6 @@ type UsageMethodMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [UsageMethodMoveEdge!]!
 
 }

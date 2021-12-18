@@ -31,9 +31,9 @@ extend type Query {
 type Effect implements Node {
   id: ID!
   
-  abilities: EffectAbilityConnection
+  abilities(filter: AbilityFilter): EffectAbilityConnection
 
-  fieldStates: EffectFieldStateConnection
+  fieldStates(filter: FieldStateFilter): EffectFieldStateConnection
 
   """
   The name of the Effect in Title Case, with appropriate punctuation.
@@ -43,18 +43,18 @@ type Effect implements Node {
   """
   The Generation of this Effect.
   """ 
-  generation: EffectGenerationConnection
+  generation(filter: GenerationFilter): EffectGenerationConnection
 
   """
   The Generation in which the Effect was introduced. Note that Moves can gain Effects between Generations.
 
   For example, 'low_kick' was introduced in Generation 1, but it didn't have the Effect 'depends_on_weight' until Generation 3.
   """
-  introduced: EffectIntroductionConnection
+  introduced(filter: GenerationFilter): EffectIntroductionConnection
 
-  items: EffectItemConnection
+  items(filter: ItemFilter): EffectItemConnection
 
-  moves: EffectMoveConnection
+  moves(filter: MoveFilter): EffectMoveConnection
 
   """
   The name of the Effect in snake_case. If the Effect has a verb in its name, the verb is conjugated in third person.
@@ -77,7 +77,6 @@ type EffectAbilityConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: AbilityFilter
   ): [EffectAbilityEdge!]! 
 
 }
@@ -93,7 +92,6 @@ type EffectFieldStateConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: FieldStateFilter
   ): [EffectFieldStateEdge!]! 
 
 }
@@ -107,7 +105,6 @@ type EffectFieldStateEdge implements Edge {
 type EffectGenerationConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [EffectGenerationEdge!]! 
 
 }
@@ -119,7 +116,6 @@ type EffectGenerationEdge implements Edge {
 type EffectIntroductionConnection implements Connection {
   edges(
     pagination: PaginationInput
-    filter: GenerationFilter
   ): [EffectIntroductionEdge!]! 
 
 }
@@ -135,7 +131,6 @@ type EffectItemConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: ItemFilter
   ): [EffectItemEdge!]! 
 
 }
@@ -151,7 +146,6 @@ type EffectMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-    filter: MoveFilter
   ): [EffectMoveEdge!]! 
 
 }
