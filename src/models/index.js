@@ -1,6 +1,7 @@
 const {db} = require('./db.js');
 const {
   entityNameToTableName,
+  escapeObjectParameters,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,

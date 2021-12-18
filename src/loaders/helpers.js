@@ -4,6 +4,7 @@ const {
   computeGenerationTableQueryString,
   computeJunctionTableQueryString,
   entityNameToTableName,
+  escapeObjectParameters,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID
@@ -207,6 +208,7 @@ const batchEntitiesByGen = (presence = true, entityName, pagination, filter) => 
   'pagination' is an object with data for paginating the results.
 */
 const batchEntitiesByGenCount = (presence = true, entityName, pagination, filter) => {
+
   const tableName = entityNameToTableName(entityName);
 
   return async gens => {

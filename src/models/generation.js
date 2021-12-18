@@ -1,11 +1,15 @@
 const {
-  entityNameToTableName,
+  escapeObjectParameters,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,
 } = require('./helpers.js');
 
 const computeGenerationTableQueryString = (presence, tableName, pagination, filter, countMode) => {
+  // Escape object parameters that are strings.
+  escapeObjectParameters(pagination);
+  escapeObjectParameters(filter);
+
   // If the entity doesn't change across generations, then the database only stores one instance of that entity. To determine the presence of such an entity in a given generation, we check whether the debut gen of that entity is less than or eqal to the given generation.
   const genDependent = hasGenID(tableName);
 

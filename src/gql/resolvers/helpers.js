@@ -1,6 +1,6 @@
 const {
-  computeJunctionTableName,
   entityNameToTableName,
+  escapeObjectParameters,
   getPaginationQueryString,
   getFilterQueryString,
   hasGenID,
@@ -15,6 +15,7 @@ const queryEntities = entityName => {
 
     tableName = entityNameToTableName(entityName);
 
+    // These functions escape strings to prevent SQL injection.
     filterString = getFilterQueryString(args.filter, tableName);
     paginationString = getPaginationQueryString(args.pagination, tableName);
 

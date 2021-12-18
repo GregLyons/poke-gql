@@ -138,6 +138,10 @@ const computeJunctionTableQueryString = (
   countMode,
   batching = false
 ) => {
+  // Escape object parameters that are strings.
+  escapeObjectParameters(pagination);
+  escapeObjectParameters(filter);
+
   // Compute the table names and id columns for the owning and owned tables, and then compute the starting and ending table names and id columns according to 'reverse'.
   //#region
 

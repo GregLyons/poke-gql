@@ -33,11 +33,28 @@ const entityNameToTableName = entityName => {
   }
 }
 
+// Goes through the keys of an object and removes non-alphanumeric/underscore characters from String values.
+const escapeObjectParameters = obj => {
+  for (let key of Object.keys(obj)) {
+    if (typeof obj[key] === 'string' || obj[key] instanceof String) {
+      obj[key] = obj[key].replace(/[\W]+/gi, '');
+    }
+  }
+  return obj
+}
+
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
+// String parameters are escaped to prevent SQL injection.
 const getPaginationQueryString = (pagination, tableName, batching = false) => {
   if (!pagination) return ``;
+  
+  // Escape pagination parameters.
+  escapeObjectParameters(pagination);
+
   const {limit, offset, orderBy, sortBy, search} = pagination;
+
+
 
   const tablesWithFormattedName = [
     'ability',
@@ -81,12 +98,13 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
     ${searchString}
     ${sortString}
     ${limitOffsetString}
-  `
+  `;
 }
 
 // Return a MySQL string for filtering results.
 // 'filter' is an object with 'introduced', 'introducedAfter', 'introducedBefore', 'name', 'contains', 'endsWith', 'startsWith' keys. 
 // 'filter' may have other keys depending on the type of entity being filtered.
+// String parameters are escaped to prevent SQL injection.
 const getFilterQueryString = (filter, tableName) => {
   
   if (!filter) return ``;
@@ -94,6 +112,9 @@ const getFilterQueryString = (filter, tableName) => {
   if (!hasGenID(tableName)) {
     return ``;
   }
+
+  // Escape filter parameters.
+  escapeObjectParameters(filter);
 
   // Introduction filtering
   //#region
@@ -401,6 +422,8 @@ const getFilterQueryString = (filter, tableName) => {
 
 module.exports = {
   entityNameToTableName,
+  escapeObjectParameters,
+
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,
