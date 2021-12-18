@@ -10,22 +10,42 @@ const computeGenerationTableQueryString = (presence, tableName, pagination, filt
   const genDependent = hasGenID(tableName);
 
   // Extract pagination fields.
-  const paginationString = getPaginationQueryString(pagination, tableName);
+  const paginationString = countMode 
+    ? ``
+    : getPaginationQueryString(pagination, tableName, true);
   const filterString = getFilterQueryString(filter, tableName);
 
-  console.log(presence, genDependent);
-  console.log(presence && genDependent ? 'generation_id' : 'introduced')
+  let whereString;
+  // The query is asking for entities present in the given generation.
+  if (presence) {
+    // If entity is generation dependent, then we check 'generation_id'.
+    if (genDependent) { whereString = `WHERE generation_id IN ?`; }
+    // Otherwise, we check whether the entity was introduced in one of the given generations.
+    else { whereString = `WHERE introduced IN ?`} 
+  } 
+  // The query is asking for entities introduced in the given generation.
+  else {
+    // If entity is generation dependent, we check whether the entity was introduced in one of the given generations, and then select those entities whose 'generation_id' matches 'introduced'.
+    if (genDependent) { 
+      whereString = `
+        WHERE introduced IN ?
+        AND introduced = generation_id
+      `;
+    }
+    // Otherwise, we check whether the entity was introduced in one of the given generations.
+    else { whereString = `WHERE introduced IN ?`}
+  }
 
   return countMode 
     ? `
       SELECT generation_id, COUNT(*) as row_count FROM ${tableName}
-      WHERE ${presence && genDependent ? 'generation_id' : 'introduced'} IN ?
+      ${whereString}
       ${filterString}
       ${paginationString}
       GROUP BY generation_id
     ` : `
       SELECT * FROM ${tableName}
-      WHERE ${presence && genDependent ? 'generation_id' : 'introduced'} IN ?
+      ${whereString}
       ${filterString}
       ${paginationString}
     `;

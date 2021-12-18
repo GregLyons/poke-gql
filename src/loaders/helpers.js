@@ -119,7 +119,7 @@ const junctionBatcherCount = databaseInfo => {
     })
     .catch(console.log);
 
-    const batches =  entityPKs.map(entityPK => 
+    let batches = entityPKs.map(entityPK => 
       data
       .filter(d => 
         hasGenID(startTableName)
@@ -134,7 +134,7 @@ const junctionBatcherCount = databaseInfo => {
     )
     .map(d => d[0] || 0);
 
-    return batches && batches.length > 0 
+    batches = batches && batches.length > 0 
       ? batches
       : [0];
   }
@@ -163,18 +163,37 @@ const batchEntitiesByGen = (presence = true, entityName, pagination, filter) => 
       [[gens]]
     )
     .then( ([results, fields]) => {
-      console.log(results);
       return results;
     })
     .catch(console.log);
 
-    return gens.map(gen => entities.filter(entity => 
+    const batches = gens.map(gen => entities.filter(entity => 
       genDependent
         ? entity.generation_id === gen
         : presence 
           ? entity.introduced <= gen
           : entity.introduced === gen
     ));
+
+    // Extract limit and offset from 'pagination' and slice each batch accordingly.
+    const limitOffset = pagination;
+
+    return batches.map(batch => {
+      return limitOffset 
+        ? limitOffset.limit 
+          ? limitOffset.offset 
+            // Limit and offset both defined
+            ? batch.slice(limitOffset.offset, limitOffset.offset + limitOffset.limit)
+            // No offset
+            : batch.slice(0, limitOffset.limit)
+          : limitOffset.offset
+            // No limit
+            ? batch.slice(limitOffset.offset)
+            // No limit or offset
+            : batch
+        // No limit or offset
+        : batch;
+    });
   }
 }
 
@@ -209,9 +228,6 @@ const batchEntitiesByGenCount = (presence = true, entityName, pagination, filter
       [[gens]]
     )
     .then( ([results, fields]) => {
-      // console.log(queryString);
-      // // console.log(gens);
-      // console.log(results);
       return results;
     })
     .catch(console.log);
@@ -232,15 +248,11 @@ const batchEntitiesByGenCount = (presence = true, entityName, pagination, filter
             : entity.introduced === gen
       )
       .map(d => {
-        console.log(d)
         return d.row_count;
       })
     )
     .map(d => d[0])
     .map(d => d || 0);
-    
-    console.log()
-    console.log(batch);
 
     return batch.length > 0
       ? batch

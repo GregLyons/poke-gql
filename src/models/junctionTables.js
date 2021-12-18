@@ -260,7 +260,9 @@ const computeJunctionTableQueryString = (
 
   const filterString = getFilterQueryString(filter, endTableName);
 
-  const paginationString = getPaginationQueryString(pagination, junctionTableName, batching);
+  const paginationString = countMode 
+    ? `` 
+    : getPaginationQueryString(pagination, junctionTableName, batching);
 
   //#endregion
 
