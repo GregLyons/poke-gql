@@ -152,7 +152,7 @@ type FieldState implements Node {
 # ABILITY
 
 type FieldStateActivatesAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -166,7 +166,7 @@ type FieldStateActivatesAbilityEdge implements Edge {
 }
 
 type FieldStateCreatedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -185,7 +185,7 @@ type FieldStateCreatedByAbilityEdge implements Edge {
 }
 
 type FieldStateIgnoredByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -199,7 +199,7 @@ type FieldStateIgnoredByAbilityEdge implements Edge {
 }
 
 type FieldStatePreventedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -213,7 +213,7 @@ type FieldStatePreventedByAbilityEdge implements Edge {
 }
 
 type FieldStateRemovedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -227,7 +227,7 @@ type FieldStateRemovedByAbilityEdge implements Edge {
 }
 
 type FieldStateSuppressedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -243,7 +243,7 @@ type FieldStateSuppressedByAbilityEdge implements Edge {
 # EFFECT
 
 type FieldStateEffectConnection implements Connection {
-  count(filter: EffectFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -285,7 +285,7 @@ type FieldStateIntroductionEdge implements Edge {
 # ITEM
 
 type FieldStateActivatesItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -299,7 +299,7 @@ type FieldStateActivatesItemEdge implements Edge {
 }
 
 type FieldStateExtendedByItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -318,7 +318,7 @@ type FieldStateExtendedByItemEdge implements Edge {
 }
 
 type FieldStateIgnoredByItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -332,7 +332,7 @@ type FieldStateIgnoredByItemEdge implements Edge {
 }
 
 type FieldStateResistedByItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -350,7 +350,7 @@ type FieldStateResistedByItemEdge implements Edge {
 # MOVE
 
 type FieldStateEnhancesMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -364,7 +364,7 @@ type FieldStateEnhancesMoveEdge implements Edge {
 }
 
 type FieldStateHindersMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -378,7 +378,7 @@ type FieldStateHindersMoveEdge implements Edge {
 }
 
 type FieldStateCreatedByMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -397,7 +397,7 @@ type FieldStateCreatedByMoveEdge implements Edge {
 }
 
 type FieldStateRemovedByMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -413,7 +413,7 @@ type FieldStateRemovedByMoveEdge implements Edge {
 # STAT
 
 type FieldStateModifiesStatConnection implements Connection {
-  count(filter: StatFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -449,7 +449,7 @@ type FieldStateModifiesStatEdge implements Edge {
 # STATUS
 
 type FieldStateCausesStatusConnection implements Connection {
-  count(filter: StatusFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -468,7 +468,7 @@ type FieldStateCausesStatusEdge implements Edge {
 }
 
 type FieldStateResistsStatusConnection implements Connection {
-  count(filter: StatusFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -484,7 +484,7 @@ type FieldStateResistsStatusEdge implements Edge {
 # TYPE
 
 type FieldStateBoostsTypeConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -503,7 +503,7 @@ type FieldStateBoostsTypeEdge implements Edge {
 }
 
 type FieldStateResistsTypeConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -522,7 +522,7 @@ type FieldStateResistsTypeEdge implements Edge {
 }
 
 type FieldStateWeatherBallConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput

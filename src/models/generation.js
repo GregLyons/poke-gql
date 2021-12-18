@@ -13,6 +13,9 @@ const computeGenerationTableQueryString = (presence, tableName, pagination, filt
   const paginationString = getPaginationQueryString(pagination, tableName);
   const filterString = getFilterQueryString(filter, tableName);
 
+  console.log(presence, genDependent);
+  console.log(presence && genDependent ? 'generation_id' : 'introduced')
+
   return countMode 
     ? `
       SELECT generation_id, COUNT(*) as row_count FROM ${tableName}

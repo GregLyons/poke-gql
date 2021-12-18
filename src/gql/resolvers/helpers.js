@@ -271,16 +271,15 @@ const junctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
   };
 };
 
-
 const presenceConnection = entityName => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation[entityName].present(args.pagination, args.filter).loader.load(parent);
+      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, false, true)
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders.generation[entityName].present(args.pagination, args.filter).counter.load(parent);
+      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, true, true)
     },
   };
 };
@@ -289,11 +288,11 @@ const debutConnection = entityName => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation[entityName].introduced(args.pagination, args.filter).loader.load(parent);
+      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, false, false)
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders.generation[entityName].introduced(args.pagination, args.filter).counter.load(parent);
+      return await context.loaders.generation.load(entityName, parent, args.pagination, args.filter, true, false)
     },
   };
 };

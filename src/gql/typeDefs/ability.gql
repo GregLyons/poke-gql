@@ -110,7 +110,7 @@ type Ability implements Node {
 # DESCRIPTION 
 
 type AbilityDescriptionConnection implements Connection {
-  count(filter: DescriptionFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -131,7 +131,7 @@ type AbilityDescriptionEdge implements Edge {
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
-  count(filter: EffectFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -146,7 +146,7 @@ type AbilityEffectEdge implements Edge {
 # FIELD STATE
 
 type AbilityActivatedByFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -159,7 +159,7 @@ type AbilityActivatedByFieldStateEdge implements Edge {
 }
 
 type AbilityCreatesFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -177,7 +177,7 @@ type AbilityCreatesFieldStateEdge implements Edge {
 }
 
 type AbilityIgnoresFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -190,7 +190,7 @@ type AbilityIgnoresFieldStateEdge implements Edge {
 }
 
 type AbilityPreventsFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -203,7 +203,7 @@ type AbilityPreventsFieldStateEdge implements Edge {
 }
 
 type AbilityRemovesFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -216,7 +216,7 @@ type AbilityRemovesFieldStateEdge implements Edge {
 }
 
 type AbilitySuppressesFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -257,7 +257,7 @@ type AbilityIntroductionEdge implements Edge {
 # POKEMON
 
 type AbilityPokemonConnection implements Connection {
-  count(filter: PokemonFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -274,7 +274,7 @@ type AbilityPokemonEdge implements Edge {
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
-  count(filter: StatFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -312,7 +312,7 @@ type AbilityModifiesStatEdge implements Edge {
 # STATUS
 
 type AbilityCausesStatusConnection implements Connection {
-  count(filter: StatusFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -333,7 +333,7 @@ type AbilityCausesStatusEdge implements Edge {
 }
 
 type AbilityResistsStatusConnection implements Connection {
-  count(filter: StatusFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -349,7 +349,7 @@ type AbilityResistsStatusEdge implements Edge {
 # TYPE
 
 type AbilityBoostsTypeConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -368,7 +368,7 @@ type AbilityBoostsTypeEdge implements Edge {
 }
 
 type AbilityResistsTypeConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -389,7 +389,7 @@ type AbilityResistsTypeEdge implements Edge {
 # USAGE METHOD
 
 type AbilityBoostsUsageMethodConnection implements Connection {
-  count(filter: UsageMethodFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -408,7 +408,7 @@ type AbilityBoostsUsageMethodEdge implements Edge {
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {
-  count(filter: UsageMethodFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput

@@ -162,7 +162,7 @@ type Generation implements Node {
 # ABILITY
 
 type GenerationAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -172,7 +172,7 @@ type GenerationAbilityConnection implements Connection {
 }
 
 type GenerationIntroducedAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -188,7 +188,7 @@ type GenerationAbilityEdge implements Edge {
 # EFFECT
 
 type GenerationEffectConnection implements Connection {
-  count(filter: EffectFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -198,7 +198,7 @@ type GenerationEffectConnection implements Connection {
 }
 
 type GenerationIntroducedEffectConnection implements Connection {
-  count(filter: EffectFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -214,7 +214,7 @@ type GenerationEffectEdge implements Edge {
 # FIELD STATE
 
 type GenerationFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -224,7 +224,7 @@ type GenerationFieldStateConnection implements Connection {
 }
 
 type GenerationIntroducedFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -241,7 +241,7 @@ type GenerationFieldStateEdge implements Edge {
 # ITEM
 
 type GenerationItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -251,7 +251,7 @@ type GenerationItemConnection implements Connection {
 }
 
 type GenerationIntroducedItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -267,7 +267,7 @@ type GenerationItemEdge implements Edge {
 # MOVE
 
 type GenerationMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -277,7 +277,7 @@ type GenerationMoveConnection implements Connection {
 }
 
 type GenerationIntroducedMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -293,7 +293,7 @@ type GenerationMoveEdge implements Edge {
 # POKEMON
 
 type GenerationPokemonConnection implements Connection {
-  count(filter: PokemonFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -303,7 +303,7 @@ type GenerationPokemonConnection implements Connection {
 }
 
 type GenerationIntroducedPokemonConnection implements Connection {
-  count(filter: PokemonFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -319,7 +319,7 @@ type GenerationPokemonEdge implements Edge {
 # STAT
 
 type GenerationStatConnection implements Connection {
-  count(filter: StatFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -329,7 +329,7 @@ type GenerationStatConnection implements Connection {
 }
 
 type GenerationIntroducedStatConnection implements Connection {
-  count(filter: StatFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -345,7 +345,7 @@ type GenerationStatEdge implements Edge {
 # STATUS
 
 type GenerationStatusConnection implements Connection {
-  count(filter: StatusFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -355,7 +355,7 @@ type GenerationStatusConnection implements Connection {
 }
 
 type GenerationIntroducedStatusConnection implements Connection {
-  count(filter: StatusFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -371,7 +371,7 @@ type GenerationStatusEdge implements Edge {
 # TYPE
 
 type GenerationTypeConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -381,7 +381,7 @@ type GenerationTypeConnection implements Connection {
 }
 
 type GenerationIntroducedTypeConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -397,7 +397,7 @@ type GenerationTypeEdge implements Edge {
 # USAGE METHOD
 
 type GenerationUsageMethodConnection implements Connection {
-  count(filter: UsageMethodFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -407,7 +407,7 @@ type GenerationUsageMethodConnection implements Connection {
 }
 
 type GenerationIntroducedUsageMethodConnection implements Connection {
-  count(filter: UsageMethodFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -423,7 +423,7 @@ type GenerationUsageMethodEdge implements Edge {
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
-  count(filter: VersionGroupFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -433,7 +433,7 @@ type GenerationVersionGroupConnection implements Connection {
 }
 
 type GenerationIntroducedVersionGroupConnection implements Connection {
-  count(filter: VersionGroupFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput

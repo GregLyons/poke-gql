@@ -67,7 +67,7 @@ type Stat implements Node {
 # ABILITY
 
 type StatModifiedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -105,7 +105,7 @@ type StatModifiedByAbilityEdge implements Edge {
 # FIELD STATE
 
 type StatModifiedByFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -169,7 +169,7 @@ type StatIntroductionEdge implements Edge {
 # ITEM
 
 type StatModifiedByItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -207,7 +207,7 @@ type StatModifiedByItemEdge implements Edge {
 # MOVE
 
 type StatModifiedByMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput

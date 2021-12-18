@@ -126,14 +126,18 @@ const getForeignKeyColumnNames = (junctionTableName, ownerTableName, ownedTableN
 
   For another example, consider the 'enablesMove' and 'requiresMove' fields for a Move Node. The relevant junction table is 'pmove_requires_pmove', so the 'owned' is the base Move, and the 'owner' is the Move requiring the base Move. Thus, the edge direction for 'requiresMove' matches the owner-owned relationship, whereas the edge direction for 'enablesMove' opposes the owner-owned relationship.
 */
-const computeJunctionTableQueryString = ([
-  pagination,
-  filter,
-  ownerEntityName,
-  ownedEntityName,
-  middle,
-  reverse
-], countMode) => {
+const computeJunctionTableQueryString = (
+  [
+    pagination,
+    filter,
+    ownerEntityName,
+    ownedEntityName,
+    middle,
+    reverse
+  ],
+  countMode,
+  batching = false
+) => {
   // Compute the table names and id columns for the owning and owned tables, and then compute the starting and ending table names and id columns according to 'reverse'.
   //#region
 
@@ -256,7 +260,7 @@ const computeJunctionTableQueryString = ([
 
   const filterString = getFilterQueryString(filter, endTableName);
 
-  const paginationString = getPaginationQueryString(pagination, junctionTableName);
+  const paginationString = getPaginationQueryString(pagination, junctionTableName, batching);
 
   //#endregion
 

@@ -169,7 +169,7 @@ type Type implements Node {
 # ABILITY
 
 type TypeBoostedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -184,7 +184,7 @@ type TypeBoostedByAbilityEdge implements Edge {
 }
 
 type TypeResistedByAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -201,7 +201,7 @@ type TypeResistedByAbilityEdge implements Edge {
 # FIELD STATE
 
 type TypeWeatherBallConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -215,7 +215,7 @@ type TypeWeatherBallEdge implements Edge {
 }
 
 type TypeBoostedByFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -230,7 +230,7 @@ type TypeBoostedByFieldStateEdge implements Edge {
 }
 
 type TypeResistedByFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -245,7 +245,7 @@ type TypeResistedByFieldStateEdge implements Edge {
 }
 
 type TypeIgnoresFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -259,7 +259,7 @@ type TypeIgnoresFieldStateEdge implements Edge {
 }
 
 type TypeResistsFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -275,7 +275,7 @@ type TypeResistsFieldStateEdge implements Edge {
 }
 
 type TypeRemovesFieldStateConnection implements Connection {
-  count(filter: FieldStateFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -291,7 +291,7 @@ type TypeRemovesFieldStateEdge implements Edge {
 # GENERATION
 
 type TypeGenerationConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -305,7 +305,7 @@ type TypeGenerationEdge implements Edge {
 }
 
 type TypeIntroductionConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -321,7 +321,7 @@ type TypeIntroductionEdge implements Edge {
 # ITEM
 
 type TypeNaturalGiftConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -340,7 +340,7 @@ type TypeNaturalGiftEdge implements Edge {
 }
 
 type TypeBoostedByItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -355,7 +355,7 @@ type TypeBoostedByItemEdge implements Edge {
 }
 
 type TypeResistedByItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -372,7 +372,7 @@ type TypeResistedByItemEdge implements Edge {
 # MOVE
 
 type TypeMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -386,7 +386,7 @@ type TypeMoveEdge implements Edge {
 }
 
 type TypeEnablesMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -402,7 +402,7 @@ type TypeEnablesMoveEdge implements Edge {
 # POKEMON
 
 type TypePokemonConnection implements Connection {
-  count(filter: PokemonFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -418,7 +418,7 @@ type TypePokemonEdge implements Edge {
 # TYPE
 
 type DefensiveTypeMatchupConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -437,7 +437,7 @@ type DefensiveTypeMatchupEdge implements Edge {
 }
 
 type OffensiveTypeMatchupConnection implements Connection {
-  count(filter: TypeFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput

@@ -35,9 +35,8 @@ const entityNameToTableName = entityName => {
 
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
-const getPaginationQueryString = (pagination, tableName) => {
+const getPaginationQueryString = (pagination, tableName, batching = false) => {
   if (!pagination) return ``;
-
   const {limit, offset, orderBy, sortBy, search} = pagination;
 
   const tablesWithFormattedName = [
@@ -54,7 +53,11 @@ const getPaginationQueryString = (pagination, tableName) => {
     'version_group'
   ]
 
-  const limitOffsetString = `LIMIT ${offset}, ${limit}`;
+  // If this is called by a batcher, we don't want to apply the limit/offset to the query. Instead, we handle that in the batcher.
+  const limitOffsetString = batching
+    ? ``
+    : `LIMIT ${offset}, ${limit}`;
+
   // Most columns, except 'generation_id' and 'introduced' are preceded by the table name.
   let sortString;
 

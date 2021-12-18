@@ -58,7 +58,7 @@ type Description implements Node {
 # ABILITY
 
 type DescriptionAbilityConnection implements Connection {
-  count(filter: AbilityFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -79,7 +79,7 @@ type DescriptionAbilityEdge implements Edge {
 # ITEM
 
 type DescriptionItemConnection implements Connection {
-  count(filter: ItemFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -100,7 +100,7 @@ type DescriptionItemEdge implements Edge {
 # MOVE 
 
 type DescriptionMoveConnection implements Connection {
-  count(filter: MoveFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
@@ -121,7 +121,7 @@ type DescriptionMoveEdge implements Edge {
 # VERSION GROUP 
 
 type DescriptionVersionGroupConnection implements Connection {
-  count(filter: VersionGroupFilter): Int!
+  count: Int!
   
   edges(
     pagination: PaginationInput
