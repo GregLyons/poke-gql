@@ -133,7 +133,7 @@ const ConnectionsAndEdges = {
   ItemCausesStatusEdge: causeStatusEdge(),
 
   ItemDescriptionConnection: junctionConnection('item', 'description'),
-  ItemDescriptionEdge: descriptionEdge('item'),
+  ItemDescriptionEdge: descriptionEdge(),
   
   ItemEffectConnection: junctionConnection('item', 'effect'),
   ItemEffectEdge: basicEdge(),

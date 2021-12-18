@@ -133,7 +133,7 @@ const ConnectionsAndEdges = {
   AbilityCreatesFieldStateEdge: turnsEdge(),
 
   AbilityDescriptionConnection: junctionConnection('ability', 'description'),
-  AbilityDescriptionEdge: descriptionEdge('ability'),
+  AbilityDescriptionEdge: descriptionEdge(),
   
   AbilityEffectConnection: junctionConnection('ability', 'effect'),
   AbilityEffectEdge: basicEdge(),

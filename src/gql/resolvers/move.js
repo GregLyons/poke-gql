@@ -142,7 +142,7 @@ const ConnectionsAndEdges = {
   MoveCreatesFieldStateEdge: turnsEdge(),
 
   MoveDescriptionConnection: junctionConnection('move', 'description'),
-  MoveDescriptionEdge: descriptionEdge('move'),
+  MoveDescriptionEdge: descriptionEdge(),
 
   MoveEffectConnection: junctionConnection('move', 'effect'),
   MoveEffectEdge: basicEdge(),

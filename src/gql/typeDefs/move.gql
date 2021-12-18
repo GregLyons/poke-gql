@@ -183,10 +183,7 @@ type MoveDescriptionConnection implements Connection {
 type MoveDescriptionEdge implements Edge {  
   node: Description!
 
-  versionGroups(
-    pagination: PaginationInput
-    filter: VersionGroupFilter
-  ): [VersionGroup!]!
+  versionGroupCode: String!
 }
 
 # EFFECT

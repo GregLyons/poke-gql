@@ -121,10 +121,7 @@ type AbilityDescriptionConnection implements Connection {
 type AbilityDescriptionEdge implements Edge {  
   node: Description!
 
-  versionGroups(
-    pagination: PaginationInput
-    filter: VersionGroupFilter
-  ): [VersionGroup!]!
+  versionGroupCode: String!
 }
 
 # EFFECT

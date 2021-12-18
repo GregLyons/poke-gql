@@ -69,10 +69,7 @@ type DescriptionAbilityConnection implements Connection {
 type DescriptionAbilityEdge implements Edge {  
   node: Ability!
 
-  versionGroups(
-    pagination: PaginationInput
-    filter: VersionGroupFilter
-  ): [VersionGroup!]!
+  versionGroupCode: String!
 }
 
 # ITEM
@@ -89,10 +86,7 @@ type DescriptionItemConnection implements Connection {
 type DescriptionItemEdge implements Edge {  
   node: Item!
 
-  versionGroups(
-    pagination: PaginationInput
-    filter: VersionGroupFilter
-  ): [VersionGroup!]!
+  versionGroupCode: String!
 }
 
 # MOVE 
@@ -109,10 +103,7 @@ type DescriptionMoveConnection implements Connection {
 type DescriptionMoveEdge implements Edge {  
   node: Move!
 
-  versionGroups(
-    pagination: PaginationInput
-    filter: VersionGroupFilter
-  ): [VersionGroup!]!
+  versionGroupCode: String!
 }
 
 # VERSION GROUP 

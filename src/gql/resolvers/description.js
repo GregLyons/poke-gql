@@ -105,13 +105,13 @@ const ConnectionsAndEdges = {
   },
 
   DescriptionAbilityConnection: junctionConnection('description', 'ability'),
-  DescriptionAbilityEdge: descriptionEdge('ability'),
+  DescriptionAbilityEdge: descriptionEdge(),
 
   DescriptionItemConnection: junctionConnection('description', 'item'),
-  DescriptionItemEdge: descriptionEdge('item'),
+  DescriptionItemEdge: descriptionEdge(),
 
   DescriptionMoveConnection: junctionConnection('description', 'move'),
-  DescriptionMoveEdge: descriptionEdge('move'),
+  DescriptionMoveEdge: descriptionEdge(),
 
 
   DescriptionVersionGroupConnection: junctionConnection('description', 'versionGroup'),

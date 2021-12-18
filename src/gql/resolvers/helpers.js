@@ -136,12 +136,10 @@ const causeStatusEdge = () => {
   }
 }
 
-const descriptionEdge = entityName => {
-  const tableName = entityNameToTableName(entityName);
-
+const descriptionEdge = () => {
   return {
     node: parent => parent,
-    versionGroups: parent => parent,
+    versionGroupCode: parent => parent.version_group_code,
   }
 }
 
