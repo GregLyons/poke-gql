@@ -1,33 +1,13 @@
 const {
   getGenLoader,
-  getLoaderAndCounter,
+
+  LoadersForEntity,
 } = require('./helpers.js');
 
-class Item {
-    
-  loaders = {};
-
-  load(key, id, pagination, filter, countMode) {
-    const loader = this.findLoader(key, pagination, filter, countMode);
-    return loader.load(id);
-  }
-
-  clearLoaders() {
-    this.loaders = {};
-  }
-
-  findLoader(key, pagination, filter, countMode) {
-    if (!this.loaders[key]) {
-      if (['generation', 'introduced'].includes(key)) {
-        this.loaders[key] = this[key](pagination, filter);
-      }
-      else {
-        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
-      }
-    }
-    return countMode 
-      ? this.loaders[key].counter
-      : this.loaders[key].loader;
+class Item extends LoadersForEntity {
+  
+  constructor() {
+    super();
   }
 
   activatedByFieldState(pagination, filter) {
@@ -66,30 +46,17 @@ class Item {
     return [pagination, filter, 'item', 'fieldState', 'item_extends_field_state', false];
   }
 
-  generation(pagination, filter) {
-    return getGenLoader(pagination, filter);
-  }
-
   ignoresFieldState(pagination, filter) {
     return [pagination, filter, 'item', 'fieldState', 'item_ignores_field_state', false];
   }
-
-  introduced(pagination, filter) {
-    return getGenLoader(pagination, filter);
-  }
-
+  
   modifiesStat(pagination, filter) {
     return [pagination, filter, 'item', 'stat', 'item_modifies_stat', false];
   }
 
   // TODO
   naturalGift(pagination, filter) {
-    return [pagination, filter, 'item', 'type', 'natural_gift', false];;
-
-    return {
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo)),
-    };
+    return [pagination, filter, 'item', 'type', 'natural_gift', false];
   }
 
   requiresPokemon(pagination, filter) {

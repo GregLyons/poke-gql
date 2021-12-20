@@ -1,35 +1,15 @@
 const {
   getGenLoader,
-  getLoaderAndCounter,
+
+  LoadersForEntity,
 } = require('./helpers.js');
 
-class Type {
-    
-  loaders = {};
-
-  load(key, id, pagination, filter, countMode) {
-    const loader = this.findLoader(key, pagination, filter, countMode);
-    return loader.load(id);
+class Type extends LoadersForEntity {
+  
+  constructor() {
+    super();
   }
-
-  clearLoaders() {
-    this.loaders = {};
-  }
-
-  findLoader(key, pagination, filter, countMode) {
-    if (!this.loaders[key]) {
-      if (['generation', 'introduced'].includes(key)) {
-        this.loaders[key] = this[key](pagination, filter);
-      }
-      else {
-        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
-      }
-    }
-    return countMode 
-      ? this.loaders[key].counter
-      : this.loaders[key].loader;
-  }
-
+  
   boostedByAbility(pagination, filter) {
     return [pagination, filter, 'ability', 'type', 'ability_boosts_ptype', true];
   }
@@ -44,36 +24,24 @@ class Type {
 
   // TODO
   defensiveMatchup(pagination, filter) {
-    return [pagination, filter, 'type', 'type', 'ptype_matchup', true];;
-  
-    return getLoaderAndCounter(databaseInfo);
+    return [pagination, filter, 'type', 'type', 'ptype_matchup', true];
   }
   
   enablesMove(pagination, filter) {
     return [pagination, filter, 'move', 'type', 'pmove_requires_ptype', true];
   }
   
-  generation(pagination, filter) {
-    return getGenLoader(pagination, filter);
-  }
-
   ignoresFieldState(pagination, filter) {
     return [pagination, filter, 'type', 'fieldState', 'ptype_ignores_field_state', false];
   }
 
-  introduced(pagination, filter) {
-    return getGenLoader(pagination, filter);
-  }
-  
   move(pagination, filter) {
     return [pagination, filter, 'move', 'type', 'pmove_ptype', true];
   }
   
   // TODO
   naturalGift(pagination, filter) {
-    return [pagination, filter, 'item', 'type', 'natural_gift', true];;
-  
-    return getLoaderAndCounter(databaseInfo);
+    return [pagination, filter, 'item', 'type', 'natural_gift', true];
   }
   
   pokemon(pagination, filter) {
@@ -82,9 +50,7 @@ class Type {
 
   // TODO
   offensiveMatchup(pagination, filter) {
-    return [pagination, filter, 'type', 'type', 'ptype_matchup', true];;
-  
-    return getLoaderAndCounter(databaseInfo);
+    return [pagination, filter, 'type', 'type', 'ptype_matchup', true];
   }
 
   removesFieldState(pagination, filter) {
@@ -108,9 +74,7 @@ class Type {
   }
 
   weatherBall(pagination, filter) {
-    return [pagination, filter, 'fieldState', 'type', 'weather_ball', true];;
-  
-    return getLoaderAndCounter(databaseInfo);
+    return [pagination, filter, 'fieldState', 'type', 'weather_ball', true];
   }
 }
 

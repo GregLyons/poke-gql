@@ -1,30 +1,27 @@
 const {
   getGenLoaderAndCounter,
+
+  LoadersForEntity,
 } = require('./helpers.js');
 
+// Unlike for most other entities, we override some of the methods defined in LoadersForEntity.
+class Generation extends LoadersForEntity {
+  
+  constructor() {
+    super();
+  }
 
-
-/*
-  Construct 'generation', an object whose keys are entity class names, with the corresponding values being objects.
-
-  These nested objects consist of two attributes: 'present' and 'introduced', which are DataLoaders. These DataLoaders are for resolving the entity fields on Generation Nodes.
-*/
-class Generation {
-  loaders = {}
-
+  // If 'presence' is true, the query concerns entities present in the given generation. If 'false', it concerns entities introduced in the given generation.
   load(key, id, pagination, filter, countMode, presence) {
     const loader = this.findLoader(key, pagination, filter, countMode, presence);
     return loader.load(id);
-  }
-
-  clearLoaders() {
-    this.loaders = {};
   }
 
   findLoader(key, pagination, filter, countMode, presence) {
     if (!presence) {
       key = key + 'Introduced';
     }
+    // A different form of loader/counter is necessary for Generation.
     if (!this.loaders[key]) {
       this.loaders[key] = getGenLoaderAndCounter(this[key](pagination, filter));
     }

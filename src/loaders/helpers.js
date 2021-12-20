@@ -5,11 +5,84 @@ const {
   computeGenerationTableQueryString,
   computeJunctionTableQueryString,
   entityNameToTableName,
-  escapeObjectParameters,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID
 } = require('../models/index.js');
+
+// An object for holding all the loaders pertaining to a given entity, e.g. Ability.
+class LoadersForEntity {
+  // Contains the loaders themselves
+  // findLoader adds loaders to this object.
+  loaders = {};
+
+  // Loads an id into the loader.
+  /*
+    'key': the key name of the desired loader.
+    'id': the primary key of the entity to be loaded.
+    'pagination' and 'filter': objects for modifying queries.
+    'countMode': if true, return the loader for performing a 'SELECT COUNT(*)' query. Otherwise, the loader performs a 'SELECT *' query.
+  */
+  load(key, id, pagination, filter, countMode) {
+    const loader = this.findLoader(key, pagination, filter, countMode);
+    return loader.load(id);
+  }
+
+  // Clears out loaders between queries to the API.
+  clearLoaders() {
+    this.loaders = {};
+  }
+
+  // Finds the specified loader, or creates it if it doesn't exist. Arguments are as specified in load(key, id, pagination, filter, countMode).
+  findLoader(key, pagination, filter, countMode) {
+    // If the loaders for this key don't already exist, create them.
+    if (!this.loaders[key]) {
+      // Batcher for 'generation' and 'introduced' fields.
+      if (['generation', 'introduced'].includes(key)) {
+        this.loaders[key] = getGenLoader(pagination, filter);
+      }
+      // Batcher for all other types of entities. Extensions of this class will define additional keys, which return, among other things, the names of the database tables necessary for resolving the query.
+      else {
+        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+      }
+    }
+    // If the loaders for 'key' exist, this is the only thing that executes.
+    return countMode 
+      ? this.loaders[key].counter
+      : this.loaders[key].loader;
+  }
+}
+
+// Getters for loaders and counters.
+//#region
+
+// For connections between non-Generation entities.
+const getLoaderAndCounter = databaseInfo => {
+  return { 
+    loader: new DataLoader(junctionBatcher(databaseInfo)),
+    counter: new DataLoader(junctionBatcherCount(databaseInfo))
+  };
+}
+
+// For connections from Generations to other entities.
+const getGenLoaderAndCounter = databaseInfo => {
+  return {
+    loader: new DataLoader(batchEntitiesByGen(databaseInfo)),
+    counter: new DataLoader(batchEntitiesByGenCount(databaseInfo))
+  }
+}
+
+// For connections from non-Generation entities to Generations, specifically for the 'generation' and 'introduced' fields. No 'counter' loader is necessary, since the count will always be 1.
+const getGenLoader = (pagination, filter) => {
+  return {
+    loader: new DataLoader(batchGens(pagination, filter))
+  };
+}
+
+//#endregion
+
+// Batchers
+//#region 
 
 // DataLoader batcher for selecting from the 'generation' table.
 const batchGens = (pagination, filter) => {
@@ -32,26 +105,6 @@ const batchGens = (pagination, filter) => {
 
     return gens.map(gen => genData.filter(genDatum => genDatum.generation_id === gen));
   }
-}
-
-const getLoaderAndCounter = databaseInfo => {
-  return { 
-    loader: new DataLoader(junctionBatcher(databaseInfo)),
-    counter: new DataLoader(junctionBatcherCount(databaseInfo))
-  };
-}
-
-const getGenLoaderAndCounter = databaseInfo => {
-  return {
-    loader: new DataLoader(batchEntitiesByGen(databaseInfo)),
-    counter: new DataLoader(batchEntitiesByGenCount(databaseInfo))
-  }
-}
-
-const getGenLoader = (pagination, filter) => {
-  return {
-    loader: new DataLoader(batchGens(pagination, filter))
-  };
 }
 
 // DataLoader batcher for selecting from junction tables.
@@ -292,16 +345,18 @@ const batchEntitiesByGenCount = ([
   }
 }
 
+//#endregion
+
 module.exports = {
   batchGens,
 
   batchEntitiesByGen,
   batchEntitiesByGenCount,
 
-  getGenLoader,
   getGenLoaderAndCounter,
-  getLoaderAndCounter,
   
   junctionBatcher,
   junctionBatcherCount,
+
+  LoadersForEntity,
 }
