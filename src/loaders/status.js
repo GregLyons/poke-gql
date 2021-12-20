@@ -1,8 +1,6 @@
-const DataLoader = require('dataloader');
 const {
-  batchGens,
-  junctionBatcher,
-  junctionBatcherCount,
+  getGenLoader,
+  getLoaderAndCounter,
 } = require('./helpers.js');
 
 class Status {
@@ -20,7 +18,12 @@ class Status {
 
   findLoader(key, pagination, filter, countMode) {
     if (!this.loaders[key]) {
-      this.loaders[key] = this[key](pagination, filter);
+      if (['generation', 'introduced'].includes(key)) {
+        this.loaders[key] = this[key](pagination, filter);
+      }
+      else {
+        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+      }
     }
     return countMode 
       ? this.loaders[key].counter
@@ -28,87 +31,43 @@ class Status {
   }
 
   causedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'status', 'ability_causes_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'ability', 'status', 'ability_causes_pstatus', true];
   }
 
   causedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'field_state_causes_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'fieldState', 'status', 'field_state_causes_pstatus', true];
   }
 
   causedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'status', 'item_causes_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'status', 'item_causes_pstatus', true];
   }
 
   causedByMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'status', 'pmove_causes_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'status', 'pmove_causes_pstatus', true];
   }
   
   generation(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
 
   introduced(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
   
   resistedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'status', 'ability_resists_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'ability', 'status', 'ability_resists_pstatus', true];
   }
 
   resistedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'field_state_prevents_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'fieldState', 'status', 'field_state_prevents_pstatus', true];
   }
 
   resistedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'status', 'item_resists_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'status', 'item_resists_pstatus', true];
   }
 
   resistedByMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'status', 'pmove_resists_pstatus', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'status', 'pmove_resists_pstatus', true];
   }
 }
 

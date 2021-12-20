@@ -1,3 +1,4 @@
+const DataLoader = require('dataloader');
 const {
   db,
 
@@ -31,6 +32,26 @@ const batchGens = (pagination, filter) => {
 
     return gens.map(gen => genData.filter(genDatum => genDatum.generation_id === gen));
   }
+}
+
+const getLoaderAndCounter = databaseInfo => {
+  return { 
+    loader: new DataLoader(junctionBatcher(databaseInfo)),
+    counter: new DataLoader(junctionBatcherCount(databaseInfo))
+  };
+}
+
+const getGenLoaderAndCounter = databaseInfo => {
+  return {
+    loader: new DataLoader(batchEntitiesByGen(databaseInfo)),
+    counter: new DataLoader(batchEntitiesByGenCount(databaseInfo))
+  }
+}
+
+const getGenLoader = (pagination, filter) => {
+  return {
+    loader: new DataLoader(batchGens(pagination, filter))
+  };
 }
 
 // DataLoader batcher for selecting from junction tables.
@@ -150,7 +171,12 @@ const junctionBatcherCount = databaseInfo => {
 
   'pagination' is an object with data for paginating the results.
 */
-const batchEntitiesByGen = (presence = true, entityName, pagination, filter) => {
+const batchEntitiesByGen = ([
+  presence,
+  entityName,
+  pagination,
+  filter
+]) => {
   const tableName = entityNameToTableName(entityName);
 
   return async gens => {
@@ -207,7 +233,12 @@ const batchEntitiesByGen = (presence = true, entityName, pagination, filter) => 
 
   'pagination' is an object with data for paginating the results.
 */
-const batchEntitiesByGenCount = (presence = true, entityName, pagination, filter) => {
+const batchEntitiesByGenCount = ([
+  presence,
+  entityName,
+  pagination,
+  filter
+]) => {
 
   const tableName = entityNameToTableName(entityName);
 
@@ -266,6 +297,10 @@ module.exports = {
 
   batchEntitiesByGen,
   batchEntitiesByGenCount,
+
+  getGenLoader,
+  getGenLoaderAndCounter,
+  getLoaderAndCounter,
   
   junctionBatcher,
   junctionBatcherCount,

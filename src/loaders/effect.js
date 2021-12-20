@@ -1,8 +1,6 @@
-const DataLoader = require('dataloader');
 const {
-  batchGens,
-  junctionBatcher,
-  junctionBatcherCount,
+  getGenLoader,
+  getLoaderAndCounter,
 } = require('./helpers.js');
 
 class Effect {
@@ -20,7 +18,12 @@ class Effect {
 
   findLoader(key, pagination, filter, countMode) {
     if (!this.loaders[key]) {
-      this.loaders[key] = this[key](pagination, filter);
+      if (['generation', 'introduced'].includes(key)) {
+        this.loaders[key] = this[key](pagination, filter);
+      }
+      else {
+        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+      }
     }
     return countMode 
       ? this.loaders[key].counter
@@ -28,51 +31,27 @@ class Effect {
   }
   
   ability(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'effect', 'ability_effect', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'ability', 'effect', 'ability_effect', true];
   }
 
   fieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'effect', 'field_state_effect', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'fieldState', 'effect', 'field_state_effect', true];
   }
   
   generation(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
 
   introduced(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
   
   item(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'effect', 'item_effect', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'effect', 'item_effect', true];
   }
 
   move(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'effect', 'pmove_effect', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'effect', 'pmove_effect', true];
   }
 }
 

@@ -1,7 +1,6 @@
-const DataLoader = require('dataloader');
 const {
-  junctionBatcher,
-  junctionBatcherCount,
+  getGenLoader,
+  getLoaderAndCounter,
 } = require('./helpers.js');
 
 class Description {
@@ -19,7 +18,12 @@ class Description {
 
   findLoader(key, pagination, filter, countMode) {
     if (!this.loaders[key]) {
-      this.loaders[key] = this[key](pagination, filter);
+      if (['generation', 'introduced'].includes(key)) {
+        this.loaders[key] = this[key](pagination, filter);
+      }
+      else {
+        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+      }
     }
     return countMode 
       ? this.loaders[key].counter
@@ -27,39 +31,19 @@ class Description {
   }
 
   ability(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'ability', 'pdescription_ability', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'description', 'ability', 'pdescription_ability', false];
   }
 
   item(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'item', 'pdescription_item', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'description', 'item', 'pdescription_item', false];
   }
   
   move(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'move', 'pdescription_pmove', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'description', 'move', 'pdescription_pmove', false];
   }
 
   versionGroup(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'versionGroup', 'description', 'version_group_pdescription', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'versionGroup', 'description', 'version_group_pdescription', true];
   }
 }
 

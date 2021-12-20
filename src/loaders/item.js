@@ -1,8 +1,6 @@
-const DataLoader = require('dataloader');
 const {
-  batchGens,
-  junctionBatcher,
-  junctionBatcherCount,
+  getGenLoader,
+  getLoaderAndCounter,
 } = require('./helpers.js');
 
 class Item {
@@ -20,7 +18,12 @@ class Item {
 
   findLoader(key, pagination, filter, countMode) {
     if (!this.loaders[key]) {
-      this.loaders[key] = this[key](pagination, filter);
+      if (['generation', 'introduced'].includes(key)) {
+        this.loaders[key] = this[key](pagination, filter);
+      }
+      else {
+        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+      }
     }
     return countMode 
       ? this.loaders[key].counter
@@ -28,119 +31,60 @@ class Item {
   }
 
   activatedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'item', 'field_state_activates_item', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'fieldState', 'item', 'field_state_activates_item', true];
   }
 
   boostsType(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'type', 'item_boosts_ptype', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'type', 'item_boosts_ptype', false];
   }
 
   boostsUsageMethod(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'item_boosts_usage_method', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'usageMethod', 'item_boosts_usage_method', false];
   }
 
   causesStatus(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'status', 'item_causes_pstatus', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'status', 'item_causes_pstatus', false];
   }
 
   description(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'item', 'pdescription_item', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'description', 'item', 'pdescription_item', true];
   }
   
   effect(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'effect', 'item_effect', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'effect', 'item_effect', false];
   }
   
   enablesMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'item', 'pmove_requires_item', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'item', 'pmove_requires_item', true];
   }
 
   enablesPokemon(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'item', 'pokemon_requires_item', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'pokemon', 'item', 'pokemon_requires_item', true];
   }
 
   extendsFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'fieldState', 'item_extends_field_state', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'fieldState', 'item_extends_field_state', false];
   }
 
   generation(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
 
   ignoresFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'fieldState', 'item_ignores_field_state', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'fieldState', 'item_ignores_field_state', false];
   }
 
   introduced(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
 
   modifiesStat(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'stat', 'item_modifies_stat', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'stat', 'item_modifies_stat', false];
   }
 
   // TODO
   naturalGift(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'type', 'natural_gift', false];
+    return [pagination, filter, 'item', 'type', 'natural_gift', false];;
 
     return {
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -149,48 +93,23 @@ class Item {
   }
 
   requiresPokemon(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'pokemon', 'item_requires_pokemon', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'pokemon', 'item_requires_pokemon', false];
   }
 
   resistsFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'fieldState', 'item_resists_field_state', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'fieldState', 'item_resists_field_state', false];
   }
 
   resistsStatus(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'status', 'item_resists_pstatus', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'status', 'item_resists_pstatus', false];
   }
 
   resistsType(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'type', 'item_resists_ptype', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'type', 'item_resists_ptype', false];
   }
 
   resistsUsageMethod(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'item_resists_usage_method', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'item', 'usageMethod', 'item_resists_usage_method', false];
   }
 }
 

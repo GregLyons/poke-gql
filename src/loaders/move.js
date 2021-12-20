@@ -1,8 +1,6 @@
-const DataLoader = require('dataloader');
 const {
-  batchGens,
-  junctionBatcher,
-  junctionBatcherCount,
+  getGenLoader,
+  getLoaderAndCounter,
 } = require('./helpers.js');
 
 class Move {
@@ -20,7 +18,12 @@ class Move {
 
   findLoader(key, pagination, filter, countMode) {
     if (!this.loaders[key]) {
-      this.loaders[key] = this[key](pagination, filter);
+      if (['generation', 'introduced'].includes(key)) {
+        this.loaders[key] = this[key](pagination, filter);
+      }
+      else {
+        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+      }
     }
     return countMode 
       ? this.loaders[key].counter
@@ -28,168 +31,79 @@ class Move {
   }
 
   causesStatus(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'status', 'pmove_causes_pstatus', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'status', 'pmove_causes_pstatus', false];
   }
 
   createsFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'fieldState', 'pmove_creates_field_state', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'fieldState', 'pmove_creates_field_state', false];
   }
 
   description(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'move', 'pdescription_pmove', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'description', 'move', 'pdescription_pmove', true];
   }
   
   effect(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'effect', 'pmove_effect', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'effect', 'pmove_effect', false];
   }
   
   enablesMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'move', 'pmove_requires_pmove', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'move', 'pmove_requires_pmove', true];
   }
 
   enhancedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'move', 'field_state_enhances_pmove', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'fieldState', 'move', 'field_state_enhances_pmove', true];
   }
   
   generation(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
 
   hinderedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'move', 'field_state_hinders_pmove', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'fieldState', 'move', 'field_state_hinders_pmove', true];
   }
   
   introduced(pagination, filter) {
-    return {
-      loader: new DataLoader(batchGens(pagination, filter))
-    }
+    return getGenLoader(pagination, filter);
   }
   
   modifiesStat(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'stat', 'pmove_modifies_stat', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'stat', 'pmove_modifies_stat', false];
   }
 
   pokemon(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'move', 'pokemon_pmove', true];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'pokemon', 'move', 'pokemon_pmove', true];
   }
   
   removesFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'fieldState', 'pmove_removes_field_state', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'fieldState', 'pmove_removes_field_state', false];
   }
 
   requiresItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'item', 'pmove_requires_item', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'item', 'pmove_requires_item', false];
   }
   
   requiresMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'move', 'pmove_requires_pmove', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'move', 'pmove_requires_pmove', false];
   }
   
   requiresPokemon(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'pokemon', 'pmove_requires_pokemon', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'pokemon', 'pmove_requires_pokemon', false];
   }
   
   requiresType(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'type', 'pmove_requires_ptype', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'type', 'pmove_requires_ptype', false];
   }
 
   resistsStatus(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'status', 'pmove_resists_pstatus', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'status', 'pmove_resists_pstatus', false];
   }
   
   type(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'type', 'pmove_ptype', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'type', 'pmove_ptype', false];
   }
 
   usageMethod(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'usageMethod', 'pmove_usage_method', false];
-
-    return { 
-      loader: new DataLoader(junctionBatcher(databaseInfo)),
-      counter: new DataLoader(junctionBatcherCount(databaseInfo))
-    };
+    return [pagination, filter, 'move', 'usageMethod', 'pmove_usage_method', false];
   }
 }
 
