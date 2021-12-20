@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class Pokemon extends LoadersForEntity {
+class PokemonLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -49,4 +47,4 @@ class Pokemon extends LoadersForEntity {
   }
 }
 
-module.exports = new Pokemon();
+module.exports = new PokemonLoaders();

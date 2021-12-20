@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class Status extends LoadersForEntity {
+class StatusLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -43,4 +41,4 @@ class Status extends LoadersForEntity {
   }
 }
 
-module.exports = new Status();
+module.exports = new StatusLoaders();

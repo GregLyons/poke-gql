@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class Stat extends LoadersForEntity {
+class StatLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -27,4 +25,4 @@ class Stat extends LoadersForEntity {
   }
 }
 
-module.exports = new Stat();
+module.exports = new StatLoaders();

@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class Move extends LoadersForEntity {
+class MoveLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -79,4 +77,4 @@ class Move extends LoadersForEntity {
   }
 }
 
-module.exports = new Move();
+module.exports = new MoveLoaders();

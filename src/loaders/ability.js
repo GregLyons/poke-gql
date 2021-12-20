@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class Ability extends LoadersForEntity {
+class AbilityLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -75,4 +73,4 @@ class Ability extends LoadersForEntity {
   }
 }
 
-module.exports = new Ability();
+module.exports = new AbilityLoaders();

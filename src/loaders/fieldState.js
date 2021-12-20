@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class FieldState extends LoadersForEntity {
+class FieldStateLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -95,4 +93,4 @@ class FieldState extends LoadersForEntity {
   }
 }
 
-module.exports = new FieldState();
+module.exports = new FieldStateLoaders();

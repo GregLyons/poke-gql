@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class VersionGroup extends LoadersForEntity {
+class VersionGroupLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -16,4 +14,4 @@ class VersionGroup extends LoadersForEntity {
 
   }
 
-module.exports = new VersionGroup();
+module.exports = new VersionGroupLoaders();

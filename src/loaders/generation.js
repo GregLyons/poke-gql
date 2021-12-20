@@ -5,7 +5,7 @@ const {
 } = require('./helpers.js');
 
 // Unlike for most other entities, we override some of the methods defined in LoadersForEntity.
-class Generation extends LoadersForEntity {
+class GenerationLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -119,4 +119,4 @@ class Generation extends LoadersForEntity {
   }
 }
 
-module.exports = new Generation();
+module.exports = new GenerationLoaders();

@@ -1,10 +1,8 @@
 const {
-  getGenLoader,
-
   LoadersForEntity,
 } = require('./helpers.js');
 
-class UsageMethod extends LoadersForEntity {
+class UsageMethodLoaders extends LoadersForEntity {
   
   constructor() {
     super();
@@ -32,4 +30,4 @@ class UsageMethod extends LoadersForEntity {
   }
 }
 
-module.exports = new UsageMethod();
+module.exports = new UsageMethodLoaders();
