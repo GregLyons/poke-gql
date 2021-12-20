@@ -28,7 +28,7 @@ class Pokemon {
   }
 
   ability(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'ability', false];
+    const databaseInfo = [pagination, filter, 'pokemon', 'ability', 'pokemon_ability', false];
     
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -37,7 +37,7 @@ class Pokemon {
   }
   
   enablesItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'pokemon', 'requires', true];
+    const databaseInfo = [pagination, filter, 'item', 'pokemon', 'item_requires_pokemon', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -46,7 +46,7 @@ class Pokemon {
   }
 
   enablesMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'pokemon', 'requires', true];
+    const databaseInfo = [pagination, filter, 'move', 'pokemon', 'pmove_requires_pokemon', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -55,7 +55,7 @@ class Pokemon {
   }
 
   evolvesFrom(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'evolution', true];
+    const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'pokemon_evolution', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -64,7 +64,7 @@ class Pokemon {
   }
 
   evolvesTo(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'evolution', false];
+    const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'pokemon_evolution', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -73,7 +73,7 @@ class Pokemon {
   }
 
   form(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'form', false];
+    const databaseInfo = [pagination, filter, 'pokemon', 'pokemon', 'pokemon_form', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -94,7 +94,7 @@ class Pokemon {
   }
 
   move(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'move', false];
+    const databaseInfo = [pagination, filter, 'pokemon', 'move', 'pokemon_pmove', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -103,7 +103,7 @@ class Pokemon {
   }
 
   requiresItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'item', 'requires', false];
+    const databaseInfo = [pagination, filter, 'pokemon', 'item', 'pokemon_requires_item', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -112,7 +112,7 @@ class Pokemon {
   }
 
   type(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'pokemon', 'type', false];
+    const databaseInfo = [pagination, filter, 'pokemon', 'type', 'pokemon_ptype', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

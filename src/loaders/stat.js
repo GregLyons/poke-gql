@@ -40,7 +40,7 @@ class Stat {
   }
 
   modifiedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'stat', 'modifies', true];
+    const databaseInfo = [pagination, filter, 'ability', 'stat', 'ability_modifies_stat', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -49,7 +49,7 @@ class Stat {
   }
 
   modifiedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'stat', 'modifies', true];
+    const databaseInfo = [pagination, filter, 'fieldState', 'stat', 'field_state_modifies_stat', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -58,7 +58,7 @@ class Stat {
   }
 
   modifiedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', true];
+    const databaseInfo = [pagination, filter, 'item', 'stat', 'item_modifies_stat', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -67,7 +67,7 @@ class Stat {
   }
 
   modifiedByMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'stat', 'modifies', true];
+    const databaseInfo = [pagination, filter, 'move', 'stat', 'pmove_modifies_stat', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

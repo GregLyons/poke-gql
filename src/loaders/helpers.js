@@ -39,7 +39,7 @@ const batchGens = (pagination, filter) => {
 
   'owner' and 'owned' refer to the two types of entities in the relationship. For example, in 'ability_effect', 'ability' is the owner, and 'effect' is owned in the relationship. As another example, 'ability_causes_status', 'ability' is again the owner, and 'status' is owned. 
 
-  'middle' is for further determining which junction table, e.g. 'causes' versus 'resists' when 'ability' is the owner and 'status' is owned. 
+  'junctionTableName' is the name of the relevant junction table.
 
   'reverse' is used for the inverse relationship. For example, in 'ability_causes_status', we may either be interested in the ability or the status. 'reverse' being false means that we're interested in the owner, i.e. the ability, whereas 'reverse' being true means that we're interested in the owned entity, i.e. the status.
 */

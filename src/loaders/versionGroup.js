@@ -28,7 +28,7 @@ class VersionGroup {
   }
 
   description(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'versionGroup', 'description', '', false];
+    const databaseInfo = [pagination, filter, 'versionGroup', 'description', 'version_group_pdescription', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

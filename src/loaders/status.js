@@ -28,7 +28,7 @@ class Status {
   }
 
   causedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'status', 'causes', true];
+    const databaseInfo = [pagination, filter, 'ability', 'status', 'ability_causes_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -37,7 +37,7 @@ class Status {
   }
 
   causedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'causes', true];
+    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'field_state_causes_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -46,7 +46,7 @@ class Status {
   }
 
   causedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'status', 'causes', true];
+    const databaseInfo = [pagination, filter, 'item', 'status', 'item_causes_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -55,7 +55,7 @@ class Status {
   }
 
   causedByMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'status', 'causes', true];
+    const databaseInfo = [pagination, filter, 'move', 'status', 'pmove_causes_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -76,7 +76,7 @@ class Status {
   }
   
   resistedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'status', 'resists', true];
+    const databaseInfo = [pagination, filter, 'ability', 'status', 'ability_resists_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -85,7 +85,7 @@ class Status {
   }
 
   resistedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'prevents', true];
+    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'field_state_prevents_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -94,7 +94,7 @@ class Status {
   }
 
   resistedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'status', 'resists', true];
+    const databaseInfo = [pagination, filter, 'item', 'status', 'item_resists_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -103,7 +103,7 @@ class Status {
   }
 
   resistedByMove(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'status', 'resists', true];
+    const databaseInfo = [pagination, filter, 'move', 'status', 'pmove_resists_pstatus', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

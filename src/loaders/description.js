@@ -27,7 +27,7 @@ class Description {
   }
 
   ability(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'ability', '', false];
+    const databaseInfo = [pagination, filter, 'description', 'ability', 'pdescription_ability', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -36,7 +36,7 @@ class Description {
   }
 
   item(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'item', '', false];
+    const databaseInfo = [pagination, filter, 'description', 'item', 'pdescription_item', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -45,7 +45,7 @@ class Description {
   }
   
   move(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'description', 'move', '', false];
+    const databaseInfo = [pagination, filter, 'description', 'move', 'pdescription_pmove', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -54,7 +54,7 @@ class Description {
   }
 
   versionGroup(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'versionGroup', 'description', '', true];
+    const databaseInfo = [pagination, filter, 'versionGroup', 'description', 'version_group_pdescription', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

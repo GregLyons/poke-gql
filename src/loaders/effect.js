@@ -28,7 +28,7 @@ class Effect {
   }
   
   ability(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'effect', '', true];
+    const databaseInfo = [pagination, filter, 'ability', 'effect', 'ability_effect', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -37,7 +37,7 @@ class Effect {
   }
 
   fieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'effect', '', true];
+    const databaseInfo = [pagination, filter, 'fieldState', 'effect', 'field_state_effect', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -58,7 +58,7 @@ class Effect {
   }
   
   item(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'effect', '', true];
+    const databaseInfo = [pagination, filter, 'item', 'effect', 'item_effect', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -67,7 +67,7 @@ class Effect {
   }
 
   move(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'effect', '', true];
+    const databaseInfo = [pagination, filter, 'move', 'effect', 'pmove_effect', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

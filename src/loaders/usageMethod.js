@@ -28,7 +28,7 @@ class UsageMethod {
   }
 
   boostedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'usageMethod', 'boosts', true];
+    const databaseInfo = [pagination, filter, 'ability', 'usageMethod', 'ability_boosts_usage_method', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -37,7 +37,7 @@ class UsageMethod {
   }
 
   boostedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'boosts', true];
+    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'item_boosts_usage_method', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -58,7 +58,7 @@ class UsageMethod {
   }
 
   move(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'move', 'usageMethod', '', true];
+    const databaseInfo = [pagination, filter, 'move', 'usageMethod', 'pmove_usage_method', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -67,7 +67,7 @@ class UsageMethod {
   }
   
   resistedByAbility(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'usageMethod', 'resists', true];
+    const databaseInfo = [pagination, filter, 'ability', 'usageMethod', 'ability_resists_usage_method', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -76,7 +76,7 @@ class UsageMethod {
   }
 
   resistedByItem(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'resists', true];
+    const databaseInfo = [pagination, filter, 'item', 'usageMethod', 'item_resists_usage_method', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

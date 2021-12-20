@@ -6,40 +6,6 @@ const {
   hasGenID,
 } = require('./helpers.js');
 
-// Compute the junction table given information about the component entity tables.
-/*
-  Generally, junction tables are of the form '<firstTableName>_<secondTableName>', e.g. 'pokemon_ability' for the junction table between 'pokemon' and 'ability'.
-
-  However, a pair of entity tables can have multiple junction tables between them, e.g. 'ability_boosts_ptype' and 'ability_resists_ptype'. In this case, 'middle' contains the necessary word.
-
-  Moreover, a few junction tables don't have names of the above form, e.g. 'natural_gift', 'pokemon_evolution', etc. In this case, 'middle' is used to determine the special junction table name directly, rather than building up from the entity table names.
-*/
-const getJunctionTableName = (ownerTableName, ownedTableName, middle) => {
-  // Special cases
-  if (middle === 'natural_gift') {
-    return 'natural_gift';
-  }
-  if (middle === 'weather_ball') {
-    return 'weather_ball';
-  }
-  else if (middle === 'ptype_matchup') {
-    return 'ptype_matchup';
-  }
-  else if (middle === 'evolution') {
-    return 'pokemon_evolution';
-  }
-  else if (middle === 'form') {
-    return 'pokemon_form';
-  }
-  
-  // General case
-  else {
-    return middle 
-      ? ownerTableName + '_' + middle + '_' + ownedTableName
-      : ownerTableName + '_' + ownedTableName;
-  }
-}
-
 const getForeignKeyColumnNames = (junctionTableName, ownerTableName, ownedTableName) => {
   let junctionOwnedID,
       junctionOwnedGen,
@@ -133,7 +99,7 @@ const computeJunctionTableQueryString = (
     filter,
     ownerEntityName,
     ownedEntityName,
-    middle,
+    junctionTableName,
     reverse
   ],
   countMode,
@@ -191,11 +157,8 @@ const computeJunctionTableQueryString = (
   //#endregion
 
 
-  // Compute the name of the junction table, as well as the names of its foreign key columns.
+  // Compute the names of the foreign key columns in the junction table.
   //#region
-
-  // Compute junction table name based on the owner and owned table names, as well as 'middle'.
-  const junctionTableName = getJunctionTableName(ownerTableName, ownedTableName, middle);
   
   // Get foreign key column names from junction table.
   const {
