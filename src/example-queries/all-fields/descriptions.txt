@@ -1,0 +1,41 @@
+{
+  descriptions {
+    entity {
+      ... on DescriptionAbilityConnection {
+        count
+        edges {
+          node {
+            name
+          }
+        }
+      }
+      ... on DescriptionItemConnection {
+        count
+        edges {
+          node {
+            name
+          }
+        }
+      }
+      ... on DescriptionMoveConnection {
+        count
+        edges {
+          node {
+            name
+          }
+        }
+      }
+    }
+    entityClass
+    entityName
+    text
+    versionGroups {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

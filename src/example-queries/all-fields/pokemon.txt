@@ -1,0 +1,105 @@
+{
+  pokemon {
+    abilities {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    baseStats {
+      attack
+      hp
+      defense
+      specialDefense
+      specialAttack
+      speed
+    }
+    dexNumber
+    enablesItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enablesMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    evolvesFrom {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    evolvesTo {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    formClass
+    forms {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    height
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    moves {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+    requiresItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    speciesName
+    typing {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    weight
+  }
+}

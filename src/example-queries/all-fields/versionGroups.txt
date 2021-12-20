@@ -1,0 +1,22 @@
+{
+  versionGroups {
+    code
+    formattedName
+    descriptions {
+      count
+      edges {
+        node {
+          text
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    name
+  }
+}

@@ -255,15 +255,15 @@ const introductionConnection = entityName => {
 
   'extra' describes the Connection further, e.g. 'causes' in AbilityCausesStatusConnection, as opposed to 'resists' in AbilityResistsStatusConnection.
 */
-const junctionConnection = (ownerEntityName, ownedEntityName) => {
+const junctionConnection = (ownerEntityName, innerKey) => {
   // Function arguments are used to determine which loader to use, via the 'context' object.
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(ownedEntityName, parent, args.pagination, parent.filter, false);
+      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, false);
     },
     
     count: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(ownedEntityName, parent, args.pagination, parent.filter, true);
+      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, true);
     },
   };
 };

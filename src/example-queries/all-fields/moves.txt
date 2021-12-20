@@ -1,0 +1,162 @@
+{
+  moves {
+    accuracy
+    causesStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    contact
+    createsFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    descriptions {
+      count
+      edges {
+        node {
+          text
+        }
+      }
+    }
+    effects {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enablesMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enhancedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    hinderedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    modifiesStat {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+    pokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    power
+    pp
+    priority
+    removesFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    requiresItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    requiresMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    requiresPokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    requiresType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    target
+    type {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    usageMethod {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

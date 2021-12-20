@@ -1,0 +1,193 @@
+{
+  fieldStates {
+    class
+    damagePercent
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    grounded
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    maxLayers
+    name
+    target
+    activatesAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    activatesItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostsType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    causesStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    createdByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    createdByMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    effects {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enhancesMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    extendedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    hindersMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    ignoredByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    ignoredByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    modifiesStat {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    preventedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    removedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    removedByMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    suppressedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    weatherBall {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

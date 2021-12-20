@@ -1,0 +1,183 @@
+{
+  generations {
+    code
+    number
+
+    abilities {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    abilitiesIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    effectsIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    effects {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    fieldStatesIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    fieldStates {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    itemsIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    items {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    movesIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    moves {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    pokemonIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    pokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    statsIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    stats {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    statusesIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    statuses {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    typesIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    types {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    usageMethodsIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    usageMethods {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    versionGroupsIntroduced {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    versionGroups {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

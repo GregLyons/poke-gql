@@ -1,0 +1,52 @@
+{
+  stats {
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    modifiedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    modifiedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    modifiedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    modifiedByMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+  }
+}

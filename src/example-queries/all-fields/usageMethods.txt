@@ -1,0 +1,60 @@
+{
+  usageMethods {
+    boostedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    resistedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    moves {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+  }
+}

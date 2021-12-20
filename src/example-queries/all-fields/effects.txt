@@ -1,0 +1,52 @@
+{
+  effects {
+    abilities {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    fieldStates {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    name
+    items {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    moves {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

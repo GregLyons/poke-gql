@@ -1,0 +1,149 @@
+{
+  items {
+    activatedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    } 
+    boostsType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostsUsageMethod {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    causesStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    class
+    descriptions {
+      count
+      edges {
+        node {
+          text
+        }
+      }
+    }
+    effects {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enablesMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enablesPokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    extendsFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    modifiesStat {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+    naturalGift {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    requiresPokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsUsageMethod {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

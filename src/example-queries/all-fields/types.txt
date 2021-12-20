@@ -1,0 +1,148 @@
+{
+  types {
+    boostedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    defensiveMatchups {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    enablesMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    ignoresFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    moves {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+    naturalGift {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    offensiveMatchups {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    pokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    removesFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    weatherBall {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

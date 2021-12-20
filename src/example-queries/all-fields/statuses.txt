@@ -1,0 +1,84 @@
+{
+  statuses {
+    causedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    causedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    causedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    causedByMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    resistedByAbility {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistedByMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+  }
+}

@@ -1,0 +1,147 @@
+{
+  abilities {
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    name
+    activatedByFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostsType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    boostsUsageMethod {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    causesStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    createsFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    descriptions {
+      count
+      edges {
+        node {
+          text
+        }
+      }
+    }
+    effects {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    ignoresFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    modifiesStat {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    pokemon {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    preventsFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    removesFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsStatus {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsType {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    resistsUsageMethod {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    suppressesFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}
