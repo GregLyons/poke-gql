@@ -140,7 +140,21 @@ class Item {
 
   // TODO
   naturalGift(pagination, filter) {
-    return new DataLoader(junctionBatcher(pagination, filter, 'item', 'type', 'natural_gift'))
+    const databaseInfo = [pagination, filter, 'item', 'type', 'natural_gift', false];
+
+    return {
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo)),
+    };
+  }
+
+  requiresPokemon(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'item', 'pokemon', 'requires', false];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
   }
 
   resistsFieldState(pagination, filter) {

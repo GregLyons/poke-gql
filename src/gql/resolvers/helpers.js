@@ -71,7 +71,8 @@ const queryEntitiesByColumn = (entityName, keyName) => {
       `
     )
     .then( ([results, fields]) => {
-      return results;
+      if (tableName === 'generation') return results[0];
+      else return results;
     })
     .catch(console.log);
   }
@@ -254,19 +255,15 @@ const introductionConnection = entityName => {
 
   'extra' describes the Connection further, e.g. 'causes' in AbilityCausesStatusConnection, as opposed to 'resists' in AbilityResistsStatusConnection.
 */
-const junctionConnection = (ownerEntityName, ownedEntityName, extra = '') => {
+const junctionConnection = (ownerEntityName, ownedEntityName) => {
   // Function arguments are used to determine which loader to use, via the 'context' object.
-  const innerKey = extra
-    ? extra + ownedEntityName[0].toUpperCase() + ownedEntityName.slice(1)
-    : ownedEntityName;
-
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, false);
+      return await context.loaders[ownerEntityName].load(ownedEntityName, parent, args.pagination, parent.filter, false);
     },
     
     count: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, true);
+      return await context.loaders[ownerEntityName].load(ownedEntityName, parent, args.pagination, parent.filter, true);
     },
   };
 };

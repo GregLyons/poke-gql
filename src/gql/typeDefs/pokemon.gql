@@ -142,11 +142,6 @@ type Pokemon implements Node {
   name: String!
 
   """
-  Entities which the Pokemon requires.
-  """
-  requires(filter: ItemFilter): PokemonRequiresItemConnection 
-
-  """
   E.g. Mega-evolutions require their corresponding Mega Stone.
   """
   requiresItem(filter: ItemFilter): PokemonRequiresItemConnection

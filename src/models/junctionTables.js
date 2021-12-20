@@ -1,5 +1,6 @@
 const {
   entityNameToTableName,
+  escapeObjectParameters,
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,

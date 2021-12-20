@@ -71,6 +71,15 @@ class Move {
       counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
+
+  enhancedByFieldState(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'fieldState', 'move', 'enhances', true];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
+  }
   
   generation(pagination, filter) {
     return {
@@ -78,6 +87,15 @@ class Move {
     }
   }
 
+  hinderedByFieldState(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'fieldState', 'move', 'hinders', true];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
+  }
+  
   introduced(pagination, filter) {
     return {
       loader: new DataLoader(batchGens(pagination, filter))
@@ -147,7 +165,7 @@ class Move {
     };
   }
 
-  resistStatus(pagination, filter) {
+  resistsStatus(pagination, filter) {
     const databaseInfo = [pagination, filter, 'move', 'status', 'resists', false];
 
     return { 

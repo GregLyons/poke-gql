@@ -120,16 +120,16 @@ const Item = {
 //#region
 
 const ConnectionsAndEdges = {
-  ItemActivatedByFieldStateConnection: junctionConnection('item', 'fieldState', 'activatedBy'),
+  ItemActivatedByFieldStateConnection: junctionConnection('item', 'activatedByFieldState'),
   ItemActivatedByFieldStateEdge: basicEdge(),
   
-  ItemBoostsTypeConnection: junctionConnection('item', 'type', 'boosts'),
+  ItemBoostsTypeConnection: junctionConnection('item', 'boostsType'),
   ItemBoostsTypeEdge: multiplierEdge(),
   
-  ItemBoostsUsageMethodConnection: junctionConnection('item', 'usageMethod', 'boosts'),
+  ItemBoostsUsageMethodConnection: junctionConnection('item', 'boostsUsageMethod'),
   ItemBoostsUsageMethodEdge: multiplierEdge(),
   
-  ItemCausesStatusConnection: junctionConnection('item', 'status', 'causes'),
+  ItemCausesStatusConnection: junctionConnection('item', 'causesStatus'),
   ItemCausesStatusEdge: causeStatusEdge(),
 
   ItemDescriptionConnection: junctionConnection('item', 'description'),
@@ -138,46 +138,46 @@ const ConnectionsAndEdges = {
   ItemEffectConnection: junctionConnection('item', 'effect'),
   ItemEffectEdge: basicEdge(),
   
-  ItemEnablesMoveConnection: junctionConnection('item', 'move', 'enables'),
+  ItemEnablesMoveConnection: junctionConnection('item', 'enablesMove'),
   ItemEnablesMoveEdge: basicEdge(),
   
-  ItemEnablesPokemonConnection: junctionConnection('item', 'pokemon', 'enables'),
+  ItemEnablesPokemonConnection: junctionConnection('item', 'enablesPokemon'),
   ItemEnablesPokemonEdge: basicEdge(),
   
-  ItemExtendsFieldStateConnection: junctionConnection('item', 'fieldState', 'extends'),
+  ItemExtendsFieldStateConnection: junctionConnection('item', 'extendsFieldState'),
   ItemExtendsFieldStateEdge: turnsEdge(),
   
   ItemGenerationConnection: generationConnection('item'),
   ItemGenerationEdge: basicEdge(),
   
-  ItemIgnoresFieldStateConnection: junctionConnection('item', 'fieldState', 'ignores'),
+  ItemIgnoresFieldStateConnection: junctionConnection('item', 'ignoresFieldState'),
   ItemIgnoresFieldStateEdge: basicEdge(),
 
-  ItemIgnoresFieldStateConnection: junctionConnection('item', 'fieldState', 'ignores'),
+  ItemIgnoresFieldStateConnection: junctionConnection('item', 'ignoresFieldState'),
   ItemIgnoresFieldStateEdge: basicEdge(),
 
   ItemIntroductionConnection: introductionConnection('item'),
   ItemIntroductionEdge: basicEdge(),
   
-  ItemModifiesStatConnection: junctionConnection('item', 'stat', 'modifies'),
+  ItemModifiesStatConnection: junctionConnection('item', 'modifiesStat'),
   ItemModifiesStatEdge: modifyStatEdge(),
 
   ItemNaturalGiftConnection: junctionConnection('item', 'naturalGift'),
   ItemNaturalGiftEdge: powerEdge(),
   
-  ItemRequiresPokemonConnection: junctionConnection('item', 'pokemon', 'requires'),
+  ItemRequiresPokemonConnection: junctionConnection('item', 'requiresPokemon'),
   ItemRequiresPokemonEdge: basicEdge(),
   
-  ItemResistsFieldStateConnection: junctionConnection('item', 'fieldState', 'resists'),
+  ItemResistsFieldStateConnection: junctionConnection('item', 'resistsFieldState'),
   ItemResistsFieldStateEdge: basicEdge(),
 
-  ItemResistsStatusConnection: junctionConnection('item', 'status', 'resists'),
+  ItemResistsStatusConnection: junctionConnection('item', 'resistsStatus'),
   ItemResistsStatusEdge: basicEdge(),
 
-  ItemResistsTypeConnection: junctionConnection('item', 'type', 'resists'),
+  ItemResistsTypeConnection: junctionConnection('item', 'resistsType'),
   ItemResistsTypeEdge: multiplierEdge(),
   
-  ItemResistsUsageMethodConnection: junctionConnection('item', 'usageMethod', 'resists'),
+  ItemResistsUsageMethodConnection: junctionConnection('item', 'resistsUsageMethod'),
   ItemResistsUsageMethodEdge: multiplierEdge(),
 }
 

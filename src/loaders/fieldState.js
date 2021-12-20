@@ -194,7 +194,7 @@ class FieldState {
   }
 
   resistsStatus(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'resists', false];
+    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'prevents', false];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),
@@ -221,7 +221,12 @@ class FieldState {
   }
 
   weatherBall(pagination, filter) {
-    return new DataLoader(junctionBatcher(pagination, filter, 'fieldState', 'type', 'weather_ball'))
+    const databaseInfo = [pagination, filter, 'fieldState', 'type', 'weather_ball', false]
+
+    return {
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    }
   }
 }
 

@@ -43,6 +43,7 @@ class Description {
       counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
+  
   move(pagination, filter) {
     const databaseInfo = [pagination, filter, 'description', 'move', '', false];
 
@@ -51,6 +52,7 @@ class Description {
       counter: new DataLoader(junctionBatcherCount(databaseInfo))
     };
   }
+
   versionGroup(pagination, filter) {
     const databaseInfo = [pagination, filter, 'versionGroup', 'description', '', true];
 

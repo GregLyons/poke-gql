@@ -20,6 +20,7 @@ module.exports = {
 
   computeGenerationTableQueryString,
   computeJunctionTableQueryString,
+  escapeObjectParameters,
   entityNameToTableName,
   getFilterQueryString,
   getPaginationQueryString,

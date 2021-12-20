@@ -63,22 +63,26 @@ const Query = {
 const Status = {
   causedByAbility: statusPK,
 
-  resistedByAbility: statusPK,
-
+  causedByFieldState: statusPK,
+  
+  causedByItem: statusPK,
+  
+  causedByMove: statusPK,
+  
   formattedName: async (parent, args, context, info) => {
     return parent.pstatus_formatted_name;
   },
-
+  
   generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
 
-  causedByItem: statusPK,
+  resistedByAbility: statusPK,
 
+  resistedByFieldState: statusPK,
+  
   resistedByItem: statusPK,
   
-  causedByMove: statusPK,
-
   resistedByMove: statusPK,
 
   name: async (parent, args, context, info) => {
@@ -92,13 +96,16 @@ const Status = {
 //#region
 
 const ConnectionsAndEdges = {
-  StatusCausedByAbilityConnection: junctionConnection('status', 'ability', 'causedBy'),
+  StatusCausedByAbilityConnection: junctionConnection('status', 'causedByAbility'),
   StatusCausedByAbilityEdge: causeStatusEdge(),
+
+  StatusCausedByFieldStateConnection: junctionConnection('status', 'causedByFieldState'),
+  StatusCausedByFieldStateEdge: causeStatusEdge(),
   
-  StatusCausedByItemConnection: junctionConnection('status', 'item', 'causedBy'),
+  StatusCausedByItemConnection: junctionConnection('status', 'causedByItem'),
   StatusCausedByItemEdge: causeStatusEdge(),
   
-  StatusCausedByMoveConnection: junctionConnection('status', 'move', 'causedBy'),
+  StatusCausedByMoveConnection: junctionConnection('status', 'causedByMove'),
   StatusCausedByMoveEdge: causeStatusEdge(),
 
   StatusGenerationConnection: generationConnection('status'),
@@ -107,13 +114,16 @@ const ConnectionsAndEdges = {
   StatusIntroductionConnection: introductionConnection('status'),
   StatusIntroductionEdge: basicEdge(),
   
-  StatusResistedByAbilityConnection: junctionConnection('status', 'ability', 'resistedBy'),
+  StatusResistedByAbilityConnection: junctionConnection('status', 'resistedByAbility'),
   StatusResistedByAbilityEdge: basicEdge(),
 
-  StatusResistedByItemConnection: junctionConnection('status', 'item', 'resistedBy'),
+  StatusResistedByFieldStateConnection: junctionConnection('status', 'resistedByFieldState'),
+  StatusResistedByFieldStateEdge: basicEdge(),
+
+  StatusResistedByItemConnection: junctionConnection('status', 'resistedByItem'),
   StatusResistedByItemEdge: basicEdge(),
 
-  StatusResistedByMoveConnection: junctionConnection('status', 'move', 'resistedBy'),
+  StatusResistedByMoveConnection: junctionConnection('status', 'resistedByMove'),
   StatusResistedByMoveEdge: basicEdge(),
 }
 

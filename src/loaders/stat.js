@@ -48,6 +48,15 @@ class Stat {
     };
   }
 
+  modifiedByFieldState(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'fieldState', 'stat', 'modifies', true];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
+  }
+
   modifiedByItem(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'stat', 'modifies', true];
 

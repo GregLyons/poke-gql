@@ -42,11 +42,11 @@ const computeGenerationTableQueryString = (presence, tableName, pagination, filt
 
   return countMode 
     ? `
-      SELECT generation_id, COUNT(*) as row_count FROM ${tableName}
+      SELECT ${genDependent ? `generation_id` : `introduced`},  COUNT(*) as row_count FROM ${tableName}
       ${whereString}
       ${filterString}
       ${paginationString}
-      GROUP BY generation_id
+      GROUP BY ${genDependent ? `generation_id` : `introduced`}
     ` : `
       SELECT * FROM ${tableName}
       ${whereString}

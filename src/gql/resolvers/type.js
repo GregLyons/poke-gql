@@ -127,22 +127,22 @@ const ConnectionsAndEdges = {
   OffensiveTypeMatchupConnection: junctionConnection('type', 'offensiveMatchup'),
   OffensiveTypeMatchupEdge: multiplierEdge(),
 
-  TypeBoostedByAbilityConnection: junctionConnection('type', 'ability', 'boostedBy'),
+  TypeBoostedByAbilityConnection: junctionConnection('type', 'boostedByAbility'),
   TypeBoostedByAbilityEdge: multiplierEdge(),
 
-  TypeBoostedByFieldStateConnection: junctionConnection('type', 'fieldState', 'boostedBy'),
+  TypeBoostedByFieldStateConnection: junctionConnection('type', 'boostedByFieldState'),
   TypeBoostedByFieldStateEdge: multiplierEdge(),
 
-  TypeBoostedByItemConnection: junctionConnection('type', 'item', 'boostedBy'),
+  TypeBoostedByItemConnection: junctionConnection('type', 'boostedByItem'),
   TypeBoostedByItemEdge: multiplierEdge(),
 
-  TypeEnablesMoveConnection: junctionConnection('type', 'move', 'enables'),
+  TypeEnablesMoveConnection: junctionConnection('type', 'enablesMove'),
   TypeEnablesMoveEdge: basicEdge(),
 
   TypeGenerationConnection: generationConnection('type'),
   TypeGenerationEdge: basicEdge(),
 
-  TypeIgnoresFieldStateConnection: junctionConnection('type', 'fieldState', 'ignores'),
+  TypeIgnoresFieldStateConnection: junctionConnection('type', 'ignoresFieldState'),
   TypeIgnoresFieldStateEdge: basicEdge(),
   
   TypeIntroductionConnection: introductionConnection('type'),
@@ -157,19 +157,19 @@ const ConnectionsAndEdges = {
   TypePokemonConnection: junctionConnection('type', 'pokemon'),
   TypePokemonEdge: basicEdge(),
   
-  TypeRemovesFieldStateConnection: junctionConnection('type', 'fieldState', 'removes'),
+  TypeRemovesFieldStateConnection: junctionConnection('type', 'removesFieldState'),
   TypeRemovesFieldStateEdge: basicEdge(),
 
-  TypeResistedByAbilityConnection: junctionConnection('type', 'ability', 'resistedBy'),
+  TypeResistedByAbilityConnection: junctionConnection('type', 'resistedByAbility'),
   TypeResistedByAbilityEdge: multiplierEdge(),
 
-  TypeResistedByFieldStateConnection: junctionConnection('type', 'fieldState', 'resistedBy'),
+  TypeResistedByFieldStateConnection: junctionConnection('type', 'resistedByFieldState'),
   TypeResistedByFieldStateEdge: multiplierEdge(),
   
-  TypeResistedByItemConnection: junctionConnection('type', 'item', 'resistedBy'),
+  TypeResistedByItemConnection: junctionConnection('type', 'resistedByItem'),
   TypeResistedByItemEdge: multiplierEdge(),
   
-  TypeResistsFieldStateConnection: junctionConnection('type', 'fieldState', 'resists'),
+  TypeResistsFieldStateConnection: junctionConnection('type', 'resistsFieldState'),
   TypeResistsFieldStateEdge: multiplierEdge(),
 
   TypeWeatherBallConnection: junctionConnection('type', 'weatherBall'),

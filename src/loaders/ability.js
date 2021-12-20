@@ -28,7 +28,7 @@ class Ability {
   }
 
   activatedByFieldState(pagination, filter) {
-    const databaseInfo = [pagination, filter, 'ability', 'fieldState', 'activates', true];
+    const databaseInfo = [pagination, filter, 'fieldState', 'ability', 'activates', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

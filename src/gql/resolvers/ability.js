@@ -117,19 +117,19 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
-  AbilityActivatedByFieldStateConnection: junctionConnection('ability', 'fieldState', 'activatedBy'),
+  AbilityActivatedByFieldStateConnection: junctionConnection('ability', 'activatedByFieldState'),
   AbilityActivatedByFieldStateEdge: basicEdge(),
 
-  AbilityBoostsTypeConnection: junctionConnection('ability', 'type', 'boosts'),
+  AbilityBoostsTypeConnection: junctionConnection('ability', 'boostsType'),
   AbilityBoostsTypeEdge: multiplierEdge(),
 
-  AbilityBoostsUsageMethodConnection: junctionConnection('ability', 'usageMethod', 'boosts'),
+  AbilityBoostsUsageMethodConnection: junctionConnection('ability', 'boostsUsageMethod'),
   AbilityBoostsUsageMethodEdge: multiplierEdge(),
 
-  AbilityCausesStatusConnection: junctionConnection('ability', 'status', 'causes'),
+  AbilityCausesStatusConnection: junctionConnection('ability', 'causesStatus'),
   AbilityCausesStatusEdge: causeStatusEdge(),
 
-  AbilityCreatesFieldStateConnection: junctionConnection('ability', 'fieldState', 'creates'),
+  AbilityCreatesFieldStateConnection: junctionConnection('ability', 'createsFieldState'),
   AbilityCreatesFieldStateEdge: turnsEdge(),
 
   AbilityDescriptionConnection: junctionConnection('ability', 'description'),
@@ -141,34 +141,34 @@ const ConnectionsAndEdges = {
   AbilityGenerationConnection: generationConnection('ability'),
   AbilityGenerationEdge: basicEdge(),
   
-  AbilityIgnoresFieldStateConnection: junctionConnection('ability', 'fieldState', 'ignores'),
+  AbilityIgnoresFieldStateConnection: junctionConnection('ability', 'ignoresFieldState'),
   AbilityIgnoresFieldStateEdge: basicEdge(),
   
   AbilityIntroductionConnection: introductionConnection('ability'),
   AbilityIntroductionEdge: basicEdge(),
 
-  AbilityModifiesStatConnection: junctionConnection('ability', 'stat', 'modifies'),
+  AbilityModifiesStatConnection: junctionConnection('ability', 'modifiesStat'),
   AbilityModifiesStatEdge: modifyStatEdge(),
 
   AbilityPokemonConnection: junctionConnection('ability', 'pokemon'),
   AbilityPokemonEdge: abilityEdge(),
 
-  AbilityPreventsFieldStateConnection: junctionConnection('ability', 'fieldState', 'prevents'),
+  AbilityPreventsFieldStateConnection: junctionConnection('ability', 'preventsFieldState'),
   AbilityPreventsFieldStateEdge: basicEdge(),
 
-  AbilityRemovesFieldStateConnection: junctionConnection('ability', 'fieldState', 'removes'),
+  AbilityRemovesFieldStateConnection: junctionConnection('ability', 'removesFieldState'),
   AbilityRemovesFieldStateEdge: basicEdge(),
   
-  AbilityResistsStatusConnection: junctionConnection('ability', 'status', 'resists'),
+  AbilityResistsStatusConnection: junctionConnection('ability', 'resistsStatus'),
   AbilityResistsStatusEdge: basicEdge(),
 
-  AbilityResistsTypeConnection: junctionConnection('ability', 'type', 'resists'),
+  AbilityResistsTypeConnection: junctionConnection('ability', 'resistsType'),
   AbilityResistsTypeEdge: multiplierEdge(),
   
-  AbilityResistsUsageMethodConnection: junctionConnection('ability', 'usageMethod', 'resists'),
+  AbilityResistsUsageMethodConnection: junctionConnection('ability', 'resistsUsageMethod'),
   AbilityResistsUsageMethodEdge: multiplierEdge(),
 
-  AbilitySuppressesFieldStateConnection: junctionConnection('ability', 'fieldState', 'suppresses'),
+  AbilitySuppressesFieldStateConnection: junctionConnection('ability', 'suppressesFieldState'),
   AbilitySuppressesFieldStateEdge: basicEdge(),
 }
 

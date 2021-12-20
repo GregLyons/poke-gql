@@ -35,7 +35,12 @@ const entityNameToTableName = entityName => {
 
 // Goes through the keys of an object and removes non-alphanumeric/underscore characters from String values.
 const escapeObjectParameters = obj => {
+  // If null, return.
+  if (!obj) return obj;
+
+  // Iterate over object keys.
   for (let key of Object.keys(obj)) {
+    // For keys whose values are strings, escape dangerous characters.
     if (typeof obj[key] === 'string' || obj[key] instanceof String) {
       obj[key] = obj[key].replace(/[\W]+/gi, '');
     }

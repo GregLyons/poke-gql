@@ -45,11 +45,6 @@ type Type implements Node {
   defensiveMatchups(filter: TypeFilter): DefensiveTypeMatchupConnection
 
   """
-  Entities which the Type enables.
-  """
-  enables(filter: MoveFilter): TypeEnablesMoveConnection
-
-  """
   E.g. 'normal'-Type Moves enable 'breakneck_blitz'.
   """
   enablesMove(filter: MoveFilter): TypeEnablesMoveConnection

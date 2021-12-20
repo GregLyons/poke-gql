@@ -60,23 +60,25 @@ const Query = {
 //#region
 
 const Stat = {
-  modifiedByAbility: statPK,
-  
   formattedName: async (parent, args, context, info) => {
     return parent.stat_formatted_name;
   },
-
+  
   generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
   
+  modifiedByAbility: statPK,
+  
+  modifiedByFieldState: statPK,
+
   modifiedByItem: statPK,
+  
+  modifiedByMove: statPK,
   
   name: async (parent, args, context, info) => {
     return parent.stat_name
   },
-  
-  modifiedByMove: statPK,
 }
 
 //#endregion
@@ -91,13 +93,16 @@ const ConnectionsAndEdges = {
   StatIntroductionConnection: introductionConnection('stat'),
   StatIntroductionEdge: basicEdge(),
 
-  StatModifiedByAbilityConnection: junctionConnection('stat', 'ability', 'modifiedBy'),
+  StatModifiedByAbilityConnection: junctionConnection('stat', 'modifiedByAbility'),
   StatModifiedByAbilityEdge: modifyStatEdge(),
 
-  StatModifiedByItemConnection: junctionConnection('stat', 'item', 'modifiedBy'),
+  StatModifiedByFieldStateConnection: junctionConnection('stat', 'modifiedByFieldState'),
+  StatModifiedByFieldStateEdge: modifyStatEdge(),
+
+  StatModifiedByItemConnection: junctionConnection('stat', 'modifiedByItem'),
   StatModifiedByItemEdge: modifyStatEdge(),
 
-  StatModifiedByMoveConnection: junctionConnection('stat', 'move', 'modifiedBy'),
+  StatModifiedByMoveConnection: junctionConnection('stat', 'modifiedByMove'),
   StatModifiedByMoveEdge: modifyStatEdge(),
 }
 

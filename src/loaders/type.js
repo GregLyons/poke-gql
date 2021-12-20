@@ -56,7 +56,12 @@ class Type {
 
   // TODO
   defensiveMatchup(pagination, filter) {
-    return new DataLoader(junctionBatcher(pagination, filter, 'type', 'type', 'ptype_matchup', true))
+    const databaseInfo = [pagination, filter, 'type', 'type', 'ptype_matchup', true];
+  
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
   }
   
   enablesMove(pagination, filter) {
@@ -100,7 +105,12 @@ class Type {
   
   // TODO
   naturalGift(pagination, filter) {
-    return new DataLoader(junctionBatcher(pagination, filter, 'item', 'type', 'natural_gift', true))
+    const databaseInfo = [pagination, filter, 'item', 'type', 'natural_gift', true];
+  
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
   }
   
   pokemon(pagination, filter) {
@@ -114,7 +124,12 @@ class Type {
 
   // TODO
   offensiveMatchup(pagination, filter) {
-    return new DataLoader(junctionBatcher(pagination, filter, 'type', 'type', 'ptype_matchup'))
+    const databaseInfo = [pagination, filter, 'type', 'type', 'ptype_matchup', true];
+  
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
   }
 
   removesFieldState(pagination, filter) {
@@ -163,7 +178,12 @@ class Type {
   }
 
   weatherBall(pagination, filter) {
-    return new DataLoader(junctionBatcher(pagination, filter, 'fieldState', 'type', 'natural_gift', true))
+    const databaseInfo = [pagination, filter, 'fieldState', 'type', 'weather_ball', true];
+  
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
   }
 }
 

@@ -81,7 +81,7 @@ const FieldState = {
 
   causesStatus: fieldStatePK,
 
-  class: parent => parent.field_state_class,
+  class: parent => parent.field_state_class.toUpperCase(),
 
   createdByAbility: fieldStatePK,
 
@@ -95,9 +95,11 @@ const FieldState = {
 
   extendedByItem: fieldStatePK,
 
-  formattedName: parent => parent.ability_formatted_name,
+  formattedName: parent => parent.field_state_formatted_name,
 
   generation: parent => parent.generation_id,
+
+  grounded: parent => parent.field_state_only_grounded,
   
   hindersMove: fieldStatePK,
 
@@ -113,8 +115,6 @@ const FieldState = {
 
   name: parent => parent.field_state_name,
 
-  grounded: parent => parent.field_state_only_grounded,
-
   preventedByAbility: fieldStatePK,
 
   removedByAbility: fieldStatePK,
@@ -129,7 +129,7 @@ const FieldState = {
 
   suppressedByAbility: fieldStatePK,
 
-  target: parent => parent.field_state_target,
+  target: parent => parent.field_state_target.toUpperCase(),
 
   weatherBall: fieldStatePK,
 }
@@ -140,70 +140,70 @@ const FieldState = {
 //#region
 
 const ConnectionsAndEdges = {
-  FieldStateActivatesAbilityConnection: junctionConnection('fieldState', 'ability', 'activates'),
+  FieldStateActivatesAbilityConnection: junctionConnection('fieldState', 'activatesAbility'),
   FieldStateActivatesAbilityEdge: basicEdge(),
 
-  FieldStateActivatesItemConnection: junctionConnection('fieldState', 'item', 'activates'),
+  FieldStateActivatesItemConnection: junctionConnection('fieldState', 'activatesItem'),
   FieldStateActivatesItemEdge: basicEdge(),
 
-  FieldStateBoostsTypeConnection: junctionConnection('fieldState', 'type', 'boosts'),
+  FieldStateBoostsTypeConnection: junctionConnection('fieldState', 'boostsType'),
   FieldStateBoostsTypeEdge: multiplierEdge(),
 
-  FieldStateCausesStatusConnection: junctionConnection('fieldState', 'status', 'causes'),
+  FieldStateCausesStatusConnection: junctionConnection('fieldState', 'causesStatus'),
   FieldStateCausesStatusEdge: causeStatusEdge(),
 
-  FieldStateCreatedByAbilityConnection: junctionConnection('fieldState', 'ability', 'createdBy'),
+  FieldStateCreatedByAbilityConnection: junctionConnection('fieldState', 'createdByAbility'),
   FieldStateCreatedByAbilityEdge: turnsEdge(),
 
-  FieldStateCreatedByMoveConnection: junctionConnection('fieldState', 'move', 'createdBy'),
+  FieldStateCreatedByMoveConnection: junctionConnection('fieldState', 'createdByMove'),
   FieldStateCreatedByMoveEdge: turnsEdge(),
   
   FieldStateEffectConnection: junctionConnection('fieldState', 'effect'),
   FieldStateEffectEdge: basicEdge(),
 
-  FieldStateEnhancesMoveConnection: junctionConnection('fieldState', 'move', 'enhances'),
+  FieldStateEnhancesMoveConnection: junctionConnection('fieldState', 'enhancesMove'),
   FieldStateEnhancesMoveEdge: basicEdge(),
   
-  FieldStateExtendedByItemConnection: junctionConnection('fieldState', 'item', 'extendedBy'),
+  FieldStateExtendedByItemConnection: junctionConnection('fieldState', 'extendedByItem'),
   FieldStateExtendedByItemEdge: turnsEdge(),
   
   FieldStateGenerationConnection: generationConnection('fieldState'),
   FieldStateGenerationEdge: basicEdge(),
 
-  FieldStateHindersMoveConnection: junctionConnection('fieldState', 'move', 'hinders'),
+  FieldStateHindersMoveConnection: junctionConnection('fieldState', 'hindersMove'),
   FieldStateHindersMoveEdge: basicEdge(),
 
-  FieldStateIgnoredByAbilityConnection: junctionConnection('fieldState', 'ability', 'ignoredBy'),
+  FieldStateIgnoredByAbilityConnection: junctionConnection('fieldState', 'ignoredByAbility'),
   FieldStateIgnoredByAbilityEdge: basicEdge(),
 
-  FieldStateIgnoredByItemConnection: junctionConnection('fieldState', 'item', 'ignoredBy'),
+  FieldStateIgnoredByItemConnection: junctionConnection('fieldState', 'ignoredByItem'),
   FieldStateIgnoredByItemEdge: basicEdge(),
   
   FieldStateIntroductionConnection: introductionConnection('fieldState'),
   FieldStateIntroductionEdge: basicEdge(),
 
-  FieldStateModifiesStatConnection: junctionConnection('fieldState', 'stat', 'modifies'),
+  FieldStateModifiesStatConnection: junctionConnection('fieldState', 'modifiesStat'),
   FieldStateModifiesStatEdge: modifyStatEdge(),
 
-  FieldStatePreventedByAbilityConnection: junctionConnection('fieldState', 'ability', 'preventedBy'),
+  FieldStatePreventedByAbilityConnection: junctionConnection('fieldState', 'preventedByAbility'),
   FieldStatePreventedByAbilityEdge: basicEdge(),
 
-  FieldStateRemovedByAbilityConnection: junctionConnection('fieldState', 'ability', 'removedBy'),
+  FieldStateRemovedByAbilityConnection: junctionConnection('fieldState', 'removedByAbility'),
   FieldStateRemovedByAbilityEdge: basicEdge(),
 
-  FieldStateRemovedByMoveConnection: junctionConnection('fieldState', 'move', 'removedBy'),
+  FieldStateRemovedByMoveConnection: junctionConnection('fieldState', 'removedByMove'),
   FieldStateRemovedByMoveEdge: basicEdge(),
 
-  FieldStateResistedByItemConnection: junctionConnection('fieldState', 'item', 'resistedBy'),
+  FieldStateResistedByItemConnection: junctionConnection('fieldState', 'resistedByItem'),
   FieldStateResistedByItemEdge: multiplierEdge(),
   
-  FieldStateResistsStatusConnection: junctionConnection('fieldState', 'status', 'resists'),
+  FieldStateResistsStatusConnection: junctionConnection('fieldState', 'resistsStatus'),
   FieldStateResistsStatusEdge: basicEdge(),
 
-  FieldStateResistsTypeConnection: junctionConnection('fieldState', 'type', 'resists'),
+  FieldStateResistsTypeConnection: junctionConnection('fieldState', 'resistsType'),
   FieldStateResistsTypeEdge: multiplierEdge(),
 
-  FieldStateSuppressedByAbilityConnection: junctionConnection('fieldState', 'ability', 'suppressedBy'),
+  FieldStateSuppressedByAbilityConnection: junctionConnection('fieldState', 'suppressedByAbility'),
   FieldStateSuppressedByAbilityEdge: basicEdge(),
 
   FieldStateWeatherBallConnection: junctionConnection('fieldState', 'weatherBall'),

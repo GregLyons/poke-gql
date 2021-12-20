@@ -223,7 +223,6 @@ const batchEntitiesByGenCount = (presence = true, entityName, pagination, filter
     //       .filter(i => i >= Math.min(gens));
           
     const queryString = computeGenerationTableQueryString(presence, tableName, pagination, filter, true);
-
     // Query the database
     const entities = await db.promise().query(
       queryString, 

@@ -36,6 +36,15 @@ class Status {
     };
   }
 
+  causedByFieldState(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'causes', true];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
+  }
+
   causedByItem(pagination, filter) {
     const databaseInfo = [pagination, filter, 'item', 'status', 'causes', true];
 
@@ -68,6 +77,15 @@ class Status {
   
   resistedByAbility(pagination, filter) {
     const databaseInfo = [pagination, filter, 'ability', 'status', 'resists', true];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
+  }
+
+  resistedByFieldState(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'fieldState', 'status', 'prevents', true];
 
     return { 
       loader: new DataLoader(junctionBatcher(databaseInfo)),

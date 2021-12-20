@@ -22,6 +22,7 @@ const {
   basicEdge,
 
   introductionConnection,
+  junctionConnection,
 } = require('./helpers.js');
 const versionGroupPK = parentPK('versionGroup');
 
@@ -61,11 +62,13 @@ const Query = {
 const VersionGroup = {
   code: parent => parent.version_group_code,
 
+  descriptions: versionGroupPK,
+
   formattedName: parent => parent.version_group_formatted_name,
-  
-  name: parent => parent.version_group_name,
 
   introduced: parent => parent.introduced,
+  
+  name: parent => parent.version_group_name,
  
 }
 
@@ -77,6 +80,9 @@ const VersionGroup = {
 const ConnectionsAndEdges = {
   VersionGroupIntroductionConnection: introductionConnection('versionGroup'),
   VersionGroupIntroductionEdge: basicEdge(),
+
+  VersionGroupDescriptionConnection: junctionConnection('versionGroup', 'description'),
+  VersionGroupDescriptionEdge: basicEdge(),
 }
 
 //#endregion

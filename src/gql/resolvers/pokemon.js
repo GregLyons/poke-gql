@@ -132,10 +132,10 @@ const ConnectionsAndEdges = {
   PokemonAbilityConnection: junctionConnection('pokemon', 'ability'),
   PokemonAbilityEdge: abilityEdge(),
   
-  PokemonEnablesItemConnection: junctionConnection('pokemon', 'item', 'enables'),
+  PokemonEnablesItemConnection: junctionConnection('pokemon', 'enablesItem'),
   PokemonEnablesItemEdge: basicEdge(),
 
-  PokemonEnablesMoveConnection: junctionConnection('pokemon', 'move', 'enables'),
+  PokemonEnablesMoveConnection: junctionConnection('pokemon', 'enablesMove'),
   PokemonEnablesMoveEdge: basicEdge(),
 
   PokemonEvolutionConnection: junctionConnection('pokemon', 'evolvesTo'),
@@ -156,7 +156,7 @@ const ConnectionsAndEdges = {
   PokemonPrevolutionConnection: junctionConnection('pokemon', 'evolvesFrom'),
   PokemonPrevolutionEdge: evolutionEdge(),
 
-  PokemonRequiresItemConnection: junctionConnection('pokemon', 'item', 'requires'),
+  PokemonRequiresItemConnection: junctionConnection('pokemon', 'requiresItem'),
   PokemonRequiresItemEdge: basicEdge(),
   
   PokemonTypeConnection: junctionConnection('pokemon', 'type'),

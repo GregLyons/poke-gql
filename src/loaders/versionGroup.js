@@ -1,6 +1,8 @@
 const DataLoader = require('dataloader');
 const {
   batchGens,
+  junctionBatcher,
+  junctionBatcherCount,
 } = require('./helpers.js');
 
 class VersionGroup {
@@ -23,6 +25,15 @@ class VersionGroup {
     return countMode 
       ? this.loaders[key].counter
       : this.loaders[key].loader;
+  }
+
+  description(pagination, filter) {
+    const databaseInfo = [pagination, filter, 'versionGroup', 'description', '', false];
+
+    return { 
+      loader: new DataLoader(junctionBatcher(databaseInfo)),
+      counter: new DataLoader(junctionBatcherCount(databaseInfo))
+    };
   }
 
   introduced(pagination, filter) {

@@ -73,16 +73,16 @@ const Query = {
 const UsageMethod = {
   boostedByAbility: usageMethodPK,
 
-  resistedByAbility: usageMethodPK,
-
+  boostedByItem: usageMethodPK,
+  
   formattedName: parent => parent.usage_method_formatted_name,
-
+  
   generation: parent => parent.generation_id,
   
   introduced: parent => parent.introduced,
 
-  boostedByItem: usageMethodPK,
-
+  resistedByAbility: usageMethodPK,
+  
   resistedByItem: usageMethodPK,
 
   moves: usageMethodPK,
@@ -96,10 +96,10 @@ const UsageMethod = {
 //#region
 
 const ConnectionsAndEdges = {
-  UsageMethodBoostedByAbilityConnection: junctionConnection('usageMethod', 'ability', 'boostedBy'),
+  UsageMethodBoostedByAbilityConnection: junctionConnection('usageMethod', 'boostedByAbility'),
   UsageMethodBoostedByAbilityEdge: multiplierEdge(),
 
-  UsageMethodBoostedByItemConnection: junctionConnection('usageMethod', 'item', 'boostedBy'),
+  UsageMethodBoostedByItemConnection: junctionConnection('usageMethod', 'boostedByItem'),
   UsageMethodBoostedByItemEdge: multiplierEdge(),
 
   UsageMethodGenerationConnection: generationConnection('usageMethod'),
@@ -111,10 +111,10 @@ const ConnectionsAndEdges = {
   UsageMethodMoveConnection: junctionConnection('usageMethod', 'move'),
   UsageMethodMoveEdge: basicEdge(),
   
-  UsageMethodResistedByAbilityConnection: junctionConnection('usageMethod', 'ability', 'resistedBy'),
+  UsageMethodResistedByAbilityConnection: junctionConnection('usageMethod', 'resistedByAbility'),
   UsageMethodResistedByAbilityEdge: multiplierEdge(),
 
-  UsageMethodResistedByItemConnection: junctionConnection('usageMethod', 'item', 'resistedBy'),
+  UsageMethodResistedByItemConnection: junctionConnection('usageMethod', 'resistedByItem'),
   UsageMethodResistedByItemEdge: multiplierEdge(),
 }
 
