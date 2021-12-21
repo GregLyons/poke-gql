@@ -3,10 +3,8 @@
 #
 
 extend type Query {
-  spriteByID(id: ID!): Sprite!
-
   """
-  Select Sprites, with optional cursor-based pagination.
+  Select Sprites with filtering and pagination.
   """
   sprites(
     pagination: PaginationInput

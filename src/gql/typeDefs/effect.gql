@@ -3,22 +3,21 @@
 #
 
 extend type Query {
-  effectByID(id: ID!): Effect!
-
   """
   Select an Effect by its snake_case name, e.g. 'costs_hp'.
   """
-  effectByName(generation: Int = 8, name: String!): Effect!
+  effectByName(
+    generation: Int = 8,
+    generations: [Int]
+    name: String!
+  ): [Effect!]!
   
   """
-  Select Effects, with optional cursor-based pagination.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
+  Select Effects with filtering and pagination.
   """
   effects(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: EffectFilter
   ): [Effect!]!
@@ -28,11 +27,20 @@ extend type Query {
 # NODES AND HELPER FIELDS
 #
 
+"""
+A combat effect from various different sources, e.g. Ability or Move. These are unofficial classifications, and attempt to capture effects of Abilities, Moves, etc. which are not already captured by other entities, e.g. 'anti_mini' for bonus damage against minimized targets (like from 'astonish'), 'affects_weight' for 'autotomize'.
+"""
 type Effect implements Node {
   id: ID!
   
+  """
+  E.g. 'gooey' has the 'punishes_contact' Effect.
+  """
   abilities(filter: AbilityFilter): EffectAbilityConnection
 
+  """
+  E.g. 'psychic_terrain' has the 'protects_against_priority' Effect, and 'magic_room' has the 'manipulates_item' Effect.
+  """
   fieldStates(filter: FieldStateFilter): EffectFieldStateConnection
 
   """
@@ -52,8 +60,14 @@ type Effect implements Node {
   """
   introduced(filter: GenerationFilter): EffectIntroductionConnection
 
+  """
+  E.g. The 'mystery_berry' has the 'restores_pp' Effect.
+  """
   items(filter: ItemFilter): EffectItemConnection
 
+  """
+  E.g. 'astonish' has the 'anti_mini' Effect.
+  """
   moves(filter: MoveFilter): EffectMoveConnection
 
   """

@@ -3,22 +3,21 @@
 #
 
 extend type Query {
-  statusByID(id: ID!): Status!
-
   """
   Select a Status by its snake_case name, e.g. 'center_of_attention'.
   """
-  statusByName(generation: Int = 8, name: String!): Status!
+  statusByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): Status!
   
   """
-  Select Statuses, with optional cursor-based pagination.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
+  Select Statuses with filtering and pagination.
   """
   statuses(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: StatusFilter
   ): [Status!]!
@@ -31,12 +30,24 @@ extend type Query {
 type Status implements Node {
   id: ID!
 
+  """
+  E.g. 'flame_body' causes 'burn'.
+  """
   causedByAbility(filter: AbilityFilter): StatusCausedByAbilityConnection
 
+  """
+  E.g. 'toxic_spikes' causes 'poison' or 'bad_poison'.
+  """
   causedByFieldState(filter: FieldStateFilter): StatusCausedByFieldStateConnection
 
+  """
+  E.g. 'toxic_orb' causes 'bad_poison'.
+  """
   causedByItem(filter: ItemFilter): StatusCausedByItemConnection
 
+  """
+  E.g. 'yawn' causes 'drowsy'.
+  """
   causedByMove(filter: MoveFilter): StatusCausedByMoveConnection
 
   """
@@ -55,14 +66,20 @@ type Status implements Node {
   introduced(filter: GenerationFilter): StatusIntroductionConnection
 
   """
+  E.g. 'immunity' protects against 'poison' and 'bad_poison'. 
+  """
+  resistedByAbility(filter: AbilityFilter): StatusResistedByAbilityConnection
+
+  """
   E.g. 'electric_terrain' prevents opponents from being inflicted with 'sleep' or 'drowsy' Status. (Note that for the case of 'yawn', 'electric_terrain' still prevents 'drowsy' Pokemon from falling asleep.)
 
   'preventedByFieldState' may be a more appropriate key name, but 'resistedByFieldState' is consistent with the other key names.
   """
   resistedByFieldState(filter: FieldStateFilter): StatusResistedByFieldStateConnection
 
-  resistedByAbility(filter: AbilityFilter): StatusResistedByAbilityConnection
-
+  """
+  E.g. 'lum_berry' removes 'poison', 'paralysis', etc. 
+  """
   resistedByItem(filter: ItemFilter): StatusResistedByItemConnection
 
   """

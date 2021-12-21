@@ -1,35 +1,23 @@
 const {
   entityNameToTableName,
-  escapeObjectParameters,
-  getPaginationQueryString,
-  getFilterQueryString,
-  hasGenID,
+  getEntityQueryString,
+  getEntityByColumnQueryString,
 } = require('../../models/index.js');
 
-// MySQL Queries
+//
 //#region
 
 const queryEntities = entityName => {
   return async (parent, args, context, info) => {
     context.loaders[entityName].clearLoaders();
 
-    tableName = entityNameToTableName(entityName);
-
-    // These functions escape strings to prevent SQL injection.
-    filterString = getFilterQueryString(args.filter, tableName);
-    paginationString = getPaginationQueryString(args.pagination, tableName);
+    if (!args.generations) {
+      args.generations = [args.generation];
+    }
 
     return await context.db.promise().query(
-      `
-        SELECT * FROM ${tableName}
-        ${
-          hasGenID(tableName) 
-            ? `WHERE generation_id = ${args.generation}`
-            : ''
-        }
-        ${filterString}
-        ${paginationString}
-      `
+      getEntityQueryString(entityName, args.pagination, args.filter),
+      [[args.generations]]
     )
     .then( ([results, fields]) => {
       return results;
@@ -41,38 +29,17 @@ const queryEntities = entityName => {
 const queryEntitiesByColumn = (entityName, keyName) => {
   return async (parent, args, context, info) => {
     context.loaders[entityName].clearLoaders();
-    
-    tableName = entityNameToTableName(entityName, keyName);
 
-    // 
-    let columnName;
-    if (tableName === 'generation' && keyName === 'number') {
-      columnName = 'id';
-    }
-    else {
-      columnName = keyName;
+    if (!args.generations) {
+      args.generations = [args.generation];
     }
 
     return await context.db.promise().query(
-      `
-        SELECT * FROM ${tableName}
-
-        ${
-          hasGenID(tableName) 
-            ? `WHERE generation_id = ${args.generation}`
-            : ''
-        }
-        
-        ${
-          hasGenID(tableName)
-            ? `AND ${tableName}_${columnName} = '${args[keyName].toString().toLowerCase()}'`
-            : `WHERE ${tableName}_${columnName} = '${args[keyName].toString().toLowerCase()}'`
-        }
-      `
+      getEntityByColumnQueryString(entityName, keyName, args[keyName]),
+      [[args.generations]]
     )
     .then( ([results, fields]) => {
-      if (tableName === 'generation') return results[0];
-      else return results;
+      return results;
     })
     .catch(console.log);
   }

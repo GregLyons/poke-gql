@@ -3,22 +3,21 @@
 #
 
 extend type Query {
-  usageMethodByID(id: ID!): UsageMethod!
-
   """
   Select a UsageMethod by its snake_case name, e.g. 'pulse'.
   """
-  usageMethodByName(generation: Int = 8, name: String!): UsageMethod!
+  usageMethodByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): UsageMethod!
   
   """
-  Select UsageMethods, with optional cursor-based pagination.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
+  Select UsageMethods with filtering and pagination.
   """
   usageMethods(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: UsageMethodFilter
   ): [UsageMethod!]!
@@ -31,9 +30,15 @@ extend type Query {
 type UsageMethod implements Node {
   id: ID!
 
+  """
+  E.g. 'mega_launcher' boosts 'pulse'.
+  """ 
   boostedByAbility(filter: AbilityFilter): UsageMethodBoostedByAbilityConnection
 
-  resistedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
+  """
+  As of Gen 8, no Items boost UsageMethods. Should such Items be introduced later, they will be immediately available here.
+  """
+  boostedByItem(filter: ItemFilter): UsageMethodBoostedByItemConnection
 
   """
   The name of the UsageMethod in Title Case.
@@ -52,17 +57,25 @@ type UsageMethod implements Node {
   """
   introduced(filter: GenerationFilter): UsageMethodIntroductionConnection
 
-  boostedByItem(filter: ItemFilter): UsageMethodBoostedByItemConnection
-
+  """
+  E.g. 'safety_goggle' resists 'powder'.
+  """
   resistedByItem(filter: ItemFilter): UsageMethodResistedByItemConnection
 
+  """
+  E.g. 'bullet_proof' resists 'ball'.
+  """
+  resistedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
+
+  """
+  Moves which have this UsageMethod, e.g. The Move 'crunch' has the UsageMethod 'bite'.
+  """
   moves(filter: MoveFilter): UsageMethodMoveConnection
 
   """
   The name of the UsageMethod in snake_case. 
   """
   name: String!
-
 }
 
 #

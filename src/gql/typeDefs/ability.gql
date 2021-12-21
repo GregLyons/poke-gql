@@ -3,24 +3,21 @@
 #
 
 extend type Query {
-  abilityByID(id: ID!): Ability!
-
   """
   Select an Ability by its snake_case name, e.g. 'intimidate', 'rks_system'.
   """
-  abilityByName(generation: Int = 8, name: String!): Ability!
+  abilityByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): [Ability!]! 
   
   """
-  Select Abilities, with optional cursor-based pagination.
-
-  'generation' refers to the (number of the) Generation in which to consider the Ability. Defaults to the latest Generation.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
+  Select Abilities with filtering and pagination.
   """
   abilities(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: AbilityFilter
   ): [Ability!]!
@@ -30,6 +27,9 @@ extend type Query {
 # NODES AND HELPER TYPES
 #
 
+"""
+An Ability which a Pokemon can possess.
+"""
 type Ability implements Node {
   id: ID!
 
@@ -38,12 +38,24 @@ type Ability implements Node {
   """
   activatedByFieldState(filter: FieldStateFilter): AbilityActivatedByFieldStateConnection
 
+  """
+  E.g. 'blaze' boosts 'fire'.
+  """ 
   boostsType(filter: TypeFilter): AbilityBoostsTypeConnection
 
+  """
+  E.g. 'liquid_voice' boosts 'sound'.
+  """
   boostsUsageMethod(filter: UsageMethodFilter): AbilityBoostsUsageMethodConnection
 
+  """
+  E.g. 'poison_point' causes 'poison'.
+  """
   causesStatus(filter: StatusFilter): AbilityCausesStatusConnection
 
+  """
+  E.g. 'electric_surge' creates 'electric_terrain'.
+  """
   createsFieldState(filter: FieldStateFilter): AbilityCreatesFieldStateConnection
 
   """
@@ -51,7 +63,9 @@ type Ability implements Node {
   """
   descriptions(filter: DescriptionFilter): AbilityDescriptionConnection
 
-
+  """
+  E.g. 'forecast' has the Effect 'changes_pokemon_type'. 
+  """
   effects(filter: EffectFilter): AbilityEffectConnection
 
   """
@@ -68,6 +82,9 @@ type Ability implements Node {
   """ 
   generation(filter: GenerationFilter): AbilityGenerationConnection
 
+  """
+  E.g. 'levitate' ignores 'sticky_web', 'infiltrator' ignores 'reflect'.
+  """
   ignoresFieldState(filter: FieldStateFilter): AbilityIgnoresFieldStateConnection
 
   """
@@ -75,6 +92,9 @@ type Ability implements Node {
   """ 
   introduced(filter: GenerationFilter): AbilityIntroductionConnection
 
+  """
+  E.g. 'intimidate' modifies 'attack'.
+  """
   modifiesStat(filter: StatFilter): AbilityModifiesStatConnection
 
   """
@@ -82,10 +102,13 @@ type Ability implements Node {
   """
   name: String!
 
+  """
+  Pokemon which can possess this Ability.
+  """
   pokemon(filter: PokemonFilter): AbilityPokemonConnection
 
   """
-  E.g. 'drizzle' prevents other weather effects.
+  E.g. 'cloud_nine' prevents 'aurora_veil' from being set up, even in the presence of 'hail'. This is because 'cloud_nine' suppresses the effects of 'hail'. 'cloud_nine' does not remove or suppress 'aurora_veil' that is already set-up. 
   """
   preventsFieldState(filter: FieldStateFilter): AbilityPreventsFieldStateConnection
 
@@ -94,12 +117,24 @@ type Ability implements Node {
   """
   removesFieldState(filter: FieldStateFilter): AbilityRemovesFieldStateConnection
 
+  """
+  E.g. 'water_absorb' resists 'water', with a multiplier of 0. Also applies to Abilities which give weaknesses to types (e.g. we say 'dry_skin' resists 'fire', with a multiplier of 1.25).
+  """
   resistsType(filter: TypeFilter): AbilityResistsTypeConnection
 
+  """
+  E.g. 'soundproof' resists 'sound'.
+  """
   resistsUsageMethod(filter: UsageMethodFilter): AbilityResistsUsageMethodConnection
 
+  """
+  E.g. 'flower_veil' resists 'sleep'. 
+  """
   resistsStatus(filter: StatusFilter): AbilityResistsStatusConnection
 
+  """
+  E.g. 'cloud_nine' suppresses weather effects, but does not remove them (if the Pokemon is switched out, the effects return).
+  """
   suppressesFieldState(filter: FieldStateFilter): AbilitySuppressesFieldStateConnection
 }
 

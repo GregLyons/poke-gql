@@ -3,32 +3,21 @@
 #
 
 extend type Query {
-  moveByID(id: ID!): Move!
-
   """
   Select a Move by its snake_case name, e.g. 'u_turn'.
   """
-  moveByName(generation: Int = 8, name: String!): Move!
+  moveByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): Move!
   
   """
-  Select Moves, with optional cursor-based pagination.
-
-  'generation' refers to the (number of the) Generation in which to consider the Move. Defaults to the latest Generation.
-
-  'category' refers to 'physical', 'status', etc. See the MoveCategory enum for all possibilities.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
-
-  'max' and 'min' are inclusive.
-
-  'type' takes the name of a type in snake_case, e.g. 'fire' for Fire-Type Moves.
-
-  'types' is an array of type names in snake_case, and will return Moves whose Type belongs to 'types'.
+  Select Moves with filtering and pagination.
   """
   moves(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: MoveFilter
   ): [Move!]!
@@ -46,6 +35,9 @@ type Move implements Node {
   """
   accuracy: Int
 
+  """
+  E.g. 'toxic' causes 'bad_poison'.
+  """
   causesStatus(filter: StatusFilter): MoveCausesStatusConnection
 
   """
@@ -63,6 +55,9 @@ type Move implements Node {
   """
   descriptions(filter: DescriptionFilter): MoveDescriptionConnection
 
+  """
+  E.g. 'stomp' has the Effect 'anti_mini' since it does bonus damage to targets which used the Move 'minimize'.
+  """
   effects(filter: EffectFilter): MoveEffectConnection
 
   """
@@ -95,6 +90,9 @@ type Move implements Node {
   """ 
   introduced(filter: GenerationFilter): MoveIntroductionConnection
 
+  """
+  E.g. 'growl' reduces 'attack' by -1.
+  """
   modifiesStat(filter: StatFilter): MoveModifiesStatConnection
 
   """
@@ -108,6 +106,9 @@ type Move implements Node {
   """
   name: String!
 
+  """
+  Pokemon who can learn this Move.
+  """
   pokemon(filter: PokemonFilter): MovePokemonConnection
 
   """

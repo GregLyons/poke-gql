@@ -8,12 +8,17 @@ const {
 } = require('./helpers.js');
 
 const {
+  getEntityQueryString,
+  getEntityByColumnQueryString,
+} = require('./basicQueries.js');
+
+const {
   computeJunctionTableQueryString,
-} = require('./junctionTables.js');
+} = require('./junctionTableQueries.js');
 
 const {
   computeGenerationTableQueryString,
-} = require('./generation.js');
+} = require('./generationQueries.js');
 
 module.exports = {
   db,
@@ -25,4 +30,6 @@ module.exports = {
   getFilterQueryString,
   getPaginationQueryString,
   hasGenID,
+  getEntityQueryString,
+  getEntityByColumnQueryString,
 };

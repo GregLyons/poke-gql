@@ -3,8 +3,6 @@
 #
 
 extend type Query {
-  generationByID(id: ID!): Generation!
-
   """
   Select a Generation by its arabic numeral, e.g. '1'.
   """
@@ -16,7 +14,7 @@ extend type Query {
   generationByCode(code: String!): Generation!
 
   """
-  Select Generations, with optional cursor-based pagination.
+  Select Generations with filtering and pagination.
   """
   generations(
     pagination: PaginationInput

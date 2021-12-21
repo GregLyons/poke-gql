@@ -3,32 +3,21 @@
 #
 
 extend type Query {
-  pokemonByID(id: ID!): Pokemon!
-
   """
   Select an Pokemon by its snake_case name, e.g. 'pikachu', 'raichu_alola'.
   """
-  pokemonByName(generation: Int = 8, name: String!): Pokemon!
+  pokemonByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): Pokemon!
   
   """
-  Select Pokemon, with optional cursor-based pagination.
-
-  'generation' refers to the (number of the) Generation in which to consider the Pokemon. Defaults to the latest Generation.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
-
-  'max' and 'min' are inclusive.
-
-  'type' takes the name of a type in snake_case, e.g. 'fire' for Fire-Type Pokemon. It will match any Pokemon with the Fire type. E.g. 'heatran' and 'charmander', among other Pokemon, will be matched by 'fire'.
-  
-  'types' is an array of type names, and it will return Pokemon such that at least one of the Pokemon's Types belongs to 'types'. E.g. 'heatran', 'charmander', and 'steelix', among other Pokemon, will be matched by ['fire', 'steel', 'water'].
-
-  'typing' is an array of type names, and it will return Pokemon whose set of Types matches the set of type names in 'typing'. E.g. 'heatran' will be matched by ['fire', 'steel'], among other Pokemon of the Fire/Steel typing, but 'charmander' will not be since it fails to be have the Steel Type.
+  Select Pokemon with filtering and pagination.
   """
   pokemon(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: PokemonFilter
   ): [Pokemon!]!
@@ -165,41 +154,6 @@ type Pokemon implements Node {
   The weight of the Pokemon in kilograms. 0.0 if unknown.
   """
   weight: Float!
-
-  #
-  # CONVENIENCE FIELDS
-  #
-  
-  """
-  Convenience field for damage calculations.
-  """
-  quadDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations.
-  """
-  doubleDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations.
-  """
-  neutralDamageFrom: [Type!]!
-  
-  """
-  Convenience field for damage calculations.
-  """
-  halfDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations.
-  """
-  quarterDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations.
-  """
-  noDamageFrom: [Type!]!
-
 }
 
 """

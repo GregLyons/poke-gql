@@ -3,22 +3,21 @@
 #
 
 extend type Query {
-  statByID(id: ID!): Stat!
-
   """
   Select a Stat by its snake_case name, e.g. 'critical_hit_ratio'.
   """
-  statByName(generatoion: Int = 8, name: String!): Stat!
+  statByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): Stat!
   
   """
-  Select Stats, with optional cursor-based pagination.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
+  Select Stats with filtering and pagination.
   """
   stats(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: StatFilter
   ): [Stat!]!
@@ -46,12 +45,24 @@ type Stat implements Node {
   """
   introduced(filter: GenerationFilter): StatIntroductionConnection
 
+  """
+  E.g. 'competitive' boosts 'special_attack' by +2.
+  """
   modifiedByAbility(filter: AbilityFilter): StatModifiedByAbilityConnection
 
+  """
+  E.g. 'tailwind' boosts 'speed' by 2.0.
+  """
   modifiedByFieldState(filter: FieldStateFilter): StatModifiedByFieldStateConnection
 
+  """
+  E.g. 'choice_scarf' boosts 'speed' by 1.5.
+  """
   modifiedByItem(filter: ItemFilter): StatModifiedByItemConnection
 
+  """
+  E.g. 'draco_meteor' reduces 'special_attack' by -2.
+  """
   modifiedByMove(filter: MoveFilter): StatModifiedByMoveConnection
 
   """

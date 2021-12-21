@@ -1,5 +1,4 @@
 // Gather all the SDL type definitions and export them.
-
 const fs = require('fs');
 const path = require('path');
 

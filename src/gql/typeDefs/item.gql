@@ -3,27 +3,21 @@
 #
 
 extend type Query {
-  itemByID(id: ID!): Item!
-
   """
   Select a Item by its snake_case name, e.g. 'venusaurite', 'firium_z'.
   """
-  itemByName(generation: Int = 8, name: String!): Item!
+  itemByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): Item!
   
   """
-  Select Items, with optional cursor-based pagination.
-
-  'generation' refers to the (number of the) Generation in which to consider the Item. Defaults to the latest Generation.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
-
-  'itemClass' is a case-insensitive.tring, with words separated by underscores, e.g. 'mega_stone', 'z_crystal'. See the ItemClass enum for all possibilities.
-
+  Select Items with filtering and pagination.
   """
   items(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: ItemFilter
   ): [Item!]!
@@ -41,12 +35,24 @@ type Item implements Node {
   """
   activatedByFieldState(filter: FieldStateFilter): ItemActivatedByFieldStateConnection
 
+  """
+  E.g. 'rock_gem' boosts 'rock'-Type Moves by 1.5/1.3 for one turn.
+  """
   boostsType(filter: TypeFilter): ItemBoostsTypeConnection
 
+  """
+  As of Gen 8, no Items boost UsageMethods, but should such Items later be released, they will be available here.
+  """
   boostsUsageMethod(filter: UsageMethodFilter): ItemBoostsUsageMethodConnection
 
+  """
+  E.g. 'flame_orb' causes 'burn'.
+  """
   causesStatus(filter: StatusFilter): ItemCausesStatusConnection
 
+  """
+  E.g. 'berry', 'choice' (for Choice Items).
+  """
   class: ItemClass
 
   """
@@ -78,6 +84,9 @@ type Item implements Node {
   """ 
   generation(filter: GenerationFilter): ItemGenerationConnection
 
+  """
+  E.g. 'air_balloon' ignores 'toxic_spikes' in that they can't poison the holder.
+  """
   ignoresFieldState(filter: FieldStateFilter): ItemIgnoresFieldStateConnection
 
   """
@@ -85,6 +94,9 @@ type Item implements Node {
   """
   introduced(filter: GenerationFilter): ItemIntroductionConnection
 
+  """
+  E.g. 'choice_band' boosts 'attack' by 1.5.
+  """
   modifiesStat(filter: StatFilter): ItemModifiesStatConnection
 
   """
@@ -106,14 +118,25 @@ type Item implements Node {
   """
   requiresPokemon(filter: PokemonFilter): ItemRequiresPokemonConnection
 
+  """
+  E.g. 'air_balloon' resists 'spikes'. One could say that it ignores 'spikes' as well ('ignoresFieldState' field), but this field also grants information about the amount by which it resists 'spikes' (0.0 multiplier).
+  """
   resistsFieldState(filter: FieldStateFilter): ItemResistsFieldStateConnection
 
+  """
+  E.g. 'psn_cure_berry' cures 'poison'.
+  """
   resistsStatus(filter: StatusFilter): ItemResistsStatusConnection
 
+  """
+  E.g. 'air_balloon' resists 'ground'-Type Moves.
+  """
   resistsType(filter: TypeFilter): ItemResistsTypeConnection
 
+  """
+  E.g. 'safety_goggles' resists 'powder'.
+  """
   resistsUsageMethod(filter: UsageMethodFilter): ItemResistsUsageMethodConnection
-
 }
 
 #

@@ -3,12 +3,14 @@
 #
 
 extend type Query {
-  typeByID(id: ID!): Type!
-
   """
   Select a Type by its snake_case name, e.g. 'dark'.
   """
-  typeByName(generation: Int = 8, name: String!): Type!
+  typeByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): Type!
   
   """
   Select Types, with optional cursor-based pagination.
@@ -21,6 +23,7 @@ extend type Query {
   """
   types(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: TypeFilter
   ): [Type!]!

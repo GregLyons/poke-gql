@@ -3,32 +3,21 @@
 #
 
 extend type Query {
-  fieldStateByID(id: ID!): FieldState!
-
   """
-  Select a Move by its snake_case name, e.g. 'electric_terrain'.
+  Select a FieldState by its snake_case name, e.g. 'electric_terrain'.
   """
-  fieldStateByName(generation: Int = 8, name: String!): FieldState!
+  fieldStateByName(
+    generation: Int = 8
+    generations: [Int]
+    name: String!
+  ): FieldState!
   
   """
-  Select Moves, with optional cursor-based pagination.
-
-  'generation' refers to the (number of the) Generation in which to consider the Move. Defaults to the latest Generation.
-
-  'category' refers to 'physical', 'status', etc. See the MoveCategory enum for all possibilities.
-
-  'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
-
-  'startsWith', 'contains', 'endsWith' refer to the name, and are case-insensitive.
-
-  'max' and 'min' are inclusive.
-
-  'type' takes the name of a type in snake_case, e.g. 'fire' for Fire-Type Moves.
-
-  'types' is an array of type names in snake_case, and will return Moves whose Type belongs to 'types'.
+  Select FieldStates with filtering and pagination.
   """
   fieldStates(
     generation: Int = 8
+    generations: [Int]
     pagination: PaginationInput
     filter: FieldStateFilter
   ): [FieldState!]!
@@ -56,16 +45,34 @@ type FieldState implements Node {
   """
   boostsType(filter: TypeFilter): FieldStateBoostsTypeConnection
 
+  """
+  E.g. 'toxic_spikes' causes 'poison'.
+  """
   causesStatus(filter: StatusFilter): FieldStateCausesStatusConnection
-
+  
+  """
+  E.g. 'weather' or 'entry_hazard'.
+  """
   class: FieldStateClass!
 
+  """
+  E.g. The Move 'stealth_rock' creates the FieldState 'stealth_rock'.
+  """
   createdByAbility(filter: AbilityFilter): FieldStateCreatedByAbilityConnection
 
+  """
+  E.g. "sunny_day" creates "harsh_sunlight".
+  """
   createdByMove(filter: MoveFilter): FieldStateCreatedByMoveConnection
 
+  """
+  E.g. 'vine_lash' deals 16.67% damage (per turn), whereas 'sticky_web' deals none. Entry hazards deal their damage on-entry, whereas most if not all other FieldStates deal their damage at the end of each turn.
+  """
   damagePercent: Float!
 
+  """
+  E.g. 'mist' has the Effect 'prevents_stat_drop'.
+  """
   effects(filter: EffectFilter): FieldStateEffectConnection
   
   """
@@ -73,6 +80,9 @@ type FieldState implements Node {
   """
   enhancesMove(filter: MoveFilter): FieldStateEnhancesMoveConnection
 
+  """
+  E.g. 'damp_rock' extends 'rain'.
+  """
   extendedByItem(filter: ItemFilter): FieldStateExtendedByItemConnection
 
   """
@@ -86,12 +96,23 @@ type FieldState implements Node {
   generation(filter: GenerationFilter): FieldStateGenerationConnection
 
   """
+  FieldStates which only affect grounded Pokemon, e.g. 'spikes'.
+  """
+  grounded: Boolean!
+
+  """
   E.g. 'grassy_terrain' hinders 'earthquake' by halving its power. 'harsh_sunlight' hinders 'thunder' by reducing its accuracy.
   """
   hindersMove(filter: MoveFilter): FieldStateHindersMoveConnection
 
+  """
+  E.g. 'infiltrator' ignores 'light_screen'.
+  """
   ignoredByAbility(filter: AbilityFilter): FieldStateIgnoredByAbilityConnection
 
+  """
+  E.g. 'heavy_duty_boots' ignores 'spikes'.
+  """
   ignoredByItem(filter: ItemFilter): FieldStateIgnoredByItemConnection
 
   """
@@ -99,8 +120,14 @@ type FieldState implements Node {
   """ 
   introduced(filter: GenerationFilter): FieldStateIntroductionConnection
 
+  """
+  E.g. 'spikes' can have up to 3 layers; most FieldStates can only have 1 layer.
+  """
   maxLayers: Int!
 
+  """
+  E.g. 'swamp' modifies 'speed'.
+  """ 
   modifiesStat(filter: StatFilter): FieldStateModifiesStatConnection
 
   """
@@ -112,19 +139,31 @@ type FieldState implements Node {
   """
   name: String!
 
-  grounded: Boolean!
-
   """
   E.g. 'cloud_nine' prevents 'rain' from being set up.
   """
   preventedByAbility(filter: AbilityFilter): FieldStatePreventedByAbilityConnection
 
+  """
+  E.g. 'drizzle' removes 'harsh_sunlight' by overwriting it.
+  """
   removedByAbility(filter: AbilityFilter): FieldStateRemovedByAbilityConnection
 
+  """
+  E.g. The Move 'trick_room' removes the FieldState 'trick_room' (it also creates it).
+  """
   removedByMove(filter: MoveFilter): FieldStateRemovedByMoveConnection
 
+  """
+  Items which reduce the damage dealt by a FieldState, e.g. 'safety_goggles' negates damage from 'hail'.
+  """
   resistedByItem(filter: ItemFilter): FieldStateResistedByItemConnection
 
+  """
+  E.g. 'safeguard' prevents 'burn' from being applied, and 'electric_terrain' prevents' sleep.
+
+  We use 'resistsStatus' as a catch-all for healing, preventing, or negating Statuses, to provide symmetry with other fields, (e.g. 'resistsStatus' on 'Ability').
+  """
   resistsStatus(filter: StatusFilter): FieldStateResistsStatusConnection
 
   """
@@ -132,6 +171,9 @@ type FieldState implements Node {
   """
   resistsType(filter: TypeFilter): FieldStateResistsTypeConnection
 
+  """
+  E.g. 'cloud_nine' suppresses 'sandstorm', but does not remove it.
+  """
   suppressedByAbility(filter: AbilityFilter): FieldStateSuppressedByAbilityConnection
 
   """
