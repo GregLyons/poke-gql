@@ -1,0 +1,196 @@
+#
+# QUERIES
+#
+
+extend type Query {
+  """
+  Select an Nature by its snake_case name, e.g. 'bold'.
+  """
+  natureByName(
+    generation: Int = 8,
+    generations: [Int]
+    name: String!
+  ): [Nature!]!
+  
+  """
+  Select Natures with filtering and pagination.
+  """
+  natures(
+    generation: Int = 8
+    generations: [Int]
+    pagination: PaginationInput
+    filter: NatureFilter
+  ): [Nature!]!
+}
+
+#
+# NODES AND HELPER FIELDS
+#
+
+"""
+An attribute of a Pokemon which helps determine, among other things, its stats.
+"""
+type Nature implements Node {
+  id: ID!
+
+  """
+  E.g. 'aguav_berry' confuses Pokemon with a 'naughty' nature when consumed.
+  """
+  confusedByItem: NatureConfusedByItemConnection
+
+  """
+  E.g. Pokemon with an 'adamant' nature dislike dry foods.
+  """
+  dislikedFlavor: String!
+
+  """
+  The name of the Nature in Title Case, with appropriate punctuation.
+  """
+  formattedName: String!
+
+  """
+  The Generation of this Nature.
+  """ 
+  generation(filter: GenerationFilter): NatureGenerationConnection
+
+  """
+  The Generation in which the Nature was introduced. Note that Natures can gain Natures between Generations.
+
+  For example, 'low_kick' was introduced in Generation 1, but it didn't have the Nature 'depends_on_weight' until Generation 3.
+  """
+  introduced(filter: GenerationFilter): NatureIntroductionConnection
+
+  """
+  E.g. Pokemon with an 'adamant' nature like spicy foods.
+  """
+  likedFlavor: String!
+
+  """
+  E.g. 'adamant' multiplies a Pokemon's 'attack' by 1.1.
+  """
+  modifiesStat(filter: StatFilter): NatureModifiesStatConnection
+
+  """
+  The name of the Move in snake_case, e.g. 'bold', 'docile'.
+  """
+  name: String!
+}
+
+#
+# CONNECTIONS AND EDGES
+#
+
+# GENERATION
+
+type NatureGenerationConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+  ): [NatureGenerationEdge!]! 
+
+}
+
+type NatureGenerationEdge implements Edge {  
+  node: Generation!
+}
+
+type NatureIntroductionConnection implements Connection {
+  edges(
+    pagination: PaginationInput
+  ): [NatureIntroductionEdge!]! 
+
+}
+
+type NatureIntroductionEdge implements Edge {  
+  node: Generation!
+}
+
+# ITEM
+
+type NatureConfusedByItemConnection implements Connection {
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [NatureConfusedByItemEdge!]! 
+
+}
+
+type NatureConfusedByItemEdge implements Edge {  
+  node: Item!
+}
+
+# STAT
+
+type NatureModifiesStatConnection implements Connection {
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [NatureModifiesStatEdge!]!
+
+}
+
+type NatureModifiesStatEdge implements Edge {
+  node: Stat!
+
+  """
+  As of Gen 8, Natures don't modify stats via stages.
+  """
+  stage: Int
+
+  """
+  The factor by which the Nature scales the Stat.
+  """
+  multiplier: Float
+
+  """
+  Natures always successfully modify their corresponding Stats.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification by a Nature is always the user (i.e. the Pokemon with the Nature).
+  """
+  recipient: Recipient!
+}
+
+#
+# INPUTS
+# 
+
+input NatureFilter {
+  """
+  The number of the Generation in which the Nature was introduced.
+  """
+  introduced: Int
+
+  """
+  The number of the Generation after which the Nature was introduced, inclusive.
+  """
+  introducedAfter: Int
+
+  """
+  The number of the Generation before which the Nature was introduced, inclusive.
+  """
+  introducedBefore: Int
+
+  """
+  The name of the Nature in snake_case.
+  """
+  name: String
+
+  """
+  Natures whose name contains the given string, case-insensitive.
+  """
+  contains: String
+
+  """
+  Natures whose name ends with the given string, case-insensitive.
+  """
+  endsWith: String
+
+  """
+  Natures whose name starts with the given string, case-insensitive.
+  """
+  startsWith: String
+}

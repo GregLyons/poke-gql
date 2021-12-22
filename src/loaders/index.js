@@ -6,6 +6,7 @@ class LoaderSet {
   generation = require('./generation.js');
   item = require('./item.js');
   move = require('./move.js');
+  nature = require('./nature.js');
   pokemon = require('./pokemon.js');
   stat = require('./stat.js');
   status = require('./status.js');

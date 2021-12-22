@@ -25,6 +25,7 @@ const entityNameToTableName = entityName => {
     case 'ability':
     case 'item':
     case 'effect':
+    case 'nature':
     case 'pokemon':
     case 'stat':
       return entityName;

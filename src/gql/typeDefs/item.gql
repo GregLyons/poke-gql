@@ -56,6 +56,11 @@ type Item implements Node {
   class: ItemClass
 
   """
+  E.g. 'aguav_berry' confuses Pokemon with a 'naughty' Nature.
+  """
+  confusesNature(filter: NatureFilter): ItemConfusesNatureConnection
+
+  """
   The Descriptions for the Move across the different VersionGroups.
   """
   descriptions(filter: DescriptionFilter): ItemDescriptionConnection
@@ -267,12 +272,27 @@ type ItemEnablesMoveConnection implements Connection {
   
   edges(
     pagination: PaginationInput
-  ): [ItemEnablesMoveEdge!]!
+  ): [ItemEnablesMoveEdge!]! 
 
 }
 
 type ItemEnablesMoveEdge implements Edge {  
   node: Move!
+}
+
+# NATURE
+
+type ItemConfusesNatureConnection implements Connection {
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [ItemConfusesNatureEdge!]! 
+
+}
+
+type ItemConfusesNatureEdge implements Edge {  
+  node: Nature!
 }
 
 # POKEMON
@@ -486,12 +506,6 @@ enum ItemClass {
   TYPE_ENHANCER
   Z_CRYSTAL
 }
-
-#
-# UNIONS
-#
-
-union ItemEnablesConnection = ItemEnablesMoveConnection | ItemEnablesPokemonConnection
 
 #
 # INPUTS

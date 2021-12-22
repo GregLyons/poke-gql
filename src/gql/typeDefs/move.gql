@@ -90,7 +90,7 @@ type Move implements Node {
 
   We do not say that 'feint' interacts with 'protect', even though strictly speaking it does (it removes the effects of 'protect' from the Pokemon using 'protect'). We intend this field to mean that the Move at the ending Node does is subject to the core mechanic of the Move at the starting Node. (E.g. 'protect' blocks Moves, 'snatch' steals Moves, 'assist' calls Moves).
   """
-  interactedWithByMove(filter: moveFilter): MoveInteractedWithByMoveConnection
+  interactedWithByMove(filter: MoveFilter): MoveInteractedWithByMoveConnection
 
   """
   E.g. 'shell_smash' interacts with 'snatch', 'surf' interacts with 'protect', 'focus_punch' does not interact with 'assist' since it cannot be called by 'assist'.

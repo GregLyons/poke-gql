@@ -66,6 +66,11 @@ type Stat implements Node {
   modifiedByMove(filter: MoveFilter): StatModifiedByMoveConnection
 
   """
+  E.g. 'adamant' increases 'attack' by 1.1.
+  """
+  modifiedByNature(filter: NatureFilter): StatModifiedByNatureConnection
+
+  """
   The name of the Stat in snake_case.
   """
   name: String!
@@ -241,6 +246,41 @@ type StatModifiedByMoveEdge implements Edge {
 
   """
   The recipient of the Stat modification.
+  """
+  recipient: Recipient!
+}
+
+# NATURE
+
+type StatModifiedByNatureConnection implements Connection {
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [StatModifiedByNatureEdge!]!
+
+}
+
+type StatModifiedByNatureEdge implements Edge {
+  node: Stat!
+
+  """
+  As of Gen 8, Natures don't modify stats via stages.
+  """
+  stage: Int
+
+  """
+  The factor by which the Nature scales the Stat.
+  """
+  multiplier: Float
+
+  """
+  Natures always successfully modify their corresponding Stats.
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification by a Nature is always the user (i.e. the Pokemon with the Nature).
   """
   recipient: Recipient!
 }

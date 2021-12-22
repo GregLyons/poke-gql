@@ -11,6 +11,7 @@ const Generation = fs.readFileSync(path.join(__dirname, 'generation.gql'), 'utf-
 const Helpers = fs.readFileSync(path.join(__dirname, 'helpers.gql'), 'utf-8');
 const Item = fs.readFileSync(path.join(__dirname, 'item.gql'), 'utf-8');
 const Move = fs.readFileSync(path.join(__dirname, 'move.gql'), 'utf-8');
+const Nature = fs.readFileSync(path.join(__dirname, 'nature.gql'), 'utf-8');
 const Pokemon = fs.readFileSync(path.join(__dirname, 'pokemon.gql'), 'utf-8');
 const Sprite = fs.readFileSync(path.join(__dirname, 'sprite.gql'), 'utf-8');
 const Stat = fs.readFileSync(path.join(__dirname, 'stat.gql'), 'utf-8');
@@ -28,6 +29,7 @@ const typeDefs = [
   Helpers,
   Item,
   Move,
+  Nature,
   Pokemon,
   Sprite,
   Stat,

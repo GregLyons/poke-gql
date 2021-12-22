@@ -47,6 +47,14 @@
         }
       }
     }
+    modifiedByNature {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     name
   }
 }

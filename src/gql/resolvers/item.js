@@ -79,6 +79,8 @@ const Item = {
 
   class: parent => parent.item_class.toUpperCase(),
 
+  confusesNature: itemPK,
+  
   descriptions: itemPK,
 
   effects: itemPK,
@@ -131,6 +133,9 @@ const ConnectionsAndEdges = {
   
   ItemCausesStatusConnection: junctionConnection('item', 'causesStatus'),
   ItemCausesStatusEdge: causeStatusEdge(),
+
+  ItemConfusesNatureConnection: junctionConnection('item', 'confusesNature'),
+  ItemConfusesNatureEdge: basicEdge(),
 
   ItemDescriptionConnection: junctionConnection('item', 'description'),
   ItemDescriptionEdge: descriptionEdge(),

@@ -24,6 +24,10 @@ class ItemLoaders extends LoadersForEntity {
     return [pagination, filter, 'item', 'status', 'item_causes_pstatus', false];
   }
 
+  confusesNature(pagination, filter) {
+    return [pagination, filter, 'item', 'nature', 'item_confuses_nature', false];
+  }
+
   description(pagination, filter) {
     return [pagination, filter, 'description', 'item', 'pdescription_item', true];
   }

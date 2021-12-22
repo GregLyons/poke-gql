@@ -32,6 +32,14 @@
         }
       }
     }
+    confusesNature {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     class
     descriptions {
       count

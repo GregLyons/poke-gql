@@ -1,0 +1,38 @@
+{
+  natures {
+    confusedByItem {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    dislikedFlavor
+    formattedName
+    generation {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    introduced {
+      edges {
+        node {
+          number
+        }
+      }
+    }
+    likedFlavor
+    modifiesStat {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    name
+  }
+}
