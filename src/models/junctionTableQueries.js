@@ -22,6 +22,14 @@ const getForeignKeyColumnNames = (junctionTableName, ownerTableName, ownedTableN
       junctionOwnedGen = 'required_pmove_generation_id';
       break;
 
+    case 'pmove_interacts_pmove':
+      // 'owned' is the move being interacted with (e.g. 'snatch', 'protect', 'assist')
+      junctionOwnerID = 'interacting_pmove_id';
+      junctionOwnerGen = 'interacting_pmove_generation_id';
+      junctionOwnedID = 'recipient_pmove_id';
+      junctionOwnedGen = 'recipient_pmove_generation_id';
+      break;
+
     case 'natural_gift':
       // 'owned' is the type
       junctionOwnerID = 'item_id';

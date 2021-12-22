@@ -35,6 +35,14 @@ class MoveLoaders extends LoadersForEntity {
   hinderedByFieldState(pagination, filter) {
     return [pagination, filter, 'fieldState', 'move', 'field_state_hinders_pmove', true];
   }
+
+  interactedWithByMove(pagination, filter) {
+    return [pagination, filter, 'move', 'move', 'pmove_interacts_pmove', true];
+  }
+
+  interactsWithMove(pagination, filter) {
+    return [pagination, filter, 'move', 'move', 'pmove_interacts_pmove', false];
+  }
       
   modifiesStat(pagination, filter) {
     return [pagination, filter, 'move', 'stat', 'pmove_modifies_stat', false];

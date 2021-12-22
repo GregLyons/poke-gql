@@ -4,9 +4,10 @@ const {
   getEntityByColumnQueryString,
 } = require('../../models/index.js');
 
-//
+// Resolving top-level Queries
 //#region
 
+// For bulk Queries (e.g. 'abilities { ... }', 'moves { ... }')
 const queryEntities = entityName => {
   return async (parent, args, context, info) => {
     context.loaders[entityName].clearLoaders();
@@ -26,6 +27,7 @@ const queryEntities = entityName => {
   }
 }
 
+// For more specific Queries (e.g. 'abilityByName (name: ...) { ... }')
 const queryEntitiesByColumn = (entityName, keyName) => {
   return async (parent, args, context, info) => {
     context.loaders[entityName].clearLoaders();
@@ -47,7 +49,7 @@ const queryEntitiesByColumn = (entityName, keyName) => {
 
 //#endregion
 
-// 
+// Common resolver patterns
 //#region
 
 // Returns the primary key of the parent. 
@@ -64,7 +66,7 @@ const parentPK = (entityName) => {
 
 //#endregion
 
-// EDGES
+// Edge patterns
 //#region
 
 // Ability slot.
@@ -181,73 +183,66 @@ const turnsEdge = () => {
 
 //#endregion
 
-// CONNECTIONS
+// Connection patterns
 //#region
 
-// Connection for presence of an entity (e.g. Ability, Effect, Move) in a given Generation.
+// Connection from a non-Generation entity to a Generation, signifying that the entity is present in that Generation.
+// No 'count' field since it is always 1.
 const generationConnection = entityName => {
   // 'parent' = 'generation'
   return {
     edges: async (parent, args, context, info) => {
       return await context.loaders[entityName].load('generation', parent, args.pagination, parent.filter, false)
     },
-
-    // count: async (parent, args, context, info) => {
-    //   return await context.loaders[entityName].load('generation', parent, args.pagination, parent.filter, true)
-    // },
   };
 }
 
-
-// return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, false);
-// },
-
-// Connection for Generation in which an entity (e.g. Item, Pokemon) was introduced.
+// Connection from a non-Generation entity to a Generation, signifying that the entity was introduced in that Generation.
+// No 'count' field since it is always 1.
 const introductionConnection = entityName => {
   // 'parent' = 'introduced'
   return {
     edges: async (parent, args, context, info) => {
       return await context.loaders[entityName].load('introduced', parent, args.pagination, parent.filter, false)
     },
-
-    // count: async (parent, args, context, info) => {
-    //   return await context.loaders[entityName].load('introduced', parent, args.pagination, parent.filter, true)
-    // },
   };
 }
 
-// Connection between two entities (e.g. Ability and Stat, Pokemon and Move).
+// Connection between two non-Generation entities (e.g. Ability and Stat, Pokemon and Move).
 /*
-  'ownerEntityName' and 'ownedEntityName' refer to the starting and ending Node, respectively, e.g. 'Pokemon' and 'Ability'--owner and owned, respectively--in PokemonAbilityConnection.
-
-  'extra' describes the Connection further, e.g. 'causes' in AbilityCausesStatusConnection, as opposed to 'resists' in AbilityResistsStatusConnection.
+  'ownerEntityClass' refers to the class of the starting node.
+  'innerKey' will be the key in the appropriate loader object
+  
+  For example, for an AbilityModifiesStatConnection, 'ownerEntityClass' is 'ability' and 'innerKey' is 'modifiesStat'.
 */
-const junctionConnection = (ownerEntityName, innerKey) => {
+const junctionConnection = (ownerEntityClass, innerKey) => {
   // Function arguments are used to determine which loader to use, via the 'context' object.
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, false);
+      return await context.loaders[ownerEntityClass].load(innerKey, parent, args.pagination, parent.filter, false);
     },
     
     count: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityName].load(innerKey, parent, args.pagination, parent.filter, true);
+      return await context.loaders[ownerEntityClass].load(innerKey, parent, args.pagination, parent.filter, true);
     },
   };
 };
 
-const presenceConnection = entityName => {
+// Connection from Generation to a non-Generation entity, signifying that the entity is present in that Generation.
+const presenceConnection = entityClass => {
   // 'parent' = 'generation_id'
   return {
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, false, true)
+      return await context.loaders.generation.load(entityClass, parent.genID, args.pagination, parent.filter, false, true)
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, true, true)
+      return await context.loaders.generation.load(entityClass, parent.genID, args.pagination, parent.filter, true, true)
     },
   };
 };
 
+// Connection from Generation to a non-Generation entity, signifying that the entity was introduced in that Generation.
 const debutConnection = entityName => {
   // 'parent' = 'generation_id'
   return {

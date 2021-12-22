@@ -33,8 +33,6 @@ const {
 } = require('./helpers.js');
 const movePK = parentPK('move');
 
-const {getPaginationQueryString, getFilterQueryString} = require('../../models/index.js');
-
 //#endregion
 
 // Query
@@ -95,6 +93,10 @@ const Move = {
   generation: parent => parent.generation_id,
 
   hinderedByFieldState: movePK,
+
+  interactedWithByMove: movePK,
+
+  interactsWithMove: movePK,
   
   introduced: parent => parent.introduced,
   
@@ -158,6 +160,12 @@ const ConnectionsAndEdges = {
 
   MoveHinderedByFieldStateConnection: junctionConnection('move', 'hinderedByFieldState'),
   MoveHinderedByFieldStateEdge: basicEdge(),
+
+  MoveInteractedWithByMoveConnection: junctionConnection('move', 'interactedWithByMove'),
+  MoveInteractedWithByMoveEdge: basicEdge(),
+
+  MoveInteractsWithMoveConnection: junctionConnection('move', 'interactsWithMove'),
+  MoveInteractsWithMoveEdge: basicEdge(),
 
   MoveIntroductionConnection: introductionConnection('move'),
   MoveIntroductionEdge: basicEdge(),

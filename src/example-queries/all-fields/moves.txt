@@ -66,6 +66,22 @@
         }
       }
     }
+    interactedWithByMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    interactsWithMove {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     introduced {
       edges {
         node {
