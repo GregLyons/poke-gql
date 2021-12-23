@@ -24,7 +24,7 @@ class StatLoaders extends LoadersForEntity {
     return [pagination, filter, 'move', 'stat', 'pmove_modifies_stat', true];
   }
 
-  modifiedByStat(pagination, filter) {
+  modifiedByNature(pagination, filter) {
     return [pagination, filter, 'nature', 'stat', 'nature_modifies_stat', true];
   }
 }

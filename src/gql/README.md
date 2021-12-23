@@ -7,4 +7,4 @@ These type definitions and resolvers are combined in `index.js` and using `makeE
 
 # Extended example: Adding Natures
 
-Nothing needs to be done in `index.js`, but the necessary type definitions and resolvers need to be added in `typeDefs` and `resolvers`, respectively.
+Nothing needs to be done in `index.js`, but the necessary type definitions and resolvers need to be added in `typeDefs` and `resolvers`, respectively. After that, move onto `../loaders`.

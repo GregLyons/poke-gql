@@ -75,6 +75,8 @@ const Stat = {
   modifiedByItem: statPK,
   
   modifiedByMove: statPK,
+
+  modifiedByNature: statPK,
   
   name: async (parent, args, context, info) => {
     return parent.stat_name
@@ -104,6 +106,9 @@ const ConnectionsAndEdges = {
 
   StatModifiedByMoveConnection: junctionConnection('stat', 'modifiedByMove'),
   StatModifiedByMoveEdge: modifyStatEdge(),
+
+  StatModifiedByNatureConnection: junctionConnection('stat', 'modifiedByNature'),
+  StatModifiedByNatureEdge: modifyStatEdge(),
 }
 
 //#endregion

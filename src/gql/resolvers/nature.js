@@ -3,11 +3,14 @@
 
   db is a mysql2 database instance. 
 
-  The 'effect' table has columns:
-    'effect_id'
-    'effect_name'
-    'effect_formatted_name'
+  The 'nature' table has columns:
+    'nature_generation_id'
+    'nature_id'
+    'nature_name'
+    'nature_formatted_name'
     'introduced'
+    'nature_favorite_flavor'
+    'nature_disliked_flavor'
 */
 
 // Import helpers
@@ -31,18 +34,6 @@ const naturePK = parentPK('effect');
 //#endregion
 
 // Query
-/*
-    natureByName(name)
-    natures(
-      cursor,
-      limit,
-      contains,
-      endsWith,
-      introducedAfter,
-      introducedBefore,
-      startsWith
-    )
-*/
 //#region
 
 const Query = {
@@ -54,9 +45,6 @@ const Query = {
 //#endregion
 
 // Nature
-/*
-    id
-*/
 //#region
 
 const Nature = {

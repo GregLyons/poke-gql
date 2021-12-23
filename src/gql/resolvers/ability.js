@@ -37,20 +37,6 @@ const abilityPK = parentPK('ability');
 //#endregion
 
 // Query
-/*
-    abilityByID(id)
-    abilityByName(name)
-    abilities(
-      cursor,
-      limit,
-      generation,
-      contains,
-      endsWith,
-      introducedAfter,
-      introducedBefore,
-      startsWith
-    )
-*/
 //#region
 
 const Query = {
@@ -62,11 +48,6 @@ const Query = {
 //#endregion
 
 // Ability
-/*
-    id
-    descriptions
-    pokemon
-*/
 //#region
 
 const Ability = {

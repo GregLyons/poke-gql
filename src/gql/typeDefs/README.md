@@ -50,6 +50,10 @@ As a final note, remember that `Edge`s also contain information about the relati
 
 # Extended example: Adding Natures
 
+We need to add a new `nature.gql` file. Since Natures are related to Items and to Stats, we need to add fields to those two `.gql` files as well. Unlike in `poke-db`, we need to write fields for both ends of each relationship; virutally all the relationships in the API are symmetric.
+
+## `nature.gql`
+
 Since we're adding a new entity class, we need to define a new `Node` type. We have a separate `.gql` file for each entity class/`Node` type, so we need to add `nature.gql`. This file consists of:
 
 - An extension of the `Query` type for top level queries, which should be very similar to most other `Node`s (e.g. see `ability.gql`).
@@ -60,3 +64,17 @@ Since we're adding a new entity class, we need to define a new `Node` type. We h
 For the understanding the `Connection`s and `Edge` types, see the discussion above. The `NatureModifiesStatEdge` contains several pieces of data about the relationship: the `stage`, `multiplier`, `chance`, and `recipient` fields. 
 
 The `NatureGenerationConnection`/`Edge` and `NatureIntroductionConnection`/`Edge` types give generational info about the Nature (remember that we have a database row for each Nature in each generation, so in turn we'll have a GraphQL `Nature` instance for each Nature in each generation).
+
+## `item.gql`
+
+We add a new `confusesNature` field to the `Item` `Node` type, as well as the corresponding `ItemConfusesNatureConnection`/`Edge` types. 
+
+## `stat.gql`
+
+We add a new `modifiedByNature` field to the `Stat` `Node` type, as well as the corresponding `StatModifiedByNatureConnection`/`Edge` types.
+
+## `index.js`
+
+Finally, we need to import our SDL file, `nature.gql`, into `index.js` and then add it to the `typeDefs` object.
+
+Now we can move onto the `../resolvers` folder.
