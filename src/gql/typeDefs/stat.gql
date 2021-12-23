@@ -262,7 +262,7 @@ type StatModifiedByNatureConnection implements Connection {
 }
 
 type StatModifiedByNatureEdge implements StatModificationEdge & Edge {
-  node: Stat!
+  node: Nature!
 
   """
   As of Gen 8, Natures don't modify stats via stages.

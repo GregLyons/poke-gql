@@ -16,6 +16,7 @@
         node {
           name
         }
+        turns
       }
     }
     descriptions {
@@ -24,6 +25,7 @@
         node {
           text
         }
+        versionGroupCode
       }
     }
     effects {
