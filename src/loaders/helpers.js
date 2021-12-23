@@ -40,6 +40,9 @@ class LoadersForEntity {
       this.loaders[key] = {};
     }
     
+    // NOTE: We need to separate set up for the loader and the counter, otherwise when the API tries to resolve 'count', which doesn't have a 'pagination' argument, the loader for the 'edges' field would also be set up, without the necessary 'pagination' argument.
+
+    // If we're not in count mode (i.e. resolving the 'edges' field instead of the 'count' field) and the loader doesn't exist, then we want to set up that loader. 
     if (!countMode && !this.loaders[key].loader) {
       // Batcher for 'generation' and 'introduced' fields.
       if (['generation', 'introduced'].includes(key)) {
@@ -51,12 +54,11 @@ class LoadersForEntity {
       }
     }
 
-    //
+    // If we're in count mode (i.e. resolving the 'count' field instead of the 'edges' field) and the counter doesn't exist, then we want to set up that counter.
     if (countMode && !this.loaders[key].counter) {
       this.loaders[key].counter = getCounter(this[key](pagination, filter));
     }
     // If the loaders for 'key' exist, this is the only thing that executes.
-    console.log(this.loaders);
     return countMode 
       ? this.loaders[key].counter
       : this.loaders[key].loader;

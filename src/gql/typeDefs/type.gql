@@ -175,7 +175,7 @@ type TypeBoostedByAbilityConnection implements Connection {
 
 }
 
-type TypeBoostedByAbilityEdge implements Edge {  
+type TypeBoostedByAbilityEdge implements MultiplierEdge & Edge {  
   node: Ability!
   multiplier: Float!
 }
@@ -218,7 +218,7 @@ type TypeBoostedByFieldStateConnection implements Connection {
 
 }
 
-type TypeBoostedByFieldStateEdge implements Edge {  
+type TypeBoostedByFieldStateEdge implements MultiplierEdge & Edge {  
   node: FieldState!
   multiplier: Float!
 }
@@ -335,7 +335,7 @@ type TypeBoostedByItemConnection implements Connection {
 
 }
 
-type TypeBoostedByItemEdge implements Edge {  
+type TypeBoostedByItemEdge implements MultiplierEdge & Edge {  
   node: Item!
   multiplier: Float!
 }

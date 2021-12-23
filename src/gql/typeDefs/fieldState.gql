@@ -446,7 +446,7 @@ type FieldStateModifiesStatConnection implements Connection {
 
 }
 
-type FieldStateModifiesStatEdge implements Edge {  
+type FieldStateModifiesStatEdge implements StatModificationEdge & Edge {  
   node: Stat!
 
   """
@@ -467,7 +467,7 @@ type FieldStateModifiesStatEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # STATUS
@@ -481,7 +481,7 @@ type FieldStateCausesStatusConnection implements Connection {
 
 }
 
-type FieldStateCausesStatusEdge implements Edge {  
+type FieldStateCausesStatusEdge implements StatusCauseEdge & Edge {  
   node: Status!
 
   """
@@ -514,7 +514,7 @@ type FieldStateBoostsTypeConnection implements Connection {
 
 }
 
-type FieldStateBoostsTypeEdge implements Edge {  
+type FieldStateBoostsTypeEdge implements MultiplierEdge & Edge {  
   node: Type!
 
   """

@@ -91,7 +91,7 @@ type StatModifiedByAbilityConnection implements Connection {
 
 }
 
-type StatModifiedByAbilityEdge implements Edge {  
+type StatModifiedByAbilityEdge implements StatModificationEdge & Edge {  
   node: Ability!
 
   """
@@ -114,7 +114,7 @@ type StatModifiedByAbilityEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # FIELD STATE
@@ -128,7 +128,7 @@ type StatModifiedByFieldStateConnection implements Connection {
 
 }
 
-type StatModifiedByFieldStateEdge implements Edge {  
+type StatModifiedByFieldStateEdge implements StatModificationEdge & Edge {  
   node: FieldState!
 
   """
@@ -151,7 +151,7 @@ type StatModifiedByFieldStateEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # GENERATION
@@ -189,7 +189,7 @@ type StatModifiedByItemConnection implements Connection {
 
 }
 
-type StatModifiedByItemEdge implements Edge {  
+type StatModifiedByItemEdge implements StatModificationEdge & Edge {  
   node: Item!
 
   """
@@ -212,7 +212,7 @@ type StatModifiedByItemEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # MOVE
@@ -226,7 +226,7 @@ type StatModifiedByMoveConnection implements Connection {
 
 }
 
-type StatModifiedByMoveEdge implements Edge {  
+type StatModifiedByMoveEdge implements StatModificationEdge & Edge {  
   node: Move!
 
   """
@@ -247,7 +247,7 @@ type StatModifiedByMoveEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # NATURE
@@ -261,7 +261,7 @@ type StatModifiedByNatureConnection implements Connection {
 
 }
 
-type StatModifiedByNatureEdge implements Edge {
+type StatModifiedByNatureEdge implements StatModificationEdge & Edge {
   node: Stat!
 
   """
@@ -282,7 +282,7 @@ type StatModifiedByNatureEdge implements Edge {
   """
   The recipient of the Stat modification by a Nature is always the user (i.e. the Pokemon with the Nature).
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 #

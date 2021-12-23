@@ -303,7 +303,7 @@ type AbilityModifiesStatConnection implements Connection {
 
 }
 
-type AbilityModifiesStatEdge implements Edge {  
+type AbilityModifiesStatEdge implements StatModificationEdge & Edge {  
   node: Stat!
 
   """
@@ -326,7 +326,7 @@ type AbilityModifiesStatEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # STATUS
@@ -340,7 +340,7 @@ type AbilityCausesStatusConnection implements Connection {
 
 }
 
-type AbilityCausesStatusEdge implements Edge {  
+type AbilityCausesStatusEdge implements StatusCauseEdge & Edge {  
   node: Status!
 
   """
@@ -375,7 +375,7 @@ type AbilityBoostsTypeConnection implements Connection {
 
 }
 
-type AbilityBoostsTypeEdge implements Edge {  
+type AbilityBoostsTypeEdge implements MultiplierEdge & Edge {  
   node: Type!
 
   """
@@ -413,7 +413,7 @@ type AbilityBoostsUsageMethodConnection implements Connection {
 
 }
 
-type AbilityBoostsUsageMethodEdge implements Edge {  
+type AbilityBoostsUsageMethodEdge implements MultiplierEdge & Edge {  
   node: UsageMethod!
 
   """
@@ -443,11 +443,6 @@ type AbilityResistsUsageMethodEdge implements Edge {
 #
 # ENUMS
 #
-enum Recipient {
-  ALL_FOES
-  TARGET
-  USER
-}
 
 enum AbilitySlot {
   ONE

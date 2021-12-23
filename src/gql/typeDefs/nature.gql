@@ -130,11 +130,11 @@ type NatureModifiesStatConnection implements Connection {
 
 }
 
-type NatureModifiesStatEdge implements Edge {
+type NatureModifiesStatEdge implements StatModificationEdge & Edge {
   node: Stat!
 
   """
-  As of Gen 8, Natures don't modify stats via stages.
+  As of Gen 8, Natures don't modify stats via stages, so this will be null.
   """
   stage: Int
 
@@ -151,7 +151,7 @@ type NatureModifiesStatEdge implements Edge {
   """
   The recipient of the Stat modification by a Nature is always the user (i.e. the Pokemon with the Nature).
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 #

@@ -93,7 +93,7 @@ type UsageMethodBoostedByAbilityConnection implements Connection {
 
 }
 
-type UsageMethodBoostedByAbilityEdge implements Edge {  
+type UsageMethodBoostedByAbilityEdge implements MultiplierEdge & Edge {  
   node: Ability!
   multiplier: Float!
 }
@@ -147,7 +147,7 @@ type UsageMethodBoostedByItemConnection implements Connection {
 
 }
 
-type UsageMethodBoostedByItemEdge implements Edge {  
+type UsageMethodBoostedByItemEdge implements MultiplierEdge & Edge {  
   node: Item!
   multiplier: Float!
 }

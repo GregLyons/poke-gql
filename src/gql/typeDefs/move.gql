@@ -421,7 +421,7 @@ type MoveModifiesStatConnection implements Connection {
 
 }
 
-type MoveModifiesStatEdge implements Edge {  
+type MoveModifiesStatEdge implements StatModificationEdge & Edge {  
   node: Stat!
 
   """
@@ -442,7 +442,7 @@ type MoveModifiesStatEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # STATUS
@@ -456,7 +456,7 @@ type MoveCausesStatusConnection implements Connection {
 
 }
 
-type MoveCausesStatusEdge implements Edge {  
+type MoveCausesStatusEdge implements StatusCauseEdge & Edge {  
   node: Status!
 
   """

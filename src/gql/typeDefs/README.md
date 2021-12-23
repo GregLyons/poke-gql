@@ -23,11 +23,11 @@ Every field which would go from one entity class to another, such as the `pokemo
 
 For example, the query
 
-    abilities(pagination: {limit: 30}, filter: {startsWith: "a"}) {
+    abilities(pagination: {limit: 3}, filter: {startsWith: "a"}) {
       name
       pokemon(filter: {introducedAfter: 7}) {
         count
-        edges(pagination: {limit: 10, offset: 5}) {
+        edges(pagination: {limit: 2}) {
           node {
             name
             speciesName
@@ -38,13 +38,25 @@ For example, the query
     }
 
 selects the following information:
-  - Up to 30 `Ability` `Node`s, whose name starts with the letter 'a'
+  - Up to 3 `Ability` `Node`s, whose name starts with the letter 'a'
   - The name of these `Ability` `Node`s
   - For each `Ability` `Node`, a `AbilityPokemonConnection`, giving
-    - The number of `Pokemon` introduced after `Generation` 7 with the `Ability`
-    - An array of `AbilityPokemonEdge`s, of size at most 10 (and offset by 5 in the database), each of which consists of
+    - `count`: The total number of `Pokemon` introduced after `Generation` 7 with the `Ability`
+    - `edges`: An array of `AbilityPokemonEdge`s, of size at most 2, each of which consists of
       - The `Pokemon` `Node` at the end of the `Edge`, accessible through the `node` argument (here we access the `name` and `speciesName` of the `Pokemon`); by the `filter` argument passed to the `pokemon` field above, all of these `Pokemon` were introduced in `Generation` 7 or later.
       - The slot which this `Ability` occupies on the Pokemon ('ONE', 'TWO', or 'HIDDEN'); note how this is a feature of the relationship between abilities and Pokemon themselves, rather than a property of one of the two entities in the relationship.
 
+As a final note, remember that `Edge`s also contain information about the relationship. For a `PokemonMoveConnection` between a `Pokemon` and a `Move` `Node`, representing that that Pokemon can learn that Move, there may be multiple edges between those two `Node`s, one for each possible method that the Pokemon can learn the Move (e.g. through breeding, through leveling up, etc.).
+
 # Extended example: Adding Natures
 
+Since we're adding a new entity class, we need to define a new `Node` type. We have a separate `.gql` file for each entity class/`Node` type, so we need to add `nature.gql`. This file consists of:
+
+- An extension of the `Query` type for top level queries, which should be very similar to most other `Node`s (e.g. see `ability.gql`).
+- The `Nature` type implementing `Node`. Here we add all the fields for the relationships. In particular, we need `confusedByItem` and `modifiesStat`, as well as various scalar fields.
+- Several `Connection` and `Edge` types.
+- A `NatureFilter` input type for filtering `Nature` `Node`s.
+
+For the understanding the `Connection`s and `Edge` types, see the discussion above. The `NatureModifiesStatEdge` contains several pieces of data about the relationship: the `stage`, `multiplier`, `chance`, and `recipient` fields. 
+
+The `NatureGenerationConnection`/`Edge` and `NatureIntroductionConnection`/`Edge` types give generational info about the Nature (remember that we have a database row for each Nature in each generation, so in turn we'll have a GraphQL `Nature` instance for each Nature in each generation).

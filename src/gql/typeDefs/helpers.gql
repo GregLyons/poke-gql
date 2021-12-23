@@ -5,6 +5,14 @@ interface Node {
   id: ID!
 }
 
+
+
+#
+# EDGES
+#
+
+
+
 """
 Interface for relationships between Nodes. See the description for Connection for more information. 
 
@@ -20,6 +28,62 @@ interface Edge {
   """
   node: Node!
 }
+
+"""
+For relationships in which one entity boosts another, e.g. Abilities boosting UsageMethods.
+"""
+interface MultiplierEdge implements Edge {
+  node: Node!
+
+  multiplier: Float!
+}
+
+"""
+For relationships in which an entity causes a Status effect.
+"""
+interface StatusCauseEdge implements Edge {
+  node: Node!
+
+  """
+  The chance of the Status being inflicted assuming that other necessary conditions have been met (e.g. the Move connects, a Pokemon with 'static' is hit by a contact Move).
+  """
+  chance: Float!
+}
+
+"""
+For relationships where an entity modifies Stats, e.g. 'intimidate' lowers 'attack'.
+"""
+interface StatModificationEdge implements Edge {
+  node: Node!
+  
+  """
+  Null if the modification is multiplier-based.
+  """
+  stage: Int
+
+  """
+  Null if the modification is stage-based.
+  """
+  multiplier: Float
+
+  """
+  The chance of the Stat modification occuring assuming that other necessary conditions have been met (e.g. the Move connects, a Pokemon with 'gooey' is hit by a contact Move).
+  """
+  chance: Float!
+
+  """
+  The recipient of the Stat modification once it occurs (e.g. the target of the Move, the user of the Item, etc.)
+  """
+  recipient: StatModificationRecipient!
+}
+
+
+
+#
+# CONNECTIONS
+#
+
+
 
 """
 Interface for relationships between Nodes. 'count' returns the total number of edges, while 'edges' refers to the Edges in the Connection.
@@ -98,6 +162,15 @@ input PaginationInput {
 enum SortByEnum {
   ASC,
   DESC
+}
+
+"""
+The recipient of the Stat modification, e.g. the 'TARGET' of the Move, the 'USER' of the Item.
+"""
+enum StatModificationRecipient {
+  ALL_FOES
+  TARGET
+  USER
 }
 
 type Query {

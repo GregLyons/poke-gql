@@ -334,7 +334,7 @@ type ItemModifiesStatConnection implements Connection {
 
 }
 
-type ItemModifiesStatEdge implements Edge {  
+type ItemModifiesStatEdge implements StatModificationEdge & Edge {  
   node: Stat!
 
   """
@@ -357,7 +357,7 @@ type ItemModifiesStatEdge implements Edge {
   """
   The recipient of the Stat modification.
   """
-  recipient: Recipient!
+  recipient: StatModificationRecipient!
 }
 
 # STATUS
@@ -371,7 +371,7 @@ type ItemCausesStatusConnection implements Connection {
 
 }
 
-type ItemCausesStatusEdge implements Edge {  
+type ItemCausesStatusEdge implements StatusCauseEdge & Edge {  
   node: Status!
 
   """
@@ -404,7 +404,7 @@ type ItemBoostsTypeConnection implements Connection {
 
 }
 
-type ItemBoostsTypeEdge implements Edge {  
+type ItemBoostsTypeEdge implements MultiplierEdge & Edge {  
   node: Type!
 
   """
@@ -460,7 +460,7 @@ type ItemBoostsUsageMethodConnection implements Connection {
 
 }
 
-type ItemBoostsUsageMethodEdge implements Edge {  
+type ItemBoostsUsageMethodEdge implements MultiplierEdge & Edge {  
   node: UsageMethod!
 
   """
