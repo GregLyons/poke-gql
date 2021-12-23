@@ -79,7 +79,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
   // If this is called by a batcher, we don't want to apply the limit/offset to the query. Instead, we handle that in the batcher.
   const limitOffsetString = batching
     ? ``
-    : `LIMIT ${offset}, ${limit}`;
+    : `LIMIT ${offset}, ${limit}\n`;
 
   // Most columns, except 'generation_id' and 'introduced' are preceded by the table name.
   let sortString;
@@ -100,11 +100,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
     ? `AND ${tableName}_formatted_name LIKE %${search}%`
     : '';
 
-  return `
-    ${searchString}
-    ${sortString}
-    ${limitOffsetString}
-  `;
+  return '\n' + [searchString, sortString, limitOffsetString].filter(d => d.length > 0).join('\n')
 }
 
 // Return a MySQL string for filtering results.
@@ -137,11 +133,7 @@ const getFilterQueryString = (filter, tableName) => {
     ? `AND introduced <= ${filter.introducedBefore}`
     : ``;
 
-  const debutFilterString = `
-    ${introducedString}
-    ${introducedAfterString}
-    ${introducedBeforeString}
-  `;
+  const debutFilterString = '\n' + [introducedString, introducedAfterString, introducedBeforeString].filter(d => d.length > 0).join('\n')
 
   //#endregion
 
@@ -263,36 +255,45 @@ const getFilterQueryString = (filter, tableName) => {
       ? `AND pokemon_form_class = '${filter.formClass.toLowerCase()}'`
       : ``;
 
-    extraFilterString = `
-      ${maxWeightString}
-      ${minWeightString}
+    extraFilterString = [
+      maxWeightString,
+      minWeightString,
 
-      ${maxHeightString}
-      ${minHeightString}
+      maxHeightString,
+      minHeightString,
 
-      ${maxDexString}
-      ${minDexString}
+      maxDexString,
+      minDexString,
 
-      ${maxHPString}
-      ${minHPString}
+      maxWeightString,
+      minWeightString,
 
-      ${maxAttackString}
-      ${minAttackString}
+      maxHeightString,
+      minHeightString,
 
-      ${maxDefenseString}
-      ${minDefenseString}
+      maxDexString,
+      minDexString,
 
-      ${maxSpecialAttackString}
-      ${minSpecialAttackString}
+      maxHPString,
+      minHPString,
 
-      ${maxSpecialDefenseString}
-      ${minSpecialDefenseString}
+      maxAttackString,
+      minAttackString,
 
-      ${maxSpeedString}
-      ${minSpeedString}
+      maxDefenseString,
+      minDefenseString,
 
-      ${formClassString}
-    `
+      maxSpecialAttackString,
+      minSpecialAttackString,
+
+      maxSpecialDefenseString,
+      minSpecialDefenseString,
+
+      maxSpeedString,
+      minSpeedString,
+
+      formClassString,
+    ].filter(d => d.length > 0).join('\n');
   }
   // Moves
   else if (tableName === 'pmove') {
@@ -346,24 +347,24 @@ const getFilterQueryString = (filter, tableName) => {
       ? `AND pmove_contact = '${filter.contact.toLowerCase()}'`
       : ``;
       
-    extraFilterString = `
-      ${maxPowerString}
-      ${minPowerString}
+    extraFilterString = [
+      maxPowerString,
+      minPowerString,
 
-      ${maxPPString}
-      ${minPPString}
+      maxPPString,
+      minPPString,
 
-      ${maxAccuracyString}
-      ${minAccuracyString}
-      ${bypassAccuracyString}
+      maxAccuracyString,
+      minAccuracyString,
+      bypassAccuracyString,
 
-      ${maxPriorityString}
-      ${minPriorityString}
+      maxPriorityString,
+      minPriorityString,
       
-      ${categoryString}
-      ${targetString}
-      ${contactString}
-    `;  
+      categoryString,
+      targetString,
+      contactString,
+    ].filter(d => d.length > 0).join('\n');  
   }
   // Items
   else if (tableName === 'item') {
@@ -372,7 +373,7 @@ const getFilterQueryString = (filter, tableName) => {
       : ``;
 
     extraFilterString = `
-      ${itemClassString}
+      itemClassString,
     `;
   }
   // FieldStates
@@ -397,13 +398,13 @@ const getFilterQueryString = (filter, tableName) => {
       ? `AND field_state_target = '${filter.target.toLowerCase()}'`
       : ``;
 
-    extraFilterString = `
-      ${fieldStateClassString}
-      ${fieldDamagePercentString}
-      ${fieldMaxLayersString}
-      ${fieldStateGroundedString}
-      ${fieldStateTargetString}
-    `;
+    extraFilterString = [
+      fieldStateClassString,
+      fieldDamagePercentString,
+      fieldMaxLayersString,
+      fieldStateGroundedString,
+      fieldStateTargetString,
+    ].filter(d => d.length > 0).join('\n');
   }
   // Default case
   else {
@@ -412,18 +413,18 @@ const getFilterQueryString = (filter, tableName) => {
 
   //#endregion
 
-  const nameFilterString = `
-    ${nameString}
-    ${containsString}
-    ${startsWithString}
-    ${endsWithString}
-  `;
+  const nameFilterString = [
+    nameString,
+    containsString,
+    startsWithString,
+    endsWithString,
+  ].filter(d => d.length > 0).join('\n');
   
-  return `
-    ${debutFilterString}
-    ${nameFilterString}
-    ${extraFilterString}
-  `;
+  return [
+    debutFilterString,
+    nameFilterString,
+    extraFilterString,
+  ].filter(d => d.length > 0).join('\n');
 }
 
 module.exports = {

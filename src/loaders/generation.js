@@ -1,5 +1,6 @@
 const {
-  getGenLoaderAndCounter,
+  getGenToEntityCounter,
+  getGenToEntityLoader,
 
   LoadersForEntity,
 } = require('./helpers.js');
@@ -23,8 +24,17 @@ class GenerationLoaders extends LoadersForEntity {
     }
     // A different form of loader/counter is necessary for Generation.
     if (!this.loaders[key]) {
-      this.loaders[key] = getGenLoaderAndCounter(this[key](pagination, filter));
+      this.loaders[key] = getGenToEntityLoaderAndCounter(this[key](pagination, filter));
     }
+    //
+    if (!countMode && !this.loaders[key].loader) {
+      this.loaders[key].loader = getGenToEntityLoader(this[key](pagination, filter));
+    }
+    //
+    if (countMode && !this.loaders[key].counter) {
+      this.loaders[key].counter = getGenToEntityCounter(this[key](pagination, filter));
+    }
+
     return countMode 
       ? this.loaders[key].counter
       : this.loaders[key].loader;

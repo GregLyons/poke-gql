@@ -37,16 +37,26 @@ class LoadersForEntity {
   findLoader(key, pagination, filter, countMode) {
     // If the loaders for this key don't already exist, create them.
     if (!this.loaders[key]) {
+      this.loaders[key] = {};
+    }
+    
+    if (!countMode && !this.loaders[key].loader) {
       // Batcher for 'generation' and 'introduced' fields.
       if (['generation', 'introduced'].includes(key)) {
-        this.loaders[key] = getGenLoader(pagination, filter);
+        this.loaders[key].loader = getEntityToGenLoader(pagination, filter);
       }
       // Batcher for all other types of entities. Extensions of this class will define additional keys, which return, among other things, the names of the database tables necessary for resolving the query.
       else {
-        this.loaders[key] = getLoaderAndCounter(this[key](pagination, filter));
+        this.loaders[key].loader = getLoader(this[key](pagination, filter));
       }
     }
+
+    //
+    if (countMode && !this.loaders[key].counter) {
+      this.loaders[key].counter = getCounter(this[key](pagination, filter));
+    }
     // If the loaders for 'key' exist, this is the only thing that executes.
+    console.log(this.loaders);
     return countMode 
       ? this.loaders[key].counter
       : this.loaders[key].loader;
@@ -57,26 +67,25 @@ class LoadersForEntity {
 //#region
 
 // For connections between non-Generation entities.
-const getLoaderAndCounter = databaseInfo => {
-  return { 
-    loader: new DataLoader(junctionBatcher(databaseInfo)),
-    counter: new DataLoader(junctionBatcherCount(databaseInfo))
-  };
+const getLoader = databaseInfo => {
+  return new DataLoader(junctionBatcher(databaseInfo));
+}
+
+const getCounter = databaseInfo => {
+  return new DataLoader(junctionBatcherCount(databaseInfo));
 }
 
 // For connections from Generations to other entities.
-const getGenLoaderAndCounter = databaseInfo => {
-  return {
-    loader: new DataLoader(batchEntitiesByGen(databaseInfo)),
-    counter: new DataLoader(batchEntitiesByGenCount(databaseInfo))
-  }
+const getGenToEntityLoader = databaseInfo => {
+  return new DataLoader(batchEntitiesByGen(databaseInfo));
+}
+const getGenToEntityCounter = databaseInfo => {
+  return new DataLoader(batchEntitiesByGenCount(databaseInfo));
 }
 
 // For connections from non-Generation entities to Generations, specifically for the 'generation' and 'introduced' fields. No 'counter' loader is necessary, since the count will always be 1.
-const getGenLoader = (pagination, filter) => {
-  return {
-    loader: new DataLoader(batchGens(pagination, filter))
-  };
+const getEntityToGenLoader = (pagination, filter) => {
+  return new DataLoader(batchGens(pagination, filter));
 }
 
 //#endregion
@@ -353,7 +362,8 @@ module.exports = {
   batchEntitiesByGen,
   batchEntitiesByGenCount,
 
-  getGenLoaderAndCounter,
+  getGenToEntityCounter,
+  getGenToEntityLoader,
   
   junctionBatcher,
   junctionBatcherCount,
