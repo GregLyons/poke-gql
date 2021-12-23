@@ -10,12 +10,11 @@ const {
 // For bulk Queries (e.g. 'abilities { ... }', 'moves { ... }')
 const queryEntities = entityName => {
   return async (parent, args, context, info) => {
-    context.loaders[entityName].clearLoaders();
+    Object.keys(context.loaders).map(entityName => context.loaders[entityName].clearLoaders());
 
     if (!args.generations) {
       args.generations = [args.generation];
     }
-    console.log(getEntityQueryString(entityName, args.pagination, args.filter));
 
     return await context.db.promise().query(
       getEntityQueryString(entityName, args.pagination, args.filter),
@@ -31,19 +30,17 @@ const queryEntities = entityName => {
 // For more specific Queries (e.g. 'abilityByName (name: ...) { ... }')
 const queryEntitiesByColumn = (entityName, keyName) => {
   return async (parent, args, context, info) => {
-    context.loaders[entityName].clearLoaders();
+    Object.keys(context.loaders).map(entityName => context.loaders[entityName].clearLoaders());
 
     if (!args.generations) {
       args.generations = [args.generation];
     }
-    console.log(getEntityByColumnQueryString(entityName, keyName, args[keyName]));
 
     return await context.db.promise().query(
       getEntityByColumnQueryString(entityName, keyName, args[keyName]),
       [[args.generations]]
     )
     .then( ([results, fields]) => {
-      console.log(results);
       return results;
     })
     .catch(console.log);

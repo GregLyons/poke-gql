@@ -48,7 +48,7 @@ class TypeLoaders extends LoadersForEntity {
 
   // TODO
   offensiveMatchup(pagination, filter) {
-    return [pagination, filter, 'type', 'type', 'ptype_matchup', true];
+    return [pagination, filter, 'type', 'type', 'ptype_matchup', false];
   }
 
   removesFieldState(pagination, filter) {
