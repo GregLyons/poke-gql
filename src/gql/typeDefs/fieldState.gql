@@ -10,7 +10,7 @@ extend type Query {
     generation: Int = 8
     generations: [Int]
     name: String!
-  ): FieldState!
+  ): [FieldState!]!
   
   """
   Select FieldStates with filtering and pagination.

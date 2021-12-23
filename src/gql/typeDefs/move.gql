@@ -10,7 +10,7 @@ extend type Query {
     generation: Int = 8
     generations: [Int]
     name: String!
-  ): Move!
+  ): [Move!]!
   
   """
   Select Moves with filtering and pagination.

@@ -10,7 +10,7 @@ extend type Query {
     generation: Int = 8
     generations: [Int]
     name: String!
-  ): Item!
+  ): [Item!]!
   
   """
   Select Items with filtering and pagination.

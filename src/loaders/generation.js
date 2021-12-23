@@ -24,7 +24,7 @@ class GenerationLoaders extends LoadersForEntity {
     }
     // A different form of loader/counter is necessary for Generation.
     if (!this.loaders[key]) {
-      this.loaders[key] = getGenToEntityLoaderAndCounter(this[key](pagination, filter));
+      this.loaders[key] = {}
     }
     //
     if (!countMode && !this.loaders[key].loader) {

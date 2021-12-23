@@ -10,7 +10,7 @@ extend type Query {
     generation: Int = 8
     generations: [Int]
     name: String!
-  ): UsageMethod!
+  ): [UsageMethod!]!
   
   """
   Select UsageMethods with filtering and pagination.

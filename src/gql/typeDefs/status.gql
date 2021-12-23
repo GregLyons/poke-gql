@@ -10,7 +10,7 @@ extend type Query {
     generation: Int = 8
     generations: [Int]
     name: String!
-  ): Status!
+  ): [Status!]!
   
   """
   Select Statuses with filtering and pagination.

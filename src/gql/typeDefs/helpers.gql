@@ -169,6 +169,7 @@ The recipient of the Stat modification, e.g. the 'TARGET' of the Move, the 'USER
 """
 enum StatModificationRecipient {
   ALL_FOES
+  ALL_ALLIES
   TARGET
   USER
 }

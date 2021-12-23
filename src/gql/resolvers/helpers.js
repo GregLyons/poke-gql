@@ -15,6 +15,7 @@ const queryEntities = entityName => {
     if (!args.generations) {
       args.generations = [args.generation];
     }
+    console.log(getEntityQueryString(entityName, args.pagination, args.filter));
 
     return await context.db.promise().query(
       getEntityQueryString(entityName, args.pagination, args.filter),
@@ -35,12 +36,14 @@ const queryEntitiesByColumn = (entityName, keyName) => {
     if (!args.generations) {
       args.generations = [args.generation];
     }
+    console.log(getEntityByColumnQueryString(entityName, keyName, args[keyName]));
 
     return await context.db.promise().query(
       getEntityByColumnQueryString(entityName, keyName, args[keyName]),
       [[args.generations]]
     )
     .then( ([results, fields]) => {
+      console.log(results);
       return results;
     })
     .catch(console.log);
