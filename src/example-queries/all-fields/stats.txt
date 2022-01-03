@@ -1,5 +1,6 @@
 {
   stats {
+    id
     formattedName
     generation {
       edges {

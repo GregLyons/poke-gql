@@ -19,13 +19,16 @@ const {
 
   basicEdge,
   modifyStatEdge,
-  parentPK,
-
+  
   junctionConnection,
   generationConnection,
   introductionConnection,
+  
+  parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const statPK = parentPK('stat');
+const getID = primaryKeyToID('stat');
 
 //#endregion
 
@@ -54,12 +57,11 @@ const Query = {
 //#endregion
 
 // Stat
-/*
-    id
-*/
 //#region
 
 const Stat = {
+  id: getID,
+
   formattedName: async (parent, args, context, info) => {
     return parent.stat_formatted_name;
   },

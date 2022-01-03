@@ -1,5 +1,6 @@
 {
   descriptions {
+    id
     entity {
       ... on DescriptionAbilityConnection {
         count

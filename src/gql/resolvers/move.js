@@ -30,8 +30,10 @@ const {
   introductionConnection,
   
   parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const movePK = parentPK('move');
+const getID = primaryKeyToID('move');
 
 //#endregion
 
@@ -62,16 +64,11 @@ const Query = {
 //#endregion
 
 // Move
-/*
-    id
-    descriptions
-    enables
-    enablesMove
-    requires
-*/
 //#region
 
 const Move = {
+  id: getID,
+
   accuracy: parent => parent.pmove_accuracy,
 
   causesStatus: movePK,

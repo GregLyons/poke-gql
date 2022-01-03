@@ -1,5 +1,6 @@
 {
   pokemon {
+    id
     abilities {
       count
       edges {

@@ -1,5 +1,6 @@
 {
   versionGroups {
+    id
     code
     formattedName
     descriptions {

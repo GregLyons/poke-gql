@@ -16,15 +16,17 @@
 const {
   queryEntities,
   queryEntitiesByColumn,
-
-  parentPK,
-
+  
   basicEdge,
-
+  
   introductionConnection,
   junctionConnection,
+
+  parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const versionGroupPK = parentPK('versionGroup');
+const getID = primaryKeyToID('versionGroup');
 
 //#endregion
 
@@ -52,14 +54,11 @@ const Query = {
 //#endregion
 
 // VersionGroup
-/*
-    id
-    descriptions
-    sprites
-*/
 //#region
 
 const VersionGroup = {
+  id: getID,
+
   code: parent => parent.version_group_code,
 
   descriptions: versionGroupPK,

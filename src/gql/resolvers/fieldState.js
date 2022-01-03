@@ -34,8 +34,10 @@ const {
   introductionConnection,
   
   parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const fieldStatePK = parentPK('fieldState');
+const getID = primaryKeyToID('fieldState');
 
 //#endregion
 
@@ -65,14 +67,11 @@ const Query = {
 //#endregion
 
 // FieldState
-/*
-    id
-    descriptions
-    pokemon
-*/
 //#region
 
 const FieldState = {
+  id: getID,
+
   activatesAbility: fieldStatePK,
   
   activatesItem: fieldStatePK,

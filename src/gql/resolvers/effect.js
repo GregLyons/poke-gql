@@ -17,15 +17,17 @@ const {
   queryEntities,
   queryEntitiesByColumn,
 
-  parentPK,
-  
   basicEdge,
-
+  
   junctionConnection,
   generationConnection,
   introductionConnection,
+
+  parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const effectPK = parentPK('effect');
+const getID = primaryKeyToID('effect');
 
 //#endregion
 
@@ -54,12 +56,11 @@ const Query = {
 //#endregion
 
 // Effect
-/*
-    id
-*/
 //#region
 
 const Effect = {
+  id: getID,
+
   abilities: effectPK,
 
   formattedName: parent => parent.effect_formatted_name,

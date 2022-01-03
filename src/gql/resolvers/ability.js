@@ -31,8 +31,10 @@ const {
   introductionConnection,
   
   parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const abilityPK = parentPK('ability');
+const getID = primaryKeyToID('ability');
 
 //#endregion
 
@@ -51,6 +53,8 @@ const Query = {
 //#region
 
 const Ability = {
+  id: getID,
+
   activatedByFieldState: abilityPK,
 
   boostsType: abilityPK,

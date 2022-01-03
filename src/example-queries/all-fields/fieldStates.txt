@@ -1,5 +1,6 @@
 {
   fieldStates {
+    id
     class
     damagePercent
     formattedName

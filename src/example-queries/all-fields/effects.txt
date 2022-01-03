@@ -1,5 +1,6 @@
 {
   effects {
+    id
     abilities {
       count
       edges {

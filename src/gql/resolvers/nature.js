@@ -19,17 +19,19 @@
 const {
   queryEntities,
   queryEntitiesByColumn,
-
-  parentPK,
   
   basicEdge,
   modifyStatEdge,
-
+  
   junctionConnection,
   generationConnection,
   introductionConnection,
+
+  parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
-const naturePK = parentPK('effect');
+const naturePK = parentPK('nature');
+const getID = primaryKeyToID('nature');
 
 //#endregion
 
@@ -48,6 +50,8 @@ const Query = {
 //#region
 
 const Nature = {
+  id: getID,
+
   confusedByItem: naturePK,
 
   dislikedFlavor: parent => parent.nature_disliked_flavor,

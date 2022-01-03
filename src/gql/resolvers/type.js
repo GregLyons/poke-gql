@@ -17,18 +17,20 @@
 const {
   queryEntities,
   queryEntitiesByColumn,
-
-  parentPK,
-
+  
   basicEdge,
   multiplierEdge,
   powerEdge,
-
+  
   junctionConnection,
   generationConnection,
   introductionConnection,
+
+  parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const typePK = parentPK('type');
+const getID = primaryKeyToID('type');
 
 //#endregion
 
@@ -59,21 +61,11 @@ const Query = {
 //#endregion
 
 // Type
-/*
-    id
-    enables
-    doubleDamageFrom
-    neutralDamageFrom
-    halfDamageFrom
-    noDamageFrom
-    doubleDamageTo
-    neutralDamageTo
-    halfDamageTo
-    noDamageTo
-*/
 //#region
 
 const Type = {
+  id: getID,
+
   boostedByAbility: typePK,
   
   boostedByFieldState: typePK,

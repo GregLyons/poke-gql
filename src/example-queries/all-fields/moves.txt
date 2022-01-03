@@ -1,5 +1,6 @@
 {
   moves {
+    id
     accuracy
     causesStatus {
       count

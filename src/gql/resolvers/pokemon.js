@@ -29,8 +29,10 @@ const {
   introductionConnection,
   
   parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const pokemonPK = parentPK('pokemon');
+const getID = primaryKeyToID('pokemon');
 
 //#endregion
 
@@ -61,20 +63,11 @@ const Query = {
 //#endregion
 
 // Pokemon
-/*
-    id
-    enables
-    requires
-    quadDamageFrom
-    doubleDamageFrom
-    neutralDamageFrom
-    halfDamageFrom
-    quarterDamageFrom
-    noDamageFrom
-*/
 //#region
 
 const Pokemon = {
+  id: getID,
+
   abilities: pokemonPK,
 
   baseStats: parent => {

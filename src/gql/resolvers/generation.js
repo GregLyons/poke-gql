@@ -44,12 +44,12 @@ const Query = {
 //#endregion
 
 // Generation
-/*
-    id
-*/
 //#region
 
 const Generation = {
+  // 
+  id: parent => parent.generation_id,
+
   abilities: async (parent, args, context, info) => {
     return {
       genID: parent.generation_id,

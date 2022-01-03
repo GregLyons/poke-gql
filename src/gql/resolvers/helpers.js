@@ -64,6 +64,16 @@ const parentPK = (entityName) => {
   };
 };
 
+// Returns an ID string for the entity. This string consists either solely of the value of the AUTO_INCREMENT column for the entity, or, if the entity is generation-dependent, the generation number followed by a '_', followed by the AUTO_INCREMENT column value.
+const primaryKeyToID = (entityName) => {
+  const idColumn = entityNameToTableName(entityName) + '_id';
+
+  return (parent, args, context, info) => {
+    if (parent.generation_id) return parent.generation_id + '_' + parent[idColumn];
+    else return parent[idColumn];
+  }
+}
+
 //#endregion
 
 // Edge patterns
@@ -282,4 +292,5 @@ module.exports = {
   debutConnection,
 
   parentPK,
+  primaryKeyToID,
 }

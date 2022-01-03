@@ -1,5 +1,6 @@
 {
   natures {
+    id
     confusedByItem {
       count
       edges {

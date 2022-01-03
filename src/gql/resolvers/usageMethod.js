@@ -15,8 +15,6 @@
 
 const {
   queryEntities,
-
-  parentPK,
   
   basicEdge,
   multiplierEdge,
@@ -24,8 +22,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+
+  parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const usageMethodPK = parentPK('usageMethod');
+const getID = primaryKeyToID('usageMethod');
 
 //#endregion
 
@@ -65,12 +67,11 @@ const Query = {
 //#endregion
 
 // UsageMethod
-/*
-    id
-*/
 //#region
 
 const UsageMethod = {
+  id: getID,
+
   boostedByAbility: usageMethodPK,
 
   boostedByItem: usageMethodPK,

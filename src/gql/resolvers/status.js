@@ -25,8 +25,10 @@ const {
   introductionConnection,
 
   parentPK,
+  primaryKeyToID,
 } = require('./helpers.js');
 const statusPK = parentPK('status');
+const getID = primaryKeyToID('status');
 
 //#endregion
 
@@ -55,12 +57,11 @@ const Query = {
 //#endregion
 
 // Status
-/*
-    id
-*/
 //#region
 
 const Status = {
+  id: getID,
+
   causedByAbility: statusPK,
 
   causedByFieldState: statusPK,
