@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Status!]!
+
+  """
+  Select Statuses by their snake_case name, e.g. 'center_of_attention'.
+  """
+  statusesByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Status!]!
   
   """
   Select Statuses with filtering and pagination.
@@ -279,6 +288,8 @@ input StatusFilter {
   The name of the Status in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

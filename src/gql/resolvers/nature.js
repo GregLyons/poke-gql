@@ -41,6 +41,8 @@ const getID = primaryKeyToID('nature');
 const Query = {
   natureByName: queryEntitiesByColumn('nature', 'name'),
 
+  naturesByName: queryEntitiesByColumn('nature', 'names'),
+
   natures: queryEntities('nature'),
 }
 

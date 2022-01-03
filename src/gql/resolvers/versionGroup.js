@@ -48,6 +48,8 @@ const Query = {
 
   versionGroupByName: queryEntitiesByColumn('versionGroup', 'name'),
 
+  versionGroupsByName: queryEntitiesByColumn('versionGroup', 'names'),
+
   versionGroups: queryEntities('versionGroup'),
 }
 

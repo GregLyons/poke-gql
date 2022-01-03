@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Nature!]!
+
+  """
+  Select Natures by their snake_case name, e.g. 'bold'.
+  """
+  naturesByName(
+    generation: Int = 8,
+    generations: [Int]
+    names: [String!]!
+  ): [Nature!]!
   
   """
   Select Natures with filtering and pagination.
@@ -178,6 +187,8 @@ input NatureFilter {
   The name of the Nature in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Natures whose name contains the given string, case-insensitive.

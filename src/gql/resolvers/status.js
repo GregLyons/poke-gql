@@ -50,6 +50,8 @@ const getID = primaryKeyToID('status');
 
 const Query = {
   statusByName: queryEntitiesByColumn('status', 'name'),
+  
+  statusesByName: queryEntitiesByColumn('status', 'names'),
 
   statuses: queryEntities('status'),
 }

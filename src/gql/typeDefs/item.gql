@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Item!]!
+
+  """
+  Select Items by their snake_case name, e.g. 'venusaurite', 'firium_z'.
+  """
+  itemsByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Item!]!
   
   """
   Select Items with filtering and pagination.
@@ -531,6 +540,8 @@ input ItemFilter {
   The name of the Item in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

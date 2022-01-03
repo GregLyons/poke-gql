@@ -13,6 +13,15 @@ extend type Query {
   ): [Ability!]! 
   
   """
+  Select Abilities by their snake_case name, e.g. 'intimidate', 'rks_system'.
+  """
+  abilitiesByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Ability!]! 
+  
+  """
   Select Abilities with filtering and pagination.
   """
   abilities(
@@ -474,6 +483,8 @@ input AbilityFilter {
   The name of the Ability in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

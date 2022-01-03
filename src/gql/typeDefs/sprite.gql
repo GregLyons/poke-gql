@@ -167,6 +167,8 @@ input SpriteFilter {
   The name of the Sprite in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

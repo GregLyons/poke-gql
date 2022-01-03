@@ -15,6 +15,7 @@
 
 const {
   queryEntities,
+  queryEntitiesByColumn,
   
   basicEdge,
   multiplierEdge,
@@ -48,18 +49,9 @@ const getID = primaryKeyToID('usageMethod');
 //#region
 
 const Query = {
-  usageMethodByName: async (parent, { name }, context, info) => {
-    return await context.db.promise().query(
-      `
-        SELECT * FROM usage_method
-        WHERE usage_method_name = '${name.toLowerCase()}'
-      `
-    )
-    .then( ([results, fields]) => {
-      return results[0];
-    })
-    .catch(console.log);
-  },
+  usageMethodByName: queryEntitiesByColumn('usageMethod', 'name'),
+
+  usageMethodsByName: queryEntitiesByColumn('usageMethod', 'names'),
 
   usageMethods: queryEntities('usageMethod'),
 }

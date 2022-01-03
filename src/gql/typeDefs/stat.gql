@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Stat!]!
+
+  """
+  Select Stats by their snake_case name, e.g. 'critical_hit_ratio'.
+  """
+  statsByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Stat!]!
   
   """
   Select Stats with filtering and pagination.
@@ -309,6 +318,8 @@ input StatFilter {
   The name of the Stat in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

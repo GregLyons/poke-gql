@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Pokemon!]!
+
+  """
+  Select Pokemon by their snake_case name, e.g. 'pikachu', 'raichu_alola'.
+  """
+  pokemonByNames(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Pokemon!]!
   
   """
   Select Pokemon with filtering and pagination.
@@ -423,6 +432,8 @@ input PokemonFilter {
   The name of the Pokemon in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Pokemon whose name contains the given string, case-insensitive.

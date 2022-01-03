@@ -50,6 +50,8 @@ const getID = primaryKeyToID('effect');
 const Query = {
   effectByName: queryEntitiesByColumn('effect', 'name'),
 
+  effectsByName: queryEntitiesByColumn('effect', 'names'),
+
   effects: queryEntities('effect'),
 }
 

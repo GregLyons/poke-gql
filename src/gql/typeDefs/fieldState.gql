@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [FieldState!]!
+
+  """
+  Select FieldStates by their snake_case name, e.g. 'electric_terrain'.
+  """
+  fieldStatesByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [FieldState!]!
   
   """
   Select FieldStates with filtering and pagination.
@@ -606,6 +615,8 @@ input FieldStateFilter {
   The name of the FieldState in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   FieldStates whose name contains the given string, case-insensitive.

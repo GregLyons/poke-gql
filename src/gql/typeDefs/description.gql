@@ -5,12 +5,23 @@
 extend type Query {
   descriptionByID(id: ID!): Description!
 
+  """
+  Select all descriptions of a given entity class, e.g. 'ABILITY'.
+  """
   descriptionsByEntityClass(class: DescriptionEntityClass!): [Description!]!
 
-  descriptionsByEntityName(name: ID!): [Description!]!
+  """
+  Select all descriptions for an entity of the given name.
+  """
+  descriptionsByEntityName(name: String!): [Description!]!
 
   """
-  Select Descriptions, with optional cursor-based pagination.
+  Select all descriptions for entities of the given names.
+  """
+  descriptionsByEntityNames(names: [String!]!): [Description!]!
+
+  """
+  Select Descriptions with filtering and pagination.
   """
   descriptions(
     pagination: PaginationInput
@@ -164,6 +175,8 @@ input DescriptionFilter {
   The name of the Description in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

@@ -47,7 +47,9 @@ const getID = primaryKeyToID('description');
 //#region
 
 const Query = {
-  descriptionsByEntityName: queryEntitiesByColumn('description', 'entity_name'),
+  descriptionsByEntityName: queryEntitiesByColumn('description', 'name'),
+
+  descriptionsByEntityNames: queryEntitiesByColumn('description', 'names'),
 
   descriptionsByEntityClass: queryEntitiesByColumn('description', 'entity_class'),
 

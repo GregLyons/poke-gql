@@ -51,6 +51,8 @@ const getID = primaryKeyToID('stat');
 const Query = {
   statByName: queryEntitiesByColumn('stat', 'name'),
 
+  statsByName: queryEntitiesByColumn('stat', 'names'),
+
   stats: queryEntities('stat'),
 }
 

@@ -60,6 +60,8 @@ const getID = primaryKeyToID('fieldState');
 
 const Query = {
   fieldStateByName: queryEntitiesByColumn('fieldState', 'name'),
+
+  fieldStatesByName: queryEntitiesByColumn('fieldState', 'names'),
   
   fieldStates: queryEntities('fieldState'),
 }

@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Move!]!
+
+  """
+  Select Moves by their snake_case name, e.g. 'u_turn'.
+  """
+  movesByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Move!]!
   
   """
   Select Moves with filtering and pagination.
@@ -585,6 +594,8 @@ input MoveFilter {
   The name of the Move in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Moves whose name contains the given string, case-insensitive.

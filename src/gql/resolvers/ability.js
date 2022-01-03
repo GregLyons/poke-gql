@@ -43,6 +43,8 @@ const getID = primaryKeyToID('ability');
 
 const Query = {
   abilityByName: queryEntitiesByColumn('ability', 'name'),
+
+  abilitiesByName: queryEntitiesByColumn('ability', 'names'),
   
   abilities: queryEntities('ability'),
 }

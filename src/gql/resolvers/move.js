@@ -57,6 +57,8 @@ const getID = primaryKeyToID('move');
 const Query = {
   moveByName: queryEntitiesByColumn('move', 'name'),
 
+  movesByName: queryEntitiesByColumn('move', 'names'),
+
   // TODO: cursor
   moves: queryEntities('move'),
 }

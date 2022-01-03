@@ -153,8 +153,10 @@ const getFilterQueryString = (filter, tableName) => {
       nameColumn = 'name';
   }
 
-  const nameString = filter.name 
-    ? `AND ${tableName}_${nameColumn} = '${filter.name}'`
+  if (!filter.names) filter.names = [filter.name];
+
+  const nameString = filter.names
+    ? `AND ${tableName}_${nameColumn} IN (${(filter.names.map(name => "'" + name + "'")).join(', ')})`
     : ``;
 
   const containsString = filter.contains 

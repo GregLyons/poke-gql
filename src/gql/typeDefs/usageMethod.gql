@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [UsageMethod!]!
+
+  """
+  Select UsageMethods by their snake_case name, e.g. 'pulse'.
+  """
+  usageMethodsByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [UsageMethod!]!
   
   """
   Select UsageMethods with filtering and pagination.
@@ -205,6 +214,8 @@ input UsageMethodFilter {
   The name of the UsageMethod in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

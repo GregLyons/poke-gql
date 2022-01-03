@@ -466,6 +466,8 @@ input GenerationFilter {
   The name of the Generation in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

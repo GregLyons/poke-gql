@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Type!]!
+
+  """
+  Select Types by their snake_case name, e.g. 'dark'.
+  """
+  typesByName(
+    generation: Int = 8
+    generations: [Int]
+    names: [String!]!
+  ): [Type!]!
   
   """
   Select Types, with optional cursor-based pagination.
@@ -459,6 +468,8 @@ input TypeFilter {
   The name of the Type in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

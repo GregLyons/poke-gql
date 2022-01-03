@@ -11,6 +11,15 @@ extend type Query {
     generations: [Int]
     name: String!
   ): [Effect!]!
+
+  """
+  Select Effects by their snake_case name, e.g. 'costs_hp'.
+  """
+  effectsByName(
+    generation: Int = 8,
+    generations: [Int]
+    names: [String!]!
+  ): [Effect!]!
   
   """
   Select Effects with filtering and pagination.
@@ -192,6 +201,8 @@ input EffectFilter {
   The name of the Effect in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.

@@ -24,16 +24,25 @@ const getEntityQueryString = (entityName, pagination, filter) => {
   `;
 }
 
-const getEntityByColumnQueryString = (entityName, keyName, columnValue) => {
+const getEntityByColumnQueryString = (entityName, keyName, columnValues) => {
   tableName = entityNameToTableName(entityName);
 
   let columnName;
   if (tableName === 'generation' && keyName === 'number') {
     columnName = 'id';
   }
+  else if (tableName === 'pdescription' && keyName.includes('names')) {
+    columnName = 'entity_' + keyName.replace('names', 'name');
+  }
+  else if (keyName.includes('names')) {
+    columnName = keyName.replace('names', 'name');
+  }
   else {
     columnName = keyName;
   }
+
+  // If singular value passed, convert to array
+  if (!Array.isArray(columnValues)) columnValues = [columnValues];
 
   return `
     SELECT * FROM ${tableName}
@@ -46,8 +55,18 @@ const getEntityByColumnQueryString = (entityName, keyName, columnValue) => {
     
     ${
       hasGenID(tableName)
-        ? `AND ${tableName}_${columnName} = '${columnValue.toString().toLowerCase()}'`
-        : `WHERE ${tableName}_${columnName} = '${columnValue.toString().toLowerCase()}'`
+        ? `AND ${tableName}_${columnName} IN (${(columnValues
+          .map(value => 
+          "'" + value.toString().toLowerCase() + "'")
+          )
+          .join(', ')
+        })`
+        : `WHERE ${tableName}_${columnName} IN (${(columnValues
+          .map(value => 
+          "'" + value.toString().toLowerCase() + "'")
+          )
+          .join(', ')
+        })`
     }
   `;
 }

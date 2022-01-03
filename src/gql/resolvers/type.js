@@ -54,6 +54,8 @@ const getID = primaryKeyToID('type');
 const Query = {
   typeByName: queryEntitiesByColumn('type', 'name'),
 
+  typesByName: queryEntitiesByColumn('type', 'names'),
+
   // TODO: cursor
   types: queryEntities('type'),
 }

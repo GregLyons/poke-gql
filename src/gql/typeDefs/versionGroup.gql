@@ -14,6 +14,11 @@ extend type Query {
   Select a VersionGroup by its snake_case name, e.g. 'Blue/Red'.
   """
   versionGroupByName(name: String!): VersionGroup!
+
+  """
+  Select VersionGroups by their snake_case name, e.g. 'Blue/Red'.
+  """
+  versionGroupsByName(names: [String!]!): VersionGroup!
   
   """
   Select VersionGroups, with optional cursor-based pagination.
@@ -146,6 +151,8 @@ input VersionGroupFilter {
   The name of the VersionGroup in snake_case.
   """
   name: String
+  
+  names: [String]
 
   """
   Entities whose name contains the given string, case-insensitive.
