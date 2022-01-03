@@ -12,3 +12,9 @@ Currently I do not have the finds or expertise to host this API (for example, th
 
 1. Write a `.env` file in this directory with the same database credentials you used for setting up the MySQL database (exact same format).
 2. Run `npm start` in this folder. You should then get the message `Server is running on http://localhost:4000/`, where you can run GraphQL queries.
+
+# Future goals
+
+1. **Add a 'names' filter**: For example, `names: ['charizard', 'squirtle', 'pikachu']` would select those three Pokemon. Currently there's only a singular `name` filter.
+2. **Add filters for `Edge`s**: For example, in the `moves` field for a `Pokemon`, one could pass in `edgeFilter: { learnMethods: ["M", "T"] }` to select only `PokemonMoveEdge`s corresponding to `Move`s learned via TM/HM or via Move Tutor.
+3. **Optimize database queries**: Currently, queries against the MySQL backend use `SELECT * FROM` for the majority of queries. Most columns are relatively narrow, since they mainly consist of `SMALLINT`s or `TINYINT`s, but of course the user won't always request from every column in a table. The `info` argument to the resolvers contains information on the fields actually being requested in a given query. I haven't yet done a performance analysis to identify bottlenecks in querying (other factors including setting up a connection to the database, network latency, etc.) to determine whether using a more specific `SELECT` statement would significantly speed up queries.
