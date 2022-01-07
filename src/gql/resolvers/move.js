@@ -73,6 +73,8 @@ const Move = {
 
   accuracy: parent => parent.pmove_accuracy,
 
+  category: parent => parent.pmove_category.toUpperCase(),
+
   causesStatus: movePK,
 
   contact: parent => parent.pmove_contact,

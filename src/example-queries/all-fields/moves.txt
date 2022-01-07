@@ -2,6 +2,7 @@
   moves {
     id
     accuracy
+    category
     causesStatus {
       count
       edges {

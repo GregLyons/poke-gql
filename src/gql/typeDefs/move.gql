@@ -45,6 +45,11 @@ type Move implements Node {
   accuracy: Int
 
   """
+  E.g. 'scald' has category 'SPECIAL'
+  """
+  category: MoveCategory!
+
+  """
   E.g. 'toxic' causes 'bad_poison'.
   """
   causesStatus(filter: StatusFilter): MoveCausesStatusConnection

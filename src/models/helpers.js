@@ -153,9 +153,13 @@ const getFilterQueryString = (filter, tableName) => {
       nameColumn = 'name';
   }
 
-  if (!filter.names) filter.names = [filter.name];
+  /* If 'names' is not specified, then:
+      if 'name' is specified, set 'names' to [<name>]
+      else, set 'names' to [].
+  */
+  if (!filter.names) filter.names = filter.name ? [filter.name] : [];
 
-  const nameString = filter.names
+  const nameString = filter.names.length > 0
     ? `AND ${tableName}_${nameColumn} IN (${(filter.names.map(name => "'" + name + "'")).join(', ')})`
     : ``;
 
