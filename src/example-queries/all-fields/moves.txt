@@ -4,6 +4,7 @@
     accuracy
     category
     causesStatus {
+      id
       count
       edges {
         node {
@@ -13,6 +14,7 @@
     }
     contact
     createsFieldState {
+      id
       count
       edges {
         node {
@@ -22,6 +24,7 @@
       }
     }
     descriptions {
+      id
       count
       edges {
         node {
@@ -31,6 +34,7 @@
       }
     }
     effects {
+      id
       count
       edges {
         node {
@@ -39,6 +43,7 @@
       }
     }
     enablesMove {
+      id
       count
       edges {
         node {
@@ -47,6 +52,7 @@
       }
     }
     enhancedByFieldState {
+      id
       count
       edges {
         node {
@@ -56,6 +62,7 @@
     }
     formattedName
     generation {
+      id
       edges {
         node {
           number
@@ -63,6 +70,7 @@
       }
     }
     hinderedByFieldState {
+      id
       count
       edges {
         node {
@@ -71,6 +79,7 @@
       }
     }
     interactedWithByMove {
+      id
       count
       edges {
         node {
@@ -79,6 +88,7 @@
       }
     }
     interactsWithMove {
+      id
       count
       edges {
         node {
@@ -87,6 +97,7 @@
       }
     }
     introduced {
+      id
       edges {
         node {
           number
@@ -94,6 +105,7 @@
       }
     }
     modifiesStat {
+      id
       count
       edges {
         node {
@@ -103,6 +115,7 @@
     }
     name
     pokemon {
+      id
       count
       edges {
         node {
@@ -114,6 +127,7 @@
     pp
     priority
     removesFieldState {
+      id
       count
       edges {
         node {
@@ -122,6 +136,7 @@
       }
     }
     requiresItem {
+      id
       count
       edges {
         node {
@@ -130,6 +145,7 @@
       }
     }
     requiresMove {
+      id
       count
       edges {
         node {
@@ -138,6 +154,7 @@
       }
     }
     requiresPokemon {
+      id
       count
       edges {
         node {
@@ -146,6 +163,7 @@
       }
     }
     requiresType {
+      id
       count
       edges {
         node {
@@ -154,6 +172,7 @@
       }
     }
     resistsStatus {
+      id
       count
       edges {
         node {
@@ -163,6 +182,7 @@
     }
     target
     type {
+      id
       count
       edges {
         node {
@@ -171,6 +191,7 @@
       }
     }
     usageMethod {
+      id
       count
       edges {
         node {

@@ -160,6 +160,7 @@ type Generation implements Node {
 # ABILITY
 
 type GenerationAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -169,6 +170,7 @@ type GenerationAbilityConnection implements Connection {
 }
 
 type GenerationIntroducedAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -184,6 +186,7 @@ type GenerationAbilityEdge implements Edge {
 # EFFECT
 
 type GenerationEffectConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -193,6 +196,7 @@ type GenerationEffectConnection implements Connection {
 }
 
 type GenerationIntroducedEffectConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -208,6 +212,7 @@ type GenerationEffectEdge implements Edge {
 # FIELD STATE
 
 type GenerationFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -217,6 +222,7 @@ type GenerationFieldStateConnection implements Connection {
 }
 
 type GenerationIntroducedFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -233,6 +239,7 @@ type GenerationFieldStateEdge implements Edge {
 # ITEM
 
 type GenerationItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -242,6 +249,7 @@ type GenerationItemConnection implements Connection {
 }
 
 type GenerationIntroducedItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -257,6 +265,7 @@ type GenerationItemEdge implements Edge {
 # MOVE
 
 type GenerationMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -266,6 +275,7 @@ type GenerationMoveConnection implements Connection {
 }
 
 type GenerationIntroducedMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -281,6 +291,7 @@ type GenerationMoveEdge implements Edge {
 # POKEMON
 
 type GenerationPokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -290,6 +301,7 @@ type GenerationPokemonConnection implements Connection {
 }
 
 type GenerationIntroducedPokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -305,6 +317,7 @@ type GenerationPokemonEdge implements Edge {
 # STAT
 
 type GenerationStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -314,6 +327,7 @@ type GenerationStatConnection implements Connection {
 }
 
 type GenerationIntroducedStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -329,6 +343,7 @@ type GenerationStatEdge implements Edge {
 # STATUS
 
 type GenerationStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -338,6 +353,7 @@ type GenerationStatusConnection implements Connection {
 }
 
 type GenerationIntroducedStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -353,6 +369,7 @@ type GenerationStatusEdge implements Edge {
 # TYPE
 
 type GenerationTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -362,6 +379,7 @@ type GenerationTypeConnection implements Connection {
 }
 
 type GenerationIntroducedTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -377,6 +395,7 @@ type GenerationTypeEdge implements Edge {
 # USAGE METHOD
 
 type GenerationUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -386,6 +405,7 @@ type GenerationUsageMethodConnection implements Connection {
 }
 
 type GenerationIntroducedUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -401,6 +421,7 @@ type GenerationUsageMethodEdge implements Edge {
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -410,6 +431,7 @@ type GenerationVersionGroupConnection implements Connection {
 }
 
 type GenerationIntroducedVersionGroupConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

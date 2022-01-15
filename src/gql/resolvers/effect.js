@@ -24,9 +24,11 @@ const {
   introductionConnection,
 
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const effectPK = parentPK('effect');
+const effectPK = parentPK('effect')
+const effectPKDebut = parentPKDebut('effect');
 const getID = primaryKeyToID('effect');
 
 //#endregion
@@ -71,9 +73,9 @@ const Effect = {
 
   fieldStates: effectPK,
 
-  generation: parent => parent.generation_id,
+  generation: effectPK,
   
-  introduced: parent => parent.introduced,
+  introduced: effectPKDebut,
   
   name: parent => parent.effect_name,
 

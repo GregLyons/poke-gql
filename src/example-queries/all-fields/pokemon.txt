@@ -2,6 +2,7 @@
   pokemon {
     id
     abilities {
+      id
       count
       edges {
         node {
@@ -19,6 +20,7 @@
     }
     dexNumber
     enablesItem {
+      id
       count
       edges {
         node {
@@ -27,6 +29,7 @@
       }
     }
     enablesMove {
+      id
       count
       edges {
         node {
@@ -35,6 +38,7 @@
       }
     }
     evolvesFrom {
+      id
       count
       edges {
         node {
@@ -43,6 +47,7 @@
       }
     }
     evolvesTo {
+      id
       count
       edges {
         node {
@@ -53,6 +58,7 @@
     formattedName
     formClass
     forms {
+      id
       count
       edges {
         node {
@@ -61,6 +67,7 @@
       }
     }
     generation {
+      id
       edges {
         node {
           number
@@ -69,6 +76,7 @@
     }
     height
     introduced {
+      id
       edges {
         node {
           number
@@ -76,6 +84,7 @@
       }
     }
     moves {
+      id
       count
       edges {
         node {
@@ -85,6 +94,7 @@
     }
     name
     requiresItem {
+      id
       count
       edges {
         node {
@@ -94,6 +104,7 @@
     }
     speciesName
     typing {
+      id
       count
       edges {
         node {

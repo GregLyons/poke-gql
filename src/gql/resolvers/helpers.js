@@ -64,9 +64,22 @@ const parentPK = (entityName) => {
   };
 };
 
-// Returns an ID string for the entity. This string consists either solely of the value of the AUTO_INCREMENT column for the entity, or, if the entity is generation-dependent, the generation number followed by a '_', followed by the AUTO_INCREMENT column value.
-const primaryKeyToID = (entityName) => {
+// Returns the primary key of the parent. 
+const parentPKDebut = (entityName) => {
   const idColumn = entityNameToTableName(entityName) + '_id';
+  return (parent, args, context, info) => {
+    return {
+      genID: parent.generation_id,
+      entityID: parent[idColumn],
+      introduced: parent.introduced,
+      filter: args.filter,
+    }
+  };
+};
+
+// Returns an ID string for the entity. This string consists either solely of the value of the AUTO_INCREMENT column for the entity, or, if the entity is generation-dependent, the generation number followed by a '_', followed by the AUTO_INCREMENT column value.
+const primaryKeyToID = (entityClass) => {
+  const idColumn = entityNameToTableName(entityClass) + '_id';
 
   return (parent, args, context, info) => {
     if (parent.generation_id) return parent.generation_id + '_' + parent[idColumn];
@@ -198,22 +211,32 @@ const turnsEdge = () => {
 
 // Connection from a non-Generation entity to a Generation, signifying that the entity is present in that Generation.
 // No 'count' field since it is always 1.
-const generationConnection = entityName => {
+const generationConnection = entityClass => {
   // 'parent' = 'generation'
   return {
+    id: (parent, args, context, info) => {
+      if (parent.genID) return [parent.genID, parent.entityID, entityClass, 'generation'].join('_')
+      else return [parent.entityID, 'generation'].join('_');
+    },
+    
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].load('generation', parent, args.pagination, parent.filter, false)
+      return await context.loaders[entityClass].load('generation', parent, args.pagination, parent.filter, false)
     },
   };
 }
 
 // Connection from a non-Generation entity to a Generation, signifying that the entity was introduced in that Generation.
 // No 'count' field since it is always 1.
-const introductionConnection = entityName => {
+const introductionConnection = entityClass => {
   // 'parent' = 'introduced'
   return {
+    id: (parent, args, context, info) => {
+      if (parent.genID) return [parent.genID, parent.entityID, entityClass, 'introduction'].join('_')
+      else return [parent.entityID, 'introduction'].join('_');
+    },
+
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityName].load('introduced', parent, args.pagination, parent.filter, false)
+      return await context.loaders[entityClass].load('introduced', parent, args.pagination, parent.filter, false)
     },
   };
 }
@@ -228,6 +251,11 @@ const introductionConnection = entityName => {
 const junctionConnection = (ownerEntityClass, innerKey) => {
   // Function arguments are used to determine which loader to use, via the 'context' object.
   return {
+    id: (parent, args, context, info) => {
+      if (parent.generation_id) return [parent.genID, parent.entityID, ownerEntityClass, innerKey].join('_')
+      else return [parent.entityID, ownerEntityClass, innerKey].join('_');
+    },
+
     edges: async (parent, args, context, info) => {
       return await context.loaders[ownerEntityClass].load(innerKey, parent, args.pagination, parent.filter, false);
     },
@@ -242,6 +270,10 @@ const junctionConnection = (ownerEntityClass, innerKey) => {
 const presenceConnection = entityClass => {
   // 'parent' = 'generation_id'
   return {
+    id: (parent, args, context, info) => {
+      return [parent.genID, entityClass, 'presence'].join('_')
+    },
+
     edges: async (parent, args, context, info) => {
       return await context.loaders.generation.load(entityClass, parent.genID, args.pagination, parent.filter, false, true)
     },
@@ -253,15 +285,19 @@ const presenceConnection = entityClass => {
 };
 
 // Connection from Generation to a non-Generation entity, signifying that the entity was introduced in that Generation.
-const debutConnection = entityName => {
+const debutConnection = entityClass => {
   // 'parent' = 'generation_id'
   return {
+    id: (parent, args, context, info) => {
+      return [parent.genID, entityClass, 'debut'].join('_')
+    },
+
     edges: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, false, false)
+      return await context.loaders.generation.load(entityClass, parent.genID, args.pagination, parent.filter, false, false)
     },
 
     count: async (parent, args, context, info) => {
-      return await context.loaders.generation.load(entityName, parent.genID, args.pagination, parent.filter, true, false)
+      return await context.loaders.generation.load(entityClass, parent.genID, args.pagination, parent.filter, true, false)
     },
   };
 };
@@ -292,5 +328,6 @@ module.exports = {
   debutConnection,
 
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 }

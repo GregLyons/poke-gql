@@ -50,7 +50,12 @@ type Nature implements Node {
   """
   E.g. Pokemon with an 'adamant' nature dislike dry foods.
   """
-  dislikedFlavor: String!
+  dislikedFlavor: String! @deprecated(reason: "In my opinion, it's likely that new flavor mechanics could be introduced in the next couple of generations. In which case, it may make more sense to make a Flavor entity class, and this field would become a connection. I recommend you use 'dislikedFlavorName' instead.")
+
+  """
+  E.g. Pokemon with an 'adamant' nature dislike dry foods.
+  """
+  dislikedFlavorName: String!
 
   """
   The name of the Nature in Title Case, with appropriate punctuation.
@@ -72,7 +77,12 @@ type Nature implements Node {
   """
   E.g. Pokemon with an 'adamant' nature like spicy foods.
   """
-  likedFlavor: String!
+  likedFlavor: String! @deprecated(reason: "In my opinion, it's likely that new flavor mechanics could be introduced in the next couple of generations. In which case, it may make more sense to make a Flavor entity class, and this field would become a connection. I recommend you use 'likedFlavorName' instead.")
+
+  """
+  E.g. Pokemon with an 'adamant' nature like spicy foods.
+  """
+  likedFlavorName: String!
 
   """
   E.g. 'adamant' multiplies a Pokemon's 'attack' by 1.1.
@@ -92,6 +102,7 @@ type Nature implements Node {
 # GENERATION
 
 type NatureGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [NatureGenerationEdge!]! 
@@ -103,6 +114,7 @@ type NatureGenerationEdge implements Edge {
 }
 
 type NatureIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [NatureIntroductionEdge!]! 
@@ -116,6 +128,7 @@ type NatureIntroductionEdge implements Edge {
 # ITEM
 
 type NatureConfusedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -131,6 +144,7 @@ type NatureConfusedByItemEdge implements Edge {
 # STAT
 
 type NatureModifiesStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

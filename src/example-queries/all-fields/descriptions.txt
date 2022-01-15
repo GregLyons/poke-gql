@@ -3,6 +3,7 @@
     id
     entity {
       ... on DescriptionAbilityConnection {
+        id
         count
         edges {
           node {
@@ -11,6 +12,7 @@
         }
       }
       ... on DescriptionItemConnection {
+        id
         count
         edges {
           node {
@@ -19,6 +21,7 @@
         }
       }
       ... on DescriptionMoveConnection {
+        id
         count
         edges {
           node {
@@ -31,6 +34,7 @@
     entityName
     text
     versionGroups {
+      id
       count
       edges {
         node {

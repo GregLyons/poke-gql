@@ -203,6 +203,7 @@ type FieldState implements Node {
 # ABILITY
 
 type FieldStateActivatesAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -216,6 +217,7 @@ type FieldStateActivatesAbilityEdge implements Edge {
 }
 
 type FieldStateCreatedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -234,6 +236,7 @@ type FieldStateCreatedByAbilityEdge implements Edge {
 }
 
 type FieldStateIgnoredByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -247,6 +250,7 @@ type FieldStateIgnoredByAbilityEdge implements Edge {
 }
 
 type FieldStatePreventedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -260,6 +264,7 @@ type FieldStatePreventedByAbilityEdge implements Edge {
 }
 
 type FieldStateRemovedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -273,6 +278,7 @@ type FieldStateRemovedByAbilityEdge implements Edge {
 }
 
 type FieldStateSuppressedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -288,6 +294,7 @@ type FieldStateSuppressedByAbilityEdge implements Edge {
 # EFFECT
 
 type FieldStateEffectConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -303,6 +310,7 @@ type FieldStateEffectEdge implements Edge {
 # GENERATION
 
 type FieldStateGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [FieldStateGenerationEdge!]! 
@@ -314,6 +322,7 @@ type FieldStateGenerationEdge implements Edge {
 }
 
 type FieldStateIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [FieldStateIntroductionEdge!]! 
@@ -327,6 +336,7 @@ type FieldStateIntroductionEdge implements Edge {
 # ITEM
 
 type FieldStateActivatesItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -340,6 +350,7 @@ type FieldStateActivatesItemEdge implements Edge {
 }
 
 type FieldStateExtendedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -358,6 +369,7 @@ type FieldStateExtendedByItemEdge implements Edge {
 }
 
 type FieldStateIgnoredByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -371,6 +383,7 @@ type FieldStateIgnoredByItemEdge implements Edge {
 }
 
 type FieldStateResistedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -388,6 +401,7 @@ type FieldStateResistedByItemEdge implements Edge {
 # MOVE
 
 type FieldStateEnhancesMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -401,6 +415,7 @@ type FieldStateEnhancesMoveEdge implements Edge {
 }
 
 type FieldStateHindersMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -414,6 +429,7 @@ type FieldStateHindersMoveEdge implements Edge {
 }
 
 type FieldStateCreatedByMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -432,6 +448,7 @@ type FieldStateCreatedByMoveEdge implements Edge {
 }
 
 type FieldStateRemovedByMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -447,6 +464,7 @@ type FieldStateRemovedByMoveEdge implements Edge {
 # STAT
 
 type FieldStateModifiesStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -482,6 +500,7 @@ type FieldStateModifiesStatEdge implements StatModificationEdge & Edge {
 # STATUS
 
 type FieldStateCausesStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -500,6 +519,7 @@ type FieldStateCausesStatusEdge implements StatusCauseEdge & Edge {
 }
 
 type FieldStateResistsStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -515,6 +535,7 @@ type FieldStateResistsStatusEdge implements Edge {
 # TYPE
 
 type FieldStateBoostsTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -533,6 +554,7 @@ type FieldStateBoostsTypeEdge implements MultiplierEdge & Edge {
 }
 
 type FieldStateResistsTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -551,6 +573,7 @@ type FieldStateResistsTypeEdge implements Edge {
 }
 
 type FieldStateWeatherBallConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

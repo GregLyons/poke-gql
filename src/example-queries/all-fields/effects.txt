@@ -2,6 +2,7 @@
   effects {
     id
     abilities {
+      id
       count
       edges {
         node {
@@ -12,6 +13,7 @@
     description
     formattedName
     fieldStates {
+      id
       count
       edges {
         node {
@@ -20,6 +22,7 @@
       }
     }
     generation {
+      id
       edges {
         node {
           number
@@ -27,6 +30,7 @@
       }
     }
     introduced {
+      id
       edges {
         node {
           number
@@ -35,6 +39,7 @@
     }
     name
     items {
+      id
       count
       edges {
         node {
@@ -43,6 +48,7 @@
       }
     }
     moves {
+      id
       count
       edges {
         node {

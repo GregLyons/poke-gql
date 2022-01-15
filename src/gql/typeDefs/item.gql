@@ -160,6 +160,7 @@ type Item implements Node {
 # DESCRIPTION 
 
 type ItemDescriptionConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -177,6 +178,7 @@ type ItemDescriptionEdge implements Edge {
 # EFFECT
 
 type ItemEffectConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -192,6 +194,7 @@ type ItemEffectEdge implements Edge {
 # FIELD STATE
 
 type ItemActivatedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -205,6 +208,7 @@ type ItemActivatedByFieldStateEdge implements Edge {
 }
 
 type ItemExtendsFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -223,6 +227,7 @@ type ItemExtendsFieldStateEdge implements Edge {
 }
 
 type ItemIgnoresFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -236,6 +241,7 @@ type ItemIgnoresFieldStateEdge implements Edge {
 }
 
 type ItemResistsFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -253,6 +259,7 @@ type ItemResistsFieldStateEdge implements Edge {
 # GENERATION
 
 type ItemGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [ItemGenerationEdge!]! 
@@ -264,6 +271,7 @@ type ItemGenerationEdge implements Edge {
 }
 
 type ItemIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [ItemIntroductionEdge!]! 
@@ -277,6 +285,7 @@ type ItemIntroductionEdge implements Edge {
 # MOVE
 
 type ItemEnablesMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -292,6 +301,7 @@ type ItemEnablesMoveEdge implements Edge {
 # NATURE
 
 type ItemConfusesNatureConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -307,6 +317,7 @@ type ItemConfusesNatureEdge implements Edge {
 # POKEMON
 
 type ItemEnablesPokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -320,6 +331,7 @@ type ItemEnablesPokemonEdge implements Edge {
 }
 
 type ItemRequiresPokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -335,6 +347,7 @@ type ItemRequiresPokemonEdge implements Edge {
 # STAT
 
 type ItemModifiesStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -372,6 +385,7 @@ type ItemModifiesStatEdge implements StatModificationEdge & Edge {
 # STATUS
 
 type ItemCausesStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -390,6 +404,7 @@ type ItemCausesStatusEdge implements StatusCauseEdge & Edge {
 }
 
 type ItemResistsStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -405,6 +420,7 @@ type ItemResistsStatusEdge implements Edge {
 # TYPE
 
 type ItemBoostsTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -423,6 +439,7 @@ type ItemBoostsTypeEdge implements MultiplierEdge & Edge {
 }
 
 type ItemResistsTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -441,6 +458,7 @@ type ItemResistsTypeEdge implements Edge {
 }
 
 type ItemNaturalGiftConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -461,6 +479,7 @@ type ItemNaturalGiftEdge implements Edge {
 # USAGE METHOD
 
 type ItemBoostsUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -479,6 +498,7 @@ type ItemBoostsUsageMethodEdge implements MultiplierEdge & Edge {
 }
 
 type ItemResistsUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

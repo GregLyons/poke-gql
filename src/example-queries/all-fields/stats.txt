@@ -3,6 +3,7 @@
     id
     formattedName
     generation {
+      id
       edges {
         node {
           number
@@ -10,6 +11,7 @@
       }
     }
     introduced {
+      id
       edges {
         node {
           number
@@ -17,6 +19,7 @@
       }
     }
     modifiedByAbility {
+      id
       count
       edges {
         node {
@@ -25,6 +28,7 @@
       }
     }
     modifiedByFieldState {
+      id
       count
       edges {
         node {
@@ -33,6 +37,7 @@
       }
     }
     modifiedByItem {
+      id
       count
       edges {
         node {
@@ -41,6 +46,7 @@
       }
     }
     modifiedByMove {
+      id
       count
       edges {
         node {
@@ -49,6 +55,7 @@
       }
     }
     modifiedByNature {
+      id
       count
       edges {
         node {

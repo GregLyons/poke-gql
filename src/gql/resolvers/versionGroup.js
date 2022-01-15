@@ -23,9 +23,11 @@ const {
   junctionConnection,
 
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const versionGroupPK = parentPK('versionGroup');
+const versionGroupPK = parentPK('versionGroup')
+const versionGroupPKDebut = parentPKDebut('versionGroup');
 const getID = primaryKeyToID('versionGroup');
 
 //#endregion
@@ -67,7 +69,7 @@ const VersionGroup = {
 
   formattedName: parent => parent.version_group_formatted_name,
 
-  introduced: parent => parent.introduced,
+  introduced: versionGroupPKDebut,
   
   name: parent => parent.version_group_name,
  

@@ -92,6 +92,7 @@ type Stat implements Node {
 # ABILITY
 
 type StatModifiedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -129,6 +130,7 @@ type StatModifiedByAbilityEdge implements StatModificationEdge & Edge {
 # FIELD STATE
 
 type StatModifiedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -166,6 +168,7 @@ type StatModifiedByFieldStateEdge implements StatModificationEdge & Edge {
 # GENERATION
 
 type StatGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [StatGenerationEdge!]! 
@@ -177,6 +180,7 @@ type StatGenerationEdge implements Edge {
 }
 
 type StatIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [StatIntroductionEdge!]! 
@@ -190,6 +194,7 @@ type StatIntroductionEdge implements Edge {
 # ITEM
 
 type StatModifiedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -227,6 +232,7 @@ type StatModifiedByItemEdge implements StatModificationEdge & Edge {
 # MOVE
 
 type StatModifiedByMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -262,6 +268,7 @@ type StatModifiedByMoveEdge implements StatModificationEdge & Edge {
 # NATURE
 
 type StatModifiedByNatureConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

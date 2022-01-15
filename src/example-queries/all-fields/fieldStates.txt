@@ -5,6 +5,7 @@
     damagePercent
     formattedName
     generation {
+      id
       edges {
         node {
           number
@@ -13,6 +14,7 @@
     }
     grounded
     introduced {
+      id
       edges {
         node {
           number
@@ -23,6 +25,7 @@
     name
     target
     activatesAbility {
+      id
       count
       edges {
         node {
@@ -31,6 +34,7 @@
       }
     }
     activatesItem {
+      id
       count
       edges {
         node {
@@ -39,6 +43,7 @@
       }
     }
     boostsType {
+      id
       count
       edges {
         node {
@@ -47,6 +52,7 @@
       }
     }
     causesStatus {
+      id
       count
       edges {
         node {
@@ -55,6 +61,7 @@
       }
     }
     createdByAbility {
+      id
       count
       edges {
         node {
@@ -63,6 +70,7 @@
       }
     }
     createdByMove {
+      id
       count
       edges {
         node {
@@ -71,6 +79,7 @@
       }
     }
     effects {
+      id
       count
       edges {
         node {
@@ -79,6 +88,7 @@
       }
     }
     enhancesMove {
+      id
       count
       edges {
         node {
@@ -87,6 +97,7 @@
       }
     }
     extendedByItem {
+      id
       count
       edges {
         node {
@@ -95,6 +106,7 @@
       }
     }
     hindersMove {
+      id
       count
       edges {
         node {
@@ -103,6 +115,7 @@
       }
     }
     ignoredByAbility {
+      id
       count
       edges {
         node {
@@ -111,6 +124,7 @@
       }
     }
     ignoredByItem {
+      id
       count
       edges {
         node {
@@ -119,6 +133,7 @@
       }
     }
     modifiesStat {
+      id
       count
       edges {
         node {
@@ -127,6 +142,7 @@
       }
     }
     preventedByAbility {
+      id
       count
       edges {
         node {
@@ -135,6 +151,7 @@
       }
     }
     removedByAbility {
+      id
       count
       edges {
         node {
@@ -143,6 +160,7 @@
       }
     }
     removedByMove {
+      id
       count
       edges {
         node {
@@ -151,6 +169,7 @@
       }
     }
     resistedByItem {
+      id
       count
       edges {
         node {
@@ -159,6 +178,7 @@
       }
     }
     resistsStatus {
+      id
       count
       edges {
         node {
@@ -167,6 +187,7 @@
       }
     }
     resistsType {
+      id
       count
       edges {
         node {
@@ -175,6 +196,7 @@
       }
     }
     suppressedByAbility {
+      id
       count
       edges {
         node {
@@ -183,6 +205,7 @@
       }
     }
     weatherBall {
+      id
       count
       edges {
         node {

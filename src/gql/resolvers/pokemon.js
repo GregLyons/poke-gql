@@ -29,9 +29,11 @@ const {
   introductionConnection,
   
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const pokemonPK = parentPK('pokemon');
+const pokemonPK = parentPK('pokemon')
+const pokemonPKDebut = parentPKDebut('pokemon');
 const getID = primaryKeyToID('pokemon');
 
 //#endregion
@@ -97,11 +99,11 @@ const Pokemon = {
 
   forms: pokemonPK,
 
-  generation: parent => parent.generation_id,
+  generation: pokemonPK,
   
   height: parent => parent.pokemon_height,
 
-  introduced: parent => parent.introduced,
+  introduced: pokemonPKDebut,
 
   moves: pokemonPK,
   

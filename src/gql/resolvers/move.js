@@ -30,9 +30,11 @@ const {
   introductionConnection,
   
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const movePK = parentPK('move');
+const movePK = parentPK('move')
+const movePKDebut = parentPKDebut('move');
 const getID = primaryKeyToID('move');
 
 //#endregion
@@ -91,7 +93,7 @@ const Move = {
 
   formattedName: parent => parent.pmove_formatted_name,
 
-  generation: parent => parent.generation_id,
+  generation: movePK,
 
   hinderedByFieldState: movePK,
 
@@ -99,7 +101,7 @@ const Move = {
 
   interactsWithMove: movePK,
   
-  introduced: parent => parent.introduced,
+  introduced: movePKDebut,
   
   modifiesStat: movePK,
   

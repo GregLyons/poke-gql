@@ -2,6 +2,7 @@
   natures {
     id
     confusedByItem {
+      id
       count
       edges {
         node {
@@ -10,8 +11,10 @@
       }
     }
     dislikedFlavor
+    dislikedFlavorName
     formattedName
     generation {
+      id
       edges {
         node {
           number
@@ -19,6 +22,7 @@
       }
     }
     introduced {
+      id
       edges {
         node {
           number
@@ -26,7 +30,9 @@
       }
     }
     likedFlavor
+    likedFlavorName
     modifiesStat {
+      id
       count
       edges {
         node {

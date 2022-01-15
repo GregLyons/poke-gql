@@ -154,6 +154,7 @@ type Ability implements Node {
 # DESCRIPTION 
 
 type AbilityDescriptionConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -171,6 +172,7 @@ type AbilityDescriptionEdge implements Edge {
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -185,6 +187,7 @@ type AbilityEffectEdge implements Edge {
 # FIELD STATE
 
 type AbilityActivatedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -197,6 +200,7 @@ type AbilityActivatedByFieldStateEdge implements Edge {
 }
 
 type AbilityCreatesFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -214,6 +218,7 @@ type AbilityCreatesFieldStateEdge implements Edge {
 }
 
 type AbilityIgnoresFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -226,6 +231,7 @@ type AbilityIgnoresFieldStateEdge implements Edge {
 }
 
 type AbilityPreventsFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -238,6 +244,7 @@ type AbilityPreventsFieldStateEdge implements Edge {
 }
 
 type AbilityRemovesFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -250,6 +257,7 @@ type AbilityRemovesFieldStateEdge implements Edge {
 }
 
 type AbilitySuppressesFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -264,6 +272,7 @@ type AbilitySuppressesFieldStateEdge implements Edge {
 # GENERATION
 
 type AbilityGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [AbilityGenerationEdge!]! 
@@ -275,6 +284,7 @@ type AbilityGenerationEdge implements Edge {
 }
 
 type AbilityIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [AbilityIntroductionEdge!]! 
@@ -288,6 +298,7 @@ type AbilityIntroductionEdge implements Edge {
 # POKEMON
 
 type AbilityPokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -304,6 +315,7 @@ type AbilityPokemonEdge implements Edge {
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -341,6 +353,7 @@ type AbilityModifiesStatEdge implements StatModificationEdge & Edge {
 # STATUS
 
 type AbilityCausesStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -361,6 +374,7 @@ type AbilityCausesStatusEdge implements StatusCauseEdge & Edge {
 }
 
 type AbilityResistsStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -376,6 +390,7 @@ type AbilityResistsStatusEdge implements Edge {
 # TYPE
 
 type AbilityBoostsTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -394,6 +409,7 @@ type AbilityBoostsTypeEdge implements MultiplierEdge & Edge {
 }
 
 type AbilityResistsTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -414,6 +430,7 @@ type AbilityResistsTypeEdge implements Edge {
 # USAGE METHOD
 
 type AbilityBoostsUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -432,6 +449,7 @@ type AbilityBoostsUsageMethodEdge implements MultiplierEdge & Edge {
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

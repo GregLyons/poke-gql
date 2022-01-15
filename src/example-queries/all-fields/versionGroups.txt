@@ -4,6 +4,7 @@
     code
     formattedName
     descriptions {
+      id
       count
       edges {
         node {
@@ -12,6 +13,7 @@
       }
     }
     introduced {
+      id
       edges {
         node {
           number

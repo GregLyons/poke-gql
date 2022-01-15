@@ -25,9 +25,11 @@ const {
   introductionConnection,
   
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const statPK = parentPK('stat');
+const statPK = parentPK('stat')
+const statPKDebut = parentPKDebut('stat');
 const getID = primaryKeyToID('stat');
 
 //#endregion
@@ -68,9 +70,9 @@ const Stat = {
     return parent.stat_formatted_name;
   },
   
-  generation: parent => parent.generation_id,
+  generation: statPK,
   
-  introduced: parent => parent.introduced,
+  introduced: statPKDebut,
   
   modifiedByAbility: statPK,
   

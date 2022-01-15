@@ -114,6 +114,7 @@ type Status implements Node {
 # ABILITY
 
 type StatusCausedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -134,6 +135,7 @@ type StatusCausedByAbilityEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -149,6 +151,7 @@ type StatusResistedByAbilityEdge implements Edge {
 # FIELD STATE
 
 type StatusCausedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -167,6 +170,7 @@ type StatusCausedByFieldStateEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -182,6 +186,7 @@ type StatusResistedByFieldStateEdge implements Edge {
 # GENERATION
 
 type StatusGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [StatusGenerationEdge!]! 
@@ -193,6 +198,7 @@ type StatusGenerationEdge implements Edge {
 }
 
 type StatusIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [StatusIntroductionEdge!]! 
@@ -206,6 +212,7 @@ type StatusIntroductionEdge implements Edge {
 # ITEM
 
 type StatusCausedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -224,6 +231,7 @@ type StatusCausedByItemEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -239,6 +247,7 @@ type StatusResistedByItemEdge implements Edge {
 # MOVE
 
 type StatusCausedByMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -257,6 +266,7 @@ type StatusCausedByMoveEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

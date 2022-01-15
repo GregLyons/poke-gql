@@ -201,6 +201,7 @@ type Move implements Node {
 # DESCRIPTION 
 
 type MoveDescriptionConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -218,6 +219,7 @@ type MoveDescriptionEdge implements Edge {
 # EFFECT
 
 type MoveEffectConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -233,6 +235,7 @@ type MoveEffectEdge implements Edge {
 # FIELD STATE
 
 type MoveCreatesFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -250,6 +253,7 @@ type MoveCreatesFieldStateEdge implements Edge {
 }
 
 type MoveRemovesFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -263,6 +267,7 @@ type MoveRemovesFieldStateEdge implements Edge {
 
 
 type MoveEnhancedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -276,6 +281,7 @@ type MoveEnhancedByFieldStateEdge implements Edge {
 }
 
 type MoveHinderedByFieldStateConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -291,6 +297,7 @@ type MoveHinderedByFieldStateEdge implements Edge {
 # GENERATION
 
 type MoveGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [MoveGenerationEdge!]! 
@@ -302,6 +309,7 @@ type MoveGenerationEdge implements Edge {
 }
 
 type MoveIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [MoveIntroductionEdge!]! 
@@ -315,6 +323,7 @@ type MoveIntroductionEdge implements Edge {
 # ITEM
 
 type MoveRequiresItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -330,6 +339,7 @@ type MoveRequiresItemEdge implements Edge {
 # MOVE
 
 type MoveEnablesMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -343,6 +353,7 @@ type MoveEnablesMoveEdge implements Edge {
 }
 
 type MoveInteractedWithByMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -356,6 +367,7 @@ type MoveInteractedWithByMoveEdge implements Edge {
 }
 
 type MoveInteractsWithMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -369,6 +381,7 @@ type MoveInteractsWithMoveEdge implements Edge {
 }
 
 type MoveRequiresMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -384,6 +397,7 @@ type MoveRequiresMoveEdge implements Edge {
 # POKEMON
 
 type MovePokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -412,6 +426,7 @@ type MovePokemonEdge implements Edge {
 }
 
 type MoveRequiresPokemonConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -427,6 +442,7 @@ type MoveRequiresPokemonEdge implements Edge {
 # STAT
 
 type MoveModifiesStatConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -462,6 +478,7 @@ type MoveModifiesStatEdge implements StatModificationEdge & Edge {
 # STATUS
 
 type MoveCausesStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -480,6 +497,7 @@ type MoveCausesStatusEdge implements StatusCauseEdge & Edge {
 }
 
 type MoveResistsStatusConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -495,6 +513,7 @@ type MoveResistsStatusEdge implements Edge {
 # TYPE
 
 type MoveTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -508,6 +527,7 @@ type MoveTypeEdge implements Edge {
 }
 
 type MoveRequiresTypeConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -523,6 +543,7 @@ type MoveRequiresTypeEdge implements Edge {
 # USAGE METHOD
 
 type MoveUsageMethodConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

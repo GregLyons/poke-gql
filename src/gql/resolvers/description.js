@@ -26,9 +26,11 @@ const {
   junctionConnection,
 
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const descriptionPK = parentPK('description');
+const descriptionPK = parentPK('description')
+const descriptionPKDebut = parentPKDebut('description');
 const getID = primaryKeyToID('description');
 
 //#endregion

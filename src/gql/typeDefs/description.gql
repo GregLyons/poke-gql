@@ -69,6 +69,7 @@ type Description implements Node {
 # ABILITY
 
 type DescriptionAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -86,6 +87,7 @@ type DescriptionAbilityEdge implements Edge {
 # ITEM
 
 type DescriptionItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -103,6 +105,7 @@ type DescriptionItemEdge implements Edge {
 # MOVE 
 
 type DescriptionMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -120,6 +123,7 @@ type DescriptionMoveEdge implements Edge {
 # VERSION GROUP 
 
 type DescriptionVersionGroupConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

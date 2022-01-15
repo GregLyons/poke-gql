@@ -2,6 +2,7 @@
   usageMethods {
     id
     boostedByAbility {
+      id
       count
       edges {
         node {
@@ -10,6 +11,7 @@
       }
     }
     boostedByItem {
+      id
       count
       edges {
         node {
@@ -19,6 +21,7 @@
     }
     formattedName
     generation {
+      id
       edges {
         node {
           number
@@ -26,6 +29,7 @@
       }
     }
     introduced {
+      id
       edges {
         node {
           number
@@ -33,6 +37,7 @@
       }
     }
     resistedByAbility {
+      id
       count
       edges {
         node {
@@ -41,6 +46,7 @@
       }
     }
     resistedByItem {
+      id
       count
       edges {
         node {
@@ -49,6 +55,7 @@
       }
     }
     moves {
+      id
       count
       edges {
         node {

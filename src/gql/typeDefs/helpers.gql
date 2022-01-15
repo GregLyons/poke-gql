@@ -93,6 +93,8 @@ For example, the 'moves' field in a Pokemon Node has type PokemonMoveConnection.
 Continuing the example, PokemonMoveConnection has a counterpart in MovePokemonConnection, which is the type of the 'pokemon' field in a Move Node. The corresponding 'edges' field type is then '[MovePokemonEdge!]!', and the 'node' field of the MovePokemonEdge type has type 'Pokemon!'. 
 """
 interface Connection {
+  id: String!
+  
   """
   The edges in the connection. The 'pagination' field allows for limit-offset pagination and sorting.
 

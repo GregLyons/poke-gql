@@ -31,9 +31,11 @@ const {
   introductionConnection,
   
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const abilityPK = parentPK('ability');
+const abilityPK = parentPK('ability')
+const abilityPKDebut = parentPKDebut('ability');
 const getID = primaryKeyToID('ability');
 
 //#endregion
@@ -73,11 +75,11 @@ const Ability = {
 
   formattedName: parent => parent.ability_formatted_name,
 
-  generation: parent => parent.generation_id,
+  generation: abilityPK,
 
   ignoresFieldState: abilityPK,
   
-  introduced: parent => parent.introduced,
+  introduced: abilityPKDebut,
   
   modifiesStat: abilityPK,
 

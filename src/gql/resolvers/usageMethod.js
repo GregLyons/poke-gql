@@ -25,9 +25,11 @@ const {
   introductionConnection,
 
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const usageMethodPK = parentPK('usageMethod');
+const usageMethodPK = parentPK('usageMethod')
+const usageMethodPKDebut = parentPKDebut('usageMethod');
 const getID = primaryKeyToID('usageMethod');
 
 //#endregion
@@ -70,9 +72,9 @@ const UsageMethod = {
   
   formattedName: parent => parent.usage_method_formatted_name,
   
-  generation: parent => parent.generation_id,
+  generation: usageMethodPK,
   
-  introduced: parent => parent.introduced,
+  introduced: usageMethodPKDebut,
 
   resistedByAbility: usageMethodPK,
   

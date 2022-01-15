@@ -87,6 +87,7 @@ type VersionGroup implements Node {
 # DESCRIPTION
 
 type VersionGroupDescriptionConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -102,6 +103,7 @@ type VersionGroupDescriptionEdge implements Edge {
 # GENERATION
 
 type VersionGroupIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [VersionGroupIntroductionEdge!]! 
@@ -115,6 +117,7 @@ type VersionGroupIntroductionEdge implements Edge {
 # SPRITE
 
 type VersionGroupSpriteConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

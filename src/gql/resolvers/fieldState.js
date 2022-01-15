@@ -34,9 +34,11 @@ const {
   introductionConnection,
   
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const fieldStatePK = parentPK('fieldState');
+const fieldStatePK = parentPK('fieldState')
+const fieldStatePKDebut = parentPKDebut('fieldState');
 const getID = primaryKeyToID('fieldState');
 
 //#endregion
@@ -98,7 +100,7 @@ const FieldState = {
 
   formattedName: parent => parent.field_state_formatted_name,
 
-  generation: parent => parent.generation_id,
+  generation: fieldStatePK,
 
   grounded: parent => parent.field_state_only_grounded,
   
@@ -108,7 +110,7 @@ const FieldState = {
 
   ignoredByItem: fieldStatePK,
 
-  introduced: parent => parent.introduced,
+  introduced: fieldStatePKDebut,
 
   maxLayers: parent => parent.field_state_max_layers,
   

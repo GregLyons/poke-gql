@@ -94,6 +94,7 @@ type UsageMethod implements Node {
 # ABILITY
 
 type UsageMethodBoostedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -108,6 +109,7 @@ type UsageMethodBoostedByAbilityEdge implements MultiplierEdge & Edge {
 }
 
 type UsageMethodResistedByAbilityConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -124,6 +126,7 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [UsageMethodGenerationEdge!]! 
@@ -135,6 +138,7 @@ type UsageMethodGenerationEdge implements Edge {
 }
 
 type UsageMethodIntroductionConnection implements Connection {
+  id: String!
   edges(
     pagination: PaginationInput
   ): [UsageMethodIntroductionEdge!]! 
@@ -148,6 +152,7 @@ type UsageMethodIntroductionEdge implements Edge {
 # ITEM
 
 type UsageMethodBoostedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -162,6 +167,7 @@ type UsageMethodBoostedByItemEdge implements MultiplierEdge & Edge {
 }
 
 type UsageMethodResistedByItemConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(
@@ -178,6 +184,7 @@ type UsageMethodResistedByItemEdge implements Edge {
 # MOVE
 
 type UsageMethodMoveConnection implements Connection {
+  id: String!
   count: Int!
   
   edges(

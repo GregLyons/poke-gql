@@ -28,9 +28,11 @@ const {
   introductionConnection,
 
   parentPK,
+  parentPKDebut,
   primaryKeyToID,
 } = require('./helpers.js');
-const naturePK = parentPK('nature');
+const naturePK = parentPK('nature')
+const naturePKDebut = parentPKDebut('nature');
 const getID = primaryKeyToID('nature');
 
 //#endregion
@@ -58,13 +60,17 @@ const Nature = {
 
   dislikedFlavor: parent => parent.nature_disliked_flavor,
 
+  dislikedFlavorName: parent => parent.nature_disliked_flavor,
+
   formattedName: parent => parent.nature_formatted_name,
 
-  generation: parent => parent.generation_id,
+  generation: naturePK,
   
-  introduced: parent => parent.introduced,
+  introduced: naturePKDebut,
   
   likedFlavor: parent => parent.nature_favorite_flavor,
+
+  likedFlavorName: parent => parent.nature_favorite_flavor,
 
   modifiesStat: naturePK,
 
