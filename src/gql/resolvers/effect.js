@@ -65,6 +65,8 @@ const Effect = {
 
   abilities: effectPK,
 
+  description: parent => parent.effect_description,
+
   formattedName: parent => parent.effect_formatted_name,
 
   fieldStates: effectPK,

@@ -60,6 +60,11 @@ type Status implements Node {
   causedByMove(filter: MoveFilter): StatusCausedByMoveConnection
 
   """
+  A description of this Status.
+  """
+  description: String!
+
+  """
   The name of the Status in Title Case, with appropriate punctuation.
   """
   formattedName: String!

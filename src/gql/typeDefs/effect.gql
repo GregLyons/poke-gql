@@ -48,6 +48,11 @@ type Effect implements Node {
   abilities(filter: AbilityFilter): EffectAbilityConnection
 
   """
+  A description of this Effect.
+  """
+  description: String!
+
+  """
   E.g. 'psychic_terrain' has the 'protects_against_priority' Effect, and 'magic_room' has the 'manipulates_item' Effect.
   """
   fieldStates(filter: FieldStateFilter): EffectFieldStateConnection

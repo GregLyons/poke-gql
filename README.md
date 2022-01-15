@@ -17,3 +17,9 @@ Currently I do not have the finds or expertise to host this API (for example, th
 
 1. **Add filters for `Edge`s**: For example, in the `moves` field for a `Pokemon`, one could pass in `edgeFilter: { learnMethods: ["M", "T"] }` to select only `PokemonMoveEdge`s corresponding to `Move`s learned via TM/HM or via Move Tutor.
 2. **Optimize database queries**: Currently, queries against the MySQL backend use `SELECT * FROM` for the majority of queries. Most columns are relatively narrow, since they mainly consist of `SMALLINT`s or `TINYINT`s, but of course the user won't always request from every column in a table. The `info` argument to the resolvers contains information on the fields actually being requested in a given query. I haven't yet done a performance analysis to identify bottlenecks in querying (other factors including setting up a connection to the database, network latency, etc.) to determine whether using a more specific `SELECT` statement would significantly speed up queries.
+
+# Bug fixes
+
+Fixed a bug in `models/helpers.js` for `extraFilterString` on items. 
+
+Added description fields to Effect and Status.

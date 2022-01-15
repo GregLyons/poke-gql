@@ -378,9 +378,9 @@ const getFilterQueryString = (filter, tableName) => {
       ? `AND item_class = '${filter.class.toLowerCase()}'`
       : ``;
 
-    extraFilterString = `
+    extraFilterString = [
       itemClassString,
-    `;
+    ].filter(d => d.length > 0).join('\n');
   }
   // FieldStates
   else if (tableName === 'item') {

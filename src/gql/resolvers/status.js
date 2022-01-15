@@ -71,6 +71,8 @@ const Status = {
   causedByItem: statusPK,
   
   causedByMove: statusPK,
+
+  description: parent => parent.pstatus_description,
   
   formattedName: async (parent, args, context, info) => {
     return parent.pstatus_formatted_name;

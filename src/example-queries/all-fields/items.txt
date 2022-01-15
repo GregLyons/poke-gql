@@ -92,6 +92,14 @@
         }
       }
     }
+    ignoresFieldState {
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     introduced {
       edges {
         node {

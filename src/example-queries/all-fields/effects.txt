@@ -9,6 +9,7 @@
         }
       }
     }
+    description
     formattedName
     fieldStates {
       count
