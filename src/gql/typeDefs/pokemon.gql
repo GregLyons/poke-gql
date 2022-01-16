@@ -140,6 +140,11 @@ type Pokemon implements Node {
   name: String!
 
   """
+  ID of the Pokemon in Pokemon Showdown's code for use with, e.g. the package 'pkmn/img' for sprites/icons.
+  """
+  pokemonShowdownID: String!
+
+  """
   E.g. Mega-evolutions require their corresponding Mega Stone.
   """
   requiresItem(filter: ItemFilter): PokemonRequiresItemConnection
@@ -406,6 +411,7 @@ enum AbilitySlot {
 enum FormClass {
   ALOLA
   BASE
+  COSMETIC
   GALAR
   GMAX
   HISUI

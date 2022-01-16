@@ -109,6 +109,8 @@ const Pokemon = {
   
   name: parent => parent.pokemon_name,
 
+  pokemonShowdownID: parent => parent.pokemon_ps_id,
+
   requiresItem: pokemonPK,
 
   speciesName: parent => parent.pokemon_species,

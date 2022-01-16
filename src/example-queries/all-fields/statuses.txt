@@ -55,6 +55,7 @@
         }
       }
     }
+    name
     resistedByAbility {
       id
       count
@@ -91,6 +92,6 @@
         }
       }
     }
-    name
+    volatile
   }
 }

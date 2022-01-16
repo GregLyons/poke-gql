@@ -84,6 +84,8 @@ const Status = {
   
   introduced: statusPKDebut,
 
+  name: parent => parent.pstatus_name,
+
   resistedByAbility: statusPK,
 
   resistedByFieldState: statusPK,
@@ -92,9 +94,7 @@ const Status = {
   
   resistedByMove: statusPK,
 
-  name: async (parent, args, context, info) => {
-    return parent.pstatus_name
-  },
+  volatile: parent => parent.pstatus_volatile,
 }
 
 //#endregion

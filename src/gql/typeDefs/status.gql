@@ -78,6 +78,11 @@ type Status implements Node {
   The Generation in which the Status was introduced.
   """
   introduced(filter: GenerationFilter): StatusIntroductionConnection
+  
+  """
+  The name of the Status in snake_case.
+  """
+  name: String!
 
   """
   E.g. 'immunity' protects against 'poison' and 'bad_poison'. 
@@ -102,9 +107,9 @@ type Status implements Node {
   resistedByMove(filter: MoveFilter): StatusResistedByMoveConnection
 
   """
-  The name of the Status in snake_case.
+  Whether the Status is volatile. Non-volatile statuses persist even upon switching out.
   """
-  name: String!
+  volatile: Boolean!
 }
 
 #

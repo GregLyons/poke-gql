@@ -93,6 +93,7 @@
       }
     }
     name
+    pokemonShowdownID
     requiresItem {
       id
       count
