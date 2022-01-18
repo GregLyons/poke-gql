@@ -9,6 +9,7 @@
           name
         }
       }
+      chance
     }
     causedByFieldState {
       id
@@ -18,6 +19,7 @@
           name
         }
       }
+      chance
     }
     causedByItem {
       id
@@ -27,6 +29,7 @@
           name
         }
       }
+      chance
     }
     causedByMove {
       id
@@ -36,6 +39,7 @@
           name
         }
       }
+      chance
     }
     description
     formattedName

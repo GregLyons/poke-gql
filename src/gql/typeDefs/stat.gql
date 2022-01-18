@@ -40,6 +40,11 @@ type Stat implements Node {
   id: ID!
 
   """
+  A description of this Stat.
+  """
+  description: String!
+
+  """
   The name of the Stat in Title Case, with appropriate punctuation.
   """
   formattedName: String!

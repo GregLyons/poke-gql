@@ -69,6 +69,8 @@ const UsageMethod = {
   boostedByAbility: usageMethodPK,
 
   boostedByItem: usageMethodPK,
+
+  description: () => 'placeholder description for fieldState',
   
   formattedName: parent => parent.usage_method_formatted_name,
   

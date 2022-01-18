@@ -66,9 +66,9 @@ const Query = {
 const Stat = {
   id: getID,
 
-  formattedName: async (parent, args, context, info) => {
-    return parent.stat_formatted_name;
-  },
+  description: () => 'placeholder description for fieldState',
+
+  formattedName: parent => parent.stat_formatted_name,
   
   generation: statPK,
   
@@ -84,9 +84,7 @@ const Stat = {
 
   modifiedByNature: statPK,
   
-  name: async (parent, args, context, info) => {
-    return parent.stat_name
-  },
+  name: parent => parent.stat_name,
 }
 
 //#endregion

@@ -1,6 +1,7 @@
 {
   stats {
     id
+    description
     formattedName
     generation {
       id

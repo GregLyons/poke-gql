@@ -50,6 +50,11 @@ type UsageMethod implements Node {
   boostedByItem(filter: ItemFilter): UsageMethodBoostedByItemConnection
 
   """
+  A description of this UsageMethod.
+  """
+  description: String!
+
+  """
   The name of the UsageMethod in Title Case.
   """
   formattedName: String!

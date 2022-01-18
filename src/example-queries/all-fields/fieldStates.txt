@@ -3,6 +3,7 @@
     id
     class
     damagePercent
+    description
     formattedName
     generation {
       id
@@ -58,6 +59,7 @@
         node {
           name
         }
+        chance
       }
     }
     createdByAbility {

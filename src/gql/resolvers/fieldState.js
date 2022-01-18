@@ -92,6 +92,8 @@ const FieldState = {
 
   damagePercent: parent => parent.field_state_damage_percent,
 
+  description: () => 'placeholder description for fieldState',
+
   effects: fieldStatePK,
 
   enhancesMove: fieldStatePK,

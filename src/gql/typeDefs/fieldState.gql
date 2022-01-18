@@ -80,6 +80,11 @@ type FieldState implements Node {
   damagePercent: Float!
 
   """
+  A description of this FieldState.
+  """
+  description: String!
+
+  """
   E.g. 'mist' has the Effect 'prevents_stat_drop'.
   """
   effects(filter: EffectFilter): FieldStateEffectConnection

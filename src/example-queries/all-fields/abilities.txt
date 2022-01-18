@@ -53,6 +53,7 @@
         node {
           name
         }
+        chance
       }
     }
     createsFieldState {

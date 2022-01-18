@@ -126,7 +126,8 @@ const basicEdge = () => {
 const causeStatusEdge = () => {
   return {
     node: parent => parent,
-    chance: parent => parent.chance,
+    // TODO: Add cause-chance to abilities, items, and field states
+    chance: parent => parent.chance || 100.0
   }
 }
 
@@ -236,7 +237,7 @@ const introductionConnection = entityClass => {
     },
 
     edges: async (parent, args, context, info) => {
-      return await context.loaders[entityClass].load('introduced', parent, args.pagination, parent.filter, false)
+      return await context.loaders[entityClass].load('introduced', parent.introduced, args.pagination, parent.filter, false)
     },
   };
 }
