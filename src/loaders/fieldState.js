@@ -55,6 +55,10 @@ class FieldStateLoaders extends LoadersForEntity {
   ignoredByItem(pagination, filter) {
     return [pagination, filter, 'item', 'fieldState', 'item_ignores_field_state', true];
   }
+
+  ignoredByType(pagination, filter) {
+    return [pagination, filter, 'type', 'fieldState', 'ptype_ignores_field_state', true];
+  }
   
   modifiesStat(pagination, filter) {
     return [pagination, filter, 'fieldState', 'stat', 'field_state_modifies_stat', false];
@@ -70,6 +74,10 @@ class FieldStateLoaders extends LoadersForEntity {
 
   removedByMove(pagination, filter) {
     return [pagination, filter, 'move', 'fieldState', 'pmove_removes_field_state', true];
+  }
+
+  removedByType(pagination, filter) {
+    return [pagination, filter, 'type', 'fieldState', 'ptype_removes_field_state', true];
   }
 
   resistedByItem(pagination, filter) {

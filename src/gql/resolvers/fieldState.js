@@ -112,6 +112,8 @@ const FieldState = {
 
   ignoredByItem: fieldStatePK,
 
+  ignoredByType: fieldStatePK,
+
   introduced: fieldStatePKDebut,
 
   maxLayers: parent => parent.field_state_max_layers,
@@ -125,6 +127,8 @@ const FieldState = {
   removedByAbility: fieldStatePK,
 
   removedByMove: fieldStatePK,
+
+  removedByType: fieldStatePK,
 
   resistedByItem: fieldStatePK,
 
@@ -183,6 +187,9 @@ const ConnectionsAndEdges = {
 
   FieldStateIgnoredByItemConnection: junctionConnection('fieldState', 'ignoredByItem'),
   FieldStateIgnoredByItemEdge: basicEdge(),
+
+  FieldStateIgnoredByTypeConnection: junctionConnection('fieldState', 'ignoredByType'),
+  FieldStateIgnoredByTypeEdge: basicEdge(),
   
   FieldStateIntroductionConnection: introductionConnection('fieldState'),
   FieldStateIntroductionEdge: basicEdge(),
@@ -199,6 +206,9 @@ const ConnectionsAndEdges = {
   FieldStateRemovedByMoveConnection: junctionConnection('fieldState', 'removedByMove'),
   FieldStateRemovedByMoveEdge: basicEdge(),
 
+  FieldStateRemovedByTypeConnection: junctionConnection('fieldState', 'ignoredByType'),
+  FieldStateRemovedByTypeEdge: basicEdge(),
+  
   FieldStateResistedByItemConnection: junctionConnection('fieldState', 'resistedByItem'),
   FieldStateResistedByItemEdge: multiplierEdge(),
   

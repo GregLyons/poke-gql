@@ -170,6 +170,7 @@ enum SortByEnum {
 The recipient of the Stat modification, e.g. the 'TARGET' of the Move, the 'USER' of the Item.
 """
 enum StatModificationRecipient {
+  ALL
   ALL_FOES
   ALL_ALLIES
   TARGET

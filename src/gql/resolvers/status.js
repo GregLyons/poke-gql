@@ -76,9 +76,7 @@ const Status = {
 
   description: parent => parent.pstatus_description,
   
-  formattedName: async (parent, args, context, info) => {
-    return parent.pstatus_formatted_name;
-  },
+  formattedName: parent => parent.pstatus_formatted_name,
   
   generation: statusPK,
   

@@ -134,6 +134,15 @@
         }
       }
     }
+    ignoredByType {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     modifiesStat {
       id
       count
@@ -162,6 +171,15 @@
       }
     }
     removedByMove {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    removedByType {
       id
       count
       edges {

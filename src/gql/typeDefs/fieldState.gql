@@ -130,6 +130,11 @@ type FieldState implements Node {
   ignoredByItem(filter: ItemFilter): FieldStateIgnoredByItemConnection
 
   """
+  E.g. 'flying' ignores 'spikes'.
+  """
+  ignoredByType(filter: TypeFilter): FieldStateIgnoredByTypeConnection
+
+  """
   The Generation in which the FieldState was introduced.
   """ 
   introduced(filter: GenerationFilter): FieldStateIntroductionConnection
@@ -167,6 +172,11 @@ type FieldState implements Node {
   E.g. The Move 'trick_room' removes the FieldState 'trick_room' (it also creates it).
   """
   removedByMove(filter: MoveFilter): FieldStateRemovedByMoveConnection
+
+  """
+  E.g. 'poison' ignores 'toxic_spikes'.
+  """
+  removedByType(filter: TypeFilter): FieldStateRemovedByTypeConnection
 
   """
   Items which reduce the damage dealt by a FieldState, e.g. 'safety_goggles' negates damage from 'hail'.
@@ -556,6 +566,34 @@ type FieldStateBoostsTypeEdge implements MultiplierEdge & Edge {
   The multiplier by which the FieldState boosts the power of Moves which have the Type. 
   """
   multiplier: Float!
+}
+
+type FieldStateIgnoredByTypeConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [FieldStateIgnoredByTypeEdge!]!
+
+}
+
+type FieldStateIgnoredByTypeEdge implements Edge {  
+  node: Type!
+}
+
+type FieldStateRemovedByTypeConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [FieldStateRemovedByTypeEdge!]!
+
+}
+
+type FieldStateRemovedByTypeEdge implements Edge {  
+  node: Type!
 }
 
 type FieldStateResistsTypeConnection implements Connection {
