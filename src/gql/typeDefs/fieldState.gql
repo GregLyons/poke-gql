@@ -80,7 +80,7 @@ type FieldState implements Node {
   damagePercent: Float!
 
   """
-  A description of this FieldState.
+  A custom description of this FieldState.
   """
   description: String!
 
@@ -182,6 +182,11 @@ type FieldState implements Node {
   Items which reduce the damage dealt by a FieldState, e.g. 'safety_goggles' negates damage from 'hail'.
   """
   resistedByItem(filter: ItemFilter): FieldStateResistedByItemConnection
+
+  """
+  Types which reduce the damage dealt by a FieldState, e.g. 'ice' resists the damage dealt by 'hail'.
+  """
+  resistedByType(filter: ItemFilter): FieldStateResistedByTypeConnection
 
   """
   E.g. 'safeguard' prevents 'burn' from being applied, and 'electric_terrain' prevents' sleep.
@@ -594,6 +599,22 @@ type FieldStateRemovedByTypeConnection implements Connection {
 
 type FieldStateRemovedByTypeEdge implements Edge {  
   node: Type!
+}
+
+type FieldStateResistedByTypeConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [FieldStateResistedByTypeEdge!]!
+
+}
+
+type FieldStateResistedByTypeEdge implements Edge {  
+  node: Type!
+
+  multiplier: Float!
 }
 
 type FieldStateResistsTypeConnection implements Connection {

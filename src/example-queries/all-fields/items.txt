@@ -10,6 +10,15 @@
         }
       }
     } 
+    activatedByUsageMethod {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    } 
     boostsType {
       id
       count

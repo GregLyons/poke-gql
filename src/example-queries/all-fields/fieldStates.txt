@@ -197,6 +197,16 @@
         }
       }
     }
+    resistedByType {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+        multiplier
+      }
+    }
     resistsStatus {
       id
       count

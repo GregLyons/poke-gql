@@ -66,7 +66,7 @@ const Query = {
 const Stat = {
   id: getID,
 
-  description: () => 'placeholder description for fieldState',
+  description: parent => parent.stat_description,
 
   formattedName: parent => parent.stat_formatted_name,
   

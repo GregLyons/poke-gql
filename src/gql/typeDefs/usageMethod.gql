@@ -40,6 +40,16 @@ type UsageMethod implements Node {
   id: ID!
 
   """
+  E.g. 'sound' activates 'liquid_voice'.
+  """
+  activatesAbility(filter: AbilityFilter): UsageMethodActivatesAbilityConnection
+
+  """
+  E.g. 'sound' activates 'throat_spray'.
+  """
+  activatesItem(filter: ItemFilter): UsageMethodActivatesItemConnection
+
+  """
   E.g. 'mega_launcher' boosts 'pulse'.
   """ 
   boostedByAbility(filter: AbilityFilter): UsageMethodBoostedByAbilityConnection
@@ -50,7 +60,7 @@ type UsageMethod implements Node {
   boostedByItem(filter: ItemFilter): UsageMethodBoostedByItemConnection
 
   """
-  A description of this UsageMethod.
+  A custom description of this UsageMethod.
   """
   description: String!
 
@@ -72,14 +82,24 @@ type UsageMethod implements Node {
   introduced(filter: GenerationFilter): UsageMethodIntroductionConnection
 
   """
-  E.g. 'safety_goggle' resists 'powder'.
+  E.g. 'damp' prevents 'explosive'.
   """
-  resistedByItem(filter: ItemFilter): UsageMethodResistedByItemConnection
+  preventedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
+
+  """
+  E.g. 'throat_chop' prevents 'sound'.
+  """
+  preventedByMove(filter: MoveFilter): UsageMethodPreventedByMoveConnection
 
   """
   E.g. 'bullet_proof' resists 'ball'.
   """
   resistedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
+
+  """
+  E.g. 'safety_goggle' resists 'powder'.
+  """
+  resistedByItem(filter: ItemFilter): UsageMethodResistedByItemConnection
 
   """
   Moves which have this UsageMethod, e.g. The Move 'crunch' has the UsageMethod 'bite'.
@@ -97,6 +117,20 @@ type UsageMethod implements Node {
 #
 
 # ABILITY
+
+type UsageMethodActivatesAbilityConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [UsageMethodActivatesAbilityEdge!]!
+
+}
+
+type UsageMethodActivatesAbilityEdge implements Edge {  
+  node: Ability!
+}
 
 type UsageMethodBoostedByAbilityConnection implements Connection {
   id: String!
@@ -128,6 +162,20 @@ type UsageMethodResistedByAbilityEdge implements Edge {
   multiplier: Float!
 }
 
+type UsageMethodPreventedByAbilityConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [UsageMethodPreventedByAbilityEdge!]!
+
+}
+
+type UsageMethodPreventedByAbilityEdge implements Edge {  
+  node: Ability!
+}
+
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
@@ -155,6 +203,20 @@ type UsageMethodIntroductionEdge implements Edge {
 }
 
 # ITEM
+
+type UsageMethodActivatesItemConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [UsageMethodActivatesItemEdge!]!
+
+}
+
+type UsageMethodActivatesItemEdge implements Edge {  
+  node: Item!
+}
 
 type UsageMethodBoostedByItemConnection implements Connection {
   id: String!
@@ -199,6 +261,20 @@ type UsageMethodMoveConnection implements Connection {
 }
 
 type UsageMethodMoveEdge implements Edge {  
+  node: Move!
+}
+
+type UsageMethodPreventedByMoveConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [UsageMethodPreventedByMoveEdge!]!
+
+}
+
+type UsageMethodPreventedByMoveEdge implements Edge {  
   node: Move!
 }
 

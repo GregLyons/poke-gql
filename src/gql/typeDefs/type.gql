@@ -123,50 +123,6 @@ type Type implements Node {
   FieldStates which turn 'weather_ball' to this Type.
   """
   weatherBall(filter: FieldStateFilter): TypeWeatherBallConnection
-
-  #
-  # CONVENIENCE FIELDS
-  #
-  
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  doubleDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  neutralDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  halfDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  noDamageFrom: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  doubleDamageTo: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  neutralDamageTo: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  halfDamageTo: [Type!]!
-
-  """
-  Convenience field for damage calculations. For pagination, use the 'matchups' field.
-  """
-  noDamageTo: [Type!]!
 }
 
 #

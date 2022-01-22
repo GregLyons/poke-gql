@@ -12,6 +12,10 @@ class ItemLoaders extends LoadersForEntity {
     return [pagination, filter, 'fieldState', 'item', 'field_state_activates_item', true];
   }
 
+  activatedByUsageMethod(pagination, filter) {
+    return [pagination, filter, 'usageMethod', 'item', 'usage_method_activates_item', true];
+  }
+
   boostsType(pagination, filter) {
     return [pagination, filter, 'item', 'type', 'item_boosts_ptype', false];
   }

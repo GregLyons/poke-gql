@@ -146,6 +146,11 @@ type Move implements Node {
 
   pp: Int!
 
+  """
+  E.g. 'throat_chop' prevents 'sound'.
+  """
+  preventsUsageMethod(filter: UsageMethodFilter): MovePreventsUsageMethodConnection
+
   priority: Int!
 
   """
@@ -191,7 +196,7 @@ type Move implements Node {
   """
   E.g. The Move 'aura_sphere' has both 'ball' and 'pulse' as UsageMethods.
   """
-  usageMethod(filter: UsageMethodFilter): MoveUsageMethodConnection
+  usageMethods(filter: UsageMethodFilter): MoveUsageMethodConnection
 }
 
 #
@@ -417,6 +422,7 @@ type MovePokemonEdge implements Edge {
   L: Start or level-up, second character onwards is the level
   R: Restricted (special moves like Rotom moves)
   E: Egg
+  EV: Evolution from a Pokemon who knows the Move; only present if the Pokemon in question cannot learn the move any other way (otherwise the size of the learnset data roughly doubles).
   D: Dream World
   S: Event, second character onwards is the index in eventData.
   V: Virtual Console or Let's Go transfer
@@ -553,6 +559,19 @@ type MoveUsageMethodConnection implements Connection {
 }
 
 type MoveUsageMethodEdge implements Edge {  
+  node: UsageMethod!
+}
+
+type MovePreventsUsageMethodConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [MovePreventsUsageMethodEdge!]! 
+}
+
+type MovePreventsUsageMethodEdge implements Edge {  
   node: UsageMethod!
 }
 

@@ -92,7 +92,7 @@ const FieldState = {
 
   damagePercent: parent => parent.field_state_damage_percent,
 
-  description: () => 'placeholder description for fieldState',
+  description: parent => parent.field_state_description,
 
   effects: fieldStatePK,
 
@@ -131,6 +131,8 @@ const FieldState = {
   removedByType: fieldStatePK,
 
   resistedByItem: fieldStatePK,
+
+  resistedByType: fieldStatePK,
 
   resistsStatus: fieldStatePK,
 
@@ -211,6 +213,9 @@ const ConnectionsAndEdges = {
   
   FieldStateResistedByItemConnection: junctionConnection('fieldState', 'resistedByItem'),
   FieldStateResistedByItemEdge: multiplierEdge(),
+
+  FieldStateResistedByTypeConnection: junctionConnection('fieldState', 'resistedByType'),
+  FieldStateResistedByTypeEdge: multiplierEdge(),
   
   FieldStateResistsStatusConnection: junctionConnection('fieldState', 'resistsStatus'),
   FieldStateResistsStatusEdge: basicEdge(),

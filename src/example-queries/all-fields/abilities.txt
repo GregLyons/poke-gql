@@ -28,6 +28,15 @@
         }
       }
     }
+    activatedByUsageMethod {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     boostsType {
       id
       count
@@ -113,6 +122,15 @@
       }
     }
     preventsFieldState {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    preventsUsageMethod {
       id
       count
       edges {

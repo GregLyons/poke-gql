@@ -48,6 +48,11 @@ type Ability implements Node {
   activatedByFieldState(filter: FieldStateFilter): AbilityActivatedByFieldStateConnection
 
   """
+  E.g. 'sound' activates 'liquid_voice'.
+  """
+  activatedByUsageMethod(filter: UsageMethodFilter): AbilityActivatedByUsageMethodConnection
+
+  """
   E.g. 'blaze' boosts 'fire'.
   """ 
   boostsType(filter: TypeFilter): AbilityBoostsTypeConnection
@@ -120,6 +125,11 @@ type Ability implements Node {
   E.g. 'cloud_nine' prevents 'aurora_veil' from being set up, even in the presence of 'hail'. This is because 'cloud_nine' suppresses the effects of 'hail'. 'cloud_nine' does not remove or suppress 'aurora_veil' that is already set-up. 
   """
   preventsFieldState(filter: FieldStateFilter): AbilityPreventsFieldStateConnection
+
+  """
+  E.g. 'damp' prevents 'explosive'.
+  """
+  preventsUsageMethod(filter: UsageMethodFilter): AbilityPreventsUsageMethodConnection
 
   """
   E.g. 'drizzle' removes other weather effects.
@@ -429,6 +439,19 @@ type AbilityResistsTypeEdge implements Edge {
 
 # USAGE METHOD
 
+type AbilityActivatedByUsageMethodConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [AbilityActivatedByUsageMethodEdge!]! 
+}
+
+type AbilityActivatedByUsageMethodEdge implements Edge {  
+  node: UsageMethod!
+}
+
 type AbilityBoostsUsageMethodConnection implements Connection {
   id: String!
   count: Int!
@@ -446,6 +469,19 @@ type AbilityBoostsUsageMethodEdge implements MultiplierEdge & Edge {
   The multiplier by which the Ability boosts the power of Moves which have the UsageMethod. 
   """
   multiplier: Float!
+}
+
+type AbilityPreventsUsageMethodConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [AbilityPreventsUsageMethodEdge!]! 
+}
+
+type AbilityPreventsUsageMethodEdge implements Edge {  
+  node: UsageMethod!
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {

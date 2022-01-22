@@ -51,6 +51,10 @@ class MoveLoaders extends LoadersForEntity {
   pokemon(pagination, filter) {
     return [pagination, filter, 'pokemon', 'move', 'pokemon_pmove', true];
   }
+
+  preventsUsageMethod(pagination, filter) {
+    return [pagination, filter, 'move', 'usageMethod', 'pmove_prevents_usage_method', false];
+  }
   
   removesFieldState(pagination, filter) {
     return [pagination, filter, 'move', 'fieldState', 'pmove_removes_field_state', false];

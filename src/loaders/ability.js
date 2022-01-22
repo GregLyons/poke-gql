@@ -12,6 +12,10 @@ class AbilityLoaders extends LoadersForEntity {
     return [pagination, filter, 'fieldState', 'ability', 'field_state_activates_ability', true];
   }
 
+  activatedByUsageMethod(pagination, filter) {
+    return [pagination, filter, 'usageMethod', 'ability', 'usage_method_activates_ability', true];
+  }
+
   boostsType(pagination, filter) {
     return [pagination, filter, 'ability', 'type', 'ability_boosts_ptype', false];
   }
@@ -50,6 +54,10 @@ class AbilityLoaders extends LoadersForEntity {
 
   preventsFieldState(pagination, filter) {
     return [pagination, filter, 'ability', 'fieldState', 'ability_prevents_field_state', false];
+  }
+
+  preventsUsageMethod(pagination, filter) {
+    return [pagination, filter, 'ability', 'usageMethod', 'ability_prevents_usage_method', false];
   }
 
   removesFieldState(pagination, filter) {

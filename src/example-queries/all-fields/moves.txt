@@ -126,6 +126,15 @@
     }
     power
     pp
+    preventsUsageMethod {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     priority
     removesFieldState {
       id
@@ -191,7 +200,7 @@
         }
       }
     }
-    usageMethod {
+    usageMethods {
       id
       count
       edges {

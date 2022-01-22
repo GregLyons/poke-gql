@@ -84,6 +84,10 @@ class FieldStateLoaders extends LoadersForEntity {
     return [pagination, filter, 'item', 'fieldState', 'item_resists_field_state', true];
   }
 
+  resistedByType(pagination, filter) {
+    return [pagination, filter, 'type', 'fieldState', 'ptype_resists_field_state', true];
+  }
+
   resistsStatus(pagination, filter) {
     return [pagination, filter, 'fieldState', 'status', 'field_state_prevents_pstatus', false];
   }

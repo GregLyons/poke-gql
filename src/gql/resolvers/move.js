@@ -113,6 +113,8 @@ const Move = {
 
   pp: parent => parent.pmove_pp,
 
+  preventsUsageMethod: movePK,
+
   priority: parent => parent.pmove_priority,
 
   removesFieldState: movePK,
@@ -131,7 +133,7 @@ const Move = {
 
   type: movePK,
 
-  usageMethod: movePK,
+  usageMethods: movePK,
 }
 
 //#endregion
@@ -178,6 +180,9 @@ const ConnectionsAndEdges = {
 
   MovePokemonConnection: junctionConnection('move', 'pokemon'),
   MovePokemonEdge: learnsetEdge(),
+
+  MovePreventsUsageMethodConnection: junctionConnection('move', 'preventsUsageMethod'),
+  MovePreventsUsageMethodEdge: basicEdge(),
   
   MoveRemovesFieldStateConnection: junctionConnection('move', 'removesFieldState'),
   MoveRemovesFieldStateEdge: basicEdge(),

@@ -61,6 +61,8 @@ const Ability = {
 
   activatedByFieldState: abilityPK,
 
+  activatedByUsageMethod: abilityPK,
+
   boostsType: abilityPK,
 
   boostsUsageMethod: abilityPK,
@@ -89,6 +91,8 @@ const Ability = {
 
   preventsFieldState: abilityPK,
 
+  preventsUsageMethod: abilityPK,
+
   removesFieldState: abilityPK,
 
   resistsStatus: abilityPK,
@@ -108,6 +112,9 @@ const Ability = {
 const ConnectionsAndEdges = {
   AbilityActivatedByFieldStateConnection: junctionConnection('ability', 'activatedByFieldState'),
   AbilityActivatedByFieldStateEdge: basicEdge(),
+
+  AbilityActivatedByUsageMethodConnection: junctionConnection('ability', 'activatedByUsageMethod'),
+  AbilityActivatedByUsageMethodEdge: basicEdge(),
 
   AbilityBoostsTypeConnection: junctionConnection('ability', 'boostsType'),
   AbilityBoostsTypeEdge: multiplierEdge(),
@@ -144,6 +151,9 @@ const ConnectionsAndEdges = {
 
   AbilityPreventsFieldStateConnection: junctionConnection('ability', 'preventsFieldState'),
   AbilityPreventsFieldStateEdge: basicEdge(),
+
+  AbilityPreventsUsageMethodConnection: junctionConnection('ability', 'preventsUsageMethod'),
+  AbilityPreventsUsageMethodEdge: basicEdge(),
 
   AbilityRemovesFieldStateConnection: junctionConnection('ability', 'removesFieldState'),
   AbilityRemovesFieldStateEdge: basicEdge(),

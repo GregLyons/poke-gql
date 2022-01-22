@@ -75,6 +75,8 @@ const Item = {
 
   activatedByFieldState: itemPK,
 
+  activatedByUsageMethod: itemPK,
+
   boostsType: itemPK,
   
   boostsUsageMethod: itemPK,
@@ -128,6 +130,9 @@ const Item = {
 const ConnectionsAndEdges = {
   ItemActivatedByFieldStateConnection: junctionConnection('item', 'activatedByFieldState'),
   ItemActivatedByFieldStateEdge: basicEdge(),
+
+  ItemActivatedByUsageMethodConnection: junctionConnection('item', 'activatedByUsageMethod'),
+  ItemActivatedByUsageMethodEdge: basicEdge(),
   
   ItemBoostsTypeConnection: junctionConnection('item', 'boostsType'),
   ItemBoostsTypeEdge: multiplierEdge(),

@@ -1,6 +1,24 @@
 {
   usageMethods {
     id
+    activatesAbility {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    activatesItem {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     boostedByAbility {
       id
       count
@@ -34,6 +52,24 @@
       edges {
         node {
           number
+        }
+      }
+    }
+    preventedByAbility {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    preventedByMove {
+      id
+      count
+      edges {
+        node {
+          name
         }
       }
     }
