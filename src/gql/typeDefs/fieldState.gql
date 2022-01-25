@@ -196,11 +196,6 @@ type FieldState implements Node {
   resistsStatus(filter: StatusFilter): FieldStateResistsStatusConnection
 
   """
-  E.g. 'rain' reduces the power of 'fire' Moves.
-  """
-  resistsType(filter: TypeFilter): FieldStateResistsTypeConnection
-
-  """
   E.g. 'cloud_nine' suppresses 'sandstorm', but does not remove it.
   """
   suppressedByAbility(filter: AbilityFilter): FieldStateSuppressedByAbilityConnection
@@ -209,6 +204,11 @@ type FieldState implements Node {
   Who the FieldState targets/affects.
   """
   target: FieldStateTargetClass!
+
+  """
+  E.g. 'rain' weakens the power of 'fire' Moves.
+  """
+  weakensType(filter: TypeFilter): FieldStateWeakensTypeConnection
 
   """
   Describes the Type and power of the Move 'weather_ball' when the FieldState is present.
@@ -617,21 +617,21 @@ type FieldStateResistedByTypeEdge implements Edge {
   multiplier: Float!
 }
 
-type FieldStateResistsTypeConnection implements Connection {
+type FieldStateWeakensTypeConnection implements Connection {
   id: String!
   count: Int!
   
   edges(
     pagination: PaginationInput
-  ): [FieldStateResistsTypeEdge!]!
+  ): [FieldStateWeakensTypeEdge!]!
 
 }
 
-type FieldStateResistsTypeEdge implements Edge {  
+type FieldStateWeakensTypeEdge implements Edge {  
   node: Type!
 
   """
-  The multiplier by which the FieldState resists the power of Moves which have the Type. 
+  The multiplier by which the FieldState weakens the power of Moves which have the Type. 
   """
   multiplier: Float!
 }

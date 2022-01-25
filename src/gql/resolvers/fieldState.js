@@ -135,12 +135,12 @@ const FieldState = {
   resistedByType: fieldStatePK,
 
   resistsStatus: fieldStatePK,
-
-  resistsType: fieldStatePK,
-
+  
   suppressedByAbility: fieldStatePK,
-
+  
   target: parent => parent.field_state_target.toUpperCase(),
+
+  weakensType: fieldStatePK,
 
   weatherBall: fieldStatePK,
 }
@@ -219,12 +219,12 @@ const ConnectionsAndEdges = {
   
   FieldStateResistsStatusConnection: junctionConnection('fieldState', 'resistsStatus'),
   FieldStateResistsStatusEdge: basicEdge(),
-
-  FieldStateResistsTypeConnection: junctionConnection('fieldState', 'resistsType'),
-  FieldStateResistsTypeEdge: multiplierEdge(),
-
+  
   FieldStateSuppressedByAbilityConnection: junctionConnection('fieldState', 'suppressedByAbility'),
   FieldStateSuppressedByAbilityEdge: basicEdge(),
+
+  FieldStateWeakensTypeConnection: junctionConnection('fieldState', 'weakensType'),
+  FieldStateWeakensTypeEdge: multiplierEdge(),
 
   FieldStateWeatherBallConnection: junctionConnection('fieldState', 'weatherBall'),
   FieldStateWeatherBallEdge: basicEdge(),

@@ -101,12 +101,12 @@ const Type = {
   removesFieldState: typePK,
 
   resistedByAbility: typePK,
-
-  resistedByFieldState: typePK,
   
   resistedByItem: typePK,
-
+  
   resistsFieldState: typePK,
+
+  weakenedByFieldState: typePK,
 
   weatherBall: typePK,
 }
@@ -158,9 +158,6 @@ const ConnectionsAndEdges = {
 
   TypeResistedByAbilityConnection: junctionConnection('type', 'resistedByAbility'),
   TypeResistedByAbilityEdge: multiplierEdge(),
-
-  TypeResistedByFieldStateConnection: junctionConnection('type', 'resistedByFieldState'),
-  TypeResistedByFieldStateEdge: multiplierEdge(),
   
   TypeResistedByItemConnection: junctionConnection('type', 'resistedByItem'),
   TypeResistedByItemEdge: multiplierEdge(),
@@ -168,6 +165,9 @@ const ConnectionsAndEdges = {
   TypeResistsFieldStateConnection: junctionConnection('type', 'resistsFieldState'),
   TypeResistsFieldStateEdge: multiplierEdge(),
 
+  TypeWeakenedByFieldStateConnection: junctionConnection('type', 'weakenedByFieldState'),
+  TypeWeakenedByFieldStateEdge: multiplierEdge(),
+  
   TypeWeatherBallConnection: junctionConnection('type', 'weatherBall'),
   TypeWeatherBallEdge: basicEdge(),
 }

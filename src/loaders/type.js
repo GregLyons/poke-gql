@@ -58,17 +58,17 @@ class TypeLoaders extends LoadersForEntity {
   resistedByAbility(pagination, filter) {
     return [pagination, filter, 'ability', 'type', 'ability_resists_ptype', true];
   }
-
-  resistedByFieldState(pagination, filter) {
-    return [pagination, filter, 'fieldState', 'type', 'field_state_resists_ptype', true];
-  }
-
+  
   resistedByItem(pagination, filter) {
     return [pagination, filter, 'item', 'type', 'item_resists_ptype', true];
   }
-
+  
   resistsFieldState(pagination, filter) {
     return [pagination, filter, 'type', 'fieldState', 'ptype_resists_field_state', false];
+  }
+
+  weakenedByFieldState(pagination, filter) {
+    return [pagination, filter, 'fieldState', 'type', 'field_state_resists_ptype', true];
   }
 
   weatherBall(pagination, filter) {

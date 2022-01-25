@@ -102,10 +102,10 @@ const UsageMethod = {
 
 const ConnectionsAndEdges = {
   UsageMethodActivatesAbilityConnection: junctionConnection('usageMethod', 'activatesAbility'),
-  UsageMethodActivatesAbilityEdge: multiplierEdge(),
+  UsageMethodActivatesAbilityEdge: basicEdge(),
 
   UsageMethodActivatesItemConnection: junctionConnection('usageMethod', 'activatesItem'),
-  UsageMethodActivatesItemEdge: multiplierEdge(),
+  UsageMethodActivatesItemEdge: basicEdge(),
 
   UsageMethodBoostedByAbilityConnection: junctionConnection('usageMethod', 'boostedByAbility'),
   UsageMethodBoostedByAbilityEdge: multiplierEdge(),

@@ -91,13 +91,13 @@ class FieldStateLoaders extends LoadersForEntity {
   resistsStatus(pagination, filter) {
     return [pagination, filter, 'fieldState', 'status', 'field_state_prevents_pstatus', false];
   }
-
-  resistsType(pagination, filter) {
-    return [pagination, filter, 'fieldState', 'type', 'field_state_resists_ptype', false];
-  }
-
+  
   suppressedByAbility(pagination, filter) {
     return [pagination, filter, 'ability', 'fieldState', 'ability_suppresses_field_state', true];
+  }
+
+  weakensType(pagination, filter) {
+    return [pagination, filter, 'fieldState', 'type', 'field_state_resists_ptype', false];
   }
 
   weatherBall(pagination, filter) {

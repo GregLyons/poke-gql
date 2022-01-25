@@ -110,7 +110,7 @@ type Type implements Node {
   """
   E.g. 'harsh_sunlight' weakens 'water' Type Moves.
   """
-  resistedByFieldState(filter: FieldStateFilter): TypeResistedByFieldStateConnection
+  weakenedByFieldState(filter: FieldStateFilter): TypeWeakenedByFieldStateConnection
 
   resistedByItem(filter: ItemFilter): TypeResistedByItemConnection
 
@@ -192,17 +192,17 @@ type TypeBoostedByFieldStateEdge implements MultiplierEdge & Edge {
   multiplier: Float!
 }
 
-type TypeResistedByFieldStateConnection implements Connection {
+type TypeWeakenedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
   edges(
     pagination: PaginationInput
-  ): [TypeResistedByFieldStateEdge!]!
+  ): [TypeWeakenedByFieldStateEdge!]!
 
 }
 
-type TypeResistedByFieldStateEdge implements Edge {  
+type TypeWeakenedByFieldStateEdge implements Edge {  
   node: FieldState!
   multiplier: Float!
 }

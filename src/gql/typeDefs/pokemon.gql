@@ -418,6 +418,7 @@ enum FormClass {
   HISUI
   MEGA
   OTHER
+  TYPE
 }
 
 #
@@ -574,5 +575,5 @@ input PokemonFilter {
   """
   Pokemon which of the base form of their form group, e.g. Meowth but not Galarian Meowth, Charizard but not Mega Charizard X/Y, nor Gigantamax Charizard.
   """
-  formClass: FormClass
+  formClass: [FormClass]
 }

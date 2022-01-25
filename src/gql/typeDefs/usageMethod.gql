@@ -139,7 +139,6 @@ type UsageMethodBoostedByAbilityConnection implements Connection {
   edges(
     pagination: PaginationInput
   ): [UsageMethodBoostedByAbilityEdge!]!
-
 }
 
 type UsageMethodBoostedByAbilityEdge implements MultiplierEdge & Edge {  

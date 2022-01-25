@@ -60,8 +60,6 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
 
   const {limit, offset, orderBy, sortBy, search} = pagination;
 
-
-
   const tablesWithFormattedName = [
     'ability',
     'effect',
@@ -258,7 +256,7 @@ const getFilterQueryString = (filter, tableName) => {
 
     // Form class
     const formClassString = filter.formClass
-      ? `AND pokemon_form_class = '${filter.formClass.toLowerCase()}'`
+      ? `AND pokemon_form_class IN (${filter.formClass.map(formClass => "'" + formClass.toLowerCase() + "'").join(', ')})`
       : ``;
 
     extraFilterString = [
