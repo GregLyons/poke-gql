@@ -109,11 +109,23 @@ const Pokemon = {
   
   name: parent => parent.pokemon_name,
 
+  pokeapiID: parent => parent.pokemon_pokeapi_id,
+
+  pokeapiName: parent => parent.pokemon_pokeapi_name,
+
   pokemonShowdownID: parent => parent.pokemon_ps_id,
+
+  removedFromSwSh: parent => parent.pokemon_removed_from_swsh,
+
+  removedFromBDSP: parent => parent.pokemon_removed_from_bdsp,
 
   requiresItem: pokemonPK,
 
   speciesName: parent => parent.pokemon_species,
+
+  typeNames: parent => parent.pokemon_ptype_name_2 
+    ? [parent.pokemon_ptype_name_1.toUpperCase(), parent.pokemon_ptype_name_2.toUpperCase()]
+    : [parent.pokemon_ptype_name_1.toUpperCase()],
 
   typing: pokemonPK,
 

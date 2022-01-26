@@ -117,6 +117,10 @@ const Move = {
 
   priority: parent => parent.pmove_priority,
 
+  removedFromSwSh: parent => parent.pmove_removed_from_swsh,
+
+  removedFromBDSP: parent => parent.pmove_removed_from_bdsp,
+
   removesFieldState: movePK,
 
   requiresItem: movePK,
@@ -132,6 +136,8 @@ const Move = {
   target: parent => parent.pmove_target.toUpperCase(),
 
   type: movePK,
+
+  typeName: parent => parent.pmove_ptype_name.toUpperCase(),
 
   usageMethods: movePK,
 }

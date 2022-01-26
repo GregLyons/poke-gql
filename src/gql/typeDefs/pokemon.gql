@@ -140,9 +140,23 @@ type Pokemon implements Node {
   name: String!
 
   """
+  ID of the Pokemon in PokeAPI. 'pikachu_world_cap', 'pikachu_partner', and 'eevee_partner' have values equal to that of their base forms.
+  """
+  pokeapiID: Int!
+
+  """
+  Name of the Pokemon in PokeAPI. 'pikachu_world_cap', 'pikachu_partner', and 'eevee_partner' have values equal to that of their base forms.
+  """
+  pokeapiName: String!
+
+  """
   ID of the Pokemon in Pokemon Showdown's code for use with, e.g. the package 'pkmn/img' for sprites/icons.
   """
   pokemonShowdownID: String!
+
+  removedFromSwSh: Boolean!
+
+  removedFromBDSP: Boolean!
 
   """
   E.g. Mega-evolutions require their corresponding Mega Stone.
@@ -158,6 +172,11 @@ type Pokemon implements Node {
     Mr. Mime (Galar), mr_mime_galar -> mr_mime
   """
   speciesName: String!
+
+  """
+  The names of the Pokemon's type, in the form [<type 1>, <type 2>]. Will be length 1 if Pokemon is monotype. E.g. '[GRASS, POISON]' for 'bulbasaur', [WATER] for 'squirtle'.
+  """
+  typeNames: [TypeName!]!
 
   """
   The elemental typing of the Pokemon, as an array of Types of length 1 or 2. For example, 'charizard' would have Types ['fire', 'flying'], and 'blastoise' would have Types ['water'].
@@ -412,6 +431,7 @@ enum AbilitySlot {
 enum FormClass {
   ALOLA
   BASE
+  BATTLE
   COSMETIC
   GALAR
   GMAX
@@ -576,4 +596,19 @@ input PokemonFilter {
   Pokemon which of the base form of their form group, e.g. Meowth but not Galarian Meowth, Charizard but not Mega Charizard X/Y, nor Gigantamax Charizard.
   """
   formClass: [FormClass]
+
+  """
+  Pokemon such that at least one of their Types belongs to the provided array.
+  """
+  types: [TypeName!]
+
+  """
+  False if the Pokemon is present in SwSh.
+  """
+  removedFromSwSh: Boolean
+
+  """
+  False if the Pokemon is present in BDSP.
+  """
+  removedFromBDSP: Boolean
 }

@@ -136,6 +136,8 @@
       }
     }
     priority
+    removedFromSwSh
+    removedFromBDSP
     removesFieldState {
       id
       count
@@ -200,6 +202,7 @@
         }
       }
     }
+    typeName
     usageMethods {
       id
       count

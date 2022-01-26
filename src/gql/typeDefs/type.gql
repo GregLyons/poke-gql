@@ -419,6 +419,34 @@ type OffensiveTypeMatchupEdge implements Edge {
 }
 
 #
+# ENUMS
+#
+
+"""
+Helper type for Moves and Pokemon. We don't use for the name of 'Type' nodes, as that would break our 'snake_case' naming convention.
+"""
+enum TypeName {
+  NORMAL
+  FIGHTING
+  FLYING
+  POISON
+  GROUND
+  ROCK
+  BUG
+  GHOST
+  FIRE
+  WATER
+  GRASS
+  ELECTRIC
+  PSYCHIC
+  ICE
+  DRAGON
+  STEEL
+  DARK
+  FAIRY
+}
+
+#
 # INPUTS
 #
 

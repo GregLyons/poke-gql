@@ -93,7 +93,11 @@
       }
     }
     name
+    pokeapiID
+    pokeapiName
     pokemonShowdownID
+    removedFromSwSh
+    removedFromBDSP
     requiresItem {
       id
       count
@@ -113,6 +117,7 @@
         }
       }
     }
+    typeNames
     weight
   }
 }

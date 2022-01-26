@@ -153,6 +153,10 @@ type Move implements Node {
 
   priority: Int!
 
+  removedFromSwSh: Boolean!
+
+  removedFromBDSP: Boolean!
+
   """
   E.g. The Move 'trick_room' removes the FieldState 'trick_room' if it's already present. 'rain_dance' removes 'harsh_sunlight'.
   """
@@ -192,6 +196,11 @@ type Move implements Node {
   The Type possessed by the Move, e.g. 'flamethrower' is 'fire'-type. 
   """
   type(filter: TypeFilter): MoveTypeConnection
+
+  """
+  The name of the type possessed by the Move. If the type varies, it will be NORMAL.
+  """ 
+  typeName: TypeName!
 
   """
   E.g. The Move 'aura_sphere' has both 'ball' and 'pulse' as UsageMethods.
@@ -725,4 +734,19 @@ input MoveFilter {
   Moves of the given target class, e.g. 'ALL', 'ANY', 'ADJACENT_FOE', 'USER'.
   """
   target: TargetClass
+
+  """
+  Move such that its Type belongs to one of the given Types. You may also want to check for Moves with the 'type_varies' Effect, e.g. 'weather_ball'.
+  """
+  types: [TypeName!]
+
+  """
+  False if the Move is present in SwSh.
+  """
+  removedFromSwSh: Boolean
+
+  """
+  False if the Move is present in BDSP.
+  """
+  removedFromBDSP: Boolean
 }

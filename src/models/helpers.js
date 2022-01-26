@@ -49,6 +49,10 @@ const escapeObjectParameters = obj => {
   return obj
 }
 
+const arrayToMySQL = arr => {
+  return "(" + arr.map(name => "'" + name + "'").join(', ') + ")";
+}
+
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 // String parameters are escaped to prevent SQL injection.
@@ -158,7 +162,7 @@ const getFilterQueryString = (filter, tableName) => {
   if (!filter.names) filter.names = filter.name ? [filter.name] : [];
 
   const nameString = filter.names.length > 0
-    ? `AND ${tableName}_${nameColumn} IN (${(filter.names.map(name => "'" + name + "'")).join(', ')})`
+    ? `AND ${tableName}_${nameColumn} IN ${arrayToMySQL(filter.names)}`
     : ``;
 
   const containsString = filter.contains 
@@ -256,7 +260,22 @@ const getFilterQueryString = (filter, tableName) => {
 
     // Form class
     const formClassString = filter.formClass
-      ? `AND pokemon_form_class IN (${filter.formClass.map(formClass => "'" + formClass.toLowerCase() + "'").join(', ')})`
+      ? `AND pokemon_form_class IN ${arrayToMySQL(filter.formClass)}`
+      : ``;
+
+    // Typing
+    const typeString = filter.types
+      ? `AND (pokemon_ptype_name_1 IN ${arrayToMySQL(filter.types)} OR pokemon_ptype_name_2 IN ${arrayToMySQL(filter.types)})`
+      : ``;
+
+    // Removed from SwSh
+    const removedFromSwShString = filter.removedFromSwSh !== undefined
+      ? `AND pokemon_removed_from_swsh = ${filter.removedFromSwSh ? 'TRUE' : 'FALSE'}`
+      : ``;
+
+    // Removed from BDSP
+    const removedFromBDSPString = filter.removedFromBDSP !== undefined
+      ? `AND pokemon_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`
       : ``;
 
     extraFilterString = [
@@ -297,6 +316,10 @@ const getFilterQueryString = (filter, tableName) => {
       minSpeedString,
 
       formClassString,
+      typeString,
+
+      removedFromSwShString,
+      removedFromBDSPString,
     ].filter(d => d.length > 0).join('\n');
   }
   // Moves
@@ -350,6 +373,21 @@ const getFilterQueryString = (filter, tableName) => {
     const contactString = filter.contact
       ? `AND pmove_contact = '${filter.contact.toLowerCase()}'`
       : ``;
+
+    // Types
+    const typeString = filter.types
+    ? `AND pmove_ptype_name IN ${arrayToMySQL(filter.types)}`
+    : ``;
+
+    // Removed from SwSh
+    const removedFromSwShString = filter.removedFromSwSh !== undefined
+      ? `AND pmove_removed_from_swsh = ${filter.removedFromSwSh ? 'TRUE' : 'FALSE'}`
+      : ``;
+
+    // Removed from BDSP
+    const removedFromBDSPString = filter.removedFromBDSP !== undefined
+      ? `AND pmove_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`
+      : ``;
       
     extraFilterString = [
       maxPowerString,
@@ -368,6 +406,10 @@ const getFilterQueryString = (filter, tableName) => {
       categoryString,
       targetString,
       contactString,
+      typeString,
+      
+      removedFromSwShString,
+      removedFromBDSPString,
     ].filter(d => d.length > 0).join('\n');  
   }
   // Items
