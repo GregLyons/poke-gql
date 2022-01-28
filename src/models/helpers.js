@@ -269,14 +269,14 @@ const getFilterQueryString = (filter, tableName) => {
       : ``;
 
     // Removed from SwSh
-    const removedFromSwShString = filter.removedFromSwSh !== undefined
-      ? `AND pokemon_removed_from_swsh = ${filter.removedFromSwSh ? 'TRUE' : 'FALSE'}`
-      : ``;
+    const removedFromSwShString = filter.removedFromSwSh === null || filter.removedFromSwSh === undefined
+      ? ``
+      : `AND pokemon_removed_from_swsh = ${filter.removedFromSwSh ? 'TRUE' : 'FALSE'}`;
 
     // Removed from BDSP
-    const removedFromBDSPString = filter.removedFromBDSP !== undefined
-      ? `AND pokemon_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`
-      : ``;
+    const removedFromBDSPString = filter.removedFromBDSP === null || filter.removedFromBDSP === undefined
+      ? ``
+      : `AND pokemon_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`;
 
     extraFilterString = [
       maxWeightString,
@@ -380,14 +380,14 @@ const getFilterQueryString = (filter, tableName) => {
     : ``;
 
     // Removed from SwSh
-    const removedFromSwShString = filter.removedFromSwSh !== undefined
-      ? `AND pmove_removed_from_swsh = ${filter.removedFromSwSh ? 'TRUE' : 'FALSE'}`
-      : ``;
+    const removedFromSwShString = filter.removedFromSwSh === null || filter.removedFromSwSh === undefined
+      ? ``
+      : `AND pmove_removed_from_swsh = ${filter.removedFromSwSh ? 'TRUE' : 'FALSE'}`;
 
     // Removed from BDSP
-    const removedFromBDSPString = filter.removedFromBDSP !== undefined
-      ? `AND pmove_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`
-      : ``;
+    const removedFromBDSPString = filter.removedFromBDSP === null || filter.removedFromBDSP === undefined
+      ? ``
+      : `AND pmove_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`;
       
     extraFilterString = [
       maxPowerString,
