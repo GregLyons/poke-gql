@@ -96,6 +96,7 @@
         }
       }
     }
+    unformattedName
     volatile
   }
 }

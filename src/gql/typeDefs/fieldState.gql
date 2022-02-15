@@ -203,7 +203,12 @@ type FieldState implements Node {
   """
   Who the FieldState targets/affects.
   """
-  target: FieldStateTargetClass!
+  target: FieldStateTargetClass!  
+  
+  """
+  The name of the FieldState with only alphanumeric characters.
+  """
+  unformattedName: String!
 
   """
   E.g. 'rain' weakens the power of 'fire' Moves.
@@ -706,17 +711,17 @@ input FieldStateFilter {
   names: [String]
 
   """
-  FieldStates whose name contains the given string, case-insensitive.
+  FieldStates whose unformatted name contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  FieldStates whose name ends with the given string, case-insensitive.
+  FieldStates whose unformatted name ends with the given string, case-insensitive.
   """
   endsWith: String
   
   """
-  FieldStates whose name starts with the given string, case-insensitive.
+  FieldStates whose unformatted name starts with the given string, case-insensitive.
   """
   startsWith: String
 

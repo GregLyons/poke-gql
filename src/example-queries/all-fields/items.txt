@@ -149,6 +149,7 @@
         }
       }
     }
+    pokemonShowdownID
     requiresPokemon {
       id
       count

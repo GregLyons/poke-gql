@@ -128,6 +128,12 @@ type Item implements Node {
   """
   naturalGift(filter: TypeFilter): ItemNaturalGiftConnection
 
+  
+  """
+  ID of the Item in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
+  """
+  pokemonShowdownID: String!
+
   """
   The Pokemon necessary for this item to take effect.
 
@@ -582,20 +588,19 @@ input ItemFilter {
   names: [String]
 
   """
-  Entities whose name contains the given string, case-insensitive.
+  Items whose PSID contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  Entities whose name ends with the given string, case-insensitive.
+  Items whose PSID ends with the given string, case-insensitive.
   """
   endsWith: String
 
   """
-  Entities whose name starts with the given string, case-insensitive.
+  Items whose PSID starts with the given string, case-insensitive.
   """
   startsWith: String
-
 
   # OTHER FILTERS
 

@@ -234,6 +234,7 @@
         }
       }
     }
+    unformattedName
     weatherBall {
       id
       count

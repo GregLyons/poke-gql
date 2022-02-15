@@ -151,8 +151,15 @@ const getFilterQueryString = (filter, tableName) => {
     case 'pdescription':
       nameColumn = 'entity_name';
       break;
+    case 'effect':
+    case 'field_state':
+    case 'stat':
+    case 'pstatus':
+    case 'usage_method':
+      nameColumn = 'unformatted_name';
+      break;
     default:
-      nameColumn = 'name';
+      nameColumn = 'ps_id';
   }
 
   /* If 'names' is not specified, then:

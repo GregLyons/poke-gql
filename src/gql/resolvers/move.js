@@ -109,6 +109,8 @@ const Move = {
 
   pokemon: movePK,
 
+  pokemonShowdownID: parent => parent.pmove_ps_id,
+
   power: parent => parent.pmove_power,
 
   pp: parent => parent.pmove_pp,

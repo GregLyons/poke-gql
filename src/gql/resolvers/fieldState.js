@@ -140,6 +140,8 @@ const FieldState = {
   
   target: parent => parent.field_state_target.toUpperCase(),
 
+  unformattedName: parent => parent.field_state_unformatted_name,
+
   weakensType: fieldStatePK,
 
   weatherBall: fieldStatePK,

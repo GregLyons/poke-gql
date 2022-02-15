@@ -89,6 +89,8 @@ const Ability = {
 
   pokemon: abilityPK,
 
+  pokemonShowdownID: parent => parent.ability_ps_id,
+
   preventsFieldState: abilityPK,
 
   preventsUsageMethod: abilityPK,

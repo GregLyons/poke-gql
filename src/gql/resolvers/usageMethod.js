@@ -93,6 +93,8 @@ const UsageMethod = {
   moves: usageMethodPK,
   
   name: parent => parent.usage_method_name,
+
+  unformattedName: parent => parent.usage_method_unformatted_name,
 }
 
 //#endregion

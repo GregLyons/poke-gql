@@ -107,6 +107,11 @@ type Status implements Node {
   resistedByMove(filter: MoveFilter): StatusResistedByMoveConnection
 
   """
+  The name of the Status with only alphanumeric characters.
+  """
+  unformattedName: String!
+
+  """
   Whether the Status is volatile. Non-volatile statuses persist even upon switching out.
   """
   volatile: Boolean!
@@ -312,17 +317,17 @@ input StatusFilter {
   names: [String]
 
   """
-  Entities whose name contains the given string, case-insensitive.
+  Entities whose unformatted name contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  Entities whose name ends with the given string, case-insensitive.
+  Entities whose unformatted name ends with the given string, case-insensitive.
   """
   endsWith: String
 
   """
-  Entities whose name starts with the given string, case-insensitive.
+  Entities whose unformatted name starts with the given string, case-insensitive.
   """
   startsWith: String
 }

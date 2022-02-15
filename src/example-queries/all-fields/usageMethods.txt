@@ -101,5 +101,6 @@
       }
     }
     name
+    unformattedName
   }
 }

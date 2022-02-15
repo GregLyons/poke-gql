@@ -85,6 +85,8 @@ const Stat = {
   modifiedByNature: statPK,
   
   name: parent => parent.stat_name,
+
+  unformattedName: parent => parent.stat_unformatted_name,
 }
 
 //#endregion

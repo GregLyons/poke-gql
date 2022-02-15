@@ -120,6 +120,11 @@ type Ability implements Node {
   Pokemon which can possess this Ability.
   """
   pokemon(filter: PokemonFilter): AbilityPokemonConnection
+  
+  """
+  ID of the Ability in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
+  """
+  pokemonShowdownID: String!
 
   """
   E.g. 'cloud_nine' prevents 'aurora_veil' from being set up, even in the presence of 'hail'. This is because 'cloud_nine' suppresses the effects of 'hail'. 'cloud_nine' does not remove or suppress 'aurora_veil' that is already set-up. 
@@ -541,17 +546,17 @@ input AbilityFilter {
   names: [String]
 
   """
-  Entities whose name contains the given string, case-insensitive.
+  Abilities whose PSID contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  Entities whose name ends with the given string, case-insensitive.
+  Abilities whose PSID ends with the given string, case-insensitive.
   """
   endsWith: String
 
   """
-  Entities whose name starts with the given string, case-insensitive.
+  Abilities whose PSID starts with the given string, case-insensitive.
   """
   startsWith: String
 }

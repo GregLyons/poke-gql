@@ -111,6 +111,8 @@ const Item = {
 
   naturalGift: itemPK,
 
+  pokemonShowdownID: parent => parent.item_ps_id,
+
   requiresPokemon: itemPK,
 
   resistsFieldState: itemPK,

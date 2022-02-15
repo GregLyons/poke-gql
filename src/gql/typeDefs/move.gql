@@ -138,6 +138,11 @@ type Move implements Node {
   Pokemon who can learn this Move.
   """
   pokemon(filter: PokemonFilter): MovePokemonConnection
+  
+  """
+  ID of the Move in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
+  """
+  pokemonShowdownID: String!
 
   """
   Non-damaging moves (e.g. status moves), fixed damage moves (e.g. sonic_boom), and variable damage (e.g. magnitude) moves have null in this field. 
@@ -652,19 +657,25 @@ input MoveFilter {
   names: [String]
 
   """
-  Moves whose name contains the given string, case-insensitive.
+  Moves whose PSID contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  Moves whose name ends with the given string, case-insensitive.
+  Moves whose PSID ends with the given string, case-insensitive.
   """
   endsWith: String
   
   """
-  Moves whose name starts with the given string, case-insensitive.
+  Moves whose PSID starts with the given string, case-insensitive.
   """
   startsWith: String
+
+  psIDContains: String
+
+  psIDEndsWith: String
+
+  psIDStartsWith: String
 
 
   # STATS FILTERS

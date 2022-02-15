@@ -92,6 +92,8 @@ const Status = {
   
   resistedByMove: statusPK,
 
+  unformattedName: parent => parent.pstatus_unformatted_name,
+
   volatile: parent => parent.pstatus_volatile,
 }
 

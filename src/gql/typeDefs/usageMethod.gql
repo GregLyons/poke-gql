@@ -110,6 +110,11 @@ type UsageMethod implements Node {
   The name of the UsageMethod in snake_case. 
   """
   name: String!
+
+  """
+  The name of the UsageMethod with only alphanumeric characters.
+  """
+  unformattedName: String!
 }
 
 #
@@ -305,17 +310,17 @@ input UsageMethodFilter {
   names: [String]
 
   """
-  Entities whose name contains the given string, case-insensitive.
+  Entities whose unformatted name contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  Entities whose name ends with the given string, case-insensitive.
+  Entities whose unformatted name ends with the given string, case-insensitive.
   """
   endsWith: String
 
   """
-  Entities whose name starts with the given string, case-insensitive.
+  Entities whose unformatted name starts with the given string, case-insensitive.
   """
   startsWith: String
 }

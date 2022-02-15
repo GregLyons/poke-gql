@@ -82,6 +82,8 @@ const Effect = {
   items: effectPK,
 
   moves: effectPK,
+
+  unformattedName: parent => parent.effect_unformatted_name,
 }
 
 //#endregion

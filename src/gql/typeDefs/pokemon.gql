@@ -216,7 +216,7 @@ type PokemonAbilityConnection implements Connection {
   ): [PokemonAbilityEdge!]!
 }
 
-type PokemonAbilityEdge implements Edge {  
+  type PokemonAbilityEdge implements Edge {  
   node: Ability!
 
   """
@@ -475,21 +475,20 @@ input PokemonFilter {
   names: [String]
 
   """
-  Pokemon whose name contains the given string, case-insensitive.
+  Pokemon whose PSID contains the given string, case-insensitive.
   """
   contains: String
 
   """
-  Pokemon whose name ends with the given string, case-insensitive.
+  Pokemon whose PSID ends with the given string, case-insensitive.
   """
 
   endsWith: String
 
   """
-  Pokemon whose name starts with the given string, case-insensitive.
+  Pokemon whose PSID starts with the given string, case-insensitive.
   """
   startsWith: String
-
 
   # STATS FILTERS
 

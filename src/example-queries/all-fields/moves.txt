@@ -124,6 +124,7 @@
         }
       }
     }
+    pokemonShowdownID
     power
     pp
     preventsUsageMethod {
