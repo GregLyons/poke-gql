@@ -27,7 +27,7 @@ extend type Query {
   pokemon(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
     filter: PokemonFilter
   ): [Pokemon!]!
 }
@@ -48,6 +48,11 @@ type Pokemon implements Node {
   The base stats of the Pokemon.
   """
   baseStats: BaseStats!
+
+  """
+  The sum of all base stats of the Pokemon.
+  """
+  baseStatTotal: Int!
 
   """
   The National Dex number of the Pokemon. 
@@ -258,7 +263,7 @@ type PokemonEnablesItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [PokemonEnablesItemEdge!]! 
 
 }
@@ -272,7 +277,7 @@ type PokemonRequiresItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [PokemonRequiresItemEdge!]! 
 
 }
@@ -288,7 +293,7 @@ type PokemonEnablesMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [PokemonEnablesMoveEdge!]! 
 
 }
@@ -302,7 +307,7 @@ type PokemonMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [PokemonMoveEdge!]!
 
 }
@@ -409,7 +414,7 @@ type PokemonTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [PokemonTypeEdge!]!
 
 }
@@ -441,6 +446,33 @@ enum FormClass {
   TYPE
 }
 
+enum PokemonColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  SPECIES_NAME
+  DEX
+  HEIGHT
+  WEIGHT
+  INTRODUCED
+  HP
+  ATTACK
+  DEFENSE
+  SPECIAL_ATTACK
+  SPECIAL_DEFENSE 
+  SPEED
+  BASE_STAT_TOTAL
+  FORM_CLASS
+  POKEMON_SHOWDOWN_ID
+  POKEAPI_NAME
+  POKEAPI_ID
+  TYPE_NAME_1
+  TYPE_NAME_2
+  REMOVED_FROM_SWSH
+  REMOVED_FROM_BDSP
+}
+
 #
 # UNIONS
 #
@@ -450,6 +482,14 @@ union PokemonEnablesConnection = PokemonEnablesItemConnection | PokemonEnablesMo
 #
 # INPUTS
 #
+
+input PokemonPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: PokemonColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input PokemonFilter {
   """
@@ -586,6 +626,16 @@ input PokemonFilter {
   Pokemon whose Speed stat is greater than the given number, inclusive.
   """
   minSpeed: Int
+
+  """
+  Pokemon whose BaseStatTotal is less than the given number, inclusive.
+  """
+  maxBaseStatTotal: Int
+
+  """
+  Pokemon whose BaseStatTotal is greater than the given number, inclusive.
+  """
+  minBaseStatTotal: Int
 
   
   # OTHER FILTERS

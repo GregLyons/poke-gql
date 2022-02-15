@@ -18,6 +18,7 @@
       specialAttack
       speed
     }
+    baseStatTotal
     dexNumber
     enablesItem {
       id

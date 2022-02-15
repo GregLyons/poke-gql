@@ -27,7 +27,7 @@ extend type Query {
   effects(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: EffectPaginationInput
     filter: EffectFilter
   ): [Effect!]!
 }
@@ -110,7 +110,7 @@ type EffectAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [EffectAbilityEdge!]! 
 
 }
@@ -126,7 +126,7 @@ type EffectFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [EffectFieldStateEdge!]! 
 
 }
@@ -168,7 +168,7 @@ type EffectItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [EffectItemEdge!]! 
 
 }
@@ -184,7 +184,7 @@ type EffectMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [EffectMoveEdge!]! 
 
 }

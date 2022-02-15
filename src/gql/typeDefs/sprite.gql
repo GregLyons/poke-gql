@@ -87,7 +87,7 @@ type SpriteItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [SpriteItemEdge!]! 
 
 }
@@ -103,7 +103,7 @@ type SpritePokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [SpritePokemonEdge!]! 
 
 }

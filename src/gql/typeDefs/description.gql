@@ -73,7 +73,7 @@ type DescriptionAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [DescriptionAbilityEdge!]!
 
 }
@@ -91,7 +91,7 @@ type DescriptionItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [DescriptionItemEdge!]!
 
 }
@@ -109,7 +109,7 @@ type DescriptionMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [DescriptionMoveEdge!]!
 
 }

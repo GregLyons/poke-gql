@@ -164,7 +164,7 @@ type GenerationAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [GenerationAbilityEdge!]! 
 
 }
@@ -174,7 +174,7 @@ type GenerationIntroducedAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [GenerationAbilityEdge!]! 
 
 }
@@ -190,7 +190,7 @@ type GenerationEffectConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: EffectPaginationInput
   ): [GenerationEffectEdge!]! 
 
 }
@@ -200,7 +200,7 @@ type GenerationIntroducedEffectConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: EffectPaginationInput
   ): [GenerationEffectEdge!]! 
 
 }
@@ -216,7 +216,7 @@ type GenerationFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [GenerationFieldStateEdge!]! 
 
 }
@@ -226,7 +226,7 @@ type GenerationIntroducedFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [GenerationFieldStateEdge!]! 
 
 }
@@ -243,7 +243,7 @@ type GenerationItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [GenerationItemEdge!]! 
 
 }
@@ -253,7 +253,7 @@ type GenerationIntroducedItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [GenerationItemEdge!]! 
 
 }
@@ -269,7 +269,7 @@ type GenerationMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [GenerationMoveEdge!]! 
 
 }
@@ -279,7 +279,7 @@ type GenerationIntroducedMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [GenerationMoveEdge!]! 
 
 }
@@ -295,7 +295,7 @@ type GenerationPokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [GenerationPokemonEdge!]! 
 
 }
@@ -305,7 +305,7 @@ type GenerationIntroducedPokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [GenerationPokemonEdge!]! 
 
 }
@@ -321,7 +321,7 @@ type GenerationStatConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatPaginationInput
   ): [GenerationStatEdge!]! 
 
 }
@@ -331,7 +331,7 @@ type GenerationIntroducedStatConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatPaginationInput
   ): [GenerationStatEdge!]! 
 
 }
@@ -347,7 +347,7 @@ type GenerationStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [GenerationStatusEdge!]! 
 
 }
@@ -357,7 +357,7 @@ type GenerationIntroducedStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [GenerationStatusEdge!]! 
 
 }
@@ -373,7 +373,7 @@ type GenerationTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [GenerationTypeEdge!]! 
 
 }
@@ -383,7 +383,7 @@ type GenerationIntroducedTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [GenerationTypeEdge!]! 
 
 }
@@ -399,7 +399,7 @@ type GenerationUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [GenerationUsageMethodEdge!]! 
 
 }
@@ -409,7 +409,7 @@ type GenerationIntroducedUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [GenerationUsageMethodEdge!]! 
 
 }

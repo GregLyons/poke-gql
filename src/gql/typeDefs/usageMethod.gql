@@ -27,7 +27,7 @@ extend type Query {
   usageMethods(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
     filter: UsageMethodFilter
   ): [UsageMethod!]!
 }
@@ -128,7 +128,7 @@ type UsageMethodActivatesAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [UsageMethodActivatesAbilityEdge!]!
 
 }
@@ -142,7 +142,7 @@ type UsageMethodBoostedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [UsageMethodBoostedByAbilityEdge!]!
 }
 
@@ -156,7 +156,7 @@ type UsageMethodResistedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [UsageMethodResistedByAbilityEdge!]!
 
 }
@@ -171,7 +171,7 @@ type UsageMethodPreventedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [UsageMethodPreventedByAbilityEdge!]!
 
 }
@@ -213,7 +213,7 @@ type UsageMethodActivatesItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [UsageMethodActivatesItemEdge!]!
 
 }
@@ -227,7 +227,7 @@ type UsageMethodBoostedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [UsageMethodBoostedByItemEdge!]!
 
 }
@@ -242,7 +242,7 @@ type UsageMethodResistedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [UsageMethodResistedByItemEdge!]!
 
 }
@@ -259,7 +259,7 @@ type UsageMethodMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [UsageMethodMoveEdge!]!
 
 }
@@ -273,7 +273,7 @@ type UsageMethodPreventedByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [UsageMethodPreventedByMoveEdge!]!
 
 }
@@ -283,8 +283,29 @@ type UsageMethodPreventedByMoveEdge implements Edge {
 }
 
 #
+# ENUMS
+#
+
+enum UsageMethodColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  UNFORMATTED_NAME
+}
+
+#
 # INPUTS
 #
+
+input UsageMethodPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: UsageMethodColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input UsageMethodFilter {
   """

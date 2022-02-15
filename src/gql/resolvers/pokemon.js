@@ -83,6 +83,8 @@ const Pokemon = {
     };
   },
 
+  baseStatTotal: parent => parent.pokemon_base_stat_total,
+
   dexNumber: parent => parent.pokemon_dex,
 
   enablesItem: pokemonPK,

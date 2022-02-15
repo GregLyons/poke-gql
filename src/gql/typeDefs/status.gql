@@ -27,7 +27,7 @@ extend type Query {
   statuses(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
     filter: StatusFilter
   ): [Status!]!
 }
@@ -128,7 +128,7 @@ type StatusCausedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [StatusCausedByAbilityEdge!]!
 
 }
@@ -149,7 +149,7 @@ type StatusResistedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [StatusResistedByAbilityEdge!]!
 
 }
@@ -165,7 +165,7 @@ type StatusCausedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [StatusCausedByFieldStateEdge!]!
 
 }
@@ -184,7 +184,7 @@ type StatusResistedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [StatusResistedByFieldStateEdge!]!
 
 }
@@ -226,7 +226,7 @@ type StatusCausedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [StatusCausedByItemEdge!]!
 
 }
@@ -245,7 +245,7 @@ type StatusResistedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [StatusResistedByItemEdge!]!
 
 }
@@ -261,7 +261,7 @@ type StatusCausedByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [StatusCausedByMoveEdge!]!
 
 }
@@ -280,7 +280,7 @@ type StatusResistedByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [StatusResistedByMoveEdge!]!
 
 }
@@ -289,9 +289,27 @@ type StatusResistedByMoveEdge implements Edge {
   node: Move!
 }
 
+enum StatusColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  UNFORMATTED_NAME
+  VOLATILE
+}
+
 #
 # INPUTS
 #
+
+input StatusPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: StatusColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input StatusFilter {
   """

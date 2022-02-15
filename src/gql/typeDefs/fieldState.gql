@@ -27,7 +27,7 @@ extend type Query {
   fieldStates(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
     filter: FieldStateFilter
   ): [FieldState!]!
 }
@@ -232,7 +232,7 @@ type FieldStateActivatesAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [FieldStateActivatesAbilityEdge!]!
 
 }
@@ -246,7 +246,7 @@ type FieldStateCreatedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [FieldStateCreatedByAbilityEdge!]!
 
 }
@@ -265,7 +265,7 @@ type FieldStateIgnoredByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [FieldStateIgnoredByAbilityEdge!]!
 
 }
@@ -279,7 +279,7 @@ type FieldStatePreventedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [FieldStatePreventedByAbilityEdge!]!
 
 }
@@ -293,7 +293,7 @@ type FieldStateRemovedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [FieldStateRemovedByAbilityEdge!]!
 
 }
@@ -307,7 +307,7 @@ type FieldStateSuppressedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [FieldStateSuppressedByAbilityEdge!]!
 
 }
@@ -323,7 +323,7 @@ type FieldStateEffectConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: EffectPaginationInput
   ): [FieldStateEffectEdge!]! 
 
 }
@@ -365,7 +365,7 @@ type FieldStateActivatesItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [FieldStateActivatesItemEdge!]!
 
 }
@@ -379,7 +379,7 @@ type FieldStateExtendedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [FieldStateExtendedByItemEdge!]!
 
 }
@@ -398,7 +398,7 @@ type FieldStateIgnoredByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [FieldStateIgnoredByItemEdge!]!
 
 }
@@ -412,7 +412,7 @@ type FieldStateResistedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [FieldStateResistedByItemEdge!]!
 
 }
@@ -430,7 +430,7 @@ type FieldStateEnhancesMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [FieldStateEnhancesMoveEdge!]!
 
 }
@@ -444,7 +444,7 @@ type FieldStateHindersMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [FieldStateHindersMoveEdge!]!
 
 }
@@ -458,7 +458,7 @@ type FieldStateCreatedByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [FieldStateCreatedByMoveEdge!]!
 
 }
@@ -477,7 +477,7 @@ type FieldStateRemovedByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [FieldStateRemovedByMoveEdge!]!
 
 }
@@ -493,7 +493,7 @@ type FieldStateModifiesStatConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatPaginationInput
   ): [FieldStateModifiesStatEdge!]!
 
 }
@@ -529,7 +529,7 @@ type FieldStateCausesStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [FieldStateCausesStatusEdge!]!
 
 }
@@ -548,7 +548,7 @@ type FieldStateResistsStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [FieldStateResistsStatusEdge!]!
 
 }
@@ -564,7 +564,7 @@ type FieldStateBoostsTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [FieldStateBoostsTypeEdge!]!
 
 }
@@ -583,7 +583,7 @@ type FieldStateIgnoredByTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [FieldStateIgnoredByTypeEdge!]!
 
 }
@@ -597,7 +597,7 @@ type FieldStateRemovedByTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [FieldStateRemovedByTypeEdge!]!
 
 }
@@ -611,7 +611,7 @@ type FieldStateResistedByTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [FieldStateResistedByTypeEdge!]!
 
 }
@@ -627,7 +627,7 @@ type FieldStateWeakensTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [FieldStateWeakensTypeEdge!]!
 
 }
@@ -682,10 +682,31 @@ enum FieldStateTargetClass {
   ALL_FOES
 }
 
+enum FieldStateColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  UNFORMATTED_NAME
+  DAMAGE_PERCENT
+  MAX_LAYERS
+  ONLY_GROUNDED
+  CLASS
+  TARGET
+}
 
 #
 # INPUTS
 #
+
+input FieldStatePaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: FieldStateColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input FieldStateFilter {
   """

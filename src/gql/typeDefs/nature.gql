@@ -27,7 +27,7 @@ extend type Query {
   natures(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: NaturePaginationInput
     filter: NatureFilter
   ): [Nature!]!
 }
@@ -132,7 +132,7 @@ type NatureConfusedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [NatureConfusedByItemEdge!]! 
 
 }
@@ -148,7 +148,7 @@ type NatureModifiesStatConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatPaginationInput
   ): [NatureModifiesStatEdge!]!
 
 }
@@ -178,8 +178,30 @@ type NatureModifiesStatEdge implements StatModificationEdge & Edge {
 }
 
 #
+# ENUMS
+#
+
+enum NatureColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  FAVORITE_FLAVOR
+  DISLIKED_FLAVOR
+}
+
+#
 # INPUTS
 # 
+
+input NaturePaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: NatureColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input NatureFilter {
   """

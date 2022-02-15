@@ -27,7 +27,7 @@ extend type Query {
   moves(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: MovePaginationInput
     filter: MoveFilter
   ): [Move!]!
 }
@@ -242,7 +242,7 @@ type MoveEffectConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: EffectPaginationInput
   ): [MoveEffectEdge!]! 
 
 }
@@ -258,7 +258,7 @@ type MoveCreatesFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [MoveCreatesFieldStateEdge!]! 
 }
 
@@ -276,7 +276,7 @@ type MoveRemovesFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [MoveRemovesFieldStateEdge!]! 
 }
 
@@ -290,7 +290,7 @@ type MoveEnhancedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [MoveEnhancedByFieldStateEdge!]! 
 
 }
@@ -304,7 +304,7 @@ type MoveHinderedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [MoveHinderedByFieldStateEdge!]! 
 
 }
@@ -346,7 +346,7 @@ type MoveRequiresItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [MoveRequiresItemEdge!]!
 
 }
@@ -362,7 +362,7 @@ type MoveEnablesMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [MoveEnablesMoveEdge!]!
 
 }
@@ -376,7 +376,7 @@ type MoveInteractedWithByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [MoveInteractedWithByMoveEdge!]!
 
 }
@@ -390,7 +390,7 @@ type MoveInteractsWithMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [MoveInteractsWithMoveEdge!]!
 
 }
@@ -404,7 +404,7 @@ type MoveRequiresMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [MoveRequiresMoveEdge!]!
 
 }
@@ -420,7 +420,7 @@ type MovePokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [MovePokemonEdge!]!
 
 }
@@ -450,7 +450,7 @@ type MoveRequiresPokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [MoveRequiresPokemonEdge!]!
 
 }
@@ -466,7 +466,7 @@ type MoveModifiesStatConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatPaginationInput
   ): [MoveModifiesStatEdge!]!
 
 }
@@ -502,7 +502,7 @@ type MoveCausesStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [MoveCausesStatusEdge!]!
 
 }
@@ -521,7 +521,7 @@ type MoveResistsStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [MoveResistsStatusEdge!]!
 
 }
@@ -537,7 +537,7 @@ type MoveTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [MoveTypeEdge!]!
 
 }
@@ -551,7 +551,7 @@ type MoveRequiresTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [MoveRequiresTypeEdge!]!
 
 }
@@ -567,7 +567,7 @@ type MoveUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [MoveUsageMethodEdge!]!
 
 }
@@ -581,7 +581,7 @@ type MovePreventsUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [MovePreventsUsageMethodEdge!]! 
 }
 
@@ -629,9 +629,37 @@ union MoveRequiresConnection = MoveRequiresItemConnection | MoveRequiresMoveConn
 
 union MoveEnablesConnection = MoveEnablesMoveConnection
 
+enum MoveColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  POKEMON_SHOWDOWN_ID
+  POWER
+  PP
+  ACCURACY
+  CATEGORY
+  PRIORITY
+  CONTACT
+  TARGET
+  REMOVED_FROM_SWSH
+  REMOVED_FROM_BDSP
+  TYPE_NAME
+  POKEMON_SHOWDOWN_ID
+}
+
 #
 # INPUTS
 #
+
+input MovePaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: MoveColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input MoveFilter {
   """

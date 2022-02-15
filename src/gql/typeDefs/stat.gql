@@ -27,7 +27,7 @@ extend type Query {
   stats(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: StatPaginationInput
     filter: StatFilter
   ): [Stat!]!
 }
@@ -106,7 +106,7 @@ type StatModifiedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [StatModifiedByAbilityEdge!]!
 
 }
@@ -144,7 +144,7 @@ type StatModifiedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [StatModifiedByFieldStateEdge!]!
 
 }
@@ -208,7 +208,7 @@ type StatModifiedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [StatModifiedByItemEdge!]!
 
 }
@@ -246,7 +246,7 @@ type StatModifiedByMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [StatModifiedByMoveEdge!]!
 
 }
@@ -282,7 +282,7 @@ type StatModifiedByNatureConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: NaturePaginationInput
   ): [StatModifiedByNatureEdge!]!
 
 }
@@ -311,9 +311,26 @@ type StatModifiedByNatureEdge implements StatModificationEdge & Edge {
   recipient: StatModificationRecipient!
 }
 
+enum StatColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  UNFORMATTED_NAME
+}
+
 #
 # INPUTS
 #
+
+input StatPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: StatColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input StatFilter {
   """

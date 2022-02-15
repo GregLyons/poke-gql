@@ -33,7 +33,7 @@ extend type Query {
   types(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: TypePaginationInput
     filter: TypeFilter
   ): [Type!]!
 }
@@ -136,7 +136,7 @@ type TypeBoostedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [TypeBoostedByAbilityEdge!]!
 
 }
@@ -151,7 +151,7 @@ type TypeResistedByAbilityConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
   ): [TypeResistedByAbilityEdge!]!
 
 }
@@ -182,7 +182,7 @@ type TypeBoostedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [TypeBoostedByFieldStateEdge!]!
 
 }
@@ -197,7 +197,7 @@ type TypeWeakenedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [TypeWeakenedByFieldStateEdge!]!
 
 }
@@ -212,7 +212,7 @@ type TypeIgnoresFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [TypeIgnoresFieldStateEdge!]! 
 
 }
@@ -226,7 +226,7 @@ type TypeResistsFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [TypeResistsFieldStateEdge!]! 
 
 }
@@ -242,7 +242,7 @@ type TypeRemovesFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [TypeRemovesFieldStateEdge!]! 
 
 }
@@ -307,7 +307,7 @@ type TypeBoostedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [TypeBoostedByItemEdge!]!
 
 }
@@ -322,7 +322,7 @@ type TypeResistedByItemConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: ItemPaginationInput
   ): [TypeResistedByItemEdge!]!
 
 }
@@ -339,7 +339,7 @@ type TypeMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [TypeMoveEdge!]!
 
 }
@@ -353,7 +353,7 @@ type TypeEnablesMoveConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: MovePaginationInput
   ): [TypeEnablesMoveEdge!]!
 
 }
@@ -369,7 +369,7 @@ type TypePokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [TypePokemonEdge!]!
 
 }
@@ -446,9 +446,25 @@ enum TypeName {
   FAIRY
 }
 
+enum TypeColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+}
+
 #
 # INPUTS
 #
+
+input TypePaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: TypeColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input TypeFilter {
   """

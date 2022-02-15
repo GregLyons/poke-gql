@@ -27,7 +27,7 @@ extend type Query {
   abilities(
     generation: Int = 8
     generations: [Int]
-    pagination: PaginationInput
+    pagination: AbilityPaginationInput
     filter: AbilityFilter
   ): [Ability!]!
 }
@@ -191,7 +191,7 @@ type AbilityEffectConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: EffectPaginationInput
   ): [AbilityEffectEdge!]! 
 }
 
@@ -206,7 +206,7 @@ type AbilityActivatedByFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [AbilityActivatedByFieldStateEdge!]! 
 }
 
@@ -219,7 +219,7 @@ type AbilityCreatesFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [AbilityCreatesFieldStateEdge!]! 
 }
 
@@ -237,7 +237,7 @@ type AbilityIgnoresFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [AbilityIgnoresFieldStateEdge!]! 
 }
 
@@ -250,7 +250,7 @@ type AbilityPreventsFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [AbilityPreventsFieldStateEdge!]! 
 }
 
@@ -263,7 +263,7 @@ type AbilityRemovesFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [AbilityRemovesFieldStateEdge!]! 
 }
 
@@ -276,7 +276,7 @@ type AbilitySuppressesFieldStateConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: FieldStatePaginationInput
   ): [AbilitySuppressesFieldStateEdge!]! 
 }
 
@@ -317,7 +317,7 @@ type AbilityPokemonConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: PokemonPaginationInput
   ): [AbilityPokemonEdge!]!
 
 }
@@ -334,7 +334,7 @@ type AbilityModifiesStatConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatPaginationInput
   ): [AbilityModifiesStatEdge!]!
 
 }
@@ -372,7 +372,7 @@ type AbilityCausesStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [AbilityCausesStatusEdge!]!
 
 }
@@ -393,7 +393,7 @@ type AbilityResistsStatusConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: StatusPaginationInput
   ): [AbilityResistsStatusEdge!]!
 
 }
@@ -409,7 +409,7 @@ type AbilityBoostsTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [AbilityBoostsTypeEdge!]!
 
 }
@@ -428,7 +428,7 @@ type AbilityResistsTypeConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: TypePaginationInput
   ): [AbilityResistsTypeEdge!]!
 
 }
@@ -449,7 +449,7 @@ type AbilityActivatedByUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [AbilityActivatedByUsageMethodEdge!]! 
 }
 
@@ -462,7 +462,7 @@ type AbilityBoostsUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [AbilityBoostsUsageMethodEdge!]!
 
 }
@@ -481,7 +481,7 @@ type AbilityPreventsUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [AbilityPreventsUsageMethodEdge!]! 
 }
 
@@ -494,7 +494,7 @@ type AbilityResistsUsageMethodConnection implements Connection {
   count: Int!
   
   edges(
-    pagination: PaginationInput
+    pagination: UsageMethodPaginationInput
   ): [AbilityResistsUsageMethodEdge!]!
 
 }
@@ -518,9 +518,26 @@ enum AbilitySlot {
   HIDDEN
 }
 
+enum AbilityColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  POKEMON_SHOWDOWN_ID
+}
+
 #
 # INPUTS
 # 
+
+input AbilityPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: AbilityColumnNames
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input AbilityFilter {
   """

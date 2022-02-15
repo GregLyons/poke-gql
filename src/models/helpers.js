@@ -53,6 +53,44 @@ const arrayToMySQL = arr => {
   return "(" + arr.map(name => "'" + name + "'").join(', ') + ")";
 }
 
+// Column name maps 
+// #region
+
+const tableNameToMap = new Map([
+  ['ability', abilityColumnNameMap],
+  ['item', itemColumnNameMap],
+  ['pmove', moveColumnNameMap],
+  ['pokemon', pokemonColumnNameMap],
+]);
+
+const abilityColumnNameMap = new Map([
+  ['POKEMON_SHOWDOWN_ID', 'ps_id'],
+]);
+
+const itemColumnNameMap = new Map([
+  ['POKEMON_SHOWDOWN_ID', 'ps_id'],
+])
+
+const moveColumnNameMap = newMap([
+  ['POKEMON_SHOWDOWN_ID', 'ps_id'],
+  ['TYPE_NAME', 'ptype_name'],
+]);
+
+const pokemonColumnNameMap = new Map([
+  ['POKEMON_SHOWDOWN_ID', 'ps_id'],
+  ['SPECIES_NAME', 'species'],
+  ['TYPE_NAME_1', 'ptype_name_1'],
+  ['TYPE_NAME_2', 'ptype_name_2'],
+]);
+
+// #endregion
+
+//
+getDatabaseColumnName = (tableName, columnName) => {
+  if (columnName === 'GEN') columnName = 'GENERATION_ID';
+  return `${tableName}_` + tableNameToMap.get(tableName).get(columnName) || columnName.toLowerCase();
+}
+
 // Return a MySQL string for paginating results.
 // 'pagination' is an object with 'limit', 'offset', 'orderBy', 'sortBy', and 'search' keys.
 // String parameters are escaped to prevent SQL injection.
@@ -63,6 +101,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
   escapeObjectParameters(pagination);
 
   const {limit, offset, orderBy, sortBy, search} = pagination;
+  const orderByColumnName = getDatabaseColumnName(tableName, columnName);
 
   const tablesWithFormattedName = [
     'ability',
@@ -84,19 +123,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
     : `LIMIT ${offset}, ${limit}\n`;
 
   // Most columns, except 'generation_id' and 'introduced' are preceded by the table name.
-  let sortString;
-
-  // 'introduced' and 'generation_id' aren't preceded by the table name 
-  if (orderBy === 'introduced' || orderBy === 'generation_id') {
-      sortString = `ORDER BY ${orderBy} ${sortBy}`
-  } 
-  // default argument for 'orderBy' is 'formatted_name'. For most fields, the appropriate column--which is what 'orderBy' represents--is preceded by the name of the table, followed by an underscore '_'.
-  else if (orderBy != 'formatted_name' || tablesWithFormattedName.includes(tableName)) {
-    sortString = `ORDER BY ${tableName}_${orderBy} ${sortBy}`;
-  }
-  else {
-    sortString = '';
-  }
+  let sortString = `ORDER BY ${orderByColumnName} ${sortBy}`;
 
   const searchString = search && tablesWithFormattedName.includes(tableName)
     ? `AND ${tableName}_formatted_name LIKE %${search}%`
@@ -265,6 +292,14 @@ const getFilterQueryString = (filter, tableName) => {
       ? `AND pokemon_speed >= ${filter.minSpeed}`
       : ``;
 
+    // BaseStatTotal
+    const maxBaseStatTotalString = filter.maxBaseStatTotal
+      ? `AND pokemon_base_stat_total <= ${filter.maxBaseStatTotal}`
+      : ``;
+    const minBaseStatTotalString = filter.minBaseStatTotal
+      ? `AND pokemon_base_stat_total >= ${filter.minBaseStatTotal}`
+      : ``;
+
     // Form class
     const formClassString = filter.formClass
       ? `AND pokemon_form_class IN ${arrayToMySQL(filter.formClass)}`
@@ -321,6 +356,9 @@ const getFilterQueryString = (filter, tableName) => {
 
       maxSpeedString,
       minSpeedString,
+
+      maxBaseStatTotalString,
+      minBaseStatTotalString,
 
       formClassString,
       typeString,
