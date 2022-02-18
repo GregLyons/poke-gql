@@ -216,15 +216,6 @@
         }
       }
     }
-    resistsType {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
     suppressedByAbility {
       id
       count
@@ -235,6 +226,15 @@
       }
     }
     unformattedName
+    weakensType {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
     weatherBall {
       id
       count

@@ -327,7 +327,7 @@ enum StatColumnNames {
 input StatPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: StatColumnNames
+  orderBy: StatColumnNames = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

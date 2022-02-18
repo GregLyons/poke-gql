@@ -8,8 +8,8 @@
         node {
           name
         }
+        chance
       }
-      chance
     }
     causedByFieldState {
       id
@@ -18,8 +18,8 @@
         node {
           name
         }
+        chance
       }
-      chance
     }
     causedByItem {
       id
@@ -28,8 +28,8 @@
         node {
           name
         }
+        chance
       }
-      chance
     }
     causedByMove {
       id
@@ -38,8 +38,8 @@
         node {
           name
         }
+        chance
       }
-      chance
     }
     description
     formattedName

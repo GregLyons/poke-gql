@@ -20,6 +20,24 @@ extend type Query {
     generations: [Int]
     names: [String!]!
   ): [Ability!]! 
+
+  """
+  Select an Ability by its psID, e.g. 'intimidate', 'rkssystem'.
+  """
+  abilityByPSID(
+    generation: Int = 8
+    generations: [Int]
+    psID: String!
+  ): [Ability!]! 
+  
+  """
+  Select Abilities by their psID, e.g. 'intimidate', 'rkssystem'.
+  """
+  abilitiesByPSIDs(
+    generation: Int = 8
+    generations: [Int]
+    psIDs: [String!]!
+  ): [Ability!]! 
   
   """
   Select Abilities with filtering and pagination.
@@ -124,7 +142,7 @@ type Ability implements Node {
   """
   ID of the Ability in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
   """
-  pokemonShowdownID: String!
+  psID: String!
 
   """
   E.g. 'cloud_nine' prevents 'aurora_veil' from being set up, even in the presence of 'hail'. This is because 'cloud_nine' suppresses the effects of 'hail'. 'cloud_nine' does not remove or suppress 'aurora_veil' that is already set-up. 
@@ -534,7 +552,7 @@ enum AbilityColumnNames {
 input AbilityPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: AbilityColumnNames
+  orderBy: AbilityColumnNames = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

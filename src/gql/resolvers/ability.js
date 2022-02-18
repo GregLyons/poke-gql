@@ -47,6 +47,10 @@ const Query = {
   abilityByName: queryEntitiesByColumn('ability', 'name'),
 
   abilitiesByName: queryEntitiesByColumn('ability', 'names'),
+
+  abilityByPSID: queryEntitiesByColumn('ability', 'psID'),
+
+  abilitiesByPSIDs: queryEntitiesByColumn('ability', 'psIDs'),
   
   abilities: queryEntities('ability'),
 }
@@ -89,7 +93,7 @@ const Ability = {
 
   pokemon: abilityPK,
 
-  pokemonShowdownID: parent => parent.ability_ps_id,
+  psID: parent => parent.ability_ps_id,
 
   preventsFieldState: abilityPK,
 

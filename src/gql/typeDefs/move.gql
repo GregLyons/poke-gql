@@ -20,6 +20,24 @@ extend type Query {
     generations: [Int]
     names: [String!]!
   ): [Move!]!
+
+  """
+  Select a Move by its psID, e.g. 'uturn'.
+  """
+  moveByPSID(
+    generation: Int = 8
+    generations: [Int]
+    psID: String!
+  ): [Move!]!
+
+  """
+  Select Moves by their psIDs, e.g. 'uturn'.
+  """
+  movesByPSIDs(
+    generation: Int = 8
+    generations: [Int]
+    psIDs: [String!]!
+  ): [Move!]!
   
   """
   Select Moves with filtering and pagination.
@@ -142,7 +160,7 @@ type Move implements Node {
   """
   ID of the Move in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
   """
-  pokemonShowdownID: String!
+  psID: String!
 
   """
   Non-damaging moves (e.g. status moves), fixed damage moves (e.g. sonic_boom), and variable damage (e.g. magnitude) moves have null in this field. 
@@ -646,7 +664,6 @@ enum MoveColumnNames {
   REMOVED_FROM_SWSH
   REMOVED_FROM_BDSP
   TYPE_NAME
-  POKEMON_SHOWDOWN_ID
 }
 
 #
@@ -656,7 +673,7 @@ enum MoveColumnNames {
 input MovePaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: MoveColumnNames
+  orderBy: MoveColumnNames = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

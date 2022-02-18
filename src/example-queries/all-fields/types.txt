@@ -127,15 +127,6 @@
         }
       }
     }
-    resistedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
     resistedByItem {
       id
       count
@@ -146,6 +137,15 @@
       }
     }
     resistsFieldState {
+      id
+      count
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    weakenedByFieldState {
       id
       count
       edges {

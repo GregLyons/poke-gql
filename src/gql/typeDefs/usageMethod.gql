@@ -302,7 +302,7 @@ enum UsageMethodColumnNames {
 input UsageMethodPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: UsageMethodColumnNames
+  orderBy: UsageMethodColumnNames = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

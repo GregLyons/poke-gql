@@ -37,6 +37,12 @@ const getEntityByColumnQueryString = (entityName, keyName, columnValues) => {
   else if (keyName.includes('names')) {
     columnName = keyName.replace('names', 'name');
   }
+  else if (keyName.includes('psID')) {
+    columnName = 'ps_id';
+  }
+  else if (keyName.includes('unformattedName')) {
+    columnName = 'unformatted_name';
+  }
   else {
     columnName = keyName;
   }

@@ -56,13 +56,6 @@ const arrayToMySQL = arr => {
 // Column name maps 
 // #region
 
-const tableNameToMap = new Map([
-  ['ability', abilityColumnNameMap],
-  ['item', itemColumnNameMap],
-  ['pmove', moveColumnNameMap],
-  ['pokemon', pokemonColumnNameMap],
-]);
-
 const abilityColumnNameMap = new Map([
   ['POKEMON_SHOWDOWN_ID', 'ps_id'],
 ]);
@@ -71,7 +64,7 @@ const itemColumnNameMap = new Map([
   ['POKEMON_SHOWDOWN_ID', 'ps_id'],
 ])
 
-const moveColumnNameMap = newMap([
+const moveColumnNameMap = new Map([
   ['POKEMON_SHOWDOWN_ID', 'ps_id'],
   ['TYPE_NAME', 'ptype_name'],
 ]);
@@ -83,12 +76,24 @@ const pokemonColumnNameMap = new Map([
   ['TYPE_NAME_2', 'ptype_name_2'],
 ]);
 
+const tableNameToMap = new Map([
+  ['ability', abilityColumnNameMap],
+  ['item', itemColumnNameMap],
+  ['pmove', moveColumnNameMap],
+  ['pokemon', pokemonColumnNameMap],
+]);
+
 // #endregion
 
 //
 getDatabaseColumnName = (tableName, columnName) => {
   if (columnName === 'GEN') columnName = 'GENERATION_ID';
-  return `${tableName}_` + tableNameToMap.get(tableName).get(columnName) || columnName.toLowerCase();
+  if (columnName === undefined) return undefined;
+
+  // If not in maps, then just change columnName to lowercase
+  return `${tableName}_` + (
+    (tableNameToMap.get(tableName) && tableNameToMap.get(tableName).get(columnName)) 
+    || columnName.toLowerCase());
 }
 
 // Return a MySQL string for paginating results.
@@ -101,7 +106,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
   escapeObjectParameters(pagination);
 
   const {limit, offset, orderBy, sortBy, search} = pagination;
-  const orderByColumnName = getDatabaseColumnName(tableName, columnName);
+  const orderByColumnName = getDatabaseColumnName(tableName, orderBy);
 
   const tablesWithFormattedName = [
     'ability',
@@ -123,7 +128,9 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
     : `LIMIT ${offset}, ${limit}\n`;
 
   // Most columns, except 'generation_id' and 'introduced' are preceded by the table name.
-  let sortString = `ORDER BY ${orderByColumnName} ${sortBy}`;
+  let sortString = orderByColumnName !== undefined && sortBy !== undefined
+    ? `ORDER BY ${orderByColumnName} ${sortBy}`
+    : ``;
 
   const searchString = search && tablesWithFormattedName.includes(tableName)
     ? `AND ${tableName}_formatted_name LIKE %${search}%`

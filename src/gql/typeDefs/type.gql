@@ -461,7 +461,7 @@ enum TypeColumnNames {
 input TypePaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: TypeColumnNames
+  orderBy: TypeColumnNames = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

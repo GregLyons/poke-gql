@@ -703,7 +703,7 @@ enum FieldStateColumnNames {
 input FieldStatePaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: FieldStateColumnNames
+  orderBy: FieldStateColumnNames = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

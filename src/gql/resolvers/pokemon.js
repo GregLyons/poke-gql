@@ -39,26 +39,17 @@ const getID = primaryKeyToID('pokemon');
 //#endregion
 
 // Query
-/*
-    pokemonByID(id)
-    pokemonByName(name)
-    pokemons(
-      cursor,
-      limit,
-      generation,
-      contains,
-      endsWith,
-      introducedAfter,
-      introducedBefore,
-      startsWith
-    )
-*/
 //#region
 
 const Query = {
   pokemonByName: queryEntitiesByColumn('pokemon', 'name'),
 
-  // TODO: cursor
+  pokemonByNames: queryEntitiesByColumn('pokemon', 'names'),
+
+  pokemonByPSID: queryEntitiesByColumn('pokemon', 'psID'),
+
+  pokemonByPSIDs: queryEntitiesByColumn('pokemon', 'psIDs'),
+
   pokemon: queryEntities('pokemon'),
 }
 
@@ -80,10 +71,9 @@ const Pokemon = {
       specialAttack: parent.pokemon_special_attack,
       specialDefense: parent.pokemon_special_defense,
       speed: parent.pokemon_speed,
+      baseStatTotal: parent.pokemon_base_stat_total,
     };
   },
-
-  baseStatTotal: parent => parent.pokemon_base_stat_total,
 
   dexNumber: parent => parent.pokemon_dex,
 
@@ -115,7 +105,7 @@ const Pokemon = {
 
   pokeapiName: parent => parent.pokemon_pokeapi_name,
 
-  pokemonShowdownID: parent => parent.pokemon_ps_id,
+  psID: parent => parent.pokemon_ps_id,
 
   removedFromSwSh: parent => parent.pokemon_removed_from_swsh,
 

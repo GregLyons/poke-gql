@@ -13,7 +13,7 @@ extend type Query {
   ): [Pokemon!]!
 
   """
-  Select Pokemon by their snake_case name, e.g. 'pikachu', 'raichu_alola'.
+  Select multiple Pokemon by their snake_case name, e.g. 'pikachu', 'raichu_alola'.
   """
   pokemonByNames(
     generation: Int = 8
@@ -21,6 +21,24 @@ extend type Query {
     names: [String!]!
   ): [Pokemon!]!
   
+  """
+  Select an Pokemon by its psID (only alphabetic characters), e.g. 'pikachu', 'raichualola'.
+  """
+  pokemonByPSID(
+    generation: Int = 8
+    generations: [Int]
+    psID: String!
+  ): [Pokemon!]!
+
+  """
+  Select multiple Pokemon by their psIDs (only alphabetic characters), e.g. 'pikachu', 'raichualola'.
+  """
+  pokemonByPSIDs(
+    generation: Int = 8
+    generations: [Int]
+    psIDs: [String!]!
+  ): [Pokemon!]!
+
   """
   Select Pokemon with filtering and pagination.
   """
@@ -48,11 +66,6 @@ type Pokemon implements Node {
   The base stats of the Pokemon.
   """
   baseStats: BaseStats!
-
-  """
-  The sum of all base stats of the Pokemon.
-  """
-  baseStatTotal: Int!
 
   """
   The National Dex number of the Pokemon. 
@@ -157,7 +170,7 @@ type Pokemon implements Node {
   """
   ID of the Pokemon in Pokemon Showdown's code for use with, e.g. the package 'pkmn/img' for sprites/icons.
   """
-  pokemonShowdownID: String!
+  psID: String!
 
   removedFromSwSh: Boolean!
 
@@ -204,6 +217,7 @@ type BaseStats {
   specialAttack: Int!
   specialDefense: Int!
   speed: Int!
+  baseStatTotal: Int!
 }
 
 #
@@ -486,7 +500,7 @@ union PokemonEnablesConnection = PokemonEnablesItemConnection | PokemonEnablesMo
 input PokemonPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: PokemonColumnNames
+  orderBy: PokemonColumnNames = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

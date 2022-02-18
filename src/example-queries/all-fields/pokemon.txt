@@ -17,6 +17,7 @@
       specialDefense
       specialAttack
       speed
+      baseStatTotal
     }
     baseStatTotal
     dexNumber

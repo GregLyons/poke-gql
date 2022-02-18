@@ -132,7 +132,7 @@ type Item implements Node {
   """
   ID of the Item in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
   """
-  pokemonShowdownID: String!
+  psID: String!
 
   """
   The Pokemon necessary for this item to take effect.
@@ -577,7 +577,7 @@ enum ItemColumnNames {
 input ItemPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: ItemColumnNames
+  orderBy: ItemColumnNames = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

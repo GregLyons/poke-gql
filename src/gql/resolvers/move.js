@@ -61,6 +61,10 @@ const Query = {
 
   movesByName: queryEntitiesByColumn('move', 'names'),
 
+  moveByPSID: queryEntitiesByColumn('move', 'psID'),
+
+  movesByPSIDs: queryEntitiesByColumn('move', 'psIDs'),
+
   // TODO: cursor
   moves: queryEntities('move'),
 }
@@ -109,7 +113,7 @@ const Move = {
 
   pokemon: movePK,
 
-  pokemonShowdownID: parent => parent.pmove_ps_id,
+  psID: parent => parent.pmove_ps_id,
 
   power: parent => parent.pmove_power,
 

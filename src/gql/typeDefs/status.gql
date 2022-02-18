@@ -306,7 +306,7 @@ enum StatusColumnNames {
 input StatusPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: StatusColumnNames
+  orderBy: StatusColumnNames = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

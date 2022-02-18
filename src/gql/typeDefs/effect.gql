@@ -194,8 +194,29 @@ type EffectMoveEdge implements Edge {
 }
 
 #
+# ENUMS
+#
+
+enum EffectColumnNames {
+  GEN
+  ID
+  NAME
+  FORMATTED_NAME
+  INTRODUCED
+  UNFORMATTED_NAME
+}
+
+#
 # INPUTS
 # 
+
+input EffectPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: EffectColumnNames = UNFORMATTED_NAME
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input EffectFilter {
   """
