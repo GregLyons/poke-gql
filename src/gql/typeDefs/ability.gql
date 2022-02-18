@@ -44,6 +44,7 @@ extend type Query {
   """
   abilities(
     generation: Int = 8
+    pagination: AbilityPaginationInput
     filter: AbilityFilter
   ): AbilityConnection!
 }
@@ -153,7 +154,7 @@ type Ability implements Node {
   """
   Pokemon which can possess this Ability.
   """
-  pokemon(filter: PokemonFilter): AbilityPokemonConnection
+  pokemon(filter: PokemonFilter, pagination: PokemonPaginationInput): AbilityPokemonConnection
   
   """
   ID of the Ability in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
@@ -350,9 +351,7 @@ type AbilityPokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [AbilityPokemonEdge!]!
+  edges: [AbilityPokemonEdge!]!
 
 }
 

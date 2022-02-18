@@ -238,7 +238,7 @@ const computeJunctionTableQueryString = (
 
   const paginationString = countMode 
     ? `` 
-    : getPaginationQueryString(pagination, junctionTableName, batching);
+    : getPaginationQueryString(pagination, endTableName, batching);
 
   //#endregion
 

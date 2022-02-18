@@ -16,7 +16,7 @@ const queryEntities = entityName => {
 
     return await context.db.promise().query(
       // Don't count
-      getEntityQueryString(entityName, args.pagination, parent.args.filter, false),
+      getEntityQueryString(entityName, parent.args.pagination, parent.args.filter, false),
       [parent.args.generation]
     )
     .then( ([results, fields]) => {
@@ -78,6 +78,7 @@ const parentPK = (entityName) => {
     return {
       genID: parent.generation_id,
       entityID: parent[idColumn],
+      pagination: args.pagination,
       filter: args.filter,
     }
   };
@@ -238,38 +239,56 @@ const turnsEdge = () => {
 // Connection patterns
 //#region
 
+const getFilterAndPaginationIDFragment = (filter, pagination) => {
+  let paginationArgs, filterArgs;
+
+  if (pagination) {
+    paginationArgs = Object.entries(pagination).map(([key, value]) => {
+      let valueString;
+      if (Array.isArray(value)) valueString = value.join('_');
+      else if (value === null) valueString = 'null';
+      else if (value === undefined) valueString = 'undefined';
+      else valueString = value + '';
+
+      return [key, value].join('_');
+    }).join('_');
+  }
+  else paginationArgs = '';
+
+  if (filter) {
+    filterArgs = Object.entries(filter).map(([key, value]) => {
+      let valueString;
+      if (Array.isArray(value)) valueString = value.join('_');
+      else if (value === null) valueString = 'null';
+      else if (value === undefined) valueString = 'undefined';
+      else valueString = value + '';
+
+      return [key, value].join('_');
+    }).join('_');
+  }
+  else filterArgs = '';
+
+  return [paginationArgs, filterArgs].join('_');
+}
+
 // Top-level connection
 const topLevelConnection = (entityClass) => {
   const tableName = entityNameToTableName(entityClass);
   const genID = hasGenID(tableName);
   return {
     id: (parent, args, context, info) => {
-      let filterArgs;
-      if (parent.args.filter) {
-        filterArgs = Object.entries(parent.args.filter).map(([key, value]) => {
-          let valueString;
-          if (Array.isArray(value)) valueString = value.join('_');
-          else if (value === null) valueString = 'null';
-          else if (value === undefined) valueString = 'undefined';
-          else valueString = value + '';
-
-          return [key, value].join('_');
-        }).join('_');
-      }
-      else filterArgs = [];
-
       if (genID) {
         return [
           'topLevelQuery',
           entityClass,
           parent.args.generation,
-          filterArgs,
+          getFilterAndPaginationIDFragment(parent.args.pagination, parent.args.filter),
         ].join('_');
       }
       return [
         'topLevelQuery',
         entityClass,
-        filterArgs,
+        getFilterAndPaginationIDFragment(parent.args.pagination, parent.args.filter),
       ].join('_');
     },
 
@@ -301,8 +320,18 @@ const introductionConnection = entityClass => {
   // 'parent' = 'introduced'
   return {
     id: (parent, args, context, info) => {
-      if (parent.genID) return [parent.genID, parent.entityID, entityClass, 'introduction'].join('_')
-      else return [parent.entityID, 'introduction'].join('_');
+      if (parent.genID) return [
+        parent.genID,
+        parent.entityID,
+        entityClass,
+        'introduction',
+        getFilterAndPaginationIDFragment(parent.filter, parent.pagination),
+      ].join('_')
+      else return [
+        parent.entityID,
+        'introduction',
+        getFilterAndPaginationIDFragment(parent.filter, parent.pagination),
+      ].join('_');
     },
 
     edges: async (parent, args, context, info) => {
@@ -322,16 +351,27 @@ const junctionConnection = (ownerEntityClass, innerKey) => {
   // Function arguments are used to determine which loader to use, via the 'context' object.
   return {
     id: (parent, args, context, info) => {
-      if (parent.generation_id) return [parent.genID, parent.entityID, ownerEntityClass, innerKey].join('_')
-      else return [parent.entityID, ownerEntityClass, innerKey].join('_');
+      if (parent.generation_id) return [
+        parent.genID,
+        parent.entityID,
+        ownerEntityClass,
+        innerKey,
+        getFilterAndPaginationIDFragment(parent.filter, parent.pagination),
+      ].join('_')
+      else return [
+        parent.entityID,
+        ownerEntityClass,
+        innerKey,
+        getFilterAndPaginationIDFragment(parent.filter, parent.pagination),
+      ].join('_');
     },
 
     edges: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityClass].load(innerKey, parent, args.pagination, parent.filter, false);
+      return await context.loaders[ownerEntityClass].load(innerKey, parent, parent.pagination, parent.filter, false);
     },
     
     count: async (parent, args, context, info) => {
-      return await context.loaders[ownerEntityClass].load(innerKey, parent, args.pagination, parent.filter, true);
+      return await context.loaders[ownerEntityClass].load(innerKey, parent, parent.pagination, parent.filter, true);
     },
   };
 };
@@ -341,7 +381,12 @@ const presenceConnection = entityClass => {
   // 'parent' = 'generation_id'
   return {
     id: (parent, args, context, info) => {
-      return [parent.genID, entityClass, 'presence'].join('_')
+      return [
+        parent.genID,
+        entityClass,
+        'presence',
+        getFilterAndPaginationIDFragment(parent.filter, parent.pagination),
+      ].join('_')
     },
 
     edges: async (parent, args, context, info) => {
@@ -359,7 +404,12 @@ const debutConnection = entityClass => {
   // 'parent' = 'generation_id'
   return {
     id: (parent, args, context, info) => {
-      return [parent.genID, entityClass, 'debut'].join('_')
+      return [
+        parent.genID,
+        entityClass,
+        'debut',
+        getFilterAndPaginationIDFragment(parent.filter, parent.pagination),
+      ].join('_')
     },
 
     edges: async (parent, args, context, info) => {
