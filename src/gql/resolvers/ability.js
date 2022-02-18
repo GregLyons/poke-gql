@@ -29,10 +29,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
   
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const abilityPK = parentPK('ability')
 const abilityPKDebut = parentPKDebut('ability');
@@ -52,7 +54,7 @@ const Query = {
 
   abilitiesByPSIDs: queryEntitiesByColumn('ability', 'psIDs'),
   
-  abilities: queryEntities('ability'),
+  abilities: topLevelBulkQuery('ability'),
 }
 
 //#endregion
@@ -116,6 +118,9 @@ const Ability = {
 //#region
 
 const ConnectionsAndEdges = {
+  AbilityConnection: topLevelConnection('ability'),
+  AbilityEdge: basicEdge(),
+
   AbilityActivatedByFieldStateConnection: junctionConnection('ability', 'activatedByFieldState'),
   AbilityActivatedByFieldStateEdge: basicEdge(),
 

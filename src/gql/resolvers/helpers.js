@@ -1,7 +1,9 @@
+const { getEntityCountQueryString } = require('../../models/basicQueries.js');
 const {
   entityNameToTableName,
   getEntityQueryString,
   getEntityByColumnQueryString,
+  hasGenID,
 } = require('../../models/index.js');
 
 // Resolving top-level Queries
@@ -12,16 +14,33 @@ const queryEntities = entityName => {
   return async (parent, args, context, info) => {
     Object.keys(context.loaders).map(entityName => context.loaders[entityName].clearLoaders());
 
-    if (!args.generations) {
-      args.generations = [args.generation];
-    }
-
     return await context.db.promise().query(
-      getEntityQueryString(entityName, args.pagination, args.filter),
-      [[args.generations]]
+      // Don't count
+      getEntityQueryString(entityName, args.pagination, parent.args.filter, false),
+      [parent.args.generation]
     )
     .then( ([results, fields]) => {
       return results;
+    })
+    .catch(console.log);
+  }
+}
+
+const countEntities = entityName => {
+  return async (parent, args, context, info) => {
+    Object.keys(context.loaders).map(entityName => context.loaders[entityName].clearLoaders());
+
+    if (!parent.args.generations) {
+      parent.args.generations = [parent.args.generation];
+    }
+
+    return await context.db.promise().query(
+      // Count
+      getEntityCountQueryString(entityName, parent.args.filter, true),
+      [[parent.args.generations]]
+    )
+    .then( ([results, fields]) => {
+      return results[0].row_count;
     })
     .catch(console.log);
   }
@@ -86,6 +105,15 @@ const primaryKeyToID = (entityClass) => {
     else return parent[idColumn];
   }
 }
+
+// Top level query
+const topLevelBulkQuery = entityClass => {
+  return (parent, args, context, info) => {
+    return {
+      args,
+    };
+  };
+};
 
 //#endregion
 
@@ -210,6 +238,22 @@ const turnsEdge = () => {
 // Connection patterns
 //#region
 
+// Top-level connection
+const topLevelConnection = (entityClass) => {
+  return {
+    id: (parent, args, context, info) => {
+      return [
+        entityClass,
+        Object.keys(parent.args).join('_'),
+      ].join('_');
+    },
+
+    count: countEntities(entityClass),
+
+    edges: queryEntities(entityClass),
+  }
+}
+
 // Connection from a non-Generation entity to a Generation, signifying that the entity is present in that Generation.
 // No 'count' field since it is always 1.
 const generationConnection = entityClass => {
@@ -309,6 +353,11 @@ module.exports = {
   queryEntities,
   queryEntitiesByColumn,
 
+  topLevelBulkQuery,
+  parentPK,
+  parentPKDebut,
+  primaryKeyToID,
+
   abilityEdge,
   basicEdge,
   causeStatusEdge,
@@ -324,11 +373,8 @@ module.exports = {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
 
   presenceConnection,
   debutConnection,
-
-  parentPK,
-  parentPKDebut,
-  primaryKeyToID,
 }

@@ -16,11 +16,28 @@ const getEntityQueryString = (entityName, pagination, filter) => {
     SELECT * FROM ${tableName}
     ${
       hasGenID(tableName) 
-        ? `WHERE generation_id IN ?`
+        ? `WHERE generation_id = ?`
         : ''
     }
     ${filterString}
     ${paginationString}
+  `;
+}
+
+const getEntityCountQueryString = (entityName, filter) => {
+  tableName = entityNameToTableName(entityName);
+
+  // These functions escape strings to prevent SQL injection.
+  filterString = getFilterQueryString(filter, tableName);
+
+  return `
+    SELECT COUNT(*) AS row_count FROM ${tableName}
+    ${
+      hasGenID(tableName) 
+        ? `WHERE generation_id IN ?`
+        : ''
+    }
+    ${filterString}
   `;
 }
 
@@ -79,5 +96,6 @@ const getEntityByColumnQueryString = (entityName, keyName, columnValues) => {
 
 module.exports = {
   getEntityQueryString,
+  getEntityCountQueryString,
   getEntityByColumnQueryString,
 }
