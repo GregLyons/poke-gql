@@ -38,9 +38,7 @@ type UsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [UsageMethodEdge!]!
+  edges: [UsageMethodEdge!]!
 }
 
 type UsageMethodEdge implements Edge {
@@ -57,22 +55,22 @@ type UsageMethod implements Node {
   """
   E.g. 'sound' activates 'liquid_voice'.
   """
-  activatesAbility(filter: AbilityFilter): UsageMethodActivatesAbilityConnection
+  activatesAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): UsageMethodActivatesAbilityConnection
 
   """
   E.g. 'sound' activates 'throat_spray'.
   """
-  activatesItem(filter: ItemFilter): UsageMethodActivatesItemConnection
+  activatesItem(filter: ItemFilter, pagination: ItemPaginationInput): UsageMethodActivatesItemConnection
 
   """
   E.g. 'mega_launcher' boosts 'pulse'.
   """ 
-  boostedByAbility(filter: AbilityFilter): UsageMethodBoostedByAbilityConnection
+  boostedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): UsageMethodBoostedByAbilityConnection
 
   """
   As of Gen 8, no Items boost UsageMethods. Should such Items be introduced later, they will be immediately available here.
   """
-  boostedByItem(filter: ItemFilter): UsageMethodBoostedByItemConnection
+  boostedByItem(filter: ItemFilter, pagination: ItemPaginationInput): UsageMethodBoostedByItemConnection
 
   """
   A custom description of this UsageMethod.
@@ -87,39 +85,39 @@ type UsageMethod implements Node {
   """
   The Generation of this UsageMethod.
   """ 
-  generation(filter: GenerationFilter): UsageMethodGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): UsageMethodGenerationConnection
   
   """
   The Generation in which the UsageMethod became relevant. That is, in which the UsageMethod of the Move would interact with certain Abilities, Moves, etc. 
   
   For example, whether a Move had the UsageMethod 'bite' only became relevant when the ability 'strong_jaw' was introduced in Generation 6, even though Moves like 'crunch' have been around since Generation 2.
   """
-  introduced(filter: GenerationFilter): UsageMethodIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): UsageMethodIntroductionConnection
 
   """
   E.g. 'damp' prevents 'explosive'.
   """
-  preventedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
+  preventedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): UsageMethodResistedByAbilityConnection
 
   """
   E.g. 'throat_chop' prevents 'sound'.
   """
-  preventedByMove(filter: MoveFilter): UsageMethodPreventedByMoveConnection
+  preventedByMove(filter: MoveFilter, pagination: MovePaginationInput): UsageMethodPreventedByMoveConnection
 
   """
   E.g. 'bullet_proof' resists 'ball'.
   """
-  resistedByAbility(filter: AbilityFilter): UsageMethodResistedByAbilityConnection
+  resistedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): UsageMethodResistedByAbilityConnection
 
   """
   E.g. 'safety_goggle' resists 'powder'.
   """
-  resistedByItem(filter: ItemFilter): UsageMethodResistedByItemConnection
+  resistedByItem(filter: ItemFilter, pagination: ItemPaginationInput): UsageMethodResistedByItemConnection
 
   """
   Moves which have this UsageMethod, e.g. The Move 'crunch' has the UsageMethod 'bite'.
   """
-  moves(filter: MoveFilter): UsageMethodMoveConnection
+  moves(filter: MoveFilter, pagination: MovePaginationInput): UsageMethodMoveConnection
 
   """
   The name of the UsageMethod in snake_case. 
@@ -142,9 +140,7 @@ type UsageMethodActivatesAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [UsageMethodActivatesAbilityEdge!]!
+  edges: [UsageMethodActivatesAbilityEdge!]!
 
 }
 
@@ -156,9 +152,7 @@ type UsageMethodBoostedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [UsageMethodBoostedByAbilityEdge!]!
+  edges: [UsageMethodBoostedByAbilityEdge!]!
 }
 
 type UsageMethodBoostedByAbilityEdge implements MultiplierEdge & Edge {  
@@ -170,9 +164,7 @@ type UsageMethodResistedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [UsageMethodResistedByAbilityEdge!]!
+  edges: [UsageMethodResistedByAbilityEdge!]!
 
 }
 
@@ -185,9 +177,7 @@ type UsageMethodPreventedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [UsageMethodPreventedByAbilityEdge!]!
+  edges: [UsageMethodPreventedByAbilityEdge!]!
 
 }
 
@@ -199,9 +189,7 @@ type UsageMethodPreventedByAbilityEdge implements Edge {
 
 type UsageMethodGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [UsageMethodGenerationEdge!]! 
+  edges: [UsageMethodGenerationEdge!]! 
 
 }
 
@@ -211,9 +199,7 @@ type UsageMethodGenerationEdge implements Edge {
 
 type UsageMethodIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [UsageMethodIntroductionEdge!]! 
+  edges: [UsageMethodIntroductionEdge!]! 
 
 }
 
@@ -227,9 +213,7 @@ type UsageMethodActivatesItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [UsageMethodActivatesItemEdge!]!
+  edges: [UsageMethodActivatesItemEdge!]!
 
 }
 
@@ -241,9 +225,7 @@ type UsageMethodBoostedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [UsageMethodBoostedByItemEdge!]!
+  edges: [UsageMethodBoostedByItemEdge!]!
 
 }
 
@@ -256,9 +238,7 @@ type UsageMethodResistedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [UsageMethodResistedByItemEdge!]!
+  edges: [UsageMethodResistedByItemEdge!]!
 
 }
 
@@ -273,9 +253,7 @@ type UsageMethodMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [UsageMethodMoveEdge!]!
+  edges: [UsageMethodMoveEdge!]!
 
 }
 
@@ -287,9 +265,7 @@ type UsageMethodPreventedByMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [UsageMethodPreventedByMoveEdge!]!
+  edges: [UsageMethodPreventedByMoveEdge!]!
 
 }
 

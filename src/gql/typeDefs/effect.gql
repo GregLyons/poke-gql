@@ -38,9 +38,7 @@ type EffectConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: EffectPaginationInput
-  ): [EffectEdge!]!
+  edges: [EffectEdge!]!
 }
 
 type EffectEdge implements Edge {
@@ -60,7 +58,7 @@ type Effect implements Node {
   """
   E.g. 'gooey' has the 'punishes_contact' Effect.
   """
-  abilities(filter: AbilityFilter): EffectAbilityConnection
+  abilities(filter: AbilityFilter, pagination: AbilityPaginationInput): EffectAbilityConnection
 
   """
   A description of this Effect.
@@ -70,7 +68,7 @@ type Effect implements Node {
   """
   E.g. 'psychic_terrain' has the 'protects_against_priority' Effect, and 'magic_room' has the 'manipulates_item' Effect.
   """
-  fieldStates(filter: FieldStateFilter): EffectFieldStateConnection
+  fieldStates(filter: FieldStateFilter, pagination: FieldStatePaginationInput): EffectFieldStateConnection
 
   """
   The name of the Effect in Title Case, with appropriate punctuation.
@@ -80,24 +78,24 @@ type Effect implements Node {
   """
   The Generation of this Effect.
   """ 
-  generation(filter: GenerationFilter): EffectGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): EffectGenerationConnection
 
   """
   The Generation in which the Effect was introduced. Note that Moves can gain Effects between Generations.
 
   For example, 'low_kick' was introduced in Generation 1, but it didn't have the Effect 'depends_on_weight' until Generation 3.
   """
-  introduced(filter: GenerationFilter): EffectIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): EffectIntroductionConnection
 
   """
   E.g. The 'mystery_berry' has the 'restores_pp' Effect.
   """
-  items(filter: ItemFilter): EffectItemConnection
+  items(filter: ItemFilter, pagination: ItemPaginationInput): EffectItemConnection
 
   """
   E.g. 'astonish' has the 'anti_mini' Effect.
   """
-  moves(filter: MoveFilter): EffectMoveConnection
+  moves(filter: MoveFilter, pagination: MovePaginationInput): EffectMoveConnection
 
   """
   The name of the Effect in snake_case. If the Effect has a verb in its name, the verb is conjugated in third person.
@@ -124,9 +122,7 @@ type EffectAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [EffectAbilityEdge!]! 
+  edges: [EffectAbilityEdge!]! 
 
 }
 
@@ -140,9 +136,7 @@ type EffectFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [EffectFieldStateEdge!]! 
+  edges: [EffectFieldStateEdge!]! 
 
 }
 
@@ -154,9 +148,7 @@ type EffectFieldStateEdge implements Edge {
 
 type EffectGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [EffectGenerationEdge!]! 
+  edges: [EffectGenerationEdge!]! 
 
 }
 
@@ -166,9 +158,7 @@ type EffectGenerationEdge implements Edge {
 
 type EffectIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [EffectIntroductionEdge!]! 
+  edges: [EffectIntroductionEdge!]! 
 
 }
 
@@ -182,9 +172,7 @@ type EffectItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [EffectItemEdge!]! 
+  edges: [EffectItemEdge!]! 
 
 }
 
@@ -198,9 +186,7 @@ type EffectMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [EffectMoveEdge!]! 
+  edges: [EffectMoveEdge!]! 
 
 }
 

@@ -44,9 +44,7 @@ type TypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [TypeEdge!]!
+  edges: [TypeEdge!]!
 }
 
 type TypeEdge implements Edge {
@@ -60,21 +58,21 @@ type TypeEdge implements Edge {
 type Type implements Node {
   id: ID!
 
-  boostedByAbility(filter: AbilityFilter): TypeBoostedByAbilityConnection
+  boostedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): TypeBoostedByAbilityConnection
 
-  boostedByFieldState(filter: FieldStateFilter): TypeBoostedByFieldStateConnection
+  boostedByFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): TypeBoostedByFieldStateConnection
 
-  boostedByItem(filter: ItemFilter): TypeBoostedByItemConnection
+  boostedByItem(filter: ItemFilter, pagination: ItemPaginationInput): TypeBoostedByItemConnection
 
   """
   The matchups of this Type as the defending-type against other attacking Types.
   """
-  defensiveMatchups(filter: TypeFilter): DefensiveTypeMatchupConnection
+  defensiveMatchups(filter: TypeFilter, pagination: TypePaginationInput): DefensiveTypeMatchupConnection
 
   """
   E.g. 'normal'-Type Moves enable 'breakneck_blitz'.
   """
-  enablesMove(filter: MoveFilter): TypeEnablesMoveConnection
+  enablesMove(filter: MoveFilter, pagination: MovePaginationInput): TypeEnablesMoveConnection
 
   """
   The name of the Type in Title Case.
@@ -84,19 +82,19 @@ type Type implements Node {
   """
   The Generation of this Type.
   """ 
-  generation(filter: GenerationFilter): TypeGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): TypeGenerationConnection
 
   """
   E.g. 'flying' Type Pokemon ignores 'spikes'.
   """
-  ignoresFieldState(filter: FieldStateFilter): TypeIgnoresFieldStateConnection
+  ignoresFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): TypeIgnoresFieldStateConnection
 
   """
   The Generation in which the Type was introduced.
   """
-  introduced(filter: GenerationFilter): TypeIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): TypeIntroductionConnection
 
-  moves(filter: MoveFilter): TypeMoveConnection
+  moves(filter: MoveFilter, pagination: MovePaginationInput): TypeMoveConnection
 
   """
   The name of the Type in snake_case. 
@@ -106,38 +104,38 @@ type Type implements Node {
   """
   The Items which grant their holder a 'natural_gift' of this Type.
   """
-  naturalGift(filter: ItemFilter): TypeNaturalGiftConnection
+  naturalGift(filter: ItemFilter, pagination: ItemPaginationInput): TypeNaturalGiftConnection
 
   """
   The matchups of this Type as the attacking-type against other defending Types.
   """
-  offensiveMatchups(filter: TypeFilter): OffensiveTypeMatchupConnection
+  offensiveMatchups(filter: TypeFilter, pagination: TypePaginationInput): OffensiveTypeMatchupConnection
   
-  pokemon(filter: PokemonFilter): TypePokemonConnection
+  pokemon(filter: PokemonFilter, pagination: PokemonPaginationInput): TypePokemonConnection
 
   """
   E.g. 'poison' Type Pokemon remove 'toxic_spikes' on entry.
   """
-  removesFieldState(filter: FieldStateFilter): TypeRemovesFieldStateConnection
+  removesFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): TypeRemovesFieldStateConnection
 
-  resistedByAbility(filter: AbilityFilter): TypeResistedByAbilityConnection
+  resistedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): TypeResistedByAbilityConnection
 
   """
   E.g. 'harsh_sunlight' weakens 'water' Type Moves.
   """
-  weakenedByFieldState(filter: FieldStateFilter): TypeWeakenedByFieldStateConnection
+  weakenedByFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): TypeWeakenedByFieldStateConnection
 
-  resistedByItem(filter: ItemFilter): TypeResistedByItemConnection
+  resistedByItem(filter: ItemFilter, pagination: ItemPaginationInput): TypeResistedByItemConnection
 
   """
   E.g. 'ground' Type Pokemon take less damage from the 'stealth_rock' FieldState. 'fairy' Type Pokemon take more damage from 'sharp_steel', but we still group it in this category rather than add an extra field.
   """ 
-  resistsFieldState(filter: FieldStateFilter): TypeResistsFieldStateConnection
+  resistsFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): TypeResistsFieldStateConnection
 
   """
   FieldStates which turn 'weather_ball' to this Type.
   """
-  weatherBall(filter: FieldStateFilter): TypeWeatherBallConnection
+  weatherBall(filter: FieldStateFilter, pagination: FieldStatePaginationInput): TypeWeatherBallConnection
 }
 
 #
@@ -150,9 +148,7 @@ type TypeBoostedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [TypeBoostedByAbilityEdge!]!
+  edges: [TypeBoostedByAbilityEdge!]!
 
 }
 
@@ -165,9 +161,7 @@ type TypeResistedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [TypeResistedByAbilityEdge!]!
+  edges: [TypeResistedByAbilityEdge!]!
 
 }
 
@@ -182,9 +176,7 @@ type TypeWeatherBallConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [TypeWeatherBallEdge!]!
+  edges: [TypeWeatherBallEdge!]!
 
 }
 
@@ -196,9 +188,7 @@ type TypeBoostedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [TypeBoostedByFieldStateEdge!]!
+  edges: [TypeBoostedByFieldStateEdge!]!
 
 }
 
@@ -211,9 +201,7 @@ type TypeWeakenedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [TypeWeakenedByFieldStateEdge!]!
+  edges: [TypeWeakenedByFieldStateEdge!]!
 
 }
 
@@ -226,9 +214,7 @@ type TypeIgnoresFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [TypeIgnoresFieldStateEdge!]! 
+  edges: [TypeIgnoresFieldStateEdge!]! 
 
 }
 
@@ -240,9 +226,7 @@ type TypeResistsFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [TypeResistsFieldStateEdge!]! 
+  edges: [TypeResistsFieldStateEdge!]! 
 
 }
 
@@ -256,9 +240,7 @@ type TypeRemovesFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [TypeRemovesFieldStateEdge!]! 
+  edges: [TypeRemovesFieldStateEdge!]! 
 
 }
 
@@ -272,9 +254,7 @@ type TypeGenerationConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [TypeGenerationEdge!]! 
+  edges: [TypeGenerationEdge!]! 
 
 }
 
@@ -286,9 +266,7 @@ type TypeIntroductionConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [TypeIntroductionEdge!]! 
+  edges: [TypeIntroductionEdge!]! 
 
 }
 
@@ -302,9 +280,7 @@ type TypeNaturalGiftConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [TypeNaturalGiftEdge!]!
+  edges: [TypeNaturalGiftEdge!]!
 
 }
 
@@ -321,9 +297,7 @@ type TypeBoostedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [TypeBoostedByItemEdge!]!
+  edges: [TypeBoostedByItemEdge!]!
 
 }
 
@@ -336,9 +310,7 @@ type TypeResistedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [TypeResistedByItemEdge!]!
+  edges: [TypeResistedByItemEdge!]!
 
 }
 
@@ -353,9 +325,7 @@ type TypeMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [TypeMoveEdge!]!
+  edges: [TypeMoveEdge!]!
 
 }
 
@@ -367,9 +337,7 @@ type TypeEnablesMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [TypeEnablesMoveEdge!]!
+  edges: [TypeEnablesMoveEdge!]!
 
 }
 
@@ -383,9 +351,7 @@ type TypePokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [TypePokemonEdge!]!
+  edges: [TypePokemonEdge!]!
 
 }
 
@@ -399,9 +365,7 @@ type DefensiveTypeMatchupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [DefensiveTypeMatchupEdge!]!
+  edges: [DefensiveTypeMatchupEdge!]!
 
 }
 
@@ -418,9 +382,7 @@ type OffensiveTypeMatchupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [OffensiveTypeMatchupEdge!]!
+  edges: [OffensiveTypeMatchupEdge!]!
 
 }
 

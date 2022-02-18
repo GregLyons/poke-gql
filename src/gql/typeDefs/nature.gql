@@ -38,9 +38,7 @@ type NatureConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [NatureEdge!]!
+  edges: [NatureEdge!]!
 }
 
 type NatureEdge implements Edge {
@@ -80,14 +78,14 @@ type Nature implements Node {
   """
   The Generation of this Nature.
   """ 
-  generation(filter: GenerationFilter): NatureGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): NatureGenerationConnection
 
   """
   The Generation in which the Nature was introduced. Note that Natures can gain Natures between Generations.
 
   For example, 'low_kick' was introduced in Generation 1, but it didn't have the Nature 'depends_on_weight' until Generation 3.
   """
-  introduced(filter: GenerationFilter): NatureIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): NatureIntroductionConnection
 
   """
   E.g. Pokemon with an 'adamant' nature like spicy foods.
@@ -102,7 +100,7 @@ type Nature implements Node {
   """
   E.g. 'adamant' multiplies a Pokemon's 'attack' by 1.1.
   """
-  modifiesStat(filter: StatFilter): NatureModifiesStatConnection
+  modifiesStat(filter: StatFilter, pagination: StatPaginationInput): NatureModifiesStatConnection
 
   """
   The name of the Move in snake_case, e.g. 'bold', 'docile'.
@@ -118,9 +116,7 @@ type Nature implements Node {
 
 type NatureGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [NatureGenerationEdge!]! 
+  edges: [NatureGenerationEdge!]! 
 
 }
 
@@ -130,9 +126,7 @@ type NatureGenerationEdge implements Edge {
 
 type NatureIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [NatureIntroductionEdge!]! 
+  edges: [NatureIntroductionEdge!]! 
 
 }
 
@@ -146,9 +140,7 @@ type NatureConfusedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [NatureConfusedByItemEdge!]! 
+  edges: [NatureConfusedByItemEdge!]! 
 
 }
 
@@ -162,9 +154,7 @@ type NatureModifiesStatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [NatureModifiesStatEdge!]!
+  edges: [NatureModifiesStatEdge!]!
 
 }
 

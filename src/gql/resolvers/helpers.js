@@ -268,7 +268,7 @@ const getFilterAndPaginationIDFragment = (filter, pagination) => {
   }
   else filterArgs = '';
 
-  return [paginationArgs, filterArgs].join('_');
+  return ['pagination', paginationArgs, 'filter', filterArgs].join('_');
 }
 
 // Top-level connection

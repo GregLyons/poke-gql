@@ -38,9 +38,7 @@ type StatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [StatEdge!]!
+  edges: [StatEdge!]!
 }
 
 type StatEdge implements Edge {
@@ -67,37 +65,37 @@ type Stat implements Node {
   """
   The Generation of this Stat.
   """ 
-  generation(filter: GenerationFilter): StatGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): StatGenerationConnection
 
   """
   The Generation in which the Stat was introduced.
   """
-  introduced(filter: GenerationFilter): StatIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): StatIntroductionConnection
 
   """
   E.g. 'competitive' boosts 'special_attack' by +2.
   """
-  modifiedByAbility(filter: AbilityFilter): StatModifiedByAbilityConnection
+  modifiedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): StatModifiedByAbilityConnection
 
   """
   E.g. 'tailwind' boosts 'speed' by 2.0.
   """
-  modifiedByFieldState(filter: FieldStateFilter): StatModifiedByFieldStateConnection
+  modifiedByFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): StatModifiedByFieldStateConnection
 
   """
   E.g. 'choice_scarf' boosts 'speed' by 1.5.
   """
-  modifiedByItem(filter: ItemFilter): StatModifiedByItemConnection
+  modifiedByItem(filter: ItemFilter, pagination: ItemPaginationInput): StatModifiedByItemConnection
 
   """
   E.g. 'draco_meteor' reduces 'special_attack' by -2.
   """
-  modifiedByMove(filter: MoveFilter): StatModifiedByMoveConnection
+  modifiedByMove(filter: MoveFilter, pagination: MovePaginationInput): StatModifiedByMoveConnection
 
   """
   E.g. 'adamant' increases 'attack' by 1.1.
   """
-  modifiedByNature(filter: NatureFilter): StatModifiedByNatureConnection
+  modifiedByNature(filter: NatureFilter, pagination: NaturePaginationInput): StatModifiedByNatureConnection
 
   """
   The name of the Stat in snake_case.
@@ -120,9 +118,7 @@ type StatModifiedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [StatModifiedByAbilityEdge!]!
+  edges: [StatModifiedByAbilityEdge!]!
 
 }
 
@@ -158,9 +154,7 @@ type StatModifiedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [StatModifiedByFieldStateEdge!]!
+  edges: [StatModifiedByFieldStateEdge!]!
 
 }
 
@@ -194,9 +188,7 @@ type StatModifiedByFieldStateEdge implements StatModificationEdge & Edge {
 
 type StatGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [StatGenerationEdge!]! 
+  edges: [StatGenerationEdge!]! 
 
 }
 
@@ -206,9 +198,7 @@ type StatGenerationEdge implements Edge {
 
 type StatIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [StatIntroductionEdge!]! 
+  edges: [StatIntroductionEdge!]! 
 
 }
 
@@ -222,9 +212,7 @@ type StatModifiedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [StatModifiedByItemEdge!]!
+  edges: [StatModifiedByItemEdge!]!
 
 }
 
@@ -260,9 +248,7 @@ type StatModifiedByMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [StatModifiedByMoveEdge!]!
+  edges: [StatModifiedByMoveEdge!]!
 
 }
 
@@ -296,9 +282,7 @@ type StatModifiedByNatureConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: NaturePaginationInput
-  ): [StatModifiedByNatureEdge!]!
+  edges: [StatModifiedByNatureEdge!]!
 
 }
 

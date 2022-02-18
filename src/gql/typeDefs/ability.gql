@@ -57,9 +57,7 @@ type AbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [AbilityEdge!]!
+  edges: [AbilityEdge!]!
 }
 
 type AbilityEdge implements Edge {
@@ -80,42 +78,42 @@ type Ability implements Node {
   """
   E.g. 'harsh_sunlight' activates 'chlorophyll'.
   """
-  activatedByFieldState(filter: FieldStateFilter): AbilityActivatedByFieldStateConnection
+  activatedByFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): AbilityActivatedByFieldStateConnection
 
   """
   E.g. 'sound' activates 'liquid_voice'.
   """
-  activatedByUsageMethod(filter: UsageMethodFilter): AbilityActivatedByUsageMethodConnection
+  activatedByUsageMethod(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): AbilityActivatedByUsageMethodConnection
 
   """
   E.g. 'blaze' boosts 'fire'.
   """ 
-  boostsType(filter: TypeFilter): AbilityBoostsTypeConnection
+  boostsType(filter: TypeFilter, pagination: TypePaginationInput): AbilityBoostsTypeConnection
 
   """
   E.g. 'liquid_voice' boosts 'sound'.
   """
-  boostsUsageMethod(filter: UsageMethodFilter): AbilityBoostsUsageMethodConnection
+  boostsUsageMethod(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): AbilityBoostsUsageMethodConnection
 
   """
   E.g. 'poison_point' causes 'poison'.
   """
-  causesStatus(filter: StatusFilter): AbilityCausesStatusConnection
+  causesStatus(filter: StatusFilter, pagination: StatusPaginationInput): AbilityCausesStatusConnection
 
   """
   E.g. 'electric_surge' creates 'electric_terrain'.
   """
-  createsFieldState(filter: FieldStateFilter): AbilityCreatesFieldStateConnection
+  createsFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): AbilityCreatesFieldStateConnection
 
   """
   The Descriptions for the Ability across the different VersionGroups.
   """
-  descriptions(filter: DescriptionFilter): AbilityDescriptionConnection
+  descriptions(filter: DescriptionFilter, pagination: DescriptionPaginationInput): AbilityDescriptionConnection
 
   """
   E.g. 'forecast' has the Effect 'changes_pokemon_type'. 
   """
-  effects(filter: EffectFilter): AbilityEffectConnection
+  effects(filter: EffectFilter, pagination: EffectPaginationInput): AbilityEffectConnection
 
   """
   The name of the Ability in Title Case, with appropriate punctuation and capitalization. 
@@ -129,22 +127,22 @@ type Ability implements Node {
   """
   The Generation of this Ability.
   """ 
-  generation(filter: GenerationFilter): AbilityGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): AbilityGenerationConnection
 
   """
   E.g. 'levitate' ignores 'sticky_web', 'infiltrator' ignores 'reflect'.
   """
-  ignoresFieldState(filter: FieldStateFilter): AbilityIgnoresFieldStateConnection
+  ignoresFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): AbilityIgnoresFieldStateConnection
 
   """
   The Generation in which the Ability was introduced.
   """ 
-  introduced(filter: GenerationFilter): AbilityIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): AbilityIntroductionConnection
 
   """
   E.g. 'intimidate' modifies 'attack'.
   """
-  modifiesStat(filter: StatFilter): AbilityModifiesStatConnection
+  modifiesStat(filter: StatFilter, pagination: StatPaginationInput): AbilityModifiesStatConnection
 
   """
   The name of the Ability in snake_case.
@@ -164,37 +162,37 @@ type Ability implements Node {
   """
   E.g. 'cloud_nine' prevents 'aurora_veil' from being set up, even in the presence of 'hail'. This is because 'cloud_nine' suppresses the effects of 'hail'. 'cloud_nine' does not remove or suppress 'aurora_veil' that is already set-up. 
   """
-  preventsFieldState(filter: FieldStateFilter): AbilityPreventsFieldStateConnection
+  preventsFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): AbilityPreventsFieldStateConnection
 
   """
   E.g. 'damp' prevents 'explosive'.
   """
-  preventsUsageMethod(filter: UsageMethodFilter): AbilityPreventsUsageMethodConnection
+  preventsUsageMethod(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): AbilityPreventsUsageMethodConnection
 
   """
   E.g. 'drizzle' removes other weather effects.
   """
-  removesFieldState(filter: FieldStateFilter): AbilityRemovesFieldStateConnection
+  removesFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): AbilityRemovesFieldStateConnection
 
   """
   E.g. 'water_absorb' resists 'water', with a multiplier of 0. Also applies to Abilities which give weaknesses to types (e.g. we say 'dry_skin' resists 'fire', with a multiplier of 1.25).
   """
-  resistsType(filter: TypeFilter): AbilityResistsTypeConnection
+  resistsType(filter: TypeFilter, pagination: TypePaginationInput): AbilityResistsTypeConnection
 
   """
   E.g. 'soundproof' resists 'sound'.
   """
-  resistsUsageMethod(filter: UsageMethodFilter): AbilityResistsUsageMethodConnection
+  resistsUsageMethod(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): AbilityResistsUsageMethodConnection
 
   """
   E.g. 'flower_veil' resists 'sleep'. 
   """
-  resistsStatus(filter: StatusFilter): AbilityResistsStatusConnection
+  resistsStatus(filter: StatusFilter, pagination: StatusPaginationInput): AbilityResistsStatusConnection
 
   """
   E.g. 'cloud_nine' suppresses weather effects, but does not remove them (if the Pokemon is switched out, the effects return).
   """
-  suppressesFieldState(filter: FieldStateFilter): AbilitySuppressesFieldStateConnection
+  suppressesFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): AbilitySuppressesFieldStateConnection
 }
 
 #
@@ -207,9 +205,7 @@ type AbilityDescriptionConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [AbilityDescriptionEdge!]!
+  edges: [AbilityDescriptionEdge!]!
 
 }
 
@@ -225,9 +221,7 @@ type AbilityEffectConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: EffectPaginationInput
-  ): [AbilityEffectEdge!]! 
+  edges: [AbilityEffectEdge!]! 
 }
 
 type AbilityEffectEdge implements Edge {  
@@ -240,9 +234,7 @@ type AbilityActivatedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [AbilityActivatedByFieldStateEdge!]! 
+  edges: [AbilityActivatedByFieldStateEdge!]! 
 }
 
 type AbilityActivatedByFieldStateEdge implements Edge {  
@@ -253,9 +245,7 @@ type AbilityCreatesFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [AbilityCreatesFieldStateEdge!]! 
+  edges: [AbilityCreatesFieldStateEdge!]! 
 }
 
 type AbilityCreatesFieldStateEdge implements Edge {  
@@ -271,9 +261,7 @@ type AbilityIgnoresFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [AbilityIgnoresFieldStateEdge!]! 
+  edges: [AbilityIgnoresFieldStateEdge!]! 
 }
 
 type AbilityIgnoresFieldStateEdge implements Edge {  
@@ -284,9 +272,7 @@ type AbilityPreventsFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [AbilityPreventsFieldStateEdge!]! 
+  edges: [AbilityPreventsFieldStateEdge!]! 
 }
 
 type AbilityPreventsFieldStateEdge implements Edge {  
@@ -297,9 +283,7 @@ type AbilityRemovesFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [AbilityRemovesFieldStateEdge!]! 
+  edges: [AbilityRemovesFieldStateEdge!]! 
 }
 
 type AbilityRemovesFieldStateEdge implements Edge {  
@@ -310,9 +294,7 @@ type AbilitySuppressesFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [AbilitySuppressesFieldStateEdge!]! 
+  edges: [AbilitySuppressesFieldStateEdge!]! 
 }
 
 type AbilitySuppressesFieldStateEdge implements Edge {  
@@ -323,9 +305,7 @@ type AbilitySuppressesFieldStateEdge implements Edge {
 
 type AbilityGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [AbilityGenerationEdge!]! 
+  edges: [AbilityGenerationEdge!]! 
 
 }
 
@@ -335,9 +315,7 @@ type AbilityGenerationEdge implements Edge {
 
 type AbilityIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [AbilityIntroductionEdge!]! 
+  edges: [AbilityIntroductionEdge!]! 
 
 }
 
@@ -366,9 +344,7 @@ type AbilityModifiesStatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [AbilityModifiesStatEdge!]!
+  edges: [AbilityModifiesStatEdge!]!
 
 }
 
@@ -404,9 +380,7 @@ type AbilityCausesStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [AbilityCausesStatusEdge!]!
+  edges: [AbilityCausesStatusEdge!]!
 
 }
 
@@ -425,9 +399,7 @@ type AbilityResistsStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [AbilityResistsStatusEdge!]!
+  edges: [AbilityResistsStatusEdge!]!
 
 }
 
@@ -441,9 +413,7 @@ type AbilityBoostsTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [AbilityBoostsTypeEdge!]!
+  edges: [AbilityBoostsTypeEdge!]!
 
 }
 
@@ -460,9 +430,7 @@ type AbilityResistsTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [AbilityResistsTypeEdge!]!
+  edges: [AbilityResistsTypeEdge!]!
 
 }
 
@@ -481,9 +449,7 @@ type AbilityActivatedByUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [AbilityActivatedByUsageMethodEdge!]! 
+  edges: [AbilityActivatedByUsageMethodEdge!]! 
 }
 
 type AbilityActivatedByUsageMethodEdge implements Edge {  
@@ -494,9 +460,7 @@ type AbilityBoostsUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [AbilityBoostsUsageMethodEdge!]!
+  edges: [AbilityBoostsUsageMethodEdge!]!
 
 }
 
@@ -513,9 +477,7 @@ type AbilityPreventsUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [AbilityPreventsUsageMethodEdge!]! 
+  edges: [AbilityPreventsUsageMethodEdge!]! 
 }
 
 type AbilityPreventsUsageMethodEdge implements Edge {  
@@ -526,9 +488,7 @@ type AbilityResistsUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [AbilityResistsUsageMethodEdge!]!
+  edges: [AbilityResistsUsageMethodEdge!]!
 
 }
 

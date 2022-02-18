@@ -38,9 +38,7 @@ type VersionGroupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [VersionGroupEdge!]!
+  edges: [VersionGroupEdge!]!
 }
 
 type VersionGroupEdge implements Edge {
@@ -67,7 +65,7 @@ type VersionGroup implements Node {
   """
   code: String!
 
-  descriptions(filter: DescriptionFilter): VersionGroupDescriptionConnection
+  descriptions(filter: DescriptionFilter, pagination: DescriptionPaginationInput): VersionGroupDescriptionConnection
 
   """
   The formatted name of the VersionGroup. If there are multiple games in the group, they are separated by a '/'.
@@ -81,7 +79,7 @@ type VersionGroup implements Node {
   """
   The Generation in which the VersionGroup was introduced. 
   """
-  introduced(filter: GenerationFilter): VersionGroupIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): VersionGroupIntroductionConnection
 
   """
   The name of the VersionGroup in snake_case. Separate versions are separeted by hyphens.
@@ -93,7 +91,7 @@ type VersionGroup implements Node {
   """
   name: String!
 
-  sprites(filter: SpriteFilter): VersionGroupSpriteConnection
+  sprites(filter: SpriteFilter, pagination: SpritePaginationInput): VersionGroupSpriteConnection
 }
 
 #
@@ -106,9 +104,7 @@ type VersionGroupDescriptionConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [VersionGroupDescriptionEdge!]! 
+  edges: [VersionGroupDescriptionEdge!]! 
 
 }
 
@@ -120,9 +116,7 @@ type VersionGroupDescriptionEdge implements Edge {
 
 type VersionGroupIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [VersionGroupIntroductionEdge!]! 
+  edges: [VersionGroupIntroductionEdge!]! 
 
 }
 
@@ -136,9 +130,7 @@ type VersionGroupSpriteConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [VersionGroupSpriteEdge!]! 
+  edges: [VersionGroupSpriteEdge!]! 
 
 }
 
@@ -146,9 +138,24 @@ type VersionGroupSpriteEdge implements Edge {
   node: Sprite!
 }
 
+enum VersionGroupColumnNames {
+  INTRODUCED
+  CODE
+  NAME
+  FORMATTED_NAME
+}
+
 #
 # INPUTS
-#
+# 
+
+input VersionGroupPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: VersionGroupColumnNames = POKEMON_SHOWDOWN_ID
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input VersionGroupFilter {
   """

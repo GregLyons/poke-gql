@@ -29,9 +29,7 @@ type GenerationConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [GenerationEdge!]!
+  edges: [GenerationEdge!]!
 }
 
 type GenerationEdge implements Edge {
@@ -51,32 +49,32 @@ type Generation implements Node {
   """
   All Abilities present in this Generation.
   """
-  abilities(filter: AbilityFilter): GenerationAbilityConnection
+  abilities(filter: AbilityFilter, pagination: AbilityPaginationInput): GenerationAbilityConnection
 
   """
   All Abilities introduced in this Generation.
   """
-  abilitiesIntroduced(filter: AbilityFilter): GenerationIntroducedAbilityConnection
+  abilitiesIntroduced(filter: AbilityFilter, pagination: AbilityPaginationInput): GenerationIntroducedAbilityConnection
 
   """
   All Effects present in this Generation.
   """
-  effects(filter: EffectFilter): GenerationEffectConnection
+  effects(filter: EffectFilter, pagination: EffectPaginationInput): GenerationEffectConnection
 
   """
   All Effects introduced in this Generation.
   """
-  effectsIntroduced(filter: EffectFilter): GenerationIntroducedEffectConnection
+  effectsIntroduced(filter: EffectFilter, pagination: EffectPaginationInput): GenerationIntroducedEffectConnection
 
   """
   All FieldStates present in this Generation.
   """
-  fieldStates(filter: FieldStateFilter): GenerationFieldStateConnection
+  fieldStates(filter: FieldStateFilter, pagination: FieldStatePaginationInput): GenerationFieldStateConnection
 
   """
   All FieldStates introduced in this Generation.
   """
-  fieldStatesIntroduced(filter: FieldStateFilter): GenerationIntroducedFieldStateConnection
+  fieldStatesIntroduced(filter: FieldStateFilter, pagination: FieldStatePaginationInput): GenerationIntroducedFieldStateConnection
 
   """
   The roman numeral for the Generation.
@@ -91,82 +89,82 @@ type Generation implements Node {
   """
   All Items present in this Generation.
   """
-  items(filter: ItemFilter): GenerationItemConnection
+  items(filter: ItemFilter, pagination: ItemPaginationInput): GenerationItemConnection
 
   """
   All Items present in this Generation.
   """
-  itemsIntroduced(filter: ItemFilter): GenerationIntroducedItemConnection
+  itemsIntroduced(filter: ItemFilter, pagination: ItemPaginationInput): GenerationIntroducedItemConnection
 
   """
   All Moves present in this Generation.
   """
-  moves(filter: MoveFilter): GenerationMoveConnection
+  moves(filter: MoveFilter, pagination: MovePaginationInput): GenerationMoveConnection
 
   """
   All Moves introduced in this Generation.
   """
-  movesIntroduced(filter: MoveFilter): GenerationIntroducedMoveConnection
+  movesIntroduced(filter: MoveFilter, pagination: MovePaginationInput): GenerationIntroducedMoveConnection
 
   """
   All Pokemon present in this Generation.
   """
-  pokemon(filter: PokemonFilter): GenerationPokemonConnection
+  pokemon(filter: PokemonFilter, pagination: PokemonPaginationInput): GenerationPokemonConnection
 
   """
   All Pokemon introduced in this Generation.
   """
-  pokemonIntroduced(filter: PokemonFilter): GenerationIntroducedPokemonConnection
+  pokemonIntroduced(filter: PokemonFilter, pagination: PokemonPaginationInput): GenerationIntroducedPokemonConnection
 
   """
   All Stats present in this Generation.
   """
-  stats(filter: StatFilter): GenerationStatConnection
+  stats(filter: StatFilter, pagination: StatPaginationInput): GenerationStatConnection
 
   """
   All Stats introduced in this Generation.
   """
-  statsIntroduced(filter: StatFilter): GenerationIntroducedStatConnection
+  statsIntroduced(filter: StatFilter, pagination: StatPaginationInput): GenerationIntroducedStatConnection
 
   """
   All Statuses present in this Generation.
   """
-  statuses(filter: StatusFilter): GenerationStatusConnection
+  statuses(filter: StatusFilter, pagination: StatusPaginationInput): GenerationStatusConnection
 
   """
   All Statuses introduced in this Generation.
   """
-  statusesIntroduced(filter: StatusFilter): GenerationIntroducedStatusConnection
+  statusesIntroduced(filter: StatusFilter, pagination: StatusPaginationInput): GenerationIntroducedStatusConnection
 
   """
   All Types present in this Generation.
   """
-  types(filter: TypeFilter): GenerationTypeConnection
+  types(filter: TypeFilter, pagination: TypePaginationInput): GenerationTypeConnection
 
   """
   All Types introduced in this Generation.
   """
-  typesIntroduced(filter: TypeFilter): GenerationIntroducedTypeConnection
+  typesIntroduced(filter: TypeFilter, pagination: TypePaginationInput): GenerationIntroducedTypeConnection
 
   """
   All UsageMethods present in this Generation.
   """
-  usageMethods(filter: UsageMethodFilter): GenerationUsageMethodConnection
+  usageMethods(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): GenerationUsageMethodConnection
 
   """
   All UsageMethods introduced in this Generation.
   """
-  usageMethodsIntroduced(filter: UsageMethodFilter): GenerationIntroducedUsageMethodConnection
+  usageMethodsIntroduced(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): GenerationIntroducedUsageMethodConnection
 
   """
   All VersionGroups present in this Generation.
   """
-  versionGroups(filter: VersionGroupFilter): GenerationVersionGroupConnection
+  versionGroups(filter: VersionGroupFilter, pagination: VersionGroupPaginationInput): GenerationVersionGroupConnection
 
   """
   All VersionGroups introduced in this Generation.
   """
-  versionGroupsIntroduced(filter: VersionGroupFilter): GenerationIntroducedVersionGroupConnection
+  versionGroupsIntroduced(filter: VersionGroupFilter, pagination: VersionGroupPaginationInput): GenerationIntroducedVersionGroupConnection
 }
 
 #
@@ -179,9 +177,7 @@ type GenerationAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [GenerationAbilityEdge!]! 
+  edges: [GenerationAbilityEdge!]! 
 
 }
 
@@ -189,9 +185,7 @@ type GenerationIntroducedAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [GenerationAbilityEdge!]! 
+  edges: [GenerationAbilityEdge!]! 
 
 }
 
@@ -205,9 +199,7 @@ type GenerationEffectConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: EffectPaginationInput
-  ): [GenerationEffectEdge!]! 
+  edges: [GenerationEffectEdge!]! 
 
 }
 
@@ -215,9 +207,7 @@ type GenerationIntroducedEffectConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: EffectPaginationInput
-  ): [GenerationEffectEdge!]! 
+  edges: [GenerationEffectEdge!]! 
 
 }
 
@@ -231,9 +221,7 @@ type GenerationFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [GenerationFieldStateEdge!]! 
+  edges: [GenerationFieldStateEdge!]! 
 
 }
 
@@ -241,9 +229,7 @@ type GenerationIntroducedFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [GenerationFieldStateEdge!]! 
+  edges: [GenerationFieldStateEdge!]! 
 
 }
 
@@ -258,9 +244,7 @@ type GenerationItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [GenerationItemEdge!]! 
+  edges: [GenerationItemEdge!]! 
 
 }
 
@@ -268,9 +252,7 @@ type GenerationIntroducedItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [GenerationItemEdge!]! 
+  edges: [GenerationItemEdge!]! 
 
 }
 
@@ -284,9 +266,7 @@ type GenerationMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [GenerationMoveEdge!]! 
+  edges: [GenerationMoveEdge!]! 
 
 }
 
@@ -294,9 +274,7 @@ type GenerationIntroducedMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [GenerationMoveEdge!]! 
+  edges: [GenerationMoveEdge!]! 
 
 }
 
@@ -310,9 +288,7 @@ type GenerationPokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [GenerationPokemonEdge!]! 
+  edges: [GenerationPokemonEdge!]! 
 
 }
 
@@ -320,9 +296,7 @@ type GenerationIntroducedPokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [GenerationPokemonEdge!]! 
+  edges: [GenerationPokemonEdge!]! 
 
 }
 
@@ -336,9 +310,7 @@ type GenerationStatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [GenerationStatEdge!]! 
+  edges: [GenerationStatEdge!]! 
 
 }
 
@@ -346,9 +318,7 @@ type GenerationIntroducedStatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [GenerationStatEdge!]! 
+  edges: [GenerationStatEdge!]! 
 
 }
 
@@ -362,9 +332,7 @@ type GenerationStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [GenerationStatusEdge!]! 
+  edges: [GenerationStatusEdge!]! 
 
 }
 
@@ -372,9 +340,7 @@ type GenerationIntroducedStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [GenerationStatusEdge!]! 
+  edges: [GenerationStatusEdge!]! 
 
 }
 
@@ -388,9 +354,7 @@ type GenerationTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [GenerationTypeEdge!]! 
+  edges: [GenerationTypeEdge!]! 
 
 }
 
@@ -398,9 +362,7 @@ type GenerationIntroducedTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [GenerationTypeEdge!]! 
+  edges: [GenerationTypeEdge!]! 
 
 }
 
@@ -414,9 +376,7 @@ type GenerationUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [GenerationUsageMethodEdge!]! 
+  edges: [GenerationUsageMethodEdge!]! 
 
 }
 
@@ -424,9 +384,7 @@ type GenerationIntroducedUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [GenerationUsageMethodEdge!]! 
+  edges: [GenerationUsageMethodEdge!]! 
 
 }
 
@@ -440,9 +398,7 @@ type GenerationVersionGroupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [GenerationVersionGroupEdge!]! 
+  edges: [GenerationVersionGroupEdge!]! 
 
 }
 
@@ -450,9 +406,7 @@ type GenerationIntroducedVersionGroupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [GenerationVersionGroupEdge!]! 
+  edges: [GenerationVersionGroupEdge!]! 
 
 }
 
@@ -480,9 +434,22 @@ enum GenerationCode {
   X
 }
 
+enum GenerationColumnNames {
+  GEN
+  CODE
+}
+
 #
 # INPUTS
-#
+# 
+
+input GenerationPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: GenerationColumnNames = GEN
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input GenerationFilter {
   """

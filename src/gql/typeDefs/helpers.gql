@@ -92,16 +92,18 @@ For example, the 'moves' field in a Pokemon Node has type PokemonMoveConnection.
 
 Continuing the example, PokemonMoveConnection has a counterpart in MovePokemonConnection, which is the type of the 'pokemon' field in a Move Node. The corresponding 'edges' field type is then '[MovePokemonEdge!]!', and the 'node' field of the MovePokemonEdge type has type 'Pokemon!'. 
   
-'edges' also always has a 'filter' field which implements the 'Filter' interface. The filtering is based on the type of node at the end of the edge. For example, if the edges originate from an Ability Node and end at Pokemon Nodes, then the filter will be a 'PokemonFilter'.
+Connections also always have a 'filter' field which implements the 'Filter' interface. The filtering is based on the type of node at the end of the edge. For example, if the edges originate from an Ability Node and end at Pokemon Nodes, then the filter will be a 'PokemonFilter'.
 
 Functionally, the 'filter' field 'implements' the 'Filter' interface (i.e. you can always use the options in the 'Filter' interface, such as 'introducedAfter' and 'startsWith', in your filter input).
 
 Unfortunately, we could not put the 'filter' field in the interface, which would make the documentation clearer.  However, because we want to extend the 'filter' input depending on the type of entity (e.g. filtering Moves by 'power', 'accuracy', etc.), filters like 'MoveFilter' would need to extend the 'Filter' interface. Since filters are 'input' types in GraphQL, this is impossible, since 'input' types cannot 'implement' interfaces (e.g. we cannot write 'MoveFilter implements Filter'), which would be ideal.
 
-Similarly, 'edges' always has a 'pagination' field which implements the 'Pagination' interface. Each entity has its own 'enum' of column names for ordering. Again, sadly 'input' types cannot 'implement' interfaces.
+Similarly, Connections always have a 'pagination' field which implements the 'Pagination' interface. Each entity has its own 'enum' of column names for ordering. Again, sadly 'input' types cannot 'implement' interfaces.
 """
 interface Connection {
   id: String!
+
+  edges: [Edge!]!
 }
 
 enum ColumnNames {
@@ -154,17 +156,6 @@ interface Filter {
   Entities whose name starts with the given string, case-insensitive.
   """
   startsWith: String
-}
-
-"""
-Input for offset-based pagination.
-"""
-input PaginationInput {
-  limit: Int = 20
-  offset: Int = 0
-  orderBy: String
-  sortBy: SortByEnum = ASC
-  search: String = ""
 }
 
 enum SortByEnum {

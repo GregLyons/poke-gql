@@ -36,9 +36,7 @@ type DescriptionConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [DescriptionEdge!]!
+  edges: [DescriptionEdge!]!
 }
 
 type DescriptionEdge implements Edge {
@@ -75,7 +73,7 @@ type Description implements Node {
   """
   The VersionGroup(s) in which the Description is present.
   """
-  versionGroups(filter: VersionGroupFilter): DescriptionVersionGroupConnection
+  versionGroups(filter: VersionGroupFilter, pagination: VersionGroupPaginationInput): DescriptionVersionGroupConnection
 }
 
 #
@@ -88,9 +86,7 @@ type DescriptionAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [DescriptionAbilityEdge!]!
+  edges: [DescriptionAbilityEdge!]!
 
 }
 
@@ -106,9 +102,7 @@ type DescriptionItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [DescriptionItemEdge!]!
+  edges: [DescriptionItemEdge!]!
 
 }
 
@@ -124,9 +118,7 @@ type DescriptionMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [DescriptionMoveEdge!]!
+  edges: [DescriptionMoveEdge!]!
 
 }
 
@@ -142,9 +134,7 @@ type DescriptionVersionGroupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [DescriptionVersionGroupEdge!]!
+  edges: [DescriptionVersionGroupEdge!]!
 
 }
 
@@ -171,9 +161,22 @@ enum DescriptionEntityClass {
 
 union DescriptionEntityConnection = DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection
 
+enum DescriptionColumnNames {
+  ENTITY_CLASS
+  ENTITY_NAME
+}
+
 #
 # INPUTS
-#
+# 
+
+input DescriptionPaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: DescriptionColumnNames = ENTITY_CLASS
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input DescriptionFilter {
   """

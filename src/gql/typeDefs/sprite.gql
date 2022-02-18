@@ -19,9 +19,7 @@ type SpriteConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [SpriteEdge!]!
+  edges: [SpriteEdge!]!
 }
 
 type SpriteEdge implements Edge {
@@ -67,12 +65,12 @@ type Sprite implements Node {
   """
   The Item represented by the Sprite.
   """
-  item(filter: ItemFilter): SpriteItemConnection
+  item(filter: ItemFilter, pagination: ItemPaginationInput): SpriteItemConnection
 
   """
   The Pokemon represented by the Sprite.
   """
-  pokemon(filter: PokemonFilter): SpritePokemonConnection
+  pokemon(filter: PokemonFilter, pagination: PokemonPaginationInput): SpritePokemonConnection
 
   """
   True if the Sprite is of a shiny Pokemon. False otherwise (always false for items).
@@ -89,7 +87,7 @@ type Sprite implements Node {
   """
   The VersionGroup(s) in which this Sprite is present.
   """
-  versionGroups(filter: VersionGroupFilter): SpriteVersionGroupConnection
+  versionGroups(filter: VersionGroupFilter, pagination: VersionGroupPaginationInput): SpriteVersionGroupConnection
 }
 
 #
@@ -102,9 +100,7 @@ type SpriteItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [SpriteItemEdge!]! 
+  edges: [SpriteItemEdge!]! 
 
 }
 
@@ -118,9 +114,7 @@ type SpritePokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [SpritePokemonEdge!]! 
+  edges: [SpritePokemonEdge!]! 
 
 }
 
@@ -134,9 +128,7 @@ type SpriteVersionGroupConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [SpriteVersionGroupEdge!]! 
+  edges: [SpriteVersionGroupEdge!]! 
 
 }
 
@@ -162,9 +154,23 @@ enum SpriteClass {
 
 union SpriteEntityConnection = SpriteItemConnection | SpritePokemonConnection
 
+enum SpriteColumnNames {
+  GEN
+  PATH
+  ENTITY_NAME
+}
+
 #
 # INPUTS
-#
+# 
+
+input SpritePaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+  orderBy: SpriteColumnNames = ENTITY_NAME
+  sortBy: SortByEnum = ASC
+  search: String = ""
+}
 
 input SpriteFilter {
   """

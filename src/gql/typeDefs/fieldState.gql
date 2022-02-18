@@ -38,9 +38,7 @@ type FieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [FieldStateEdge!]!
+  edges: [FieldStateEdge!]!
 }
 
 type FieldStateEdge implements Edge {
@@ -57,22 +55,22 @@ type FieldState implements Node {
   """
   E.g. 'rain' enables 'swift_swim'.
   """
-  activatesAbility(filter: AbilityFilter): FieldStateActivatesAbilityConnection
+  activatesAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): FieldStateActivatesAbilityConnection
 
   """
   E.g. 'grassy_terrain' enables 'grassy_seed'.
   """
-  activatesItem(filter: ItemFilter): FieldStateActivatesItemConnection
+  activatesItem(filter: ItemFilter, pagination: ItemPaginationInput): FieldStateActivatesItemConnection
 
   """
   E.g. 'rain' boosts the power of 'water' Moves.
   """
-  boostsType(filter: TypeFilter): FieldStateBoostsTypeConnection
+  boostsType(filter: TypeFilter, pagination: TypePaginationInput): FieldStateBoostsTypeConnection
 
   """
   E.g. 'toxic_spikes' causes 'poison'.
   """
-  causesStatus(filter: StatusFilter): FieldStateCausesStatusConnection
+  causesStatus(filter: StatusFilter, pagination: StatusPaginationInput): FieldStateCausesStatusConnection
   
   """
   E.g. 'weather' or 'entry_hazard'.
@@ -82,12 +80,12 @@ type FieldState implements Node {
   """
   E.g. The Move 'stealth_rock' creates the FieldState 'stealth_rock'.
   """
-  createdByAbility(filter: AbilityFilter): FieldStateCreatedByAbilityConnection
+  createdByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): FieldStateCreatedByAbilityConnection
 
   """
   E.g. "sunny_day" creates "harsh_sunlight".
   """
-  createdByMove(filter: MoveFilter): FieldStateCreatedByMoveConnection
+  createdByMove(filter: MoveFilter, pagination: MovePaginationInput): FieldStateCreatedByMoveConnection
 
   """
   E.g. 'vine_lash' deals 16.67% damage (per turn), whereas 'sticky_web' deals none. Entry hazards deal their damage on-entry, whereas most if not all other FieldStates deal their damage at the end of each turn.
@@ -102,17 +100,17 @@ type FieldState implements Node {
   """
   E.g. 'mist' has the Effect 'prevents_stat_drop'.
   """
-  effects(filter: EffectFilter): FieldStateEffectConnection
+  effects(filter: EffectFilter, pagination: EffectPaginationInput): FieldStateEffectConnection
   
   """
   E.g. 'rain' enhances 'thunder' by making it bypass accuracy checks. 'grassy_terrain' enhances 'grassy_glide' by giving it increased priority.
   """
-  enhancesMove(filter: MoveFilter): FieldStateEnhancesMoveConnection
+  enhancesMove(filter: MoveFilter, pagination: MovePaginationInput): FieldStateEnhancesMoveConnection
 
   """
   E.g. 'damp_rock' extends 'rain'.
   """
-  extendedByItem(filter: ItemFilter): FieldStateExtendedByItemConnection
+  extendedByItem(filter: ItemFilter, pagination: ItemPaginationInput): FieldStateExtendedByItemConnection
 
   """
   The name of the FieldState in Title Case.
@@ -122,7 +120,7 @@ type FieldState implements Node {
   """
   The Generation of this FieldState.
   """ 
-  generation(filter: GenerationFilter): FieldStateGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): FieldStateGenerationConnection
 
   """
   FieldStates which only affect grounded Pokemon, e.g. 'spikes'.
@@ -132,27 +130,27 @@ type FieldState implements Node {
   """
   E.g. 'grassy_terrain' hinders 'earthquake' by halving its power. 'harsh_sunlight' hinders 'thunder' by reducing its accuracy.
   """
-  hindersMove(filter: MoveFilter): FieldStateHindersMoveConnection
+  hindersMove(filter: MoveFilter, pagination: MovePaginationInput): FieldStateHindersMoveConnection
 
   """
   E.g. 'infiltrator' ignores 'light_screen'.
   """
-  ignoredByAbility(filter: AbilityFilter): FieldStateIgnoredByAbilityConnection
+  ignoredByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): FieldStateIgnoredByAbilityConnection
 
   """
   E.g. 'heavy_duty_boots' ignores 'spikes'.
   """
-  ignoredByItem(filter: ItemFilter): FieldStateIgnoredByItemConnection
+  ignoredByItem(filter: ItemFilter, pagination: ItemPaginationInput): FieldStateIgnoredByItemConnection
 
   """
   E.g. 'flying' ignores 'spikes'.
   """
-  ignoredByType(filter: TypeFilter): FieldStateIgnoredByTypeConnection
+  ignoredByType(filter: TypeFilter, pagination: TypePaginationInput): FieldStateIgnoredByTypeConnection
 
   """
   The Generation in which the FieldState was introduced.
   """ 
-  introduced(filter: GenerationFilter): FieldStateIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): FieldStateIntroductionConnection
 
   """
   E.g. 'spikes' can have up to 3 layers; most FieldStates can only have 1 layer.
@@ -162,7 +160,7 @@ type FieldState implements Node {
   """
   E.g. 'swamp' modifies 'speed'.
   """ 
-  modifiesStat(filter: StatFilter): FieldStateModifiesStatConnection
+  modifiesStat(filter: StatFilter, pagination: StatPaginationInput): FieldStateModifiesStatConnection
 
   """
   The name of the FieldState in snake_case. 
@@ -176,44 +174,44 @@ type FieldState implements Node {
   """
   E.g. 'cloud_nine' prevents 'rain' from being set up.
   """
-  preventedByAbility(filter: AbilityFilter): FieldStatePreventedByAbilityConnection
+  preventedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): FieldStatePreventedByAbilityConnection
 
   """
   E.g. 'drizzle' removes 'harsh_sunlight' by overwriting it.
   """
-  removedByAbility(filter: AbilityFilter): FieldStateRemovedByAbilityConnection
+  removedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): FieldStateRemovedByAbilityConnection
 
   """
   E.g. The Move 'trick_room' removes the FieldState 'trick_room' (it also creates it).
   """
-  removedByMove(filter: MoveFilter): FieldStateRemovedByMoveConnection
+  removedByMove(filter: MoveFilter, pagination: MovePaginationInput): FieldStateRemovedByMoveConnection
 
   """
   E.g. 'poison' ignores 'toxic_spikes'.
   """
-  removedByType(filter: TypeFilter): FieldStateRemovedByTypeConnection
+  removedByType(filter: TypeFilter, pagination: TypePaginationInput): FieldStateRemovedByTypeConnection
 
   """
   Items which reduce the damage dealt by a FieldState, e.g. 'safety_goggles' negates damage from 'hail'.
   """
-  resistedByItem(filter: ItemFilter): FieldStateResistedByItemConnection
+  resistedByItem(filter: ItemFilter, pagination: ItemPaginationInput): FieldStateResistedByItemConnection
 
   """
   Types which reduce the damage dealt by a FieldState, e.g. 'ice' resists the damage dealt by 'hail'.
   """
-  resistedByType(filter: ItemFilter): FieldStateResistedByTypeConnection
+  resistedByType(filter: ItemFilter, pagination: ItemPaginationInput): FieldStateResistedByTypeConnection
 
   """
   E.g. 'safeguard' prevents 'burn' from being applied, and 'electric_terrain' prevents' sleep.
 
   We use 'resistsStatus' as a catch-all for healing, preventing, or negating Statuses, to provide symmetry with other fields, (e.g. 'resistsStatus' on 'Ability').
   """
-  resistsStatus(filter: StatusFilter): FieldStateResistsStatusConnection
+  resistsStatus(filter: StatusFilter, pagination: StatusPaginationInput): FieldStateResistsStatusConnection
 
   """
   E.g. 'cloud_nine' suppresses 'sandstorm', but does not remove it.
   """
-  suppressedByAbility(filter: AbilityFilter): FieldStateSuppressedByAbilityConnection
+  suppressedByAbility(filter: AbilityFilter, pagination: AbilityPaginationInput): FieldStateSuppressedByAbilityConnection
 
   """
   Who the FieldState targets/affects.
@@ -228,12 +226,12 @@ type FieldState implements Node {
   """
   E.g. 'rain' weakens the power of 'fire' Moves.
   """
-  weakensType(filter: TypeFilter): FieldStateWeakensTypeConnection
+  weakensType(filter: TypeFilter, pagination: TypePaginationInput): FieldStateWeakensTypeConnection
 
   """
   Describes the Type and power of the Move 'weather_ball' when the FieldState is present.
   """
-  weatherBall(filter: TypeFilter): FieldStateWeatherBallConnection
+  weatherBall(filter: TypeFilter, pagination: TypePaginationInput): FieldStateWeatherBallConnection
 }
 
 #
@@ -246,9 +244,7 @@ type FieldStateActivatesAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [FieldStateActivatesAbilityEdge!]!
+  edges: [FieldStateActivatesAbilityEdge!]!
 
 }
 
@@ -260,9 +256,7 @@ type FieldStateCreatedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [FieldStateCreatedByAbilityEdge!]!
+  edges: [FieldStateCreatedByAbilityEdge!]!
 
 }
 
@@ -279,9 +273,7 @@ type FieldStateIgnoredByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [FieldStateIgnoredByAbilityEdge!]!
+  edges: [FieldStateIgnoredByAbilityEdge!]!
 
 }
 
@@ -293,9 +285,7 @@ type FieldStatePreventedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [FieldStatePreventedByAbilityEdge!]!
+  edges: [FieldStatePreventedByAbilityEdge!]!
 
 }
 
@@ -307,9 +297,7 @@ type FieldStateRemovedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [FieldStateRemovedByAbilityEdge!]!
+  edges: [FieldStateRemovedByAbilityEdge!]!
 
 }
 
@@ -321,9 +309,7 @@ type FieldStateSuppressedByAbilityConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: AbilityPaginationInput
-  ): [FieldStateSuppressedByAbilityEdge!]!
+  edges: [FieldStateSuppressedByAbilityEdge!]!
 
 }
 
@@ -337,9 +323,7 @@ type FieldStateEffectConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: EffectPaginationInput
-  ): [FieldStateEffectEdge!]! 
+  edges: [FieldStateEffectEdge!]! 
 
 }
 
@@ -351,9 +335,7 @@ type FieldStateEffectEdge implements Edge {
 
 type FieldStateGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [FieldStateGenerationEdge!]! 
+  edges: [FieldStateGenerationEdge!]! 
 
 }
 
@@ -363,9 +345,7 @@ type FieldStateGenerationEdge implements Edge {
 
 type FieldStateIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [FieldStateIntroductionEdge!]! 
+  edges: [FieldStateIntroductionEdge!]! 
 
 }
 
@@ -379,9 +359,7 @@ type FieldStateActivatesItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [FieldStateActivatesItemEdge!]!
+  edges: [FieldStateActivatesItemEdge!]!
 
 }
 
@@ -393,9 +371,7 @@ type FieldStateExtendedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [FieldStateExtendedByItemEdge!]!
+  edges: [FieldStateExtendedByItemEdge!]!
 
 }
 
@@ -412,9 +388,7 @@ type FieldStateIgnoredByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [FieldStateIgnoredByItemEdge!]!
+  edges: [FieldStateIgnoredByItemEdge!]!
 
 }
 
@@ -426,9 +400,7 @@ type FieldStateResistedByItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [FieldStateResistedByItemEdge!]!
+  edges: [FieldStateResistedByItemEdge!]!
 
 }
 
@@ -444,9 +416,7 @@ type FieldStateEnhancesMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [FieldStateEnhancesMoveEdge!]!
+  edges: [FieldStateEnhancesMoveEdge!]!
 
 }
 
@@ -458,9 +428,7 @@ type FieldStateHindersMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [FieldStateHindersMoveEdge!]!
+  edges: [FieldStateHindersMoveEdge!]!
 
 }
 
@@ -472,9 +440,7 @@ type FieldStateCreatedByMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [FieldStateCreatedByMoveEdge!]!
+  edges: [FieldStateCreatedByMoveEdge!]!
 
 }
 
@@ -491,9 +457,7 @@ type FieldStateRemovedByMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [FieldStateRemovedByMoveEdge!]!
+  edges: [FieldStateRemovedByMoveEdge!]!
 
 }
 
@@ -507,9 +471,7 @@ type FieldStateModifiesStatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [FieldStateModifiesStatEdge!]!
+  edges: [FieldStateModifiesStatEdge!]!
 
 }
 
@@ -543,9 +505,7 @@ type FieldStateCausesStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [FieldStateCausesStatusEdge!]!
+  edges: [FieldStateCausesStatusEdge!]!
 
 }
 
@@ -562,9 +522,7 @@ type FieldStateResistsStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [FieldStateResistsStatusEdge!]!
+  edges: [FieldStateResistsStatusEdge!]!
 
 }
 
@@ -578,9 +536,7 @@ type FieldStateBoostsTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [FieldStateBoostsTypeEdge!]!
+  edges: [FieldStateBoostsTypeEdge!]!
 
 }
 
@@ -597,9 +553,7 @@ type FieldStateIgnoredByTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [FieldStateIgnoredByTypeEdge!]!
+  edges: [FieldStateIgnoredByTypeEdge!]!
 
 }
 
@@ -611,9 +565,7 @@ type FieldStateRemovedByTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [FieldStateRemovedByTypeEdge!]!
+  edges: [FieldStateRemovedByTypeEdge!]!
 
 }
 
@@ -625,9 +577,7 @@ type FieldStateResistedByTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [FieldStateResistedByTypeEdge!]!
+  edges: [FieldStateResistedByTypeEdge!]!
 
 }
 
@@ -641,9 +591,7 @@ type FieldStateWeakensTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [FieldStateWeakensTypeEdge!]!
+  edges: [FieldStateWeakensTypeEdge!]!
 
 }
 
@@ -660,9 +608,7 @@ type FieldStateWeatherBallConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [FieldStateWeatherBallEdge!]!
+  edges: [FieldStateWeatherBallEdge!]!
 
 }
 

@@ -56,9 +56,7 @@ type MoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [MoveEdge!]!
+  edges: [MoveEdge!]!
 }
 
 type MoveEdge implements Edge {
@@ -85,7 +83,7 @@ type Move implements Node {
   """
   E.g. 'toxic' causes 'bad_poison'.
   """
-  causesStatus(filter: StatusFilter): MoveCausesStatusConnection
+  causesStatus(filter: StatusFilter, pagination: StatusPaginationInput): MoveCausesStatusConnection
 
   """
   Whether or not the Move makes contact (e.g. for interacting with the Move 'static').
@@ -95,27 +93,27 @@ type Move implements Node {
   """
   E.g. The Move 'wonder_room' creates the 'wonder_room' FieldState.
   """
-  createsFieldState(filter: FieldStateFilter): MoveCreatesFieldStateConnection
+  createsFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): MoveCreatesFieldStateConnection
 
   """
   The Descriptions for the Move across the different VersionGroups.
   """
-  descriptions(filter: DescriptionFilter): MoveDescriptionConnection
+  descriptions(filter: DescriptionFilter, pagination: DescriptionPaginationInput): MoveDescriptionConnection
 
   """
   E.g. 'stomp' has the Effect 'anti_mini' since it does bonus damage to targets which used the Move 'minimize'.
   """
-  effects(filter: EffectFilter): MoveEffectConnection
+  effects(filter: EffectFilter, pagination: EffectPaginationInput): MoveEffectConnection
 
   """
   E.g. 'volt_tackle' (partly) enables 'catastropika'.
   """
-  enablesMove(filter: MoveFilter): MoveEnablesMoveConnection
+  enablesMove(filter: MoveFilter, pagination: MovePaginationInput): MoveEnablesMoveConnection
 
   """
   E.g. The presence of 'electric_terrain' enhances 'rising_voltage' by increasing its power and making it target all foes.
   """
-  enhancedByFieldState(filter: FieldStateFilter): MoveEnhancedByFieldStateConnection
+  enhancedByFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): MoveEnhancedByFieldStateConnection
 
   """
   The name of the Move in Title Case.
@@ -125,36 +123,36 @@ type Move implements Node {
   """
   The Generation of this Move.
   """ 
-  generation(filter: GenerationFilter): MoveGenerationConnection
+  generation(filter: GenerationFilter, pagination: GenerationPaginationInput): MoveGenerationConnection
 
   """
   E.g. The presence of 'rain' decreases the power of 'solar_beam' and the healing effects of 'morning_sun'.
   """
-  hinderedByFieldState(filter: FieldStateFilter): MoveHinderedByFieldStateConnection
+  hinderedByFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): MoveHinderedByFieldStateConnection
 
   """
   E.g. 'shell_smash' interacts with 'snatch', 'surf' interacts with 'protect', 'focus_punch' does not interact with 'assist' since it cannot be called by 'assist'.
 
   We do not say that 'feint' interacts with 'protect', even though strictly speaking it does (it removes the effects of 'protect' from the Pokemon using 'protect'). We intend this field to mean that the Move at the ending Node does is subject to the core mechanic of the Move at the starting Node. (E.g. 'protect' blocks Moves, 'snatch' steals Moves, 'assist' calls Moves).
   """
-  interactedWithByMove(filter: MoveFilter): MoveInteractedWithByMoveConnection
+  interactedWithByMove(filter: MoveFilter, pagination: MovePaginationInput): MoveInteractedWithByMoveConnection
 
   """
   E.g. 'shell_smash' interacts with 'snatch', 'surf' interacts with 'protect', 'focus_punch' does not interact with 'assist' since it cannot be called by 'assist'.
 
   We do not say that 'feint' interacts with 'protect', even though strictly speaking it does (it removes the effects of 'protect' from the Pokemon using 'protect'). We intend this field to mean that the Move at the starting Node does is subject to the core mechanic of the Move at the ending Node. (E.g. 'protect' blocks Moves, 'snatch' steals Moves, 'assist' calls Moves).
   """
-  interactsWithMove(filter: MoveFilter): MoveInteractsWithMoveConnection
+  interactsWithMove(filter: MoveFilter, pagination: MovePaginationInput): MoveInteractsWithMoveConnection
 
   """
   The Generation in which the Move was introduced.
   """ 
-  introduced(filter: GenerationFilter): MoveIntroductionConnection
+  introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): MoveIntroductionConnection
 
   """
   E.g. 'growl' reduces 'attack' by -1.
   """
-  modifiesStat(filter: StatFilter): MoveModifiesStatConnection
+  modifiesStat(filter: StatFilter, pagination: StatPaginationInput): MoveModifiesStatConnection
 
   """
   The name of the Move in snake_case. 
@@ -170,7 +168,7 @@ type Move implements Node {
   """
   Pokemon who can learn this Move.
   """
-  pokemon(filter: PokemonFilter): MovePokemonConnection
+  pokemon(filter: PokemonFilter, pagination: PokemonPaginationInput): MovePokemonConnection
   
   """
   ID of the Move in Pokemon Showdown's code for use with, e.g. the package 'pkmn/sets' for Pokemon movesets.
@@ -187,7 +185,7 @@ type Move implements Node {
   """
   E.g. 'throat_chop' prevents 'sound'.
   """
-  preventsUsageMethod(filter: UsageMethodFilter): MovePreventsUsageMethodConnection
+  preventsUsageMethod(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): MovePreventsUsageMethodConnection
 
   priority: Int!
 
@@ -198,32 +196,32 @@ type Move implements Node {
   """
   E.g. The Move 'trick_room' removes the FieldState 'trick_room' if it's already present. 'rain_dance' removes 'harsh_sunlight'.
   """
-  removesFieldState(filter: FieldStateFilter): MoveRemovesFieldStateConnection
+  removesFieldState(filter: FieldStateFilter, pagination: FieldStatePaginationInput): MoveRemovesFieldStateConnection
 
   """
   E.g. 'breakneck_blitz' requires 'normalium_z'.
   """
-  requiresItem(filter: ItemFilter): MoveRequiresItemConnection
+  requiresItem(filter: ItemFilter, pagination: ItemPaginationInput): MoveRequiresItemConnection
 
   """
   E.g. 'catastropika' requires the Move 'volt_tackle'.
   """
-  requiresMove(filter: MoveFilter): MoveRequiresMoveConnection
+  requiresMove(filter: MoveFilter, pagination: MovePaginationInput): MoveRequiresMoveConnection
 
   """
   E.g. 'g_max_wildfire' requires the user to be 'charizard_gmax'.
   """
-  requiresPokemon(filter: PokemonFilter): MoveRequiresPokemonConnection
+  requiresPokemon(filter: PokemonFilter, pagination: PokemonPaginationInput): MoveRequiresPokemonConnection
 
   """
   E.g. 'inferno_overdrive', the Fire Z-Move, requires a 'fire'-Type base move.
   """
-  requiresType(filter: TypeFilter): MoveRequiresTypeConnection
+  requiresType(filter: TypeFilter, pagination: TypePaginationInput): MoveRequiresTypeConnection
 
   """
   Refers to Moves which either cure or alleviate the negative effects of Status conditions. For example, 'heal_bell' cannot prevent the 'burn' status, but it can heal it. We bring it under 'resistsStatus' rather than splitting it off into its own field like 'healsStatus'. 
   """
-  resistsStatus(filter: StatusFilter): MoveResistsStatusConnection
+  resistsStatus(filter: StatusFilter, pagination: StatusPaginationInput): MoveResistsStatusConnection
 
   """
   Who the Move can target.
@@ -233,7 +231,7 @@ type Move implements Node {
   """
   The Type possessed by the Move, e.g. 'flamethrower' is 'fire'-type. 
   """
-  type(filter: TypeFilter): MoveTypeConnection
+  type(filter: TypeFilter, pagination: TypePaginationInput): MoveTypeConnection
 
   """
   The name of the type possessed by the Move. If the type varies, it will be NORMAL.
@@ -243,7 +241,7 @@ type Move implements Node {
   """
   E.g. The Move 'aura_sphere' has both 'ball' and 'pulse' as UsageMethods.
   """
-  usageMethods(filter: UsageMethodFilter): MoveUsageMethodConnection
+  usageMethods(filter: UsageMethodFilter, pagination: UsageMethodPaginationInput): MoveUsageMethodConnection
 }
 
 #
@@ -256,9 +254,7 @@ type MoveDescriptionConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PaginationInput
-  ): [MoveDescriptionEdge!]!
+  edges: [MoveDescriptionEdge!]!
 
 }
 
@@ -274,9 +270,7 @@ type MoveEffectConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: EffectPaginationInput
-  ): [MoveEffectEdge!]! 
+  edges: [MoveEffectEdge!]! 
 
 }
 
@@ -290,9 +284,7 @@ type MoveCreatesFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [MoveCreatesFieldStateEdge!]! 
+  edges: [MoveCreatesFieldStateEdge!]! 
 }
 
 type MoveCreatesFieldStateEdge implements Edge {  
@@ -308,9 +300,7 @@ type MoveRemovesFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [MoveRemovesFieldStateEdge!]! 
+  edges: [MoveRemovesFieldStateEdge!]! 
 }
 
 type MoveRemovesFieldStateEdge implements Edge {  
@@ -322,9 +312,7 @@ type MoveEnhancedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [MoveEnhancedByFieldStateEdge!]! 
+  edges: [MoveEnhancedByFieldStateEdge!]! 
 
 }
 
@@ -336,9 +324,7 @@ type MoveHinderedByFieldStateConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: FieldStatePaginationInput
-  ): [MoveHinderedByFieldStateEdge!]! 
+  edges: [MoveHinderedByFieldStateEdge!]! 
 
 }
 
@@ -350,9 +336,7 @@ type MoveHinderedByFieldStateEdge implements Edge {
 
 type MoveGenerationConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [MoveGenerationEdge!]! 
+  edges: [MoveGenerationEdge!]! 
 
 }
 
@@ -362,9 +346,7 @@ type MoveGenerationEdge implements Edge {
 
 type MoveIntroductionConnection implements Connection {
   id: String!
-  edges(
-    pagination: PaginationInput
-  ): [MoveIntroductionEdge!]! 
+  edges: [MoveIntroductionEdge!]! 
 
 }
 
@@ -378,9 +360,7 @@ type MoveRequiresItemConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: ItemPaginationInput
-  ): [MoveRequiresItemEdge!]!
+  edges: [MoveRequiresItemEdge!]!
 
 }
 
@@ -394,9 +374,7 @@ type MoveEnablesMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [MoveEnablesMoveEdge!]!
+  edges: [MoveEnablesMoveEdge!]!
 
 }
 
@@ -408,9 +386,7 @@ type MoveInteractedWithByMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [MoveInteractedWithByMoveEdge!]!
+  edges: [MoveInteractedWithByMoveEdge!]!
 
 }
 
@@ -422,9 +398,7 @@ type MoveInteractsWithMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [MoveInteractsWithMoveEdge!]!
+  edges: [MoveInteractsWithMoveEdge!]!
 
 }
 
@@ -436,9 +410,7 @@ type MoveRequiresMoveConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: MovePaginationInput
-  ): [MoveRequiresMoveEdge!]!
+  edges: [MoveRequiresMoveEdge!]!
 
 }
 
@@ -452,9 +424,7 @@ type MovePokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [MovePokemonEdge!]!
+  edges: [MovePokemonEdge!]!
 
 }
 
@@ -482,9 +452,7 @@ type MoveRequiresPokemonConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: PokemonPaginationInput
-  ): [MoveRequiresPokemonEdge!]!
+  edges: [MoveRequiresPokemonEdge!]!
 
 }
 
@@ -498,9 +466,7 @@ type MoveModifiesStatConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatPaginationInput
-  ): [MoveModifiesStatEdge!]!
+  edges: [MoveModifiesStatEdge!]!
 
 }
 
@@ -534,9 +500,7 @@ type MoveCausesStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [MoveCausesStatusEdge!]!
+  edges: [MoveCausesStatusEdge!]!
 
 }
 
@@ -553,9 +517,7 @@ type MoveResistsStatusConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: StatusPaginationInput
-  ): [MoveResistsStatusEdge!]!
+  edges: [MoveResistsStatusEdge!]!
 
 }
 
@@ -569,9 +531,7 @@ type MoveTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [MoveTypeEdge!]!
+  edges: [MoveTypeEdge!]!
 
 }
 
@@ -583,9 +543,7 @@ type MoveRequiresTypeConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: TypePaginationInput
-  ): [MoveRequiresTypeEdge!]!
+  edges: [MoveRequiresTypeEdge!]!
 
 }
 
@@ -599,9 +557,7 @@ type MoveUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [MoveUsageMethodEdge!]!
+  edges: [MoveUsageMethodEdge!]!
 
 }
 
@@ -613,9 +569,7 @@ type MovePreventsUsageMethodConnection implements Connection {
   id: String!
   count: Int!
   
-  edges(
-    pagination: UsageMethodPaginationInput
-  ): [MovePreventsUsageMethodEdge!]! 
+  edges: [MovePreventsUsageMethodEdge!]! 
 }
 
 type MovePreventsUsageMethodEdge implements Edge {  
