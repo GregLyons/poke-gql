@@ -240,11 +240,36 @@ const turnsEdge = () => {
 
 // Top-level connection
 const topLevelConnection = (entityClass) => {
+  const tableName = entityNameToTableName(entityClass);
+  const genID = hasGenID(tableName);
   return {
     id: (parent, args, context, info) => {
+      let filterArgs;
+      if (parent.args.filter) {
+        filterArgs = Object.entries(parent.args.filter).map(([key, value]) => {
+          let valueString;
+          if (Array.isArray(value)) valueString = value.join('_');
+          else if (value === null) valueString = 'null';
+          else if (value === undefined) valueString = 'undefined';
+          else valueString = value + '';
+
+          return [key, value].join('_');
+        }).join('_');
+      }
+      else filterArgs = [];
+
+      if (genID) {
+        return [
+          'topLevelQuery',
+          entityClass,
+          parent.args.generation,
+          filterArgs,
+        ].join('_');
+      }
       return [
+        'topLevelQuery',
         entityClass,
-        Object.keys(parent.args).join('_'),
+        filterArgs,
       ].join('_');
     },
 
