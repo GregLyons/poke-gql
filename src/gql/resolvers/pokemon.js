@@ -27,10 +27,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
   
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const pokemonPK = parentPK('pokemon')
 const pokemonPKDebut = parentPKDebut('pokemon');
@@ -50,7 +52,7 @@ const Query = {
 
   pokemonByPSIDs: queryEntitiesByColumn('pokemon', 'psIDs'),
 
-  pokemon: queryEntities('pokemon'),
+  pokemon: topLevelBulkQuery('pokemon'),
 }
 
 //#endregion
@@ -130,6 +132,9 @@ const Pokemon = {
 //#region
 
 const ConnectionsAndEdges = {
+  PokemonConnection: topLevelConnection('pokemon'),
+  PokemonEdge: basicEdge(),
+
   PokemonAbilityConnection: junctionConnection('pokemon', 'ability'),
   PokemonAbilityEdge: abilityEdge(),
   

@@ -1,215 +1,222 @@
 {
   moves {
     id
-    accuracy
-    category
-    causesStatus {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+
+    edges {
+      node {
+        id
+        accuracy
+        category
+        causesStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
         }
-        chance
-      }
-    }
-    contact
-    createsFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        contact
+        createsFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            turns
+          }
         }
-        turns
-      }
-    }
-    descriptions {
-      id
-      count
-      edges {
-        node {
-          text
+        descriptions {
+          id
+          count
+          edges {
+            node {
+              text
+            }
+            versionGroupCode
+          }
         }
-        versionGroupCode
-      }
-    }
-    effects {
-      id
-      count
-      edges {
-        node {
-          name
+        effects {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    enablesMove {
-      id
-      count
-      edges {
-        node {
-          name
+        enablesMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    enhancedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        enhancedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    hinderedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        hinderedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    interactedWithByMove {
-      id
-      count
-      edges {
-        node {
-          name
+        interactedWithByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    interactsWithMove {
-      id
-      count
-      edges {
-        node {
-          name
+        interactsWithMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    modifiesStat {
-      id
-      count
-      edges {
-        node {
-          name
+        modifiesStat {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    name
-    pokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        name
+        pokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemonShowdownID
-    power
-    pp
-    preventsUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        psID
+        power
+        pp
+        preventsUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    priority
-    removedFromSwSh
-    removedFromBDSP
-    removesFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        priority
+        removedFromSwSh
+        removedFromBDSP
+        removesFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    requiresItem {
-      id
-      count
-      edges {
-        node {
-          name
+        requiresItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    requiresMove {
-      id
-      count
-      edges {
-        node {
-          name
+        requiresMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    requiresPokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        requiresPokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    requiresType {
-      id
-      count
-      edges {
-        node {
-          name
+        requiresType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsStatus {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    target
-    type {
-      id
-      count
-      edges {
-        node {
-          name
+        target
+        type {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    typeName
-    usageMethods {
-      id
-      count
-      edges {
-        node {
-          name
+        typeName
+        usageMethods {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     }

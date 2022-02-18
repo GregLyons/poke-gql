@@ -1,197 +1,204 @@
 {
   items {
     id
-    activatedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+
+    edges {
+      node {
+        id
+        activatedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        } 
+        activatedByUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        } 
+        boostsType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    } 
-    activatedByUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        boostsUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    } 
-    boostsType {
-      id
-      count
-      edges {
-        node {
-          name
+        causesStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
         }
-      }
-    }
-    boostsUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        confusesNature {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    causesStatus {
-      id
-      count
-      edges {
-        node {
-          name
+        class
+        descriptions {
+          id
+          count
+          edges {
+            node {
+              text
+            }
+            versionGroupCode
+          }
         }
-        chance
-      }
-    }
-    confusesNature {
-      id
-      count
-      edges {
-        node {
-          name
+        effects {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    class
-    descriptions {
-      id
-      count
-      edges {
-        node {
-          text
+        enablesMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-        versionGroupCode
-      }
-    }
-    effects {
-      id
-      count
-      edges {
-        node {
-          name
+        enablesPokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    enablesMove {
-      id
-      count
-      edges {
-        node {
-          name
+        extendsFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            turns
+          }
         }
-      }
-    }
-    enablesPokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    extendsFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        ignoresFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-        turns
-      }
-    }
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    ignoresFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        modifiesStat {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
+        name
+        naturalGift {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    modifiesStat {
-      id
-      count
-      edges {
-        node {
-          name
+        psID
+        requiresPokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    name
-    naturalGift {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemonShowdownID
-    requiresPokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsStatus {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistsType {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistsUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     }

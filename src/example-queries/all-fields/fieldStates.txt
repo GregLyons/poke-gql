@@ -1,246 +1,253 @@
 {
   fieldStates {
     id
-    class
-    damagePercent
-    description
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
+    count
+
+    edges {
+      node {
+        id
+        class
+        damagePercent
+        description
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    grounded
-    introduced {
-      id
-      edges {
-        node {
-          number
+        grounded
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    maxLayers
-    name
-    target
-    activatesAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        maxLayers
+        name
+        target
+        activatesAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    activatesItem {
-      id
-      count
-      edges {
-        node {
-          name
+        activatesItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    boostsType {
-      id
-      count
-      edges {
-        node {
-          name
+        boostsType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    causesStatus {
-      id
-      count
-      edges {
-        node {
-          name
+        causesStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
         }
-        chance
-      }
-    }
-    createdByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        createdByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    createdByMove {
-      id
-      count
-      edges {
-        node {
-          name
+        createdByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    effects {
-      id
-      count
-      edges {
-        node {
-          name
+        effects {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    enhancesMove {
-      id
-      count
-      edges {
-        node {
-          name
+        enhancesMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    extendedByItem {
-      id
-      count
-      edges {
-        node {
-          name
+        extendedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    hindersMove {
-      id
-      count
-      edges {
-        node {
-          name
+        hindersMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    ignoredByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        ignoredByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    ignoredByItem {
-      id
-      count
-      edges {
-        node {
-          name
+        ignoredByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    ignoredByType {
-      id
-      count
-      edges {
-        node {
-          name
+        ignoredByType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    modifiesStat {
-      id
-      count
-      edges {
-        node {
-          name
+        modifiesStat {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    preventedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        preventedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    removedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        removedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    removedByMove {
-      id
-      count
-      edges {
-        node {
-          name
+        removedByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    removedByType {
-      id
-      count
-      edges {
-        node {
-          name
+        removedByType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistedByItem {
-      id
-      count
-      edges {
-        node {
-          name
+        resistedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistedByType {
-      id
-      count
-      edges {
-        node {
-          name
+        resistedByType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            multiplier
+          }
         }
-        multiplier
-      }
-    }
-    resistsStatus {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    suppressedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        suppressedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    unformattedName
-    weakensType {
-      id
-      count
-      edges {
-        node {
-          name
+        unformattedName
+        weakensType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    weatherBall {
-      id
-      count
-      edges {
-        node {
-          name
+        weatherBall {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     }

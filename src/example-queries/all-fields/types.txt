@@ -1,165 +1,172 @@
 {
   types {
     id
-    boostedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+
+    edges {
+      node {
+        id
+        boostedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    boostedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        boostedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    boostedByItem {
-      id
-      count
-      edges {
-        node {
-          name
+        boostedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    defensiveMatchups {
-      id
-      count
-      edges {
-        node {
-          name
+        defensiveMatchups {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    enablesMove {
-      id
-      count
-      edges {
-        node {
-          name
+        enablesMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    ignoresFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        ignoresFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    moves {
-      id
-      count
-      edges {
-        node {
-          name
+        moves {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    name
-    naturalGift {
-      id
-      count
-      edges {
-        node {
-          name
+        name
+        naturalGift {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    offensiveMatchups {
-      id
-      count
-      edges {
-        node {
-          name
+        offensiveMatchups {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        pokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    removesFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        removesFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+        resistedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistedByItem {
-      id
-      count
-      edges {
-        node {
-          name
+        resistedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    weakenedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        weakenedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    weatherBall {
-      id
-      count
-      edges {
-        node {
-          name
+        weatherBall {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     }

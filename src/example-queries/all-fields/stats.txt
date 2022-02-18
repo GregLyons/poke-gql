@@ -1,70 +1,77 @@
 {
   stats {
     id
-    description
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
+    count
+
+    edges {
+      node {
+        id
+        description
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        modifiedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        modifiedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        modifiedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        modifiedByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        modifiedByNature {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        name
+        unformattedName
       }
     }
-    introduced {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    modifiedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    modifiedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    modifiedByItem {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    modifiedByMove {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    modifiedByNature {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    name
-    unformattedName
   }
 }

@@ -44,10 +44,25 @@ extend type Query {
   """
   pokemon(
     generation: Int = 8
-    generations: [Int]
-    pagination: PokemonPaginationInput
     filter: PokemonFilter
-  ): [Pokemon!]!
+  ): PokemonConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type PokemonConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PokemonPaginationInput
+  ): [PokemonEdge!]!
+}
+
+type PokemonEdge implements Edge {
+  node: Pokemon!
 }
 
 #

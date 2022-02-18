@@ -23,10 +23,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
   
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const statPK = parentPK('stat')
 const statPKDebut = parentPKDebut('stat');
@@ -55,7 +57,7 @@ const Query = {
 
   statsByName: queryEntitiesByColumn('stat', 'names'),
 
-  stats: queryEntities('stat'),
+  stats: topLevelBulkQuery('stat'),
 }
 
 //#endregion
@@ -95,6 +97,9 @@ const Stat = {
 //#region
 
 const ConnectionsAndEdges = {
+  StatConnection: topLevelConnection('stat'),
+  StatEdge: basicEdge(),
+
   StatGenerationConnection: generationConnection('stat'),
   StatGenerationEdge: basicEdge(),
 

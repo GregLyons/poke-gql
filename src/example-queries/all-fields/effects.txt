@@ -1,61 +1,68 @@
 {
   effects {
     id
-    abilities {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+
+    edges {
+      node {
+        id
+        abilities {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
+        description
+        formattedName
+        fieldStates {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        name
+        items {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        moves {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        unformattedName
       }
     }
-    description
-    formattedName
-    fieldStates {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    generation {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    name
-    items {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    moves {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    unformattedName
   }
 }

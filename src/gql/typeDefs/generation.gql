@@ -17,9 +17,25 @@ extend type Query {
   Select Generations with filtering and pagination.
   """
   generations(
-    pagination: PaginationInput
     filter: GenerationFilter
-  ): [Generation!]!
+  ): GenerationConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type GenerationConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [GenerationEdge!]!
+}
+
+type GenerationEdge implements Edge {
+  node: Generation!
 }
 
 #

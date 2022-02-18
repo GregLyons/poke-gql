@@ -29,10 +29,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
   
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const itemPK = parentPK('item')
 const itemPKDebut = parentPKDebut('item');
@@ -62,7 +64,7 @@ const Query = {
 
   itemsByName: queryEntitiesByColumn('item', 'names'),
 
-  items: queryEntities('item'),
+  items: topLevelBulkQuery('item'),
 }
 
 //#endregion
@@ -130,6 +132,9 @@ const Item = {
 //#region
 
 const ConnectionsAndEdges = {
+  ItemConnection: topLevelConnection('item'),
+  ItemEdge: basicEdge(),
+
   ItemActivatedByFieldStateConnection: junctionConnection('item', 'activatedByFieldState'),
   ItemActivatedByFieldStateEdge: basicEdge(),
 

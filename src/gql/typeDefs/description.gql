@@ -24,9 +24,25 @@ extend type Query {
   Select Descriptions with filtering and pagination.
   """
   descriptions(
-    pagination: PaginationInput
     filter: DescriptionFilter
-  ): [Description!]!
+  ): DescriptionConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type DescriptionConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [DescriptionEdge!]!
+}
+
+type DescriptionEdge implements Edge {
+  node: Description!
 }
 
 #

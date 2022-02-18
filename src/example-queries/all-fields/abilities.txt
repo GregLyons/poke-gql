@@ -1,187 +1,193 @@
 {
   abilities {
     id
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
+    count
+    edges {
+      node {
+        id
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
         }
-      }
-    }
-    name
-    activatedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        name
+        activatedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    activatedByUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        activatedByUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    boostsType {
-      id
-      count
-      edges {
-        node {
-          name
+        boostsType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    boostsUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        boostsUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    causesStatus {
-      id
-      count
-      edges {
-        node {
-          name
+        causesStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
         }
-        chance
-      }
-    }
-    createsFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        createsFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            turns
+          }
         }
-        turns
-      }
-    }
-    descriptions {
-      id
-      count
-      edges {
-        node {
-          text
+        descriptions {
+          id
+          count
+          edges {
+            node {
+              text
+            }
+            versionGroupCode
+          }
         }
-        versionGroupCode
-      }
-    }
-    effects {
-      id
-      count
-      edges {
-        node {
-          name
+        effects {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    ignoresFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        ignoresFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    modifiesStat {
-      id
-      count
-      edges {
-        node {
-          name
+        modifiesStat {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        pokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemonShowdownID
-    preventsFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        psID
+        preventsFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    preventsUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        preventsUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    removesFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        removesFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsStatus {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsStatus {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsType {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsType {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    resistsUsageMethod {
-      id
-      count
-      edges {
-        node {
-          name
+        resistsUsageMethod {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    suppressesFieldState {
-      id
-      count
-      edges {
-        node {
-          name
+        suppressesFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     }

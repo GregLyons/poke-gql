@@ -1,45 +1,52 @@
 {
   natures {
     id
-    confusedByItem {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+
+    edges {
+      node {
+        id
+        confusedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
+        dislikedFlavor
+        dislikedFlavorName
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        likedFlavor
+        likedFlavorName
+        modifiesStat {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        name
       }
     }
-    dislikedFlavor
-    dislikedFlavorName
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    likedFlavor
-    likedFlavorName
-    modifiesStat {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    name
   }
 }

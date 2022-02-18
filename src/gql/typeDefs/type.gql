@@ -32,10 +32,25 @@ extend type Query {
   """
   types(
     generation: Int = 8
-    generations: [Int]
-    pagination: TypePaginationInput
     filter: TypeFilter
-  ): [Type!]!
+  ): TypeConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type TypeConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: TypePaginationInput
+  ): [TypeEdge!]!
+}
+
+type TypeEdge implements Edge {
+  node: Type!
 }
 
 #

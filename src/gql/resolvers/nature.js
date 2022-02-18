@@ -26,10 +26,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const naturePK = parentPK('nature')
 const naturePKDebut = parentPKDebut('nature');
@@ -45,7 +47,7 @@ const Query = {
 
   naturesByName: queryEntitiesByColumn('nature', 'names'),
 
-  natures: queryEntities('nature'),
+  natures: topLevelBulkQuery('nature'),
 }
 
 //#endregion
@@ -83,6 +85,9 @@ const Nature = {
 //#region
 
 const ConnectionsAndEdges = {
+  NatureConnection: topLevelConnection('nature'),
+  NatureEdge: basicEdge(),
+
   NatureConfusedByItemConnection: junctionConnection('nature', 'confusedByItem'),
   NatureConfusedByItemEdge: basicEdge(),
   

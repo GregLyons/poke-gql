@@ -29,6 +29,9 @@ const {
 
   debutConnection,
   presenceConnection,
+  topLevelConnection,
+
+  topLevelBulkQuery,
 } = require('./helpers.js');
 
 //#endregion
@@ -38,7 +41,7 @@ const Query = {
   
   generationByCode: queryEntitiesByColumn('generation', 'code'),
   
-  generations: queryEntities('generation'),
+  generations: topLevelBulkQuery('generation'),
 }
 
 //#endregion
@@ -205,6 +208,9 @@ const Generation = {
 
 // TODO: cursor
 const ConnectionsAndEdges = {
+  GenerationConnection: topLevelConnection('generation'),
+  GenerationEdge: basicEdge(),
+
   GenerationAbilityConnection: presenceConnection('ability'),
   GenerationIntroducedAbilityConnection: debutConnection('ability'),
   GenerationAbilityEdge: basicEdge(),

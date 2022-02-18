@@ -23,10 +23,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const usageMethodPK = parentPK('usageMethod')
 const usageMethodPKDebut = parentPKDebut('usageMethod');
@@ -55,7 +57,7 @@ const Query = {
 
   usageMethodsByName: queryEntitiesByColumn('usageMethod', 'names'),
 
-  usageMethods: queryEntities('usageMethod'),
+  usageMethods: topLevelBulkQuery('usageMethod'),
 }
 
 //#endregion
@@ -103,6 +105,9 @@ const UsageMethod = {
 //#region
 
 const ConnectionsAndEdges = {
+  UsageMethodConnection: topLevelConnection('usageMethod'),
+  UsageMethodEdge: basicEdge(),
+  
   UsageMethodActivatesAbilityConnection: junctionConnection('usageMethod', 'activatesAbility'),
   UsageMethodActivatesAbilityEdge: basicEdge(),
 

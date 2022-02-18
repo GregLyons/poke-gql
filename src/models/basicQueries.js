@@ -31,7 +31,7 @@ const getEntityCountQueryString = (entityName, filter) => {
   filterString = getFilterQueryString(filter, tableName);
 
   return `
-    SELECT COUNT(*) AS row_count FROM ${tableName}
+    SELECT COUNT(${tableName}_id) AS row_count FROM ${tableName}
     ${
       hasGenID(tableName) 
         ? `WHERE generation_id IN ?`

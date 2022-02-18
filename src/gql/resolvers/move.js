@@ -28,10 +28,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
   
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const movePK = parentPK('move')
 const movePKDebut = parentPKDebut('move');
@@ -40,20 +42,6 @@ const getID = primaryKeyToID('move');
 //#endregion
 
 // Query
-/*
-    moveByID(id)
-    moveByName(name)
-    moves(
-      cursor,
-      limit,
-      generation,
-      contains,
-      endsWith,
-      introducedAfter,
-      introducedBefore,
-      startsWith
-    )
-*/
 //#region
 
 const Query = {
@@ -65,8 +53,7 @@ const Query = {
 
   movesByPSIDs: queryEntitiesByColumn('move', 'psIDs'),
 
-  // TODO: cursor
-  moves: queryEntities('move'),
+  moves: topLevelBulkQuery('move'),
 }
 
 //#endregion
@@ -154,6 +141,9 @@ const Move = {
 //#region
 
 const ConnectionsAndEdges = {
+  MoveConnection: topLevelConnection('move'),
+  MoveEdge: basicEdge(),
+
   MoveCausesStatusConnection: junctionConnection('move', 'causesStatus'),
   MoveCausesStatusEdge: causeStatusEdge(),
   

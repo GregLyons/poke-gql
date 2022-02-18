@@ -1,204 +1,211 @@
 {
   generations {
     id
-    code
-    number
+    count
 
-    abilities {
-      id
-      count
-      edges {
-        node {
-          name
+    edges {
+      node {
+        id
+        code
+        number
+
+        abilities {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    abilitiesIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        abilitiesIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    effectsIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        effectsIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    effects {
-      id
-      count
-      edges {
-        node {
-          name
+        effects {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    fieldStatesIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        fieldStatesIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    fieldStates {
-      id
-      count
-      edges {
-        node {
-          name
+        fieldStates {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    itemsIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        itemsIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    items {
-      id
-      count
-      edges {
-        node {
-          name
+        items {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    movesIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        movesIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    moves {
-      id
-      count
-      edges {
-        node {
-          name
+        moves {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemonIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        pokemonIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    pokemon {
-      id
-      count
-      edges {
-        node {
-          name
+        pokemon {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    statsIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        statsIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    stats {
-      id
-      count
-      edges {
-        node {
-          name
+        stats {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    statusesIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        statusesIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    statuses {
-      id
-      count
-      edges {
-        node {
-          name
+        statuses {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    typesIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        typesIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    types {
-      id
-      count
-      edges {
-        node {
-          name
+        types {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    usageMethodsIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        usageMethodsIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    usageMethods {
-      id
-      count
-      edges {
-        node {
-          name
+        usageMethods {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    versionGroupsIntroduced {
-      id
-      count
-      edges {
-        node {
-          name
+        versionGroupsIntroduced {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
-      }
-    }
-    versionGroups {
-      id
-      count
-      edges {
-        node {
-          name
+        versionGroups {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     }

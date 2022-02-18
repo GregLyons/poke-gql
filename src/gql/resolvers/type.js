@@ -25,10 +25,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const typePK = parentPK('type')
 const typePKDebut = parentPKDebut('type');
@@ -59,7 +61,7 @@ const Query = {
   typesByName: queryEntitiesByColumn('type', 'names'),
 
   // TODO: cursor
-  types: queryEntities('type'),
+  types: topLevelBulkQuery('type'),
 }
 
 //#endregion
@@ -117,6 +119,9 @@ const Type = {
 //#region
 
 const ConnectionsAndEdges = {
+  TypeConnection: topLevelConnection('type'),
+  TypeEdge: basicEdge(),
+
   DefensiveTypeMatchupConnection: junctionConnection('type', 'defensiveMatchup'),
   DefensiveTypeMatchupEdge: multiplierEdge(),
 

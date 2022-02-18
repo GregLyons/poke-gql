@@ -1,102 +1,109 @@
 {
   statuses {
     id
-    causedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+    
+    edges {
+      node {
+        id
+        causedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
         }
-        chance
+        causedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
+        }
+        causedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
+        }
+        causedByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+            chance
+          }
+        }
+        description
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        name
+        resistedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        resistedByFieldState {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        resistedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        resistedByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        unformattedName
+        volatile
       }
     }
-    causedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-        chance
-      }
-    }
-    causedByItem {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-        chance
-      }
-    }
-    causedByMove {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-        chance
-      }
-    }
-    description
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    name
-    resistedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistedByFieldState {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistedByItem {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistedByMove {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    unformattedName
-    volatile
   }
 }

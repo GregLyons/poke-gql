@@ -26,10 +26,25 @@ extend type Query {
   """
   effects(
     generation: Int = 8
-    generations: [Int]
-    pagination: EffectPaginationInput
     filter: EffectFilter
-  ): [Effect!]!
+  ): EffectConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type EffectConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: EffectPaginationInput
+  ): [EffectEdge!]!
+}
+
+type EffectEdge implements Edge {
+  node: Effect!
 }
 
 #

@@ -1,25 +1,32 @@
 {
   versionGroups {
     id
-    code
-    formattedName
-    descriptions {
-      id
-      count
-      edges {
-        node {
-          text
+    count
+
+    edges {
+      node {
+        id
+        code
+        formattedName
+        descriptions {
+          id
+          count
+          edges {
+            node {
+              text
+            }
+          }
         }
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        name
       }
     }
-    introduced {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    name
   }
 }

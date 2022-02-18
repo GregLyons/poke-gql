@@ -32,10 +32,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
   
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const fieldStatePK = parentPK('fieldState')
 const fieldStatePKDebut = parentPKDebut('fieldState');
@@ -44,20 +46,6 @@ const getID = primaryKeyToID('fieldState');
 //#endregion
 
 // Query
-/*
-    fieldStateByID(id)
-    fieldStateByName(name)
-    fieldStates(
-      cursor,
-      limit,
-      generation,
-      contains,
-      endsWith,
-      introducedAfter,
-      introducedBefore,
-      startsWith
-    )
-*/
 //#region
 
 const Query = {
@@ -65,7 +53,7 @@ const Query = {
 
   fieldStatesByName: queryEntitiesByColumn('fieldState', 'names'),
   
-  fieldStates: queryEntities('fieldState'),
+  fieldStates: topLevelBulkQuery('fieldState'),
 }
 
 //#endregion
@@ -153,6 +141,9 @@ const FieldState = {
 //#region
 
 const ConnectionsAndEdges = {
+  FieldStateConnection: topLevelConnection('fieldState'),
+  FieldStateEdge: basicEdge(),
+
   FieldStateActivatesAbilityConnection: junctionConnection('fieldState', 'activatesAbility'),
   FieldStateActivatesAbilityEdge: basicEdge(),
 

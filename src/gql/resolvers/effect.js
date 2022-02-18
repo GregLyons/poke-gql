@@ -22,10 +22,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const effectPK = parentPK('effect')
 const effectPKDebut = parentPKDebut('effect');
@@ -54,7 +56,7 @@ const Query = {
 
   effectsByName: queryEntitiesByColumn('effect', 'names'),
 
-  effects: queryEntities('effect'),
+  effects: topLevelBulkQuery('effect'),
 }
 
 //#endregion
@@ -92,6 +94,9 @@ const Effect = {
 //#region
 
 const ConnectionsAndEdges = {
+  EffectConnection: topLevelConnection('effect'),
+  EffectEdge: basicEdge(),
+
   EffectAbilityConnection: junctionConnection('effect', 'ability'),
   EffectAbilityEdge: basicEdge(),
 

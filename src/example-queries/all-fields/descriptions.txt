@@ -1,44 +1,50 @@
 {
   descriptions {
     id
-    entity {
-      ... on DescriptionAbilityConnection {
+    count
+    edges {
+      node {
         id
-        count
-        edges {
-          node {
-            name
+        entity {
+          ... on DescriptionAbilityConnection {
+            id
+            count
+            edges {
+              node {
+                name
+              }
+            }
+          }
+          ... on DescriptionItemConnection {
+            id
+            count
+            edges {
+              node {
+                name
+              }
+            }
+          }
+          ... on DescriptionMoveConnection {
+            id
+            count
+            edges {
+              node {
+                name
+              }
+            }
           }
         }
-      }
-      ... on DescriptionItemConnection {
-        id
-        count
-        edges {
-          node {
-            name
+        entityClass
+        entityName
+        text
+        versionGroups {
+          id
+          count
+          edges {
+            node {
+              name
+            }
           }
-        }
-      }
-      ... on DescriptionMoveConnection {
-        id
-        count
-        edges {
-          node {
-            name
-          }
-        }
-      }
-    }
-    entityClass
-    entityName
-    text
-    versionGroups {
-      id
-      count
-      edges {
-        node {
-          name
         }
       }
     }

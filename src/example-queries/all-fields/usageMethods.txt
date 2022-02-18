@@ -1,106 +1,113 @@
 {
   usageMethods {
     id
-    activatesAbility {
-      id
-      count
-      edges {
-        node {
-          name
+    count
+
+    edges {
+      node {
+        id
+        activatesAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
         }
+        activatesItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        boostedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        boostedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        description
+        formattedName
+        generation {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        introduced {
+          id
+          edges {
+            node {
+              number
+            }
+          }
+        }
+        preventedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        preventedByMove {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        resistedByAbility {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        resistedByItem {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        moves {
+          id
+          count
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        name
+        unformattedName
       }
     }
-    activatesItem {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    boostedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    boostedByItem {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    description
-    formattedName
-    generation {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    introduced {
-      id
-      edges {
-        node {
-          number
-        }
-      }
-    }
-    preventedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    preventedByMove {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistedByAbility {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    resistedByItem {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    moves {
-      id
-      count
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    name
-    unformattedName
   }
 }

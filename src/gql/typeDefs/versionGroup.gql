@@ -26,9 +26,25 @@ extend type Query {
   'introducedAfter' and 'introducedBefore' refer to the number of a Generation, and are inclusive.
   """
   versionGroups(
-    pagination: PaginationInput
     filter: VersionGroupFilter
-  ): [VersionGroup!]!
+  ): VersionGroupConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type VersionGroupConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: PaginationInput
+  ): [VersionGroupEdge!]!
+}
+
+type VersionGroupEdge implements Edge {
+  node: VersionGroup!
 }
 
 #

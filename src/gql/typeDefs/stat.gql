@@ -26,10 +26,25 @@ extend type Query {
   """
   stats(
     generation: Int = 8
-    generations: [Int]
-    pagination: StatPaginationInput
     filter: StatFilter
-  ): [Stat!]!
+  ): StatConnection!
+}
+
+#
+# TOP-LEVEL CONNECTION
+#
+
+type StatConnection implements Connection {
+  id: String!
+  count: Int!
+  
+  edges(
+    pagination: StatPaginationInput
+  ): [StatEdge!]!
+}
+
+type StatEdge implements Edge {
+  node: Stat!
 }
 
 #

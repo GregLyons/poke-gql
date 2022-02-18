@@ -23,10 +23,12 @@ const {
   junctionConnection,
   generationConnection,
   introductionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const statusPK = parentPK('status')
 const statusPKDebut = parentPKDebut('status');
@@ -55,7 +57,7 @@ const Query = {
   
   statusesByName: queryEntitiesByColumn('status', 'names'),
 
-  statuses: queryEntities('status'),
+  statuses: topLevelBulkQuery('status'),
 }
 
 //#endregion
@@ -103,6 +105,9 @@ const Status = {
 //#region
 
 const ConnectionsAndEdges = {
+  StatusConnection: topLevelConnection('status'),
+  StatusEdge: basicEdge(),
+
   StatusCausedByAbilityConnection: junctionConnection('status', 'causedByAbility'),
   StatusCausedByAbilityEdge: causeStatusEdge(),
 

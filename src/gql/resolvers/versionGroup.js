@@ -21,10 +21,12 @@ const {
   
   introductionConnection,
   junctionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const versionGroupPK = parentPK('versionGroup')
 const versionGroupPKDebut = parentPKDebut('versionGroup');
@@ -52,7 +54,7 @@ const Query = {
 
   versionGroupsByName: queryEntitiesByColumn('versionGroup', 'names'),
 
-  versionGroups: queryEntities('versionGroup'),
+  versionGroups: topLevelBulkQuery('versionGroup'),
 }
 
 //#endregion
@@ -81,6 +83,9 @@ const VersionGroup = {
 //#region
 
 const ConnectionsAndEdges = {
+  VersionGroupConnection: topLevelConnection('versionGroup'),
+  VersionGroupEdge: basicEdge(),
+
   VersionGroupIntroductionConnection: introductionConnection('versionGroup'),
   VersionGroupIntroductionEdge: basicEdge(),
 

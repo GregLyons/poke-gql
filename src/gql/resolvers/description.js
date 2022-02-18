@@ -24,10 +24,12 @@ const {
   descriptionEdge,
   
   junctionConnection,
+  topLevelConnection,
 
   parentPK,
   parentPKDebut,
   primaryKeyToID,
+  topLevelBulkQuery,
 } = require('./helpers.js');
 const descriptionPK = parentPK('description')
 const descriptionPKDebut = parentPKDebut('description');
@@ -55,7 +57,7 @@ const Query = {
 
   descriptionsByEntityClass: queryEntitiesByColumn('description', 'entity_class'),
 
-  descriptions: queryEntities('description'),
+  descriptions: topLevelBulkQuery('description'),
 }
 
 //#endregion
@@ -90,6 +92,9 @@ const Description = {
 //#region
 
 const ConnectionsAndEdges = {
+  DescriptionConnection: topLevelConnection('description'),
+  DescriptionEdge: basicEdge(),
+
   DescriptionEntityConnection: {
     __resolveType(parent, context, info) {
       switch(parent.entityClass) {
