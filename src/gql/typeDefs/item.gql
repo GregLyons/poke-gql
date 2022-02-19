@@ -27,6 +27,7 @@ extend type Query {
   items(
     generation: Int = 8
     filter: ItemFilter
+    pagination: ItemPaginationInput
   ): ItemConnection!
 }
 
@@ -593,5 +594,5 @@ input ItemFilter {
 
   # OTHER FILTERS
 
-  
+  class: [ItemClass!]
 }

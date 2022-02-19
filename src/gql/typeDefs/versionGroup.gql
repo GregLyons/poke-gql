@@ -27,6 +27,7 @@ extend type Query {
   """
   versionGroups(
     filter: VersionGroupFilter
+    pagination: VersionGroupPaginationInput
   ): VersionGroupConnection!
 }
 

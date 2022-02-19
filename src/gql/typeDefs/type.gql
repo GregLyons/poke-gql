@@ -33,6 +33,7 @@ extend type Query {
   types(
     generation: Int = 8
     filter: TypeFilter
+    pagination: TypePaginationInput
   ): TypeConnection!
 }
 

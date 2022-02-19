@@ -27,6 +27,7 @@ extend type Query {
   statuses(
     generation: Int = 8
     filter: StatusFilter
+    pagination: StatusPaginationInput
   ): StatusConnection!
 }
 
@@ -341,4 +342,9 @@ input StatusFilter {
   Entities whose unformatted name starts with the given string, case-insensitive.
   """
   startsWith: String
+
+  """
+  Statuses which are classified as 'volatile', meaning that they expire upon the victim switching out.
+  """
+  volatile: Boolean
 }

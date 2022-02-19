@@ -27,6 +27,7 @@ extend type Query {
   stats(
     generation: Int = 8
     filter: StatFilter
+    pagination: StatPaginationInput
   ): StatConnection!
 }
 

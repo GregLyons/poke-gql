@@ -50,7 +50,7 @@ const escapeObjectParameters = obj => {
 }
 
 const arrayToMySQL = arr => {
-  return "(" + arr.map(name => "'" + name + "'").join(', ') + ")";
+  return "(" + arr.map(name => ("'" + name + "'").toLowerCase()).join(', ') + ")";
 }
 
 // Column name maps 
@@ -383,10 +383,13 @@ const getFilterQueryString = (filter, tableName) => {
     const minPowerString = filter.minPower
       ? `AND pmove_power >= ${filter.minPower}`
       : ``;
+    const variablePowerString = filter.variablePower 
+      ? `AND pmove_power = NULL`
+      : ``;
 
     // PP
     const maxPPString = filter.maxPP
-      ? `AND pmove_power <= ${filter.maxPP}`
+      ? `AND pmove_pp <= ${filter.maxPP}`
       : ``;
     const minPPString = filter.minPower
       ? `AND pmove_pp >= ${filter.minPP}`
@@ -413,17 +416,17 @@ const getFilterQueryString = (filter, tableName) => {
 
     // Category
     const categoryString = filter.category
-      ? `AND pmove_category = '${filter.category.toLowerCase()}'`
+      ? `AND pmove_category IN ${arrayToMySQL(filter.category)}`
       : ``;
 
     // Target
     const targetString = filter.target
-      ? `AND pmove_target = '${filter.target.toLowerCase()}'`
+      ? `AND pmove_target IN ${arrayToMySQL(filter.target)}`
       : ``;
       
     // Contact
-    const contactString = filter.contact
-      ? `AND pmove_contact = '${filter.contact.toLowerCase()}'`
+    const contactString = filter.contact !== undefined
+      ? `AND pmove_contact = ${filter.contact ? 'TRUE' : 'FALSE'}`
       : ``;
 
     // Types
@@ -444,6 +447,7 @@ const getFilterQueryString = (filter, tableName) => {
     extraFilterString = [
       maxPowerString,
       minPowerString,
+      variablePowerString,
 
       maxPPString,
       minPPString,
@@ -466,8 +470,8 @@ const getFilterQueryString = (filter, tableName) => {
   }
   // Items
   else if (tableName === 'item') {
-    const itemClassString = filter.class
-      ? `AND item_class = '${filter.class.toLowerCase()}'`
+    const itemClassString = filter.class !== undefined && filter.class.length > 0
+      ? `AND item_class IN ${arrayToMySQL(filter.class)}`
       : ``;
 
     extraFilterString = [
@@ -475,34 +479,53 @@ const getFilterQueryString = (filter, tableName) => {
     ].filter(d => d.length > 0).join('\n');
   }
   // FieldStates
-  else if (tableName === 'item') {
-    const fieldStateClassString = filter.class
-      ? `AND field_state_class = '${filter.class.toLowerCase()}'`
+  else if (tableName === 'field_state') {
+    const fieldStateClassString = filter.class !== undefined && filter.class.length > 0
+      ? `AND field_state_class IN ${arrayToMySQL(filter.class)}`
       : ``;
 
-    const fieldDamagePercentString = filter.damagePercent
-      ? `AND field_state_damage_percent = '${filter.damagePercent.toLowerCase()}'`
+    // Damage percent
+    const maxDamagePercentString = filter.maxDamagePercent
+      ? `AND field_state_damage_percent <= ${filter.maxDamagePercent}`
+      : ``;
+    const minDamagePercentString = filter.minDamagePercent
+      ? `AND field_state_damage_percent >= ${filter.minDamagePercent}`
       : ``;
       
     const fieldMaxLayersString = filter.maxLayers
-      ? `AND field_state_max_layers = '${filter.maxLayers.toLowerCase()}'`
+      ? `AND field_state_max_layers <= ${filter.maxLayers}`
       : ``;
 
-    const fieldStateGroundedString = filter.grounded
-      ? `AND field_state_only_grounded = '${filter.grounded.toLowerCase()}'`
+    const fieldStateGroundedString = filter.grounded !== undefined
+      ? `AND field_state_only_grounded = ${filter.grounded ? 'TRUE' : 'FALSE'}`
       : ``;
 
-    const fieldStateTargetString = filter.target
-      ? `AND field_state_target = '${filter.target.toLowerCase()}'`
+    const fieldStateTargetString = filter.target !== undefined && filter.target.length > 0
+      ? `AND field_state_target IN ${arrayToMySQL(filter.target)}`
       : ``;
 
     extraFilterString = [
       fieldStateClassString,
-      fieldDamagePercentString,
+
+      maxDamagePercentString,
+      minDamagePercentString,
+
       fieldMaxLayersString,
       fieldStateGroundedString,
       fieldStateTargetString,
     ].filter(d => d.length > 0).join('\n');
+  }
+  // Items
+  else if (tableName === 'pstatus') {
+    const volatileString = filter.volatile !== undefined
+      ? `AND pstatus_volatile = ${filter.volatile === true ? 'TRUE' : 'FALSE'}`
+      : ``;
+
+    extraFilterString = [
+      volatileString,
+    ].filter(d => d.length > 0).join('\n');
+
+    console.log(volatileString);
   }
   // Default case
   else {

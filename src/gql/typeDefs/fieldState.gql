@@ -27,6 +27,7 @@ extend type Query {
   fieldStates(
     generation: Int = 8
     filter: FieldStateFilter
+    pagination: FieldStatePaginationInput
   ): FieldStateConnection!
 }
 
@@ -710,12 +711,16 @@ input FieldStateFilter {
   
   # OTHER FILTERS
   
-  class: FieldStateClass
+  class: [FieldStateClass!]
 
-  damagePercent: Float
+  maxDamagePercent: Float
+
+  minDamagePercent: Float
 
   """
-  E.g. 'spikes' can have up to 3 layers, but 'grassy_terrain' can have only 1 layer.
+  Selects FieldStates which can have a number of layers up to the given integer.
+  
+  E.g. 'spikes' can have up to 3 layers, but 'grassy_terrain' can have only 1 layer. 
   """
   maxLayers: Int
 
@@ -724,5 +729,5 @@ input FieldStateFilter {
   """
   FieldStates of the given target class, e.g. 'ALL', 'ALL_ALLIES', 'ALL_FOES'.
   """
-  target: FieldStateTargetClass
+  target: [FieldStateTargetClass!]
 }

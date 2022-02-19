@@ -45,6 +45,7 @@ extend type Query {
   moves(
     generation: Int = 8
     filter: MoveFilter
+    pagination: MovePaginationInput
   ): MoveConnection!
 }
 
@@ -738,17 +739,16 @@ input MoveFilter {
 
   
   # OTHER FILTERS
-  
 
   """
-  Only select Moves which bypass accuracy checks.
+  Only select Moves which bypass accuracy checks
   """
   bypassAccuracy: Boolean
 
   """
   Moves of the given category, e.g. 'PHYSICAL', 'SPECIAL'.
   """
-  category: MoveCategory
+  category: [MoveCategory!]
 
   """
   Only select Moves which make contact.
@@ -758,7 +758,7 @@ input MoveFilter {
   """
   Moves of the given target class, e.g. 'ALL', 'ANY', 'ADJACENT_FOE', 'USER'.
   """
-  target: TargetClass
+  target: [TargetClass!]
 
   """
   Move such that its Type belongs to one of the given Types. You may also want to check for Moves with the 'type_varies' Effect, e.g. 'weather_ball'.
@@ -774,4 +774,9 @@ input MoveFilter {
   False if the Move is present in BDSP.
   """
   removedFromBDSP: Boolean
+
+  """
+  Only select Moves whose power varies
+  """
+  variablePower: Boolean
 }

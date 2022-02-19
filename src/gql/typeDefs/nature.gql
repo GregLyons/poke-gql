@@ -27,6 +27,7 @@ extend type Query {
   natures(
     generation: Int = 8
     filter: NatureFilter
+    pagination: NaturePaginationInput
   ): NatureConnection!
 }
 

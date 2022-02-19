@@ -27,6 +27,7 @@ extend type Query {
   effects(
     generation: Int = 8
     filter: EffectFilter
+    pagination: EffectPaginationInput
   ): EffectConnection!
 }
 

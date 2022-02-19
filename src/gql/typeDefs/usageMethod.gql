@@ -27,6 +27,7 @@ extend type Query {
   usageMethods(
     generation: Int = 8
     filter: UsageMethodFilter
+    pagination: UsageMethodPaginationInput
   ): UsageMethodConnection!
 }
 

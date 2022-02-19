@@ -45,6 +45,7 @@ extend type Query {
   pokemon(
     generation: Int = 8
     filter: PokemonFilter
+    pagination: PokemonPaginationInput
   ): PokemonConnection!
 }
 

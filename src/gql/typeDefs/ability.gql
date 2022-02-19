@@ -44,8 +44,8 @@ extend type Query {
   """
   abilities(
     generation: Int = 8
-    pagination: AbilityPaginationInput
     filter: AbilityFilter
+    pagination: AbilityPaginationInput
   ): AbilityConnection!
 }
 

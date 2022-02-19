@@ -25,6 +25,7 @@ extend type Query {
   """
   descriptions(
     filter: DescriptionFilter
+    pagination: DescriptionPaginationInput
   ): DescriptionConnection!
 }
 
