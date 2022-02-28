@@ -109,6 +109,11 @@ type Pokemon implements Node {
   evolvesFrom(filter: PokemonFilter, pagination: PokemonPaginationInput): PokemonPrevolutionConnection
 
   """
+  Number between 0 and 1 representing proportion of females for this Pokemon.
+  """
+  femaleRate: Float!
+
+  """
   The name of the Pokemon in Title Case, and with appropriate punctuation. The species name is capitalized, and form data is in parentheses.
 
   Examples:
@@ -140,6 +145,11 @@ type Pokemon implements Node {
   forms(filter: PokemonFilter, pagination: PokemonPaginationInput): PokemonFormConnection
 
   """
+  True if Pokemon's gender is 'unknown', i.e. neither male nor female. False otherwise.
+  """
+  genderless: Boolean!
+
+  """
   The Generation of this Pokemon.
   """ 
   generation(filter: GenerationFilter, pagination: GenerationPaginationInput): PokemonGenerationConnection
@@ -153,6 +163,11 @@ type Pokemon implements Node {
   The Generation in which the Pokemon was introduced.
   """
   introduced(filter: GenerationFilter, pagination: GenerationPaginationInput): PokemonIntroductionConnection
+
+  """
+  Number between 0 and 1 representing proportion of males for this Pokemon.
+  """
+  maleRate: Float!
 
   """
   The Moves that the Pokemon can learn.
@@ -225,6 +240,11 @@ type Pokemon implements Node {
 An object containing the six base stats of a Pokemon. For Generation 1, we split the Special stat into Special Attack and Special Defense.
 """
 type BaseStats {
+  """
+  For caching
+  """
+  id: String!
+
   hp: Int!
   attack: Int!
   defense: Int!
@@ -536,7 +556,8 @@ input PokemonFilter {
   """
   startsWith: String
 
-  # STATS FILTERS
+
+  # NUMERIC FILTERS
 
 
   """
@@ -568,6 +589,26 @@ input PokemonFilter {
   Pokemon whose National Dex number is greater than the given number, inclusive.
   """
   minDex: Int
+
+  """
+  Pokemon whose maleRate is less than the given number, inclusive.
+  """
+  maxMaleRate: Float
+
+  """
+  Pokemon whose maleRate is greater than the given number, inclusive.
+  """
+  minMaleRate: Float
+
+  """
+  Pokemon whose femaleRate is less than the given number, inclusive.
+  """
+  maxFemaleRate: Float
+
+  """
+  Pokemon whose femaleRate is greater than the given number, inclusive.
+  """
+  minFemaleRate: Float
 
 
   # BASE STAT FILTERS
@@ -666,4 +707,9 @@ input PokemonFilter {
   False if the Pokemon is present in BDSP.
   """
   removedFromBDSP: Boolean
+
+  """
+  True if the Pokemon has unknown gender.
+  """
+  genderless: Boolean
 }

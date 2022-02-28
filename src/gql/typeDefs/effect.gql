@@ -62,6 +62,11 @@ type Effect implements Node {
   abilities(filter: AbilityFilter, pagination: AbilityPaginationInput): EffectAbilityConnection
 
   """
+  Classification of this Effect. The name of the class signifies the mechanic to which the Effect most closely applies. E.g. 'adds_priority' has the 'speed' classification, 'uses_different_stat' has the 'stat' classification, and so on. In some cases, 'misc' is still used.
+  """
+  class: EffectClass!
+
+  """
   A description of this Effect.
   """
   description: String!
@@ -199,6 +204,23 @@ type EffectMoveEdge implements Edge {
 # ENUMS
 #
 
+enum EffectClass {
+  ABILITY
+  ACCURACY
+  CONTACT
+  COST
+  CRIT
+  GROUND
+  MISC
+  POWER
+  RESTORE
+  STAT
+  SWITCH
+  SIZE
+  SPEED
+  TYPE
+}
+
 enum EffectColumnNames {
   GEN
   ID
@@ -257,4 +279,9 @@ input EffectFilter {
   Effects whose unformatted name starts with the given string, case-insensitive.
   """
   startsWith: String
+
+
+  # OTHER FILTERS
+
+  class: [EffectClass!]
 }

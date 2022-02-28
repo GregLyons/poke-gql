@@ -163,14 +163,14 @@ type NatureModifiesStatEdge implements StatModificationEdge & Edge {
   node: Stat!
 
   """
-  As of Gen 8, Natures don't modify stats via stages, so this will be null.
+  As of Gen 8, Natures don't modify stats via stages, so this will be 0.
   """
-  stage: Int
+  stage: Int!
 
   """
   The factor by which the Nature scales the Stat.
   """
-  multiplier: Float
+  multiplier: Float!
 
   """
   Natures always successfully modify their corresponding Stats.

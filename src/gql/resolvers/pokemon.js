@@ -67,6 +67,7 @@ const Pokemon = {
 
   baseStats: parent => {
     return {
+      id: parent.generation_id + parent.ps_id,
       hp: parent.pokemon_hp,
       attack: parent.pokemon_attack,
       defense: parent.pokemon_defense,
@@ -87,17 +88,23 @@ const Pokemon = {
 
   evolvesTo: pokemonPK,
 
+  femaleRate: parent => parent.pokemon_female_rate,
+
   formattedName: parent => parent.pokemon_formatted_name,
 
   formClass: parent => parent.pokemon_form_class.toUpperCase(),
 
   forms: pokemonPK,
 
+  genderless: parent => parent.pokemon_genderless,
+
   generation: pokemonPK,
   
   height: parent => parent.pokemon_height,
 
   introduced: pokemonPKDebut,
+
+  maleRate: parent => parent.pokemon_male_rate,
 
   moves: pokemonPK,
   

@@ -192,6 +192,9 @@ const getFilterQueryString = (filter, tableName) => {
     case 'usage_method':
       nameColumn = 'unformatted_name';
       break;
+    case 'nature':
+      nameColumn = 'name';
+      break;
     default:
       nameColumn = 'ps_id';
   }
@@ -227,93 +230,109 @@ const getFilterQueryString = (filter, tableName) => {
 
   // Pokemon
   if (tableName === 'pokemon') {
-    // Dex
-    const maxWeightString = filter.maxWeight
+    // Weight
+    const maxWeightString = filter.maxWeight !== undefined
       ? `AND pokemon_weight <= ${filter.maxWeight}`
       : ``;
-    const minWeightString = filter.minWeight
+    const minWeightString = filter.minWeight !== undefined
       ? `AND pokemon_weight >= ${filter.minWeight}`
       : ``;
 
-    // Dex
-    const maxHeightString = filter.maxHeight
+    // Height
+    const maxHeightString = filter.maxHeight !== undefined
       ? `AND pokemon_height <= ${filter.maxHeight}`
       : ``;
-    const minHeightString = filter.minHeight
+    const minHeightString = filter.minHeight !== undefined
       ? `AND pokemon_height >= ${filter.minHeight}`
       : ``;
 
+    // maleRate
+    const maxMaleRateString = filter.maxMaleRate !== undefined
+      ? `AND pokemon_male_rate <= ${filter.maxMaleRate}`
+      : ``;
+    const minMaleRateString = filter.minMaleRate !== undefined
+      ? `AND pokemon_male_rate >= ${filter.minMaleRate}`
+      : ``;
+
+    // maleRate
+    const maxFemaleRateString = filter.maxFemaleRate !== undefined
+      ? `AND pokemon_female_rate <= ${filter.maxFemaleRate}`
+      : ``;
+    const minFemaleRateString = filter.minFemaleRate !== undefined
+      ? `AND pokemon_female_rate >= ${filter.minFemaleRate}`
+      : ``;
+
     // Dex
-    const maxDexString = filter.maxDex
+    const maxDexString = filter.maxDex !== undefined
       ? `AND pokemon_dex <= ${filter.maxDex}`
       : ``;
-    const minDexString = filter.minDex
+    const minDexString = filter.minDex !== undefined
       ? `AND pokemon_dex >= ${filter.minDex}`
       : ``;
 
     // HP
-    const maxHPString = filter.maxHP
+    const maxHPString = filter.maxHP !== undefined
       ? `AND pokemon_hp <= ${filter.maxHP}`
       : ``;
-    const minHPString = filter.minHP
+    const minHPString = filter.minHP !== undefined
       ? `AND pokemon_hp >= ${filter.minHP}`
       : ``;
     
     // Attack
-    const maxAttackString = filter.maxAttack
+    const maxAttackString = filter.maxAttack !== undefined
       ? `AND pokemon_attack <= ${filter.maxAttack}`
       : ``;
-    const minAttackString = filter.minAttack
+    const minAttackString = filter.minAttack !== undefined
       ? `AND pokemon_attack >= ${filter.minAttack}`
       : ``;
 
     // Defense
-    const maxDefenseString = filter.maxDefense
+    const maxDefenseString = filter.maxDefense !== undefined
       ? `AND pokemon_defense <= ${filter.maxDefense}`
       : ``;
-    const minDefenseString = filter.minDefense
+    const minDefenseString = filter.minDefense !== undefined
       ? `AND pokemon_defense >= ${filter.minDefense}`
       : ``;
 
     // Special Attack
-    const maxSpecialAttackString = filter.maxSpecialAttack
+    const maxSpecialAttackString = filter.maxSpecialAttack !== undefined
       ? `AND pokemon_special_attack <= ${filter.maxSpecialAttack}`
       : ``;
-    const minSpecialAttackString = filter.minSpecialAttack
+    const minSpecialAttackString = filter.minSpecialAttack !== undefined
       ? `AND pokemon_special_attack >= ${filter.minSpecialAttack}`
       : ``;
 
     // Special Defense
-    const maxSpecialDefenseString = filter.maxSpecialDefense
+    const maxSpecialDefenseString = filter.maxSpecialDefense !== undefined
       ? `AND pokemon_special_defense <= ${filter.maxSpecialDefense}`
       : ``;
-    const minSpecialDefenseString = filter.minSpecialDefense
+    const minSpecialDefenseString = filter.minSpecialDefense !== undefined
       ? `AND pokemon_special_defense >= ${filter.minSpecialDefense}`
       : ``;
 
     // Speed
-    const maxSpeedString = filter.maxSpeed
+    const maxSpeedString = filter.maxSpeed !== undefined
       ? `AND pokemon_speed <= ${filter.maxSpeed}`
       : ``;
-    const minSpeedString = filter.minSpeed
+    const minSpeedString = filter.minSpeed !== undefined
       ? `AND pokemon_speed >= ${filter.minSpeed}`
       : ``;
 
     // BaseStatTotal
-    const maxBaseStatTotalString = filter.maxBaseStatTotal
+    const maxBaseStatTotalString = filter.maxBaseStatTotal !== undefined
       ? `AND pokemon_base_stat_total <= ${filter.maxBaseStatTotal}`
       : ``;
-    const minBaseStatTotalString = filter.minBaseStatTotal
+    const minBaseStatTotalString = filter.minBaseStatTotal !== undefined
       ? `AND pokemon_base_stat_total >= ${filter.minBaseStatTotal}`
       : ``;
 
     // Form class
-    const formClassString = filter.formClass
+    const formClassString = filter.formClass !== undefined
       ? `AND pokemon_form_class IN ${arrayToMySQL(filter.formClass)}`
       : ``;
 
     // Typing
-    const typeString = filter.types
+    const typeString = filter.types !== undefined
       ? `AND (pokemon_ptype_name_1 IN ${arrayToMySQL(filter.types)} OR pokemon_ptype_name_2 IN ${arrayToMySQL(filter.types)})`
       : ``;
 
@@ -327,6 +346,11 @@ const getFilterQueryString = (filter, tableName) => {
       ? ``
       : `AND pokemon_removed_from_bdsp = ${filter.removedFromBDSP ? 'TRUE' : 'FALSE'}`;
 
+    // Genderless
+    const genderlessString = filter.genderless !== undefined
+      ? `AND pokemon_removed_from_bdsp = ${filter.genderless ? 'TRUE' : 'FALSE'}`
+      : ``;
+
     extraFilterString = [
       maxWeightString,
       minWeightString,
@@ -336,6 +360,12 @@ const getFilterQueryString = (filter, tableName) => {
 
       maxDexString,
       minDexString,
+
+      maxMaleRateString,
+      minMaleRateString,
+
+      maxFemaleRateString,
+      minFemaleRateString,
 
       maxWeightString,
       minWeightString,
@@ -372,6 +402,8 @@ const getFilterQueryString = (filter, tableName) => {
 
       removedFromSwShString,
       removedFromBDSPString,
+
+      genderlessString,
     ].filter(d => d.length > 0).join('\n');
   }
   // Moves
@@ -391,7 +423,7 @@ const getFilterQueryString = (filter, tableName) => {
     const maxPPString = filter.maxPP
       ? `AND pmove_pp <= ${filter.maxPP}`
       : ``;
-    const minPPString = filter.minPower
+    const minPPString = filter.minPP
       ? `AND pmove_pp >= ${filter.minPP}`
       : ``;
     
@@ -515,7 +547,25 @@ const getFilterQueryString = (filter, tableName) => {
       fieldStateTargetString,
     ].filter(d => d.length > 0).join('\n');
   }
-  // Items
+  // Effects
+  else if (tableName === 'effect') {
+    const effectClassString = filter.class !== undefined && filter.class.length > 0
+      ? `AND effect_class IN ${arrayToMySQL(filter.class)}`
+      : ``;
+
+    extraFilterString = [
+      effectClassString,
+
+      maxDamagePercentString,
+      minDamagePercentString,
+
+      fieldMaxLayersString,
+      fieldStateGroundedString,
+      fieldStateTargetString,
+    ].filter(d => d.length > 0).join('\n');
+
+  }
+  // Statuses
   else if (tableName === 'pstatus') {
     const volatileString = filter.volatile !== undefined
       ? `AND pstatus_volatile = ${filter.volatile === true ? 'TRUE' : 'FALSE'}`

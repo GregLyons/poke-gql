@@ -22,6 +22,24 @@ extend type Query {
   ): [Item!]!
   
   """
+  Select an Item by its psID, e.g. 'intimidate', 'rkssystem'.
+  """
+  itemByPSID(
+    generation: Int = 8
+    generations: [Int]
+    psID: String!
+  ): [Item!]! 
+  
+  """
+  Select Items by their psID, e.g. 'intimidate', 'rkssystem'.
+  """
+  itemsByPSIDs(
+    generation: Int = 8
+    generations: [Int]
+    psIDs: [String!]!
+  ): [Item!]! 
+
+  """
   Select Items with filtering and pagination.
   """
   items(
