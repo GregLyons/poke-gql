@@ -66,6 +66,8 @@ const getEntityByColumnQueryString = (entityName, keyName, columnValues) => {
 
   // If singular value passed, convert to array
   if (!Array.isArray(columnValues)) columnValues = [columnValues];
+  // Empty value to avoid empty IN clause error
+  columnValues = columnValues.concat(['placeholder_asdf']);
 
   return `
     SELECT * FROM ${tableName}

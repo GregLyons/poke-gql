@@ -61,6 +61,7 @@
             }
           }
         }
+        femaleRate
         formattedName
         formClass
         forms {
@@ -72,6 +73,7 @@
             }
           }
         }
+        genderless
         generation {
           id
           edges {
@@ -89,6 +91,7 @@
             }
           }
         }
+        maleRate
         moves {
           id
           count

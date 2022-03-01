@@ -33,7 +33,7 @@ extend type Query {
   """
   Select Items by their psID, e.g. 'intimidate', 'rkssystem'.
   """
-  itemsByPSIDs(
+  itemsByPSID(
     generation: Int = 8
     generations: [Int]
     psIDs: [String!]!

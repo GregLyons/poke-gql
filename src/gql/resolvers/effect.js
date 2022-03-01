@@ -69,7 +69,7 @@ const Effect = {
 
   abilities: effectPK,
 
-  class: parent => parent.effect_class,
+  class: parent => parent.effect_class.toUpperCase(),
 
   description: parent => parent.effect_description,
 

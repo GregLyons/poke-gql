@@ -199,10 +199,15 @@ const getFilterQueryString = (filter, tableName) => {
       nameColumn = 'ps_id';
   }
 
-  /* If 'names' is not specified, then:
+  // If psID/psIDs is specified, set name/names to that
+  if (filter.psID && !filter.name) filter.name = filter.psID;
+  if (filter.psIDs && !filter.names) filter.names = filter.psIDs;
+
+  /* 
+    If 'names' is not specified, then:
       if 'name' is specified, set 'names' to [<name>]
       else, set 'names' to [].
-  */
+      */
   if (!filter.names) filter.names = filter.name ? [filter.name] : [];
 
   const nameString = filter.names.length > 0
@@ -327,12 +332,12 @@ const getFilterQueryString = (filter, tableName) => {
       : ``;
 
     // Form class
-    const formClassString = filter.formClass !== undefined
+    const formClassString = filter.formClass !== undefined && filter.formClass.length > 0
       ? `AND pokemon_form_class IN ${arrayToMySQL(filter.formClass)}`
       : ``;
 
     // Typing
-    const typeString = filter.types !== undefined
+    const typeString = filter.types !== undefined && filter.types.length > 0
       ? `AND (pokemon_ptype_name_1 IN ${arrayToMySQL(filter.types)} OR pokemon_ptype_name_2 IN ${arrayToMySQL(filter.types)})`
       : ``;
 
@@ -447,12 +452,12 @@ const getFilterQueryString = (filter, tableName) => {
       : ``;
 
     // Category
-    const categoryString = filter.category
+    const categoryString = filter.category && filter.category.length > 0
       ? `AND pmove_category IN ${arrayToMySQL(filter.category)}`
       : ``;
 
     // Target
-    const targetString = filter.target
+    const targetString = filter.target && filter.target.length > 0
       ? `AND pmove_target IN ${arrayToMySQL(filter.target)}`
       : ``;
       
@@ -462,7 +467,7 @@ const getFilterQueryString = (filter, tableName) => {
       : ``;
 
     // Types
-    const typeString = filter.types
+    const typeString = filter.types && filter.types.length > 0
     ? `AND pmove_ptype_name IN ${arrayToMySQL(filter.types)}`
     : ``;
 
@@ -574,8 +579,6 @@ const getFilterQueryString = (filter, tableName) => {
     extraFilterString = [
       volatileString,
     ].filter(d => d.length > 0).join('\n');
-
-    console.log(volatileString);
   }
   // Default case
   else {

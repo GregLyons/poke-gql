@@ -51,7 +51,7 @@ const Query = {
 
   moveByPSID: queryEntitiesByColumn('move', 'psID'),
 
-  movesByPSIDs: queryEntitiesByColumn('move', 'psIDs'),
+  movesByPSID: queryEntitiesByColumn('move', 'psIDs'),
 
   moves: topLevelBulkQuery('move'),
 }

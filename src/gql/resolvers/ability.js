@@ -52,7 +52,7 @@ const Query = {
 
   abilityByPSID: queryEntitiesByColumn('ability', 'psID'),
 
-  abilitiesByPSIDs: queryEntitiesByColumn('ability', 'psIDs'),
+  abilitiesByPSID: queryEntitiesByColumn('ability', 'psIDs'),
   
   abilities: topLevelBulkQuery('ability'),
 }

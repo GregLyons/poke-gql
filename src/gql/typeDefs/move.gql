@@ -33,7 +33,7 @@ extend type Query {
   """
   Select Moves by their psIDs, e.g. 'uturn'.
   """
-  movesByPSIDs(
+  movesByPSID(
     generation: Int = 8
     generations: [Int]
     psIDs: [String!]!

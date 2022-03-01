@@ -33,7 +33,7 @@ extend type Query {
   """
   Select Abilities by their psID, e.g. 'intimidate', 'rkssystem'.
   """
-  abilitiesByPSIDs(
+  abilitiesByPSID(
     generation: Int = 8
     generations: [Int]
     psIDs: [String!]!

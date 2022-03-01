@@ -66,7 +66,7 @@ const Query = {
 
   itemByPSID: queryEntitiesByColumn('item', 'psID'),
 
-  itemsByPSIDs: queryEntitiesByColumn('item', 'psIDs'),
+  itemsByPSID: queryEntitiesByColumn('item', 'psIDs'),
 
   items: topLevelBulkQuery('item'),
 }

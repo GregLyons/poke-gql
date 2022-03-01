@@ -15,6 +15,7 @@
             }
           }
         }
+        class
         description
         formattedName
         fieldStates {
