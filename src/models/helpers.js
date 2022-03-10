@@ -192,6 +192,7 @@ const getFilterQueryString = (filter, tableName) => {
     case 'usage_method':
       nameColumn = 'unformatted_name';
       break;
+    case 'ptype':
     case 'nature':
       nameColumn = 'name';
       break;
@@ -560,13 +561,6 @@ const getFilterQueryString = (filter, tableName) => {
 
     extraFilterString = [
       effectClassString,
-
-      maxDamagePercentString,
-      minDamagePercentString,
-
-      fieldMaxLayersString,
-      fieldStateGroundedString,
-      fieldStateTargetString,
     ].filter(d => d.length > 0).join('\n');
 
   }

@@ -83,6 +83,8 @@ const Ability = {
 
   formattedName: parent => parent.ability_formatted_name,
 
+  formattedPSID: parent => parent.ability_formatted_ps_id,
+
   generation: abilityPK,
 
   ignoresFieldState: abilityPK,

@@ -67,6 +67,7 @@
           }
         }
         formattedName
+        formattedPSID
         generation {
           id
           edges {

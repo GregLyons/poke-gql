@@ -6,6 +6,7 @@
       node {
         id
         formattedName
+        formattedPSID
         generation {
           id
           edges {

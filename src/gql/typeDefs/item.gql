@@ -131,6 +131,11 @@ type Item implements Node {
   formattedName: String!
 
   """
+  The name of the Item so that it is compatible with '@smogon/calc'.
+  """
+  formattedPSID: String!
+
+  """
   The Generation of this Item.
   """ 
   generation(filter: GenerationFilter, pagination: GenerationPaginationInput): ItemGenerationConnection

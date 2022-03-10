@@ -126,6 +126,11 @@ type Pokemon implements Node {
   formattedName: String!
 
   """
+  The name of the Pokemon so that it is compatible with '@smogon/calc'.
+  """
+  formattedPSID: String!
+
+  """
   The type of form of this Pokemon, e.g. 'MEGA' for 'mega_charizard_x', 'BASE' for 'charizard', 'GMAX' for 'charizard_gmax', 'ALOLA' for 'raticate_alola'. 
   """
   formClass: FormClass!

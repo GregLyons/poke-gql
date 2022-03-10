@@ -125,6 +125,11 @@ type Ability implements Node {
   formattedName: String!
 
   """
+  The name of the Ability so that it is compatible with '@smogon/calc'.
+  """
+  formattedPSID: String!
+
+  """
   The Generation of this Ability.
   """ 
   generation(filter: GenerationFilter, pagination: GenerationPaginationInput): AbilityGenerationConnection

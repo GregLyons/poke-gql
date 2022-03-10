@@ -105,6 +105,8 @@ const Item = {
 
   formattedName: parent => parent.item_formatted_name,
 
+  formattedPSID: parent => parent.item_formatted_ps_id,
+
   generation: itemPK,
 
   ignoresFieldState: itemPK,

@@ -84,6 +84,8 @@ const Move = {
 
   formattedName: parent => parent.pmove_formatted_name,
 
+  formattedPSID: parent => parent.pmove_formatted_ps_id,
+
   generation: movePK,
 
   hinderedByFieldState: movePK,

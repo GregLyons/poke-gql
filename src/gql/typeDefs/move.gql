@@ -122,6 +122,11 @@ type Move implements Node {
   formattedName: String!
 
   """
+  The name of the Move so that it is compatible with '@smogon/calc'.
+  """
+  formattedPSID: String!
+
+  """
   The Generation of this Move.
   """ 
   generation(filter: GenerationFilter, pagination: GenerationPaginationInput): MoveGenerationConnection

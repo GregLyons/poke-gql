@@ -92,6 +92,8 @@ const Pokemon = {
 
   formattedName: parent => parent.pokemon_formatted_name,
 
+  formattedPSID: parent => parent.pokemon_formatted_ps_id,
+
   formClass: parent => parent.pokemon_form_class.toUpperCase(),
 
   forms: pokemonPK,
