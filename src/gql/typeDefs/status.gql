@@ -36,7 +36,7 @@ extend type Query {
 #
 
 type StatusConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusEdge!]!
@@ -138,7 +138,7 @@ type Status implements Node {
 # ABILITY
 
 type StatusCausedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusCausedByAbilityEdge!]!
@@ -157,7 +157,7 @@ type StatusCausedByAbilityEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusResistedByAbilityEdge!]!
@@ -171,7 +171,7 @@ type StatusResistedByAbilityEdge implements Edge {
 # FIELD STATE
 
 type StatusCausedByFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusCausedByFieldStateEdge!]!
@@ -188,7 +188,7 @@ type StatusCausedByFieldStateEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusResistedByFieldStateEdge!]!
@@ -202,7 +202,7 @@ type StatusResistedByFieldStateEdge implements Edge {
 # GENERATION
 
 type StatusGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [StatusGenerationEdge!]! 
 
 }
@@ -212,7 +212,7 @@ type StatusGenerationEdge implements Edge {
 }
 
 type StatusIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [StatusIntroductionEdge!]! 
 
 }
@@ -224,7 +224,7 @@ type StatusIntroductionEdge implements Edge {
 # ITEM
 
 type StatusCausedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusCausedByItemEdge!]!
@@ -241,7 +241,7 @@ type StatusCausedByItemEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusResistedByItemEdge!]!
@@ -255,7 +255,7 @@ type StatusResistedByItemEdge implements Edge {
 # MOVE
 
 type StatusCausedByMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusCausedByMoveEdge!]!
@@ -272,7 +272,7 @@ type StatusCausedByMoveEdge implements StatusCauseEdge & Edge {
 }
 
 type StatusResistedByMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatusResistedByMoveEdge!]!
@@ -283,7 +283,7 @@ type StatusResistedByMoveEdge implements Edge {
   node: Move!
 }
 
-enum StatusColumnNames {
+enum StatusColumnName {
   GEN
   ID
   NAME
@@ -300,7 +300,7 @@ enum StatusColumnNames {
 input StatusPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: StatusColumnNames = UNFORMATTED_NAME
+  orderBy: StatusColumnName = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

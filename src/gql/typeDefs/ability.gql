@@ -54,7 +54,7 @@ extend type Query {
 #
 
 type AbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityEdge!]!
@@ -207,7 +207,7 @@ type Ability implements Node {
 # DESCRIPTION 
 
 type AbilityDescriptionConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityDescriptionEdge!]!
@@ -223,7 +223,7 @@ type AbilityDescriptionEdge implements Edge {
 # EFFECT
 
 type AbilityEffectConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityEffectEdge!]! 
@@ -236,7 +236,7 @@ type AbilityEffectEdge implements Edge {
 # FIELD STATE
 
 type AbilityActivatedByFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityActivatedByFieldStateEdge!]! 
@@ -247,7 +247,7 @@ type AbilityActivatedByFieldStateEdge implements Edge {
 }
 
 type AbilityCreatesFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityCreatesFieldStateEdge!]! 
@@ -263,7 +263,7 @@ type AbilityCreatesFieldStateEdge implements Edge {
 }
 
 type AbilityIgnoresFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityIgnoresFieldStateEdge!]! 
@@ -274,7 +274,7 @@ type AbilityIgnoresFieldStateEdge implements Edge {
 }
 
 type AbilityPreventsFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityPreventsFieldStateEdge!]! 
@@ -285,7 +285,7 @@ type AbilityPreventsFieldStateEdge implements Edge {
 }
 
 type AbilityRemovesFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityRemovesFieldStateEdge!]! 
@@ -296,7 +296,7 @@ type AbilityRemovesFieldStateEdge implements Edge {
 }
 
 type AbilitySuppressesFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilitySuppressesFieldStateEdge!]! 
@@ -309,7 +309,7 @@ type AbilitySuppressesFieldStateEdge implements Edge {
 # GENERATION
 
 type AbilityGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [AbilityGenerationEdge!]! 
 
 }
@@ -319,7 +319,7 @@ type AbilityGenerationEdge implements Edge {
 }
 
 type AbilityIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [AbilityIntroductionEdge!]! 
 
 }
@@ -331,7 +331,7 @@ type AbilityIntroductionEdge implements Edge {
 # POKEMON
 
 type AbilityPokemonConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityPokemonEdge!]!
@@ -346,7 +346,7 @@ type AbilityPokemonEdge implements Edge {
 # STAT
 
 type AbilityModifiesStatConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityModifiesStatEdge!]!
@@ -382,7 +382,7 @@ type AbilityModifiesStatEdge implements StatModificationEdge & Edge {
 # STATUS
 
 type AbilityCausesStatusConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityCausesStatusEdge!]!
@@ -401,7 +401,7 @@ type AbilityCausesStatusEdge implements StatusCauseEdge & Edge {
 }
 
 type AbilityResistsStatusConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityResistsStatusEdge!]!
@@ -415,7 +415,7 @@ type AbilityResistsStatusEdge implements Edge {
 # TYPE
 
 type AbilityBoostsTypeConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityBoostsTypeEdge!]!
@@ -432,7 +432,7 @@ type AbilityBoostsTypeEdge implements MultiplierEdge & Edge {
 }
 
 type AbilityResistsTypeConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityResistsTypeEdge!]!
@@ -451,7 +451,7 @@ type AbilityResistsTypeEdge implements Edge {
 # USAGE METHOD
 
 type AbilityActivatedByUsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityActivatedByUsageMethodEdge!]! 
@@ -462,7 +462,7 @@ type AbilityActivatedByUsageMethodEdge implements Edge {
 }
 
 type AbilityBoostsUsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityBoostsUsageMethodEdge!]!
@@ -479,7 +479,7 @@ type AbilityBoostsUsageMethodEdge implements MultiplierEdge & Edge {
 }
 
 type AbilityPreventsUsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityPreventsUsageMethodEdge!]! 
@@ -490,7 +490,7 @@ type AbilityPreventsUsageMethodEdge implements Edge {
 }
 
 type AbilityResistsUsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [AbilityResistsUsageMethodEdge!]!
@@ -516,7 +516,7 @@ enum AbilitySlot {
   HIDDEN
 }
 
-enum AbilityColumnNames {
+enum AbilityColumnName {
   GEN
   ID
   NAME
@@ -532,7 +532,7 @@ enum AbilityColumnNames {
 input AbilityPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: AbilityColumnNames = POKEMON_SHOWDOWN_ID
+  orderBy: AbilityColumnName = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

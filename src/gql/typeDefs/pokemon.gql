@@ -54,7 +54,7 @@ extend type Query {
 #
 
 type PokemonConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonEdge!]!
@@ -248,7 +248,7 @@ type BaseStats {
   """
   For caching
   """
-  id: String!
+  id: ID!
 
   hp: Int!
   attack: Int!
@@ -266,7 +266,7 @@ type BaseStats {
 # ABILITY
 
 type PokemonAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
 
   edges: [PokemonAbilityEdge!]!
@@ -284,7 +284,7 @@ type PokemonAbilityConnection implements Connection {
 # GENERATION
 
 type PokemonGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [PokemonGenerationEdge!]! 
 
 }
@@ -294,7 +294,7 @@ type PokemonGenerationEdge implements Edge {
 }
 
 type PokemonIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [PokemonIntroductionEdge!]! 
 
 }
@@ -306,7 +306,7 @@ type PokemonIntroductionEdge implements Edge {
 # ITEM
 
 type PokemonEnablesItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonEnablesItemEdge!]! 
@@ -318,7 +318,7 @@ type PokemonEnablesItemEdge implements Edge {
 }
 
 type PokemonRequiresItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonRequiresItemEdge!]! 
@@ -332,7 +332,7 @@ type PokemonRequiresItemEdge implements Edge {
 # MOVE
 
 type PokemonEnablesMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonEnablesMoveEdge!]! 
@@ -344,7 +344,7 @@ type PokemonEnablesMoveEdge implements Edge {
 }
 
 type PokemonMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonMoveEdge!]!
@@ -374,7 +374,7 @@ type PokemonMoveEdge implements Edge {
 # POKEMON
 
 type PokemonEvolutionConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonEvolutionEdge!]!
@@ -395,7 +395,7 @@ type PokemonEvolutionEdge implements Edge {
 }
 
 type PokemonPrevolutionConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonPrevolutionEdge!]!
@@ -416,7 +416,7 @@ type PokemonPrevolutionEdge implements Edge {
 }
 
 type PokemonFormConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonFormEdge!]!
@@ -443,7 +443,7 @@ type PokemonFormEdge implements Edge {
 # TYPE
 
 type PokemonTypeConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [PokemonTypeEdge!]!
@@ -477,7 +477,7 @@ enum FormClass {
   TYPE
 }
 
-enum PokemonColumnNames {
+enum PokemonColumnName {
   GEN
   ID
   NAME
@@ -517,7 +517,7 @@ union PokemonEnablesConnection = PokemonEnablesItemConnection | PokemonEnablesMo
 input PokemonPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: PokemonColumnNames = POKEMON_SHOWDOWN_ID
+  orderBy: PokemonColumnName = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

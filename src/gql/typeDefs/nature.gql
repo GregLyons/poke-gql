@@ -36,7 +36,7 @@ extend type Query {
 #
 
 type NatureConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [NatureEdge!]!
@@ -116,7 +116,7 @@ type Nature implements Node {
 # GENERATION
 
 type NatureGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [NatureGenerationEdge!]! 
 
 }
@@ -126,7 +126,7 @@ type NatureGenerationEdge implements Edge {
 }
 
 type NatureIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [NatureIntroductionEdge!]! 
 
 }
@@ -138,7 +138,7 @@ type NatureIntroductionEdge implements Edge {
 # ITEM
 
 type NatureConfusedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [NatureConfusedByItemEdge!]! 
@@ -152,7 +152,7 @@ type NatureConfusedByItemEdge implements Edge {
 # STAT
 
 type NatureModifiesStatConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [NatureModifiesStatEdge!]!
@@ -187,7 +187,7 @@ type NatureModifiesStatEdge implements StatModificationEdge & Edge {
 # ENUMS
 #
 
-enum NatureColumnNames {
+enum NatureColumnName {
   GEN
   ID
   NAME
@@ -204,7 +204,7 @@ enum NatureColumnNames {
 input NaturePaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: NatureColumnNames
+  orderBy: NatureColumnName
   sortBy: SortByEnum = ASC
   search: String = ""
 }

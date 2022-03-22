@@ -27,7 +27,7 @@ extend type Query {
 #
 
 type GenerationConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationEdge!]!
@@ -175,7 +175,7 @@ type Generation implements Node {
 # ABILITY
 
 type GenerationAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationAbilityEdge!]! 
@@ -183,7 +183,7 @@ type GenerationAbilityConnection implements Connection {
 }
 
 type GenerationIntroducedAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationAbilityEdge!]! 
@@ -197,7 +197,7 @@ type GenerationAbilityEdge implements Edge {
 # EFFECT
 
 type GenerationEffectConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationEffectEdge!]! 
@@ -205,7 +205,7 @@ type GenerationEffectConnection implements Connection {
 }
 
 type GenerationIntroducedEffectConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationEffectEdge!]! 
@@ -219,7 +219,7 @@ type GenerationEffectEdge implements Edge {
 # FIELD STATE
 
 type GenerationFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationFieldStateEdge!]! 
@@ -227,7 +227,7 @@ type GenerationFieldStateConnection implements Connection {
 }
 
 type GenerationIntroducedFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationFieldStateEdge!]! 
@@ -242,7 +242,7 @@ type GenerationFieldStateEdge implements Edge {
 # ITEM
 
 type GenerationItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationItemEdge!]! 
@@ -250,7 +250,7 @@ type GenerationItemConnection implements Connection {
 }
 
 type GenerationIntroducedItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationItemEdge!]! 
@@ -264,7 +264,7 @@ type GenerationItemEdge implements Edge {
 # MOVE
 
 type GenerationMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationMoveEdge!]! 
@@ -272,7 +272,7 @@ type GenerationMoveConnection implements Connection {
 }
 
 type GenerationIntroducedMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationMoveEdge!]! 
@@ -286,7 +286,7 @@ type GenerationMoveEdge implements Edge {
 # POKEMON
 
 type GenerationPokemonConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationPokemonEdge!]! 
@@ -294,7 +294,7 @@ type GenerationPokemonConnection implements Connection {
 }
 
 type GenerationIntroducedPokemonConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationPokemonEdge!]! 
@@ -308,7 +308,7 @@ type GenerationPokemonEdge implements Edge {
 # STAT
 
 type GenerationStatConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationStatEdge!]! 
@@ -316,7 +316,7 @@ type GenerationStatConnection implements Connection {
 }
 
 type GenerationIntroducedStatConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationStatEdge!]! 
@@ -330,7 +330,7 @@ type GenerationStatEdge implements Edge {
 # STATUS
 
 type GenerationStatusConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationStatusEdge!]! 
@@ -338,7 +338,7 @@ type GenerationStatusConnection implements Connection {
 }
 
 type GenerationIntroducedStatusConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationStatusEdge!]! 
@@ -352,7 +352,7 @@ type GenerationStatusEdge implements Edge {
 # TYPE
 
 type GenerationTypeConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationTypeEdge!]! 
@@ -360,7 +360,7 @@ type GenerationTypeConnection implements Connection {
 }
 
 type GenerationIntroducedTypeConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationTypeEdge!]! 
@@ -374,7 +374,7 @@ type GenerationTypeEdge implements Edge {
 # USAGE METHOD
 
 type GenerationUsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationUsageMethodEdge!]! 
@@ -382,7 +382,7 @@ type GenerationUsageMethodConnection implements Connection {
 }
 
 type GenerationIntroducedUsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationUsageMethodEdge!]! 
@@ -396,7 +396,7 @@ type GenerationUsageMethodEdge implements Edge {
 # VERSION GROUP
 
 type GenerationVersionGroupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationVersionGroupEdge!]! 
@@ -404,7 +404,7 @@ type GenerationVersionGroupConnection implements Connection {
 }
 
 type GenerationIntroducedVersionGroupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [GenerationVersionGroupEdge!]! 
@@ -435,7 +435,7 @@ enum GenerationCode {
   X
 }
 
-enum GenerationColumnNames {
+enum GenerationColumnName {
   GEN
   CODE
 }
@@ -447,7 +447,7 @@ enum GenerationColumnNames {
 input GenerationPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: GenerationColumnNames = GEN
+  orderBy: GenerationColumnName = GEN
   sortBy: SortByEnum = ASC
   search: String = ""
 }

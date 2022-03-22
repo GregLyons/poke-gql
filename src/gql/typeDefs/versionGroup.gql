@@ -36,7 +36,7 @@ extend type Query {
 #
 
 type VersionGroupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [VersionGroupEdge!]!
@@ -102,7 +102,7 @@ type VersionGroup implements Node {
 # DESCRIPTION
 
 type VersionGroupDescriptionConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [VersionGroupDescriptionEdge!]! 
@@ -116,7 +116,7 @@ type VersionGroupDescriptionEdge implements Edge {
 # GENERATION
 
 type VersionGroupIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [VersionGroupIntroductionEdge!]! 
 
 }
@@ -128,7 +128,7 @@ type VersionGroupIntroductionEdge implements Edge {
 # SPRITE
 
 type VersionGroupSpriteConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [VersionGroupSpriteEdge!]! 
@@ -139,7 +139,7 @@ type VersionGroupSpriteEdge implements Edge {
   node: Sprite!
 }
 
-enum VersionGroupColumnNames {
+enum VersionGroupColumnName {
   INTRODUCED
   CODE
   NAME
@@ -153,7 +153,7 @@ enum VersionGroupColumnNames {
 input VersionGroupPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: VersionGroupColumnNames = POKEMON_SHOWDOWN_ID
+  orderBy: VersionGroupColumnName = POKEMON_SHOWDOWN_ID
   sortBy: SortByEnum = ASC
   search: String = ""
 }

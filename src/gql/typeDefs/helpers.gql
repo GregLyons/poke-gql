@@ -101,19 +101,19 @@ Unfortunately, we could not put the 'filter' field in the interface, which would
 Similarly, Connections always have a 'pagination' field which implements the 'Pagination' interface. Each entity has its own 'enum' of column names for ordering. Again, sadly 'input' types cannot 'implement' interfaces.
 """
 interface Connection {
-  id: String!
+  id: ID!
 
   edges: [Edge!]!
 }
 
-enum ColumnNames {
+enum ColumnName {
   ID
 }
 
 interface Pagination {
   limit: Int
   offset: Int
-  orderBy: ColumnNames
+  orderBy: ColumnName
   sortBy: SortByEnum
   search: String
 }

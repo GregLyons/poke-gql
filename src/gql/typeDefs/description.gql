@@ -34,7 +34,7 @@ extend type Query {
 #
 
 type DescriptionConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [DescriptionEdge!]!
@@ -84,7 +84,7 @@ type Description implements Node {
 # ABILITY
 
 type DescriptionAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [DescriptionAbilityEdge!]!
@@ -100,7 +100,7 @@ type DescriptionAbilityEdge implements Edge {
 # ITEM
 
 type DescriptionItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [DescriptionItemEdge!]!
@@ -116,7 +116,7 @@ type DescriptionItemEdge implements Edge {
 # MOVE 
 
 type DescriptionMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [DescriptionMoveEdge!]!
@@ -132,7 +132,7 @@ type DescriptionMoveEdge implements Edge {
 # VERSION GROUP 
 
 type DescriptionVersionGroupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [DescriptionVersionGroupEdge!]!
@@ -162,7 +162,7 @@ enum DescriptionEntityClass {
 
 union DescriptionEntityConnection = DescriptionAbilityConnection | DescriptionItemConnection | DescriptionMoveConnection
 
-enum DescriptionColumnNames {
+enum DescriptionColumnName {
   ENTITY_CLASS
   ENTITY_NAME
 }
@@ -174,7 +174,7 @@ enum DescriptionColumnNames {
 input DescriptionPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: DescriptionColumnNames = ENTITY_CLASS
+  orderBy: DescriptionColumnName = ENTITY_CLASS
   sortBy: SortByEnum = ASC
   search: String = ""
 }

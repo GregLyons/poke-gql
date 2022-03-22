@@ -36,7 +36,7 @@ extend type Query {
 #
 
 type UsageMethodConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodEdge!]!
@@ -138,7 +138,7 @@ type UsageMethod implements Node {
 # ABILITY
 
 type UsageMethodActivatesAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodActivatesAbilityEdge!]!
@@ -150,7 +150,7 @@ type UsageMethodActivatesAbilityEdge implements Edge {
 }
 
 type UsageMethodBoostedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodBoostedByAbilityEdge!]!
@@ -162,7 +162,7 @@ type UsageMethodBoostedByAbilityEdge implements MultiplierEdge & Edge {
 }
 
 type UsageMethodResistedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodResistedByAbilityEdge!]!
@@ -175,7 +175,7 @@ type UsageMethodResistedByAbilityEdge implements Edge {
 }
 
 type UsageMethodPreventedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodPreventedByAbilityEdge!]!
@@ -189,7 +189,7 @@ type UsageMethodPreventedByAbilityEdge implements Edge {
 # GENERATION
 
 type UsageMethodGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [UsageMethodGenerationEdge!]! 
 
 }
@@ -199,7 +199,7 @@ type UsageMethodGenerationEdge implements Edge {
 }
 
 type UsageMethodIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [UsageMethodIntroductionEdge!]! 
 
 }
@@ -211,7 +211,7 @@ type UsageMethodIntroductionEdge implements Edge {
 # ITEM
 
 type UsageMethodActivatesItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodActivatesItemEdge!]!
@@ -223,7 +223,7 @@ type UsageMethodActivatesItemEdge implements Edge {
 }
 
 type UsageMethodBoostedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodBoostedByItemEdge!]!
@@ -236,7 +236,7 @@ type UsageMethodBoostedByItemEdge implements MultiplierEdge & Edge {
 }
 
 type UsageMethodResistedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodResistedByItemEdge!]!
@@ -251,7 +251,7 @@ type UsageMethodResistedByItemEdge implements Edge {
 # MOVE
 
 type UsageMethodMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodMoveEdge!]!
@@ -263,7 +263,7 @@ type UsageMethodMoveEdge implements Edge {
 }
 
 type UsageMethodPreventedByMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [UsageMethodPreventedByMoveEdge!]!
@@ -278,7 +278,7 @@ type UsageMethodPreventedByMoveEdge implements Edge {
 # ENUMS
 #
 
-enum UsageMethodColumnNames {
+enum UsageMethodColumnName {
   GEN
   ID
   NAME
@@ -294,7 +294,7 @@ enum UsageMethodColumnNames {
 input UsageMethodPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: UsageMethodColumnNames = UNFORMATTED_NAME
+  orderBy: UsageMethodColumnName = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

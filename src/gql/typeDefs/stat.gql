@@ -36,7 +36,7 @@ extend type Query {
 #
 
 type StatConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatEdge!]!
@@ -116,7 +116,7 @@ type Stat implements Node {
 # ABILITY
 
 type StatModifiedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatModifiedByAbilityEdge!]!
@@ -152,7 +152,7 @@ type StatModifiedByAbilityEdge implements StatModificationEdge & Edge {
 # FIELD STATE
 
 type StatModifiedByFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatModifiedByFieldStateEdge!]!
@@ -188,7 +188,7 @@ type StatModifiedByFieldStateEdge implements StatModificationEdge & Edge {
 # GENERATION
 
 type StatGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [StatGenerationEdge!]! 
 
 }
@@ -198,7 +198,7 @@ type StatGenerationEdge implements Edge {
 }
 
 type StatIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [StatIntroductionEdge!]! 
 
 }
@@ -210,7 +210,7 @@ type StatIntroductionEdge implements Edge {
 # ITEM
 
 type StatModifiedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatModifiedByItemEdge!]!
@@ -246,7 +246,7 @@ type StatModifiedByItemEdge implements StatModificationEdge & Edge {
 # MOVE
 
 type StatModifiedByMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatModifiedByMoveEdge!]!
@@ -280,7 +280,7 @@ type StatModifiedByMoveEdge implements StatModificationEdge & Edge {
 # NATURE
 
 type StatModifiedByNatureConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [StatModifiedByNatureEdge!]!
@@ -311,7 +311,7 @@ type StatModifiedByNatureEdge implements StatModificationEdge & Edge {
   recipient: StatModificationRecipient!
 }
 
-enum StatColumnNames {
+enum StatColumnName {
   GEN
   ID
   NAME
@@ -327,7 +327,7 @@ enum StatColumnNames {
 input StatPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: StatColumnNames = UNFORMATTED_NAME
+  orderBy: StatColumnName = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

@@ -36,7 +36,7 @@ extend type Query {
 #
 
 type EffectConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [EffectEdge!]!
@@ -125,7 +125,7 @@ type Effect implements Node {
 # ABILITY
 
 type EffectAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [EffectAbilityEdge!]! 
@@ -139,7 +139,7 @@ type EffectAbilityEdge implements Edge {
 # FIELD STATE
 
 type EffectFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [EffectFieldStateEdge!]! 
@@ -153,7 +153,7 @@ type EffectFieldStateEdge implements Edge {
 # GENERATION
 
 type EffectGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [EffectGenerationEdge!]! 
 
 }
@@ -163,7 +163,7 @@ type EffectGenerationEdge implements Edge {
 }
 
 type EffectIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   edges: [EffectIntroductionEdge!]! 
 
 }
@@ -175,7 +175,7 @@ type EffectIntroductionEdge implements Edge {
 # ITEM
 
 type EffectItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [EffectItemEdge!]! 
@@ -189,7 +189,7 @@ type EffectItemEdge implements Edge {
 # MOVE
 
 type EffectMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [EffectMoveEdge!]! 
@@ -221,7 +221,7 @@ enum EffectClass {
   TYPE
 }
 
-enum EffectColumnNames {
+enum EffectColumnName {
   GEN
   ID
   NAME
@@ -237,7 +237,7 @@ enum EffectColumnNames {
 input EffectPaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: EffectColumnNames = UNFORMATTED_NAME
+  orderBy: EffectColumnName = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

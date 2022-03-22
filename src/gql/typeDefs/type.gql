@@ -42,7 +42,7 @@ extend type Query {
 #
 
 type TypeConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeEdge!]!
@@ -146,7 +146,7 @@ type Type implements Node {
 # ABILITY
 
 type TypeBoostedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeBoostedByAbilityEdge!]!
@@ -159,7 +159,7 @@ type TypeBoostedByAbilityEdge implements MultiplierEdge & Edge {
 }
 
 type TypeResistedByAbilityConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeResistedByAbilityEdge!]!
@@ -174,7 +174,7 @@ type TypeResistedByAbilityEdge implements Edge {
 # FIELD STATE
 
 type TypeWeatherBallConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeWeatherBallEdge!]!
@@ -186,7 +186,7 @@ type TypeWeatherBallEdge implements Edge {
 }
 
 type TypeBoostedByFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeBoostedByFieldStateEdge!]!
@@ -199,7 +199,7 @@ type TypeBoostedByFieldStateEdge implements MultiplierEdge & Edge {
 }
 
 type TypeWeakenedByFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeWeakenedByFieldStateEdge!]!
@@ -212,7 +212,7 @@ type TypeWeakenedByFieldStateEdge implements Edge {
 }
 
 type TypeIgnoresFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeIgnoresFieldStateEdge!]! 
@@ -224,7 +224,7 @@ type TypeIgnoresFieldStateEdge implements Edge {
 }
 
 type TypeResistsFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeResistsFieldStateEdge!]! 
@@ -238,7 +238,7 @@ type TypeResistsFieldStateEdge implements Edge {
 }
 
 type TypeRemovesFieldStateConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeRemovesFieldStateEdge!]! 
@@ -252,7 +252,7 @@ type TypeRemovesFieldStateEdge implements Edge {
 # GENERATION
 
 type TypeGenerationConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeGenerationEdge!]! 
@@ -264,7 +264,7 @@ type TypeGenerationEdge implements Edge {
 }
 
 type TypeIntroductionConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeIntroductionEdge!]! 
@@ -278,7 +278,7 @@ type TypeIntroductionEdge implements Edge {
 # ITEM
 
 type TypeNaturalGiftConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeNaturalGiftEdge!]!
@@ -295,7 +295,7 @@ type TypeNaturalGiftEdge implements Edge {
 }
 
 type TypeBoostedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeBoostedByItemEdge!]!
@@ -308,7 +308,7 @@ type TypeBoostedByItemEdge implements MultiplierEdge & Edge {
 }
 
 type TypeResistedByItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeResistedByItemEdge!]!
@@ -323,7 +323,7 @@ type TypeResistedByItemEdge implements Edge {
 # MOVE
 
 type TypeMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeMoveEdge!]!
@@ -335,7 +335,7 @@ type TypeMoveEdge implements Edge {
 }
 
 type TypeEnablesMoveConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypeEnablesMoveEdge!]!
@@ -349,7 +349,7 @@ type TypeEnablesMoveEdge implements Edge {
 # POKEMON
 
 type TypePokemonConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [TypePokemonEdge!]!
@@ -363,7 +363,7 @@ type TypePokemonEdge implements Edge {
 # TYPE
 
 type DefensiveTypeMatchupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [DefensiveTypeMatchupEdge!]!
@@ -380,7 +380,7 @@ type DefensiveTypeMatchupEdge implements Edge {
 }
 
 type OffensiveTypeMatchupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [OffensiveTypeMatchupEdge!]!
@@ -424,7 +424,7 @@ enum TypeName {
   FAIRY
 }
 
-enum TypeColumnNames {
+enum TypeColumnName {
   GEN
   ID
   NAME
@@ -439,7 +439,7 @@ enum TypeColumnNames {
 input TypePaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: TypeColumnNames = UNFORMATTED_NAME
+  orderBy: TypeColumnName = UNFORMATTED_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }

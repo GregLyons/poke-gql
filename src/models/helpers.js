@@ -415,40 +415,52 @@ const getFilterQueryString = (filter, tableName) => {
   // Moves
   else if (tableName === 'pmove') {
     // Power
-    const maxPowerString = filter.maxPower
-      ? `AND pmove_power <= ${filter.maxPower}`
+    const maxPowerString = filter.maxPower !== undefined
+      ? filter.variablePower
+        ? ``
+        : `AND (pmove_power <= ${filter.maxPower} OR pmove_power IS NULL)`
       : ``;
-    const minPowerString = filter.minPower
-      ? `AND pmove_power >= ${filter.minPower}`
+    const minPowerString = filter.minPower !== undefined
+      ? filter.variablePower
+        ? ``
+        : `AND (pmove_power >= ${filter.minPower} OR pmove_power IS NULL)`
       : ``;
-    const variablePowerString = filter.variablePower 
-      ? `AND pmove_power = NULL`
+    const variablePowerString = filter.variablePower !== undefined && filter.variablePower !== null
+      ? filter.variablePower
+        ? `AND pmove_power IS NULL`
+        : `AND pmove_power IS NOT NULL`
       : ``;
 
     // PP
-    const maxPPString = filter.maxPP
+    const maxPPString = filter.maxPP !== undefined
       ? `AND pmove_pp <= ${filter.maxPP}`
       : ``;
-    const minPPString = filter.minPP
+    const minPPString = filter.minPP !== undefined
       ? `AND pmove_pp >= ${filter.minPP}`
       : ``;
     
     // Accuracy
-    const maxAccuracyString = filter.maxAccuracy
-      ? `AND pmove_accuracy <= ${filter.maxAccuracy}`
+    const maxAccuracyString = filter.maxAccuracy !== undefined
+      ? filter.bypassAccuracy
+        ? `AND (pmove_accuracy <= ${filter.maxAccuracy} OR pmove_accuracy IS NULL)`
+        : ``
       : ``;
-    const minAccuracyString = filter.minAccuracy
-      ? `AND pmove_accuracy >= ${filter.minAccuracy}`
+    const minAccuracyString = filter.minAccuracy !== undefined
+      ? filter.bypassAccuracy
+        ? ``
+        : `AND (pmove_accuracy >= ${filter.minAccuracy} OR pmove_accuracy IS NULL)`
       : ``;
-    const bypassAccuracyString = filter.bypassAccuracy 
-      ? `AND pmove_accuracy = NULL`
+    const bypassAccuracyString = filter.bypassAccuracy !== undefined && filter.bypassAccuracy !== null
+      ? filter.bypassAccuracy
+        ? `AND pmove_accuracy IS NULL`
+        : `AND pmove_accuracy IS NOT NULL`
       : ``;
 
     // Priority
-    const maxPriorityString = filter.maxPriority
+    const maxPriorityString = filter.maxPriority !== undefined
       ? `AND pmove_priority <= ${filter.maxPriority}`
       : ``;
-    const minPriorityString = filter.minPriority
+    const minPriorityString = filter.minPriority !== undefined
       ? `AND pmove_priority >= ${filter.minPriority}`
       : ``;
 
@@ -504,7 +516,7 @@ const getFilterQueryString = (filter, tableName) => {
       
       removedFromSwShString,
       removedFromBDSPString,
-    ].filter(d => d.length > 0).join('\n');  
+    ].filter(d => d.length > 0).join('\n');
   }
   // Items
   else if (tableName === 'item') {
@@ -566,7 +578,7 @@ const getFilterQueryString = (filter, tableName) => {
   }
   // Statuses
   else if (tableName === 'pstatus') {
-    const volatileString = filter.volatile !== undefined
+    const volatileString = filter.volatile !== undefined && filter.volatile !== null
       ? `AND pstatus_volatile = ${filter.volatile === true ? 'TRUE' : 'FALSE'}`
       : ``;
 

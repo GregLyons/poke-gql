@@ -17,7 +17,7 @@ extend type Query {
 #
 
 type SpriteConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [SpriteEdge!]!
@@ -98,7 +98,7 @@ type Sprite implements Node {
 # ITEM
 
 type SpriteItemConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [SpriteItemEdge!]! 
@@ -112,7 +112,7 @@ type SpriteItemEdge implements Edge {
 # POKEMON
 
 type SpritePokemonConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [SpritePokemonEdge!]! 
@@ -126,7 +126,7 @@ type SpritePokemonEdge implements Edge {
 # VERSION GROUP
 
 type SpriteVersionGroupConnection implements Connection {
-  id: String!
+  id: ID!
   count: Int!
   
   edges: [SpriteVersionGroupEdge!]! 
@@ -155,7 +155,7 @@ enum SpriteClass {
 
 union SpriteEntityConnection = SpriteItemConnection | SpritePokemonConnection
 
-enum SpriteColumnNames {
+enum SpriteColumnName {
   GEN
   PATH
   ENTITY_NAME
@@ -168,7 +168,7 @@ enum SpriteColumnNames {
 input SpritePaginationInput {
   limit: Int = 20
   offset: Int = 0
-  orderBy: SpriteColumnNames = ENTITY_NAME
+  orderBy: SpriteColumnName = ENTITY_NAME
   sortBy: SortByEnum = ASC
   search: String = ""
 }
