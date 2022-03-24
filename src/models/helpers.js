@@ -125,7 +125,7 @@ const getPaginationQueryString = (pagination, tableName, batching = false) => {
   // If this is called by a batcher, we don't want to apply the limit/offset to the query. Instead, we handle that in the batcher.
   const limitOffsetString = batching
     ? ``
-    : `LIMIT ${offset}, ${limit}\n`;
+    : `LIMIT ${Math.max(offset, 0)}, ${limit}\n`;
 
   // Most columns, except 'generation_id' and 'introduced' are preceded by the table name.
   let sortString = orderByColumnName !== undefined && sortBy !== undefined

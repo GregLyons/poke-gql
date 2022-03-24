@@ -67,7 +67,7 @@ const Pokemon = {
 
   baseStats: parent => {
     return {
-      id: `${parent.generation_id} + ${parent.ps_id}`,
+      id: `${parent.generation_id} + ${parent.pokemon_ps_id}`,
       hp: parent.pokemon_hp,
       attack: parent.pokemon_attack,
       defense: parent.pokemon_defense,
