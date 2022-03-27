@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 /*
   Set up poke_gql database.
 */
@@ -14,17 +15,10 @@ const { schema } = require('./gql/index.js');
 
 const LoaderSet = require('./loaders/index.js');
 
-// Very basic authorization
-const authorizeHeader = ({ req }) => {
-  if (req.headers.authorization !== 123456) throw new Error('Incorrect API key');
-}
 
 const server = new ApolloServer({
   schema,
   context: ({ req }) => {
-    // Remove if you don't want authorization
-    authorizeHeader({req});
-    //
 
     return {
       ...req,
@@ -32,7 +26,7 @@ const server = new ApolloServer({
       loaders: new LoaderSet(),
     }
   }
-})
+});
 
 server
   .listen({
